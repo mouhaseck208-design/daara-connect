@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DAARA CONNECT</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --green: #1a7a3c;
+    --green-light: #2ea84f;
+    --green-dark: #145e2d;
+    --orange: #e07b2a;
+    --orange-light: #f0953d;
+    --blue: #2563eb;
+    --purple: #7c3aed;
+    --bg: #f0f7f0;
+    --card: #ffffff;
+    --text: #1a2e1a;
+    --text-light: #6b7c6b;
+    --border: #c8dfc8;
+  }
+
+- { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+font-family: ‘Nunito’, sans-serif;
+background: var(–bg);
+color: var(–text);
+min-height: 100vh;
+}
+
+/* ── SETUP SCREEN ── */
+#setup-screen {
+min-height: 100vh;
+display: flex;
+align-items: center;
+justify-content: center;
+background: linear-gradient(135deg, #0f4c25 0%, #1a7a3c 50%, #2ea84f 100%);
+position: relative;
+overflow: hidden;
+}
+
+#setup-screen::before {
+content: ‘’;
+position: absolute;
+inset: 0;
+background-image: repeating-linear-gradient(
+45deg,
+transparent,
+transparent 40px,
+rgba(255,255,255,0.03) 40px,
+rgba(255,255,255,0.03) 80px
+);
+}
+
+/* floating circles */
+.orb {
+position: absolute;
+border-radius: 50%;
+background: rgba(255,255,255,0.06);
+animation: float 8s ease-in-out infinite;
+}
+.orb:nth-child(1) { width:300px; height:300px; top:-80px; right:-80px; animation-delay:0s; }
+.orb:nth-child(2) { width:200px; height:200px; bottom:-60px; left:-60px; animation-delay:3s; }
+.orb:nth-child(3) { width:150px; height:150px; top:40%; left:5%; animation-delay:6s; }
+
+@keyframes float {
+0%,100% { transform: translateY(0) scale(1); }
+50% { transform: translateY(-20px) scale(1.05); }
+}
+
+.setup-card {
+background: rgba(255,255,255,0.97);
+border-radius: 24px;
+padding: 48px 44px;
+width: 100%;
+max-width: 480px;
+position: relative;
+z-index: 10;
+box-shadow: 0 32px 80px rgba(0,0,0,0.3);
+animation: slideUp 0.6s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+@keyframes slideUp {
+from { opacity:0; transform: translateY(40px); }
+to   { opacity:1; transform: translateY(0); }
+}
+
+.setup-logo {
+text-align: center;
+margin-bottom: 36px;
+}
+
+.setup-logo .mosque {
+font-size: 56px;
+display: block;
+margin-bottom: 10px;
+animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+0%,100% { transform: scale(1); }
+50% { transform: scale(1.08); }
+}
+
+.setup-logo h1 {
+font-family: ‘Amiri’, serif;
+font-size: 32px;
+color: var(–green);
+font-weight: 700;
+letter-spacing: 2px;
+}
+
+.setup-logo p {
+font-size: 13px;
+color: var(–text-light);
+margin-top: 6px;
+}
+
+.setup-divider {
+height: 2px;
+background: linear-gradient(90deg, transparent, var(–green), transparent);
+margin: 0 auto 32px;
+width: 60%;
+border-radius: 99px;
+}
+
+.field-group {
+margin-bottom: 20px;
+}
+
+.field-group label {
+display: block;
+font-size: 12px;
+font-weight: 800;
+letter-spacing: 1.2px;
+text-transform: uppercase;
+color: var(–green-dark);
+margin-bottom: 8px;
+}
+
+.field-group input {
+width: 100%;
+padding: 14px 18px;
+border-radius: 12px;
+border: 2px solid var(–border);
+font-size: 15px;
+font-family: ‘Nunito’, sans-serif;
+color: var(–text);
+transition: border-color 0.2s, box-shadow 0.2s;
+outline: none;
+background: #f8fbf8;
+}
+
+.field-group input:focus {
+border-color: var(–green);
+box-shadow: 0 0 0 4px rgba(26,122,60,0.12);
+background: #fff;
+}
+
+.field-group input::placeholder { color: #aac5aa; }
+
+.setup-btn {
+width: 100%;
+padding: 16px;
+background: linear-gradient(135deg, var(–green), var(–green-light));
+color: #fff;
+border: none;
+border-radius: 14px;
+font-size: 16px;
+font-weight: 800;
+font-family: ‘Nunito’, sans-serif;
+cursor: pointer;
+margin-top: 10px;
+letter-spacing: 0.5px;
+transition: transform 0.15s, box-shadow 0.15s;
+box-shadow: 0 6px 24px rgba(26,122,60,0.35);
+}
+
+.setup-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(26,122,60,0.4); }
+.setup-btn:active { transform: translateY(0); }
+
+.error-msg {
+color: #dc2626;
+font-size: 12px;
+margin-top: 6px;
+font-weight: 600;
+display: none;
+}
+
+/* ── MAIN APP ── */
+#app { display: none; }
+
+/* Header */
+.header {
+background: linear-gradient(135deg, var(–green-dark), var(–green));
+color: #fff;
+padding: 0 32px;
+position: sticky;
+top: 0;
+z-index: 100;
+box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+.header-top {
+display: flex;
+align-items: center;
+justify-content: space-between;
+height: 60px;
+}
+
+.header-logo {
+font-family: ‘Amiri’, serif;
+font-size: 22px;
+font-weight: 700;
+letter-spacing: 1.5px;
+}
+
+.header-daara {
+font-size: 13px;
+opacity: 0.88;
+text-align: right;
+line-height: 1.4;
+}
+
+.header-daara strong { display: block; font-size: 15px; }
+
+nav {
+display: flex;
+gap: 2px;
+overflow-x: auto;
+}
+
+nav::-webkit-scrollbar { display: none; }
+
+.nav-btn {
+background: transparent;
+color: rgba(255,255,255,0.8);
+border: none;
+border-bottom: 3px solid transparent;
+padding: 12px 16px;
+cursor: pointer;
+font-weight: 600;
+font-size: 13px;
+font-family: ‘Nunito’, sans-serif;
+white-space: nowrap;
+transition: all 0.2s;
+}
+
+.nav-btn.active {
+color: #fff;
+border-bottom-color: #fff;
+font-weight: 800;
+background: rgba(255,255,255,0.12);
+}
+
+.nav-btn:hover:not(.active) { color: #fff; background: rgba(255,255,255,0.08); }
+
+/* Content */
+.content { max-width: 1100px; margin: 0 auto; padding: 32px 24px; }
+
+/* Page title */
+.page-title { font-size: 26px; font-weight: 900; color: var(–text); margin-bottom: 24px; }
+
+/* Cards */
+.card {
+background: var(–card);
+border-radius: 18px;
+padding: 24px;
+box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+}
+
+.card h3 { font-size: 16px; font-weight: 800; margin-bottom: 16px; }
+
+/* Stat Cards */
+.stats-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-bottom: 28px; }
+
+.stat-card {
+border-radius: 18px;
+padding: 24px 20px;
+color: #fff;
+box-shadow: 0 6px 24px rgba(0,0,0,0.15);
+position: relative;
+overflow: hidden;
+}
+
+.stat-card::after {
+content: ‘’;
+position: absolute;
+bottom: -20px; right: -20px;
+width: 80px; height: 80px;
+border-radius: 50%;
+background: rgba(255,255,255,0.1);
+}
+
+.stat-icon { font-size: 28px; margin-bottom: 8px; }
+.stat-value { font-size: 32px; font-weight: 900; }
+.stat-label { font-size: 12px; opacity: 0.88; margin-top: 4px; }
+
+/* Grid */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+/* Badge */
+.badge {
+padding: 3px 12px; border-radius: 99px; font-size: 12px; font-weight: 700;
+}
+.badge.actif, .badge.payé { background: #dcfce7; color: #166534; }
+.badge.inactif, .badge.attente { background: #fee2e2; color: #991b1b; }
+
+/* Table */
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; }
+th { background: var(–green); color: #fff; padding: 14px 16px; text-align: left; font-size: 13px; }
+th:first-child { border-radius: 8px 0 0 0; }
+th:last-child { border-radius: 0 8px 0 0; }
+td { padding: 12px 16px; font-size: 14px; border-bottom: 1px solid var(–border); }
+tr:nth-child(even) td { background: #f4faf4; }
+tr:hover td { background: #e8f5e8; }
+
+/* Forms */
+.form-box {
+background: #f4faf4;
+border-radius: 14px;
+padding: 24px;
+margin-bottom: 24px;
+border: 1.5px solid var(–border);
+animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn { from { opacity:0; transform:translateY(-8px); } to { opacity:1; transform:translateY(0); } }
+
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+input[type=text], input[type=number], input[type=date], input[type=tel], select, textarea {
+width: 100%;
+padding: 11px 14px;
+border-radius: 10px;
+border: 1.5px solid var(–border);
+font-size: 14px;
+font-family: ‘Nunito’, sans-serif;
+color: var(–text);
+outline: none;
+transition: border-color 0.2s, box-shadow 0.2s;
+background: #fff;
+}
+
+input:focus, select:focus, textarea:focus {
+border-color: var(–green);
+box-shadow: 0 0 0 3px rgba(26,122,60,0.1);
+}
+
+.btn {
+padding: 10px 22px;
+border-radius: 10px;
+border: none;
+cursor: pointer;
+font-weight: 700;
+font-size: 14px;
+font-family: ‘Nunito’, sans-serif;
+transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.btn:hover { transform: translateY(-1px); }
+
+.btn-primary { background: var(–green); color: #fff; box-shadow: 0 4px 14px rgba(26,122,60,0.3); }
+.btn-secondary { background: #e8f5e8; color: var(–green-dark); }
+.btn-danger { background: #fee2e2; color: #991b1b; font-size: 12px; padding: 6px 12px; }
+.btn-success { background: var(–green); color: #fff; font-size: 12px; padding: 6px 12px; }
+
+.btn-row { display: flex; gap: 10px; margin-top: 16px; }
+
+/* Add button */
+.add-btn {
+background: var(–green);
+color: #fff;
+border: none;
+border-radius: 12px;
+padding: 11px 22px;
+font-weight: 800;
+font-size: 14px;
+cursor: pointer;
+font-family: ‘Nunito’, sans-serif;
+box-shadow: 0 4px 14px rgba(26,122,60,0.25);
+transition: transform 0.15s, box-shadow 0.15s;
+}
+.add-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(26,122,60,0.35); }
+
+/* Search */
+.search-box {
+width: 100%;
+padding: 13px 18px;
+border-radius: 12px;
+border: 2px solid var(–border);
+font-size: 14px;
+font-family: ‘Nunito’, sans-serif;
+outline: none;
+margin-bottom: 20px;
+transition: border-color 0.2s;
+}
+.search-box:focus { border-color: var(–green); }
+
+/* Presence bar */
+.bar-wrap { width: 80px; background: #e0f0e0; border-radius: 99px; height: 8px; }
+.bar { height: 8px; border-radius: 99px; }
+
+/* Message card */
+.msg-card {
+background: var(–card);
+border-radius: 14px;
+padding: 18px;
+margin-bottom: 12px;
+box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+border-left: 4px solid var(–green);
+}
+
+.msg-avatar {
+width: 38px; height: 38px;
+border-radius: 50%;
+background: var(–green);
+color: #fff;
+display: flex; align-items: center; justify-content: center;
+font-weight: 800; font-size: 15px;
+flex-shrink: 0;
+}
+
+/* Rapport bar */
+.rapport-bar-wrap { background: #e0f0e0; border-radius: 99px; height: 12px; flex:1; }
+.rapport-bar { height: 12px; border-radius: 99px; transition: width 0.6s ease; }
+
+/* Kourel card */
+.kourel-card {
+background: var(–card);
+border-radius: 18px;
+padding: 22px;
+box-shadow: 0 2px 14px rgba(0,0,0,0.07);
+border-top: 4px solid var(–green);
+}
+
+/* Page visibility */
+.page { display: none; }
+.page.active { display: block; }
+
+/* Responsive */
+@media (max-width: 700px) {
+.stats-grid { grid-template-columns: 1fr 1fr; }
+.two-col { grid-template-columns: 1fr; }
+.form-grid { grid-template-columns: 1fr; }
+.content { padding: 20px 14px; }
+.header { padding: 0 14px; }
+}
+
+@media (max-width: 480px) {
+.stats-grid { grid-template-columns: 1fr; }
+.setup-card { padding: 32px 22px; }
+}
+</style>
+
+</head>
+<body>
+
+<!-- ══════════════ SETUP SCREEN ══════════════ -->
+
+<div id="setup-screen">
+  <div class="orb"></div>
+  <div class="orb"></div>
+  <div class="orb"></div>
+
+  <div class="setup-card">
+    <div class="setup-logo">
+      <span class="mosque">🕌</span>
+      <h1>DAARA CONNECT</h1>
+      <p>Système de gestion des Kourels</p>
+    </div>
+    <div class="setup-divider"></div>
+
+```
+<div class="field-group">
+  <label>Nom du Daara</label>
+  <input type="text" id="setup-daara" placeholder="Ex: Daara Touba Mbacké" maxlength="60"/>
+  <div class="error-msg" id="err-daara">Veuillez entrer le nom du Daara</div>
+</div>
+
+<div class="field-group">
+  <label>Siège du Daara</label>
+  <input type="text" id="setup-siege" placeholder="Ex: Touba, Sénégal" maxlength="80"/>
+  <div class="error-msg" id="err-siege">Veuillez entrer le siège du Daara</div>
+</div>
+
+<div class="field-group">
+  <label>Identifiant administrateur</label>
+  <input type="text" id="setup-id" placeholder="Ex: admin123" maxlength="30"/>
+  <div class="error-msg" id="err-id">Veuillez entrer un identifiant</div>
+</div>
+
+<button class="setup-btn" onclick="startApp()">
+  Accéder à l'application →
+</button>
+```
+
+  </div>
+</div>
+
+<!-- ══════════════ MAIN APP ══════════════ -->
+
+<div id="app">
+
+  <!-- Header -->
+
+  <div class="header">
+    <div class="header-top">
+      <div class="header-logo">🕌 DAARA CONNECT</div>
+      <div class="header-daara">
+        <strong id="hdr-daara">—</strong>
+        <span id="hdr-siege">—</span>
+      </div>
+    </div>
+    <nav id="nav">
+      <button class="nav-btn active" onclick="showPage('accueil',this)">🏠 Accueil</button>
+      <button class="nav-btn" onclick="showPage('kourels',this)">👥 Kourels</button>
+      <button class="nav-btn" onclick="showPage('membres',this)">👤 Membres</button>
+      <button class="nav-btn" onclick="showPage('presences',this)">✅ Présences</button>
+      <button class="nav-btn" onclick="showPage('cotisations',this)">💰 Cotisations</button>
+      <button class="nav-btn" onclick="showPage('messagerie',this)">💬 Messagerie</button>
+      <button class="nav-btn" onclick="showPage('rapports',this)">📊 Rapports</button>
+    </nav>
+  </div>
+
+  <div class="content">
+
+```
+<!-- ── ACCUEIL ── -->
+<div id="page-accueil" class="page active">
+  <h2 class="page-title">Tableau de Bord</h2>
+
+  <div class="stats-grid">
+    <div class="stat-card" style="background:linear-gradient(135deg,#1a7a3c,#2ea84f)">
+      <div class="stat-icon">👥</div>
+      <div class="stat-value" id="stat-kourels">4</div>
+      <div class="stat-label">Kourels Actifs</div>
+    </div>
+    <div class="stat-card" style="background:linear-gradient(135deg,#c05f1a,#e07b2a)">
+      <div class="stat-icon">👤</div>
+      <div class="stat-value" id="stat-membres">7</div>
+      <div class="stat-label">Membres Inscrits</div>
+    </div>
+    <div class="stat-card" style="background:linear-gradient(135deg,#1d4ed8,#3b82f6)">
+      <div class="stat-icon">📈</div>
+      <div class="stat-value" id="stat-cotisations">—</div>
+      <div class="stat-label">Cotisations (Mai)</div>
+    </div>
+    <div class="stat-card" style="background:linear-gradient(135deg,#5b21b6,#7c3aed)">
+      <div class="stat-icon">✅</div>
+      <div class="stat-value" id="stat-presence">75%</div>
+      <div class="stat-label">Présence Aujourd'hui</div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <h3>Kourels</h3>
+      <div id="accueil-kourels"></div>
+    </div>
+    <div class="card">
+      <h3>Activités Récentes</h3>
+      <div id="accueil-presences"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── KOURELS ── -->
+<div id="page-kourels" class="page">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
+    <h2 class="page-title" style="margin:0">Gestion des Kourels</h2>
+    <button class="add-btn" onclick="toggleForm('form-kourel')">+ Nouveau Kourel</button>
+  </div>
+
+  <div id="form-kourel" class="form-box" style="display:none">
+    <h3 style="margin-bottom:16px;font-size:15px">Ajouter un Kourel</h3>
+    <div class="form-grid">
+      <input type="text" id="k-nom" placeholder="Nom du Kourel"/>
+      <input type="number" id="k-membres" placeholder="Nombre de membres"/>
+      <input type="number" id="k-cotisation" placeholder="Cotisation (FCFA)"/>
+      <select id="k-freq"><option>Mensuel</option><option>Hebdomadaire</option></select>
+      <input type="text" id="k-desc" placeholder="Description"/>
+      <select id="k-statut"><option>Actif</option><option>Inactif</option></select>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="addKourel()">Enregistrer</button>
+      <button class="btn btn-secondary" onclick="toggleForm('form-kourel')">Annuler</button>
+    </div>
+  </div>
+
+  <div id="kourels-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px"></div>
+</div>
+
+<!-- ── MEMBRES ── -->
+<div id="page-membres" class="page">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
+    <h2 class="page-title" style="margin:0">Gestion des Membres</h2>
+    <button class="add-btn" onclick="toggleForm('form-membre')">+ Nouveau Membre</button>
+  </div>
+
+  <input class="search-box" type="text" id="search-membre" placeholder="🔍 Rechercher un membre..." oninput="renderMembres()"/>
+
+  <div id="form-membre" class="form-box" style="display:none">
+    <h3 style="margin-bottom:16px;font-size:15px">Ajouter un Membre</h3>
+    <div class="form-grid">
+      <input type="text" id="m-prenom" placeholder="Prénom"/>
+      <input type="text" id="m-nom" placeholder="Nom"/>
+      <input type="tel" id="m-tel" placeholder="Téléphone"/>
+      <select id="m-kourel"></select>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="addMembre()">Enregistrer</button>
+      <button class="btn btn-secondary" onclick="toggleForm('form-membre')">Annuler</button>
+    </div>
+  </div>
+
+  <div class="card" style="padding:0;overflow:hidden">
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Nom</th><th>Kourel</th><th>Téléphone</th><th>Statut</th><th>Dern. cotisation</th>
+          </tr>
+        </thead>
+        <tbody id="membres-body"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ── PRÉSENCES ── -->
+<div id="page-presences" class="page">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
+    <h2 class="page-title" style="margin:0">Suivi des Présences</h2>
+    <button class="add-btn" onclick="toggleForm('form-presence')">+ Enregistrer</button>
+  </div>
+
+  <div id="form-presence" class="form-box" style="display:none">
+    <div class="form-grid">
+      <input type="date" id="p-date"/>
+      <select id="p-kourel"></select>
+      <select id="p-type">
+        <option>Récitation</option><option>Xam Xam</option><option>Cérémonie</option><option>Réunion</option>
+      </select>
+      <input type="number" id="p-participants" placeholder="Présents"/>
+      <input type="number" id="p-total" placeholder="Total membres"/>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="addPresence()">Enregistrer</button>
+      <button class="btn btn-secondary" onclick="toggleForm('form-presence')">Annuler</button>
+    </div>
+  </div>
+
+  <div id="presences-list"></div>
+</div>
+
+<!-- ── COTISATIONS ── -->
+<div id="page-cotisations" class="page">
+  <h2 class="page-title">Gestion des Cotisations</h2>
+
+  <div class="stats-grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:24px">
+    <div class="stat-card" style="background:linear-gradient(135deg,#1a7a3c,#2ea84f)">
+      <div class="stat-icon">💵</div>
+      <div class="stat-value" id="cot-total">—</div>
+      <div class="stat-label">Total collecté</div>
+    </div>
+    <div class="stat-card" style="background:linear-gradient(135deg,#c05f1a,#e07b2a)">
+      <div class="stat-icon">✅</div>
+      <div class="stat-value" id="cot-payees">—</div>
+      <div class="stat-label">Payées</div>
+    </div>
+    <div class="stat-card" style="background:linear-gradient(135deg,#b91c1c,#dc2626)">
+      <div class="stat-icon">⏳</div>
+      <div class="stat-value" id="cot-attente">—</div>
+      <div class="stat-label">En attente</div>
+    </div>
+  </div>
+
+  <div class="card" style="padding:0;overflow:hidden">
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Membre</th><th>Kourel</th><th>Montant</th><th>Date</th><th>Statut</th><th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="cotisations-body"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ── MESSAGERIE ── -->
+<div id="page-messagerie" class="page">
+  <h2 class="page-title">Messagerie</h2>
+
+  <div class="card" style="margin-bottom:20px">
+    <div style="display:flex;gap:12px;margin-bottom:12px">
+      <select id="msg-kourel" style="max-width:220px"></select>
+    </div>
+    <textarea id="msg-text" rows="3" placeholder="Écrire un message pour le groupe…" style="width:100%;resize:vertical"></textarea>
+    <button class="btn btn-primary" style="margin-top:12px" onclick="sendMsg()">Envoyer →</button>
+  </div>
+
+  <div id="messages-list"></div>
+</div>
+
+<!-- ── RAPPORTS ── -->
+<div id="page-rapports" class="page">
+  <h2 class="page-title">Rapports & Statistiques</h2>
+
+  <div class="stats-grid" style="margin-bottom:24px" id="rapport-stats"></div>
+
+  <div class="two-col">
+    <div class="card">
+      <h3>Activités par type</h3>
+      <div id="rapport-types"></div>
+    </div>
+    <div class="card">
+      <h3>Cotisations par Kourel</h3>
+      <div id="rapport-kourels"></div>
+    </div>
+  </div>
+</div>
+```
+
+  </div><!-- /content -->
+</div><!-- /app -->
+
+<script>
+// ── DATA ──────────────────────────────────────────────────────
+let daara = { nom: "", siege: "", admin: "" };
+
+let db = {
+  kourels: [
+    { id:1, nom:"Kourel Al-Amine",  membres:25, cotisation:5000, frequence:"Mensuel",      statut:"Actif",   description:"Groupe de récitation du Coran" },
+    { id:2, nom:"Kourel At-Tahara", membres:18, cotisation:3000, frequence:"Hebdomadaire", statut:"Actif",   description:"Groupe d'étude islamique" },
+    { id:3, nom:"Kourel Al-Fath",   membres:30, cotisation:4000, frequence:"Mensuel",      statut:"Actif",   description:"Groupe de cérémonies" },
+    { id:4, nom:"Kourel An-Nour",   membres:12, cotisation:2000, frequence:"Hebdomadaire", statut:"Inactif", description:"Groupe jeunes" },
+  ],
+  membres: [
+    { id:1, prenom:"Moussa",   nom:"Diallo", kourel:"Kourel Al-Amine",  telephone:"77 123 45 67", statut:"Actif",   cotisationJour:"2026-05-01" },
+    { id:2, prenom:"Fatou",    nom:"Ndiaye", kourel:"Kourel At-Tahara", telephone:"78 234 56 78", statut:"Actif",   cotisationJour:"2026-05-03" },
+    { id:3, prenom:"Ibrahim",  nom:"Sow",    kourel:"Kourel Al-Fath",   telephone:"76 345 67 89", statut:"Actif",   cotisationJour:"2026-04-28" },
+    { id:4, prenom:"Aminata",  nom:"Ba",     kourel:"Kourel Al-Amine",  telephone:"70 456 78 90", statut:"Actif",   cotisationJour:"2026-05-05" },
+    { id:5, prenom:"Ousmane",  nom:"Fall",   kourel:"Kourel An-Nour",   telephone:"77 567 89 01", statut:"Inactif", cotisationJour:null },
+    { id:6, prenom:"Mariama",  nom:"Gueye",  kourel:"Kourel At-Tahara", telephone:"78 678 90 12", statut:"Actif",   cotisationJour:"2026-05-02" },
+    { id:7, prenom:"Cheikh",   nom:"Mbaye",  kourel:"Kourel Al-Fath",   telephone:"76 789 01 23", statut:"Actif",   cotisationJour:"2026-05-07" },
+  ],
+  presences: [
+    { id:1, date:"2026-05-09", kourel:"Kourel Al-Amine",  type:"Récitation", participants:20, total:25 },
+    { id:2, date:"2026-05-09", kourel:"Kourel At-Tahara", type:"Xam Xam",    participants:15, total:18 },
+    { id:3, date:"2026-05-08", kourel:"Kourel Al-Fath",   type:"Cérémonie",  participants:28, total:30 },
+    { id:4, date:"2026-05-07", kourel:"Kourel An-Nour",   type:"Réunion",    participants:10, total:12 },
+    { id:5, date:"2026-05-06", kourel:"Kourel Al-Amine",  type:"Récitation", participants:22, total:25 },
+  ],
+  cotisations: [
+    { id:1, membre:"Moussa Diallo",  kourel:"Kourel Al-Amine",  montant:5000, date:"2026-05-01", statut:"Payé" },
+    { id:2, membre:"Fatou Ndiaye",   kourel:"Kourel At-Tahara", montant:3000, date:"2026-05-03", statut:"Payé" },
+    { id:3, membre:"Ibrahim Sow",    kourel:"Kourel Al-Fath",   montant:4000, date:"2026-04-28", statut:"Payé" },
+    { id:4, membre:"Aminata Ba",     kourel:"Kourel Al-Amine",  montant:5000, date:"2026-05-05", statut:"Payé" },
+    { id:5, membre:"Ousmane Fall",   kourel:"Kourel An-Nour",   montant:2000, date:null,          statut:"En attente" },
+    { id:6, membre:"Mariama Gueye",  kourel:"Kourel At-Tahara", montant:3000, date:"2026-05-02", statut:"Payé" },
+    { id:7, membre:"Cheikh Mbaye",   kourel:"Kourel Al-Fath",   montant:4000, date:"2026-05-07", statut:"Payé" },
+  ],
+  messages: [
+    { id:1, de:"Admin",       kourel:"Tous",            contenu:"Rappel: Réunion mensuelle ce samedi à 15h00",         date:"2026-05-09", heure:"08:00" },
+    { id:2, de:"Cheikh Mbaye",kourel:"Kourel Al-Fath",  contenu:"La cérémonie de demain est confirmée, merci à tous", date:"2026-05-09", heure:"10:30" },
+    { id:3, de:"Admin",       kourel:"Kourel Al-Amine", contenu:"Les cotisations du mois de Mai sont dues avant le 15",date:"2026-05-08", heure:"09:00" },
+    { id:4, de:"Fatou Ndiaye",kourel:"Kourel At-Tahara",contenu:"Merci pour l'organisation du Xam Xam d'hier",         date:"2026-05-08", heure:"11:00" },
+  ],
+};
+
+// ── SETUP ─────────────────────────────────────────────────────
+function startApp() {
+  const nom   = document.getElementById('setup-daara').value.trim();
+  const siege = document.getElementById('setup-siege').value.trim();
+  const id    = document.getElementById('setup-id').value.trim();
+  let ok = true;
+
+  [['err-daara', nom], ['err-siege', siege], ['err-id', id]].forEach(([eid, val]) => {
+    document.getElementById(eid).style.display = val ? 'none' : 'block';
+    if (!val) ok = false;
+  });
+  if (!ok) return;
+
+  daara = { nom, siege, admin: id };
+  document.getElementById('hdr-daara').textContent = nom;
+  document.getElementById('hdr-siege').textContent = siege + ' · ' + id;
+
+  document.getElementById('setup-screen').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+
+  renderAll();
+}
+
+// ── NAVIGATION ────────────────────────────────────────────────
+function showPage(id, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function toggleForm(id) {
+  const el = document.getElementById(id);
+  el.style.display = el.style.display === 'none' ? 'block' : 'none';
+}
+
+// ── BADGE ─────────────────────────────────────────────────────
+function badge(s) {
+  const cls = (s === 'Actif' || s === 'Payé') ? 'actif' : 'attente';
+  return `<span class="badge ${cls}">${s}</span>`;
+}
+
+// ── KOUREL SELECT OPTIONS ──────────────────────────────────────
+function kourelOptions(selId, includeAll) {
+  const el = document.getElementById(selId);
+  if (!el) return;
+  el.innerHTML = (includeAll ? '<option value="Tous">Tous</option>' : '') +
+    db.kourels.map(k => `<option>${k.nom}</option>`).join('');
+}
+
+// ── RENDER ALL ────────────────────────────────────────────────
+function renderAll() {
+  renderAccueil();
+  renderKourels();
+  renderMembres();
+  renderPresences();
+  renderCotisations();
+  renderMessages();
+  renderRapports();
+  kourelOptions('m-kourel', false);
+  kourelOptions('p-kourel', false);
+  kourelOptions('msg-kourel', true);
+}
+
+// ── ACCUEIL ───────────────────────────────────────────────────
+function renderAccueil() {
+  const actifs = db.kourels.filter(k => k.statut === 'Actif').length;
+  const totalM = db.membres.length;
+  const payees = db.cotisations.filter(c => c.statut === 'Payé').length;
+  const taux   = Math.round(payees / db.cotisations.length * 100);
+  const dp     = db.presences[0];
+  const tp     = dp ? Math.round(dp.participants / dp.total * 100) : 0;
+
+  document.getElementById('stat-kourels').textContent    = actifs;
+  document.getElementById('stat-membres').textContent    = totalM;
+  document.getElementById('stat-cotisations').textContent = taux + '%';
+  document.getElementById('stat-presence').textContent   = tp + '%';
+
+  document.getElementById('accueil-kourels').innerHTML = db.kourels.map(k => `
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border)">
+      <div>
+        <div style="font-weight:700;font-size:14px">${k.nom}</div>
+        <div style="font-size:12px;color:var(--text-light)">${k.membres} membres · ${k.cotisation.toLocaleString()} FCFA/${k.frequence}</div>
+      </div>
+      ${badge(k.statut)}
+    </div>`).join('');
+
+  document.getElementById('accueil-presences').innerHTML = db.presences.map(p => `
+    <div style="padding:10px 0;border-bottom:1px solid var(--border)">
+      <div style="font-weight:700;font-size:14px">${p.type}</div>
+      <div style="font-size:12px;color:var(--text-light)">${p.kourel} · ${p.date}</div>
+      <div style="font-size:12px;color:var(--green);font-weight:700">${p.participants} participants</div>
+    </div>`).join('');
+}
+
+// ── KOURELS ───────────────────────────────────────────────────
+function renderKourels() {
+  document.getElementById('kourels-grid').innerHTML = db.kourels.map(k => `
+    <div class="kourel-card">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+        <h3 style="font-size:15px;font-weight:800">${k.nom}</h3>
+        ${badge(k.statut)}
+      </div>
+      <p style="font-size:13px;color:var(--text-light);margin-bottom:16px">${k.description}</p>
+      <div style="display:flex;gap:20px;margin-bottom:16px">
+        <div style="text-align:center">
+          <div style="font-size:24px;font-weight:900;color:var(--green)">${k.membres}</div>
+          <div style="font-size:11px;color:var(--text-light)">Membres</div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-size:18px;font-weight:800;color:var(--orange)">${k.cotisation.toLocaleString()} F</div>
+          <div style="font-size:11px;color:var(--text-light)">${k.frequence}</div>
+        </div>
+      </div>
+      <button class="btn btn-danger" onclick="deleteKourel(${k.id})">🗑 Supprimer</button>
+    </div>`).join('');
+}
+
+function addKourel() {
+  const nom = document.getElementById('k-nom').value.trim();
+  if (!nom) return;
+  db.kourels.push({
+    id: Date.now(),
+    nom,
+    membres:     +document.getElementById('k-membres').value || 0,
+    cotisation:  +document.getElementById('k-cotisation').value || 0,
+    frequence:    document.getElementById('k-freq').value,
+    statut:       document.getElementById('k-statut').value,
+    description:  document.getElementById('k-desc').value,
+  });
+  ['k-nom','k-membres','k-cotisation','k-desc'].forEach(id => document.getElementById(id).value = '');
+  toggleForm('form-kourel');
+  renderAll();
+}
+
+function deleteKourel(id) {
+  db.kourels = db.kourels.filter(k => k.id !== id);
+  renderAll();
+}
+
+// ── MEMBRES ───────────────────────────────────────────────────
+function renderMembres() {
+  const q = (document.getElementById('search-membre')?.value || '').toLowerCase();
+  const filtered = db.membres.filter(m =>
+    (m.prenom + ' ' + m.nom + ' ' + m.kourel).toLowerCase().includes(q)
+  );
+  document.getElementById('membres-body').innerHTML = filtered.map(m => `
+    <tr>
+      <td><strong>${m.prenom} ${m.nom}</strong></td>
+      <td style="color:var(--text-light)">${m.kourel}</td>
+      <td>${m.telephone}</td>
+      <td>${badge(m.statut)}</td>
+      <td style="color:var(--text-light)">${m.cotisationJour || '—'}</td>
+    </tr>`).join('');
+  kourelOptions('m-kourel', false);
+}
+
+function addMembre() {
+  const prenom = document.getElementById('m-prenom').value.trim();
+  const nom    = document.getElementById('m-nom').value.trim();
+  if (!prenom || !nom) return;
+  db.membres.push({
+    id: Date.now(), prenom, nom,
+    kourel:    document.getElementById('m-kourel').value,
+    telephone: document.getElementById('m-tel').value,
+    statut:    'Actif',
+    cotisationJour: null,
+  });
+  // add cotisation entry
+  db.cotisations.push({
+    id: Date.now()+1,
+    membre: prenom + ' ' + nom,
+    kourel: document.getElementById('m-kourel').value,
+    montant: db.kourels.find(k => k.nom === document.getElementById('m-kourel').value)?.cotisation || 0,
+    date: null, statut: 'En attente'
+  });
+  ['m-prenom','m-nom','m-tel'].forEach(id => document.getElementById(id).value = '');
+  toggleForm('form-membre');
+  renderAll();
+}
+
+// ── PRÉSENCES ─────────────────────────────────────────────────
+const typeColors = { Récitation: '#1a7a3c', 'Xam Xam': '#2563eb', Cérémonie: '#7c3aed', Réunion: '#e07b2a' };
+
+function renderPresences() {
+  kourelOptions('p-kourel', false);
+  document.getElementById('presences-list').innerHTML = db.presences.map(p => {
+    const taux = Math.round(p.participants / p.total * 100);
+    const col  = taux >= 80 ? '#1a7a3c' : '#e07b2a';
+    return `
+    <div style="background:#fff;border-radius:14px;padding:20px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,0.06);display:flex;align-items:center;gap:20px">
+      <div style="background:${typeColors[p.type]||'#1a7a3c'};color:#fff;border-radius:10px;padding:8px 14px;font-weight:700;font-size:13px;white-space:nowrap">${p.type}</div>
+      <div style="flex:1">
+        <div style="font-weight:700;font-size:14px">${p.kourel}</div>
+        <div style="font-size:12px;color:var(--text-light)">${p.date}</div>
+      </div>
+      <div style="text-align:center">
+        <div style="font-weight:900;font-size:20px;color:${col}">${taux}%</div>
+        <div style="font-size:11px;color:var(--text-light)">${p.participants}/${p.total}</div>
+      </div>
+      <div class="bar-wrap"><div class="bar" style="width:${taux}%;background:${col}"></div></div>
+    </div>`;
+  }).join('');
+}
+
+function addPresence() {
+  const date = document.getElementById('p-date').value;
+  const part = +document.getElementById('p-participants').value;
+  const tot  = +document.getElementById('p-total').value;
+  if (!date || !part || !tot) return;
+  db.presences.unshift({
+    id: Date.now(),
+    date,
+    kourel:      document.getElementById('p-kourel').value,
+    type:        document.getElementById('p-type').value,
+    participants: part,
+    total:        tot,
+  });
+  ['p-date','p-participants','p-total'].forEach(id => document.getElementById(id).value = '');
+  toggleForm('form-presence');
+  renderAll();
+}
+
+// ── COTISATIONS ───────────────────────────────────────────────
+function renderCotisations() {
+  const payees  = db.cotisations.filter(c => c.statut === 'Payé');
+  const attente = db.cotisations.filter(c => c.statut !== 'Payé');
+  const total   = payees.reduce((s,c) => s+c.montant, 0);
+
+  document.getElementById('cot-total').textContent   = total.toLocaleString() + ' F';
+  document.getElementById('cot-payees').textContent  = payees.length;
+  document.getElementById('cot-attente').textContent = attente.length;
+
+  document.getElementById('cotisations-body').innerHTML = db.cotisations.map(c => `
+    <tr>
+      <td><strong>${c.membre}</strong></td>
+      <td style="color:var(--text-light)">${c.kourel}</td>
+      <td style="font-weight:700;color:var(--green)">${c.montant.toLocaleString()} F</td>
+      <td style="color:var(--text-light)">${c.date || '—'}</td>
+      <td>${badge(c.statut)}</td>
+      <td>${c.statut !== 'Payé' ? `<button class="btn btn-success" onclick="marquerPaye(${c.id})">Marquer payé</button>` : ''}</td>
+    </tr>`).join('');
+}
+
+function marquerPaye(id) {
+  const c = db.cotisations.find(c => c.id === id);
+  if (c) { c.statut = 'Payé'; c.date = new Date().toISOString().split('T')[0]; }
+  renderAll();
+}
+
+// ── MESSAGES ──────────────────────────────────────────────────
+function renderMessages() {
+  kourelOptions('msg-kourel', true);
+  document.getElementById('messages-list').innerHTML = db.messages.map(m => `
+    <div class="msg-card">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+        <div style="display:flex;gap:12px;align-items:center">
+          <div class="msg-avatar">${m.de[0]}</div>
+          <div>
+            <div style="font-weight:800;font-size:14px">${m.de}</div>
+            <div style="font-size:11px;color:var(--text-light)">→ ${m.kourel}</div>
+          </div>
+        </div>
+        <div style="font-size:11px;color:var(--text-light)">${m.date} · ${m.heure}</div>
+      </div>
+      <p style="font-size:14px;line-height:1.5">${m.contenu}</p>
+    </div>`).join('');
+}
+
+function sendMsg() {
+  const txt = document.getElementById('msg-text').value.trim();
+  if (!txt) return;
+  const now = new Date();
+  db.messages.unshift({
+    id: Date.now(),
+    de: daara.admin,
+    kourel: document.getElementById('msg-kourel').value,
+    contenu: txt,
+    date: now.toISOString().split('T')[0],
+    heure: now.toLocaleTimeString('fr-FR', {hour:'2-digit',minute:'2-digit'}),
+  });
+  document.getElementById('msg-text').value = '';
+  renderMessages();
+}
+
+// ── RAPPORTS ──────────────────────────────────────────────────
+function renderRapports() {
+  const totalM     = db.membres.length;
+  const actifs     = db.membres.filter(m => m.statut === 'Actif').length;
+  const totalCot   = db.cotisations.filter(c => c.statut === 'Payé').reduce((s,c) => s+c.montant, 0);
+  const tauxPres   = db.presences.length
+    ? Math.round(db.presences.reduce((s,p) => s + p.participants/p.total, 0) / db.presences.length * 100)
+    : 0;
+  const kActifs    = db.kourels.filter(k => k.statut === 'Actif').length;
+
+  document.getElementById('rapport-stats').innerHTML = [
+    { label:'Membres actifs',       value:`${actifs}/${totalM}`,             color:'var(--green)' },
+    { label:'Cotisations collectées',value:`${totalCot.toLocaleString()} F`, color:'var(--orange)' },
+    { label:'Présence moyenne',      value:`${tauxPres}%`,                   color:'var(--blue)' },
+    { label:'Kourels actifs',        value:`${kActifs}/${db.kourels.length}`,color:'var(--purple)' },
+  ].map(s => `
+    <div class="stat-card" style="background:${s.color};position:relative">
+      <div class="stat-value" style="font-size:24px">${s.value}</div>
+      <div class="stat-label">${s.label}</div>
+    </div>`).join('');
+
+  // Types
+  const types = ['Récitation','Xam Xam','Cérémonie','Réunion'];
+  const tColors = ['var(--green)','var(--blue)','var(--purple)','var(--orange)'];
+  const total = db.presences.length || 1;
+  document.getElementById('rapport-types').innerHTML = types.map((t,i) => {
+    const cnt  = db.presences.filter(p => p.type === t).length;
+    const pct  = Math.round(cnt/total*100);
+    return `
+    <div style="margin-bottom:16px">
+      <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+        <span style="font-size:13px;font-weight:700">${t}</span>
+        <span style="font-size:13px;color:var(--text-light)">${cnt} séance${cnt>1?'s':''}</span>
+      </div>
+      <div class="rapport-bar-wrap">
+        <div class="rapport-bar" style="width:${pct}%;background:${tColors[i]}"></div>
+      </div>
+    </div>`;
+  }).join('');
+
+  // Par kourel
+  document.getElementById('rapport-kourels').innerHTML = db.kourels.map(k => {
+    const t = db.cotisations.filter(c => c.kourel === k.nom && c.statut === 'Payé').reduce((s,c) => s+c.montant,0);
+    return `
+    <div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)">
+      <span style="font-size:13px;font-weight:700">${k.nom}</span>
+      <span style="font-size:13px;font-weight:900;color:var(--green)">${t.toLocaleString()} FCFA</span>
+    </div>`;
+  }).join('');
+}
+
+// Enter key on setup
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && document.getElementById('setup-screen').style.display !== 'none') startApp();
+});
+</script>
+
+</body>
+</html>
