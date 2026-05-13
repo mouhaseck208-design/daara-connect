@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="fr">
 <head>
 <meta charset="UTF-8"/>
@@ -22,446 +21,499 @@
     --border: #c8dfc8;
   }
 
-- { box-sizing: border-box; margin: 0; padding: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
-body {
-font-family: ‘Nunito’, sans-serif;
-background: var(–bg);
-color: var(–text);
-min-height: 100vh;
-}
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
 
-/* ── SETUP SCREEN ── */
-#setup-screen {
-min-height: 100vh;
-display: flex;
-align-items: center;
-justify-content: center;
-background: linear-gradient(135deg, #0f4c25 0%, #1a7a3c 50%, #2ea84f 100%);
-position: relative;
-overflow: hidden;
-}
+  /* ── SETUP SCREEN ── */
+  #setup-screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0f4c25 0%, #1a7a3c 50%, #2ea84f 100%);
+    position: relative;
+    overflow: hidden;
+  }
 
-#setup-screen::before {
-content: ‘’;
-position: absolute;
-inset: 0;
-background-image: repeating-linear-gradient(
-45deg,
-transparent,
-transparent 40px,
-rgba(255,255,255,0.03) 40px,
-rgba(255,255,255,0.03) 80px
-);
-}
+  #setup-screen::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(255,255,255,0.03) 40px, rgba(255,255,255,0.03) 80px);
+  }
 
-/* floating circles */
-.orb {
-position: absolute;
-border-radius: 50%;
-background: rgba(255,255,255,0.06);
-animation: float 8s ease-in-out infinite;
-}
-.orb:nth-child(1) { width:300px; height:300px; top:-80px; right:-80px; animation-delay:0s; }
-.orb:nth-child(2) { width:200px; height:200px; bottom:-60px; left:-60px; animation-delay:3s; }
-.orb:nth-child(3) { width:150px; height:150px; top:40%; left:5%; animation-delay:6s; }
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+    animation: float 8s ease-in-out infinite;
+  }
+  .orb:nth-child(1) { width:300px; height:300px; top:-80px; right:-80px; animation-delay:0s; }
+  .orb:nth-child(2) { width:200px; height:200px; bottom:-60px; left:-60px; animation-delay:3s; }
+  .orb:nth-child(3) { width:150px; height:150px; top:40%; left:5%; animation-delay:6s; }
 
-@keyframes float {
-0%,100% { transform: translateY(0) scale(1); }
-50% { transform: translateY(-20px) scale(1.05); }
-}
+  @keyframes float {
+    0%,100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-20px) scale(1.05); }
+  }
 
-.setup-card {
-background: rgba(255,255,255,0.97);
-border-radius: 24px;
-padding: 48px 44px;
-width: 100%;
-max-width: 480px;
-position: relative;
-z-index: 10;
-box-shadow: 0 32px 80px rgba(0,0,0,0.3);
-animation: slideUp 0.6s cubic-bezier(0.22,1,0.36,1) both;
-}
+  .setup-card {
+    background: rgba(255,255,255,0.97);
+    border-radius: 24px;
+    padding: 48px 44px;
+    width: 100%;
+    max-width: 480px;
+    position: relative;
+    z-index: 10;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.3);
+    animation: slideUp 0.6s cubic-bezier(0.22,1,0.36,1) both;
+  }
 
-@keyframes slideUp {
-from { opacity:0; transform: translateY(40px); }
-to   { opacity:1; transform: translateY(0); }
-}
+  @keyframes slideUp {
+    from { opacity:0; transform: translateY(40px); }
+    to   { opacity:1; transform: translateY(0); }
+  }
 
-.setup-logo {
-text-align: center;
-margin-bottom: 36px;
-}
+  .setup-logo { text-align: center; margin-bottom: 36px; }
+  .setup-logo .mosque { font-size: 56px; display: block; margin-bottom: 10px; animation: pulse 2s ease-in-out infinite; }
 
-.setup-logo .mosque {
-font-size: 56px;
-display: block;
-margin-bottom: 10px;
-animation: pulse 2s ease-in-out infinite;
-}
+  @keyframes pulse {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+  }
 
-@keyframes pulse {
-0%,100% { transform: scale(1); }
-50% { transform: scale(1.08); }
-}
+  .setup-logo h1 { font-family: 'Amiri', serif; font-size: 32px; color: var(--green); font-weight: 700; letter-spacing: 2px; }
+  .setup-logo p { font-size: 13px; color: var(--text-light); margin-top: 6px; }
 
-.setup-logo h1 {
-font-family: ‘Amiri’, serif;
-font-size: 32px;
-color: var(–green);
-font-weight: 700;
-letter-spacing: 2px;
-}
+  .setup-divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--green), transparent);
+    margin: 0 auto 32px;
+    width: 60%;
+    border-radius: 99px;
+  }
 
-.setup-logo p {
-font-size: 13px;
-color: var(–text-light);
-margin-top: 6px;
-}
+  .field-group { margin-bottom: 20px; }
+  .field-group label { display: block; font-size: 12px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: var(--green-dark); margin-bottom: 8px; }
+  .field-group input { width: 100%; padding: 14px 18px; border-radius: 12px; border: 2px solid var(--border); font-size: 15px; font-family: 'Nunito', sans-serif; color: var(--text); transition: border-color 0.2s, box-shadow 0.2s; outline: none; background: #f8fbf8; }
+  .field-group input:focus { border-color: var(--green); box-shadow: 0 0 0 4px rgba(26,122,60,0.12); background: #fff; }
+  .field-group input::placeholder { color: #aac5aa; }
 
-.setup-divider {
-height: 2px;
-background: linear-gradient(90deg, transparent, var(–green), transparent);
-margin: 0 auto 32px;
-width: 60%;
-border-radius: 99px;
-}
+  .setup-btn {
+    width: 100%; padding: 16px;
+    background: var(--green-dark); color: #fff; border: none; border-radius: 14px;
+    font-size: 16px; font-weight: 800; font-family: 'Nunito', sans-serif;
+    cursor: pointer; margin-top: 10px; letter-spacing: 0.5px;
+    transition: transform 0.15s, box-shadow 0.15s;
+    box-shadow: 0 6px 24px rgba(26,122,60,0.35);
+  }
+  .setup-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(26,122,60,0.4); }
+  .setup-btn:active { transform: translateY(0); }
 
-.field-group {
-margin-bottom: 20px;
-}
+  .error-msg { color: #dc2626; font-size: 12px; margin-top: 6px; font-weight: 600; display: none; }
 
-.field-group label {
-display: block;
-font-size: 12px;
-font-weight: 800;
-letter-spacing: 1.2px;
-text-transform: uppercase;
-color: var(–green-dark);
-margin-bottom: 8px;
-}
+  /* ── MAIN APP ── */
+  #app { display: none; }
 
-.field-group input {
-width: 100%;
-padding: 14px 18px;
-border-radius: 12px;
-border: 2px solid var(–border);
-font-size: 15px;
-font-family: ‘Nunito’, sans-serif;
-color: var(–text);
-transition: border-color 0.2s, box-shadow 0.2s;
-outline: none;
-background: #f8fbf8;
-}
+  .header {
+    background: linear-gradient(135deg, var(--green-dark), var(--green));
+    color: #fff;
+    padding: 0 32px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  }
 
-.field-group input:focus {
-border-color: var(–green);
-box-shadow: 0 0 0 4px rgba(26,122,60,0.12);
-background: #fff;
-}
+  .header-top { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+  .header-logo { font-family: 'Amiri', serif; font-size: 22px; font-weight: 700; letter-spacing: 1.5px; }
+  .header-daara { font-size: 13px; opacity: 0.88; text-align: right; line-height: 1.4; }
+  .header-daara strong { display: block; font-size: 15px; }
 
-.field-group input::placeholder { color: #aac5aa; }
+  nav { display: flex; gap: 2px; overflow-x: auto; }
+  nav::-webkit-scrollbar { display: none; }
 
-.setup-btn {
-width: 100%;
-padding: 16px;
-background: linear-gradient(135deg, var(–green), var(–green-light));
-color: #fff;
-border: none;
-border-radius: 14px;
-font-size: 16px;
-font-weight: 800;
-font-family: ‘Nunito’, sans-serif;
-cursor: pointer;
-margin-top: 10px;
-letter-spacing: 0.5px;
-transition: transform 0.15s, box-shadow 0.15s;
-box-shadow: 0 6px 24px rgba(26,122,60,0.35);
-}
+  .nav-btn {
+    background: transparent; color: rgba(255,255,255,0.85); border: none;
+    border-bottom: 3px solid transparent; padding: 12px 16px; cursor: pointer;
+    font-weight: 600; font-size: 13px; font-family: 'Nunito', sans-serif;
+    white-space: nowrap; transition: all 0.2s;
+  }
+  .nav-btn.active { color: #fff; border-bottom-color: #fff; font-weight: 800; background: rgba(255,255,255,0.12); }
+  .nav-btn:hover:not(.active) { color: #fff; background: rgba(255,255,255,0.08); }
 
-.setup-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(26,122,60,0.4); }
-.setup-btn:active { transform: translateY(0); }
+  .content { max-width: 1100px; margin: 0 auto; padding: 32px 24px; }
+  .page-title { font-size: 26px; font-weight: 900; color: var(--text); margin-bottom: 24px; }
 
-.error-msg {
-color: #dc2626;
-font-size: 12px;
-margin-top: 6px;
-font-weight: 600;
-display: none;
-}
+  .card { background: var(--card); border-radius: 18px; padding: 24px; box-shadow: 0 2px 16px rgba(0,0,0,0.07); }
+  .card h3 { font-size: 16px; font-weight: 800; margin-bottom: 16px; }
 
-/* ── MAIN APP ── */
-#app { display: none; }
+  .stats-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-bottom: 28px; }
 
-/* Header */
-.header {
-background: linear-gradient(135deg, var(–green-dark), var(–green));
-color: #fff;
-padding: 0 32px;
-position: sticky;
-top: 0;
-z-index: 100;
-box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-}
+  .stat-card {
+    border-radius: 18px; padding: 24px 20px; color: #fff;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.15); position: relative; overflow: hidden;
+  }
+  .stat-card::after { content: ''; position: absolute; bottom: -20px; right: -20px; width: 80px; height: 80px; border-radius: 50%; background: rgba(255,255,255,0.1); }
+  .stat-icon { font-size: 28px; margin-bottom: 8px; }
+  .stat-value { font-size: 32px; font-weight: 900; }
+  .stat-label { font-size: 12px; opacity: 0.88; margin-top: 4px; }
 
-.header-top {
-display: flex;
-align-items: center;
-justify-content: space-between;
-height: 60px;
-}
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 
-.header-logo {
-font-family: ‘Amiri’, serif;
-font-size: 22px;
-font-weight: 700;
-letter-spacing: 1.5px;
-}
+  .badge { padding: 3px 12px; border-radius: 99px; font-size: 12px; font-weight: 700; }
+  .badge.actif, .badge.payé { background: #dcfce7; color: #166534; }
+  .badge.inactif, .badge.attente { background: #fee2e2; color: #991b1b; }
 
-.header-daara {
-font-size: 13px;
-opacity: 0.88;
-text-align: right;
-line-height: 1.4;
-}
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; }
+  th { background: var(--green); color: #fff; padding: 14px 16px; text-align: left; font-size: 13px; }
+  th:first-child { border-radius: 8px 0 0 0; }
+  th:last-child { border-radius: 0 8px 0 0; }
+  td { padding: 12px 16px; font-size: 14px; border-bottom: 1px solid var(--border); }
+  tr:nth-child(even) td { background: #f4faf4; }
+  tr:hover td { background: #e8f5e8; }
 
-.header-daara strong { display: block; font-size: 15px; }
+  .form-box {
+    background: #f4faf4; border-radius: 14px; padding: 24px; margin-bottom: 24px;
+    border: 1.5px solid var(--border); animation: fadeIn 0.3s ease;
+  }
 
-nav {
-display: flex;
-gap: 2px;
-overflow-x: auto;
-}
+  @keyframes fadeIn { from { opacity:0; transform:translateY(-8px); } to { opacity:1; transform:translateY(0); } }
 
-nav::-webkit-scrollbar { display: none; }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .form-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
 
-.nav-btn {
-background: transparent;
-color: rgba(255,255,255,0.8);
-border: none;
-border-bottom: 3px solid transparent;
-padding: 12px 16px;
-cursor: pointer;
-font-weight: 600;
-font-size: 13px;
-font-family: ‘Nunito’, sans-serif;
-white-space: nowrap;
-transition: all 0.2s;
-}
+  input[type=text], input[type=number], input[type=date], input[type=time], input[type=tel], select, textarea {
+    width: 100%; padding: 11px 14px; border-radius: 10px; border: 1.5px solid var(--border);
+    font-size: 14px; font-family: 'Nunito', sans-serif; color: var(--text); outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s; background: #fff;
+  }
+  input:focus, select:focus, textarea:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(26,122,60,0.1); }
 
-.nav-btn.active {
-color: #fff;
-border-bottom-color: #fff;
-font-weight: 800;
-background: rgba(255,255,255,0.12);
-}
+  .btn { padding: 10px 22px; border-radius: 10px; border: none; cursor: pointer; font-weight: 700; font-size: 14px; font-family: 'Nunito', sans-serif; transition: transform 0.15s, box-shadow 0.15s; }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-primary { background: var(--green); color: #fff; box-shadow: 0 4px 14px rgba(26,122,60,0.3); }
+  .btn-secondary { background: #e8f5e8; color: var(--green-dark); }
+  .btn-danger { background: #fee2e2; color: #991b1b; font-size: 12px; padding: 6px 12px; }
+  .btn-success { background: var(--green); color: #fff; font-size: 12px; padding: 6px 12px; }
+  .btn-row { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
 
-.nav-btn:hover:not(.active) { color: #fff; background: rgba(255,255,255,0.08); }
+  .add-btn {
+    background: var(--green-dark); color: #fff; border: none; border-radius: 12px;
+    padding: 11px 22px; font-weight: 800; font-size: 14px; cursor: pointer;
+    font-family: 'Nunito', sans-serif; box-shadow: 0 4px 14px rgba(26,122,60,0.25);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .add-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(26,122,60,0.35); }
 
-/* Content */
-.content { max-width: 1100px; margin: 0 auto; padding: 32px 24px; }
+  .search-box { width: 100%; padding: 13px 18px; border-radius: 12px; border: 2px solid var(--border); font-size: 14px; font-family: 'Nunito', sans-serif; outline: none; margin-bottom: 20px; transition: border-color 0.2s; }
+  .search-box:focus { border-color: var(--green); }
 
-/* Page title */
-.page-title { font-size: 26px; font-weight: 900; color: var(–text); margin-bottom: 24px; }
+  .bar-wrap { width: 80px; background: #e0f0e0; border-radius: 99px; height: 8px; }
+  .bar { height: 8px; border-radius: 99px; }
 
-/* Cards */
-.card {
-background: var(–card);
-border-radius: 18px;
-padding: 24px;
-box-shadow: 0 2px 16px rgba(0,0,0,0.07);
-}
+  .msg-card { background: var(--card); border-radius: 14px; padding: 18px; margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-left: 4px solid var(--green); }
+  .msg-avatar { width: 38px; height: 38px; border-radius: 50%; background: var(--green); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 15px; flex-shrink: 0; }
 
-.card h3 { font-size: 16px; font-weight: 800; margin-bottom: 16px; }
+  .rapport-bar-wrap { background: #e0f0e0; border-radius: 99px; height: 12px; flex:1; }
+  .rapport-bar { height: 12px; border-radius: 99px; transition: width 0.6s ease; }
 
-/* Stat Cards */
-.stats-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-bottom: 28px; }
+  .kourel-card { background: var(--card); border-radius: 18px; padding: 22px; box-shadow: 0 2px 14px rgba(0,0,0,0.07); border-top: 4px solid var(--green); }
 
-.stat-card {
-border-radius: 18px;
-padding: 24px 20px;
-color: #fff;
-box-shadow: 0 6px 24px rgba(0,0,0,0.15);
-position: relative;
-overflow: hidden;
-}
+  .page { display: none; }
+  .page.active { display: block; }
 
-.stat-card::after {
-content: ‘’;
-position: absolute;
-bottom: -20px; right: -20px;
-width: 80px; height: 80px;
-border-radius: 50%;
-background: rgba(255,255,255,0.1);
-}
+  /* ── PROGRAMME STYLES ── */
+  .programme-card {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 24px;
+    box-shadow: 0 2px 14px rgba(0,0,0,0.07);
+    border-left: 5px solid var(--green);
+    margin-bottom: 16px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .programme-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
 
-.stat-icon { font-size: 28px; margin-bottom: 8px; }
-.stat-value { font-size: 32px; font-weight: 900; }
-.stat-label { font-size: 12px; opacity: 0.88; margin-top: 4px; }
+  .programme-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+  }
 
-/* Grid */
-.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .programme-badge {
+    background: linear-gradient(135deg, var(--green), var(--green-light));
+    color: #fff;
+    border-radius: 10px;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 800;
+  }
 
-/* Badge */
-.badge {
-padding: 3px 12px; border-radius: 99px; font-size: 12px; font-weight: 700;
-}
-.badge.actif, .badge.payé { background: #dcfce7; color: #166534; }
-.badge.inactif, .badge.attente { background: #fee2e2; color: #991b1b; }
+  .programme-infos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+    margin-top: 12px;
+  }
 
-/* Table */
-.table-wrap { overflow-x: auto; }
-table { width: 100%; border-collapse: collapse; }
-th { background: var(–green); color: #fff; padding: 14px 16px; text-align: left; font-size: 13px; }
-th:first-child { border-radius: 8px 0 0 0; }
-th:last-child { border-radius: 0 8px 0 0; }
-td { padding: 12px 16px; font-size: 14px; border-bottom: 1px solid var(–border); }
-tr:nth-child(even) td { background: #f4faf4; }
-tr:hover td { background: #e8f5e8; }
+  .prog-info-item {
+    background: #f4faf4;
+    border-radius: 10px;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+  }
 
-/* Forms */
-.form-box {
-background: #f4faf4;
-border-radius: 14px;
-padding: 24px;
-margin-bottom: 24px;
-border: 1.5px solid var(–border);
-animation: fadeIn 0.3s ease;
-}
+  .prog-info-label {
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-light);
+    margin-bottom: 4px;
+  }
 
-@keyframes fadeIn { from { opacity:0; transform:translateY(-8px); } to { opacity:1; transform:translateY(0); } }
+  .prog-info-value {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+  }
 
-.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .audio-player {
+    background: linear-gradient(135deg, #0f4c25, #1a7a3c);
+    border-radius: 12px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 12px;
+  }
 
-input[type=text], input[type=number], input[type=date], input[type=tel], select, textarea {
-width: 100%;
-padding: 11px 14px;
-border-radius: 10px;
-border: 1.5px solid var(–border);
-font-size: 14px;
-font-family: ‘Nunito’, sans-serif;
-color: var(–text);
-outline: none;
-transition: border-color 0.2s, box-shadow 0.2s;
-background: #fff;
-}
+  .audio-player audio {
+    flex: 1;
+    height: 32px;
+    accent-color: var(--green-light);
+  }
 
-input:focus, select:focus, textarea:focus {
-border-color: var(–green);
-box-shadow: 0 0 0 3px rgba(26,122,60,0.1);
-}
+  .audio-label {
+    color: rgba(255,255,255,0.9);
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
 
-.btn {
-padding: 10px 22px;
-border-radius: 10px;
-border: none;
-cursor: pointer;
-font-weight: 700;
-font-size: 14px;
-font-family: ‘Nunito’, sans-serif;
-transition: transform 0.15s, box-shadow 0.15s;
-}
+  /* ── PRESENCE DETAIL STYLES ── */
+  .presence-session-card {
+    background: var(--card);
+    border-radius: 18px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 14px rgba(0,0,0,0.07);
+    overflow: hidden;
+  }
 
-.btn:hover { transform: translateY(-1px); }
+  .presence-session-header {
+    background: linear-gradient(135deg, var(--green-dark), var(--green));
+    color: #fff;
+    padding: 18px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
 
-.btn-primary { background: var(–green); color: #fff; box-shadow: 0 4px 14px rgba(26,122,60,0.3); }
-.btn-secondary { background: #e8f5e8; color: var(–green-dark); }
-.btn-danger { background: #fee2e2; color: #991b1b; font-size: 12px; padding: 6px 12px; }
-.btn-success { background: var(–green); color: #fff; font-size: 12px; padding: 6px 12px; }
+  .presence-session-title { font-size: 16px; font-weight: 800; }
+  .presence-session-meta { font-size: 13px; opacity: 0.88; }
 
-.btn-row { display: flex; gap: 10px; margin-top: 16px; }
+  .presence-stats-row {
+    display: flex;
+    gap: 16px;
+    padding: 16px 24px;
+    background: #f4faf4;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
 
-/* Add button */
-.add-btn {
-background: var(–green);
-color: #fff;
-border: none;
-border-radius: 12px;
-padding: 11px 22px;
-font-weight: 800;
-font-size: 14px;
-cursor: pointer;
-font-family: ‘Nunito’, sans-serif;
-box-shadow: 0 4px 14px rgba(26,122,60,0.25);
-transition: transform 0.15s, box-shadow 0.15s;
-}
-.add-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(26,122,60,0.35); }
+  .pstat {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 700;
+  }
 
-/* Search */
-.search-box {
-width: 100%;
-padding: 13px 18px;
-border-radius: 12px;
-border: 2px solid var(–border);
-font-size: 14px;
-font-family: ‘Nunito’, sans-serif;
-outline: none;
-margin-bottom: 20px;
-transition: border-color 0.2s;
-}
-.search-box:focus { border-color: var(–green); }
+  .pstat-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
 
-/* Presence bar */
-.bar-wrap { width: 80px; background: #e0f0e0; border-radius: 99px; height: 8px; }
-.bar { height: 8px; border-radius: 99px; }
+  .pstat-present { background: #16a34a; }
+  .pstat-retard  { background: #d97706; }
+  .pstat-absent  { background: #dc2626; }
 
-/* Message card */
-.msg-card {
-background: var(–card);
-border-radius: 14px;
-padding: 18px;
-margin-bottom: 12px;
-box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-border-left: 4px solid var(–green);
-}
+  .membre-presence-row {
+    display: flex;
+    align-items: center;
+    padding: 14px 24px;
+    border-bottom: 1px solid var(--border);
+    gap: 16px;
+  }
 
-.msg-avatar {
-width: 38px; height: 38px;
-border-radius: 50%;
-background: var(–green);
-color: #fff;
-display: flex; align-items: center; justify-content: center;
-font-weight: 800; font-size: 15px;
-flex-shrink: 0;
-}
+  .membre-presence-row:last-child { border-bottom: none; }
 
-/* Rapport bar */
-.rapport-bar-wrap { background: #e0f0e0; border-radius: 99px; height: 12px; flex:1; }
-.rapport-bar { height: 12px; border-radius: 99px; transition: width 0.6s ease; }
+  .membre-presence-name {
+    flex: 1;
+    font-weight: 700;
+    font-size: 14px;
+  }
 
-/* Kourel card */
-.kourel-card {
-background: var(–card);
-border-radius: 18px;
-padding: 22px;
-box-shadow: 0 2px 14px rgba(0,0,0,0.07);
-border-top: 4px solid var(–green);
-}
+  .membre-presence-kourel {
+    font-size: 12px;
+    color: var(--text-light);
+    min-width: 120px;
+  }
 
-/* Page visibility */
-.page { display: none; }
-.page.active { display: block; }
+  .status-group {
+    display: flex;
+    gap: 6px;
+  }
 
-/* Responsive */
-@media (max-width: 700px) {
-.stats-grid { grid-template-columns: 1fr 1fr; }
-.two-col { grid-template-columns: 1fr; }
-.form-grid { grid-template-columns: 1fr; }
-.content { padding: 20px 14px; }
-.header { padding: 0 14px; }
-}
+  .status-btn {
+    padding: 6px 14px;
+    border-radius: 99px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 800;
+    font-family: 'Nunito', sans-serif;
+    transition: all 0.15s;
+    background: #f0f0f0;
+    color: #666;
+  }
 
-@media (max-width: 480px) {
-.stats-grid { grid-template-columns: 1fr; }
-.setup-card { padding: 32px 22px; }
-}
+  .status-btn.present.selected  { background: #dcfce7; border-color: #16a34a; color: #166534; }
+  .status-btn.retard.selected   { background: #fef3c7; border-color: #d97706; color: #92400e; }
+  .status-btn.absent.selected   { background: #fee2e2; border-color: #dc2626; color: #991b1b; }
+  .status-btn:hover { transform: scale(1.05); }
+
+  .retard-input {
+    width: 60px;
+    padding: 4px 8px;
+    border-radius: 8px;
+    border: 1.5px solid var(--border);
+    font-size: 12px;
+    font-family: 'Nunito', sans-serif;
+    display: none;
+  }
+
+  .retard-input.visible { display: block; }
+
+  .form-section-title {
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--green-dark);
+    margin: 16px 0 8px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .audio-upload-zone {
+    border: 2px dashed var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: #f8fbf8;
+  }
+  .audio-upload-zone:hover { border-color: var(--green); background: #f0f7f0; }
+  .audio-upload-zone input { display: none; }
+  .audio-upload-zone .upload-icon { font-size: 28px; margin-bottom: 6px; }
+  .audio-upload-zone p { font-size: 13px; color: var(--text-light); }
+  .audio-upload-zone strong { color: var(--green); }
+
+  .tolerance-selector {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .tol-btn {
+    padding: 8px 16px;
+    border-radius: 99px;
+    border: 2px solid var(--border);
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 700;
+    font-family: 'Nunito', sans-serif;
+    background: #fff;
+    color: var(--text-light);
+    transition: all 0.15s;
+  }
+  .tol-btn.selected { background: var(--green); border-color: var(--green); color: #fff; }
+
+  .session-filter-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    padding: 8px 18px;
+    border-radius: 99px;
+    border: 2px solid var(--border);
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 700;
+    font-family: 'Nunito', sans-serif;
+    background: #fff;
+    color: var(--text-light);
+    transition: all 0.15s;
+  }
+  .filter-btn.active { background: var(--green); border-color: var(--green); color: #fff; }
+
+  /* ── JOUR BADGE ── */
+  .jour-badge {
+    background: var(--green);
+    color: #fff;
+    border-radius: 8px;
+    padding: 4px 12px;
+    font-size: 12px;
+    font-weight: 800;
+    display: inline-block;
+  }
+
+  @media (max-width: 700px) {
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .two-col { grid-template-columns: 1fr; }
+    .form-grid { grid-template-columns: 1fr; }
+    .form-grid-3 { grid-template-columns: 1fr; }
+    .content { padding: 20px 14px; }
+    .header { padding: 0 14px; }
+    .programme-infos { grid-template-columns: 1fr 1fr; }
+    .status-btn { padding: 5px 10px; font-size: 11px; }
+  }
+
+  @media (max-width: 480px) {
+    .stats-grid { grid-template-columns: 1fr; }
+    .setup-card { padding: 32px 22px; }
+  }
 </style>
-
 </head>
 <body>
 
 <!-- ══════════════ SETUP SCREEN ══════════════ -->
-
 <div id="setup-screen">
   <div class="orb"></div>
   <div class="orb"></div>
@@ -475,38 +527,30 @@ border-top: 4px solid var(–green);
     </div>
     <div class="setup-divider"></div>
 
-```
-<div class="field-group">
-  <label>Nom du Daara</label>
-  <input type="text" id="setup-daara" placeholder="Ex: Daara Touba Mbacké" maxlength="60"/>
-  <div class="error-msg" id="err-daara">Veuillez entrer le nom du Daara</div>
-</div>
+    <div class="field-group">
+      <label>Nom du Daara</label>
+      <input type="text" id="setup-daara" placeholder="Ex: Daara Touba Mbacké" maxlength="60"/>
+      <div class="error-msg" id="err-daara">Veuillez entrer le nom du Daara</div>
+    </div>
 
-<div class="field-group">
-  <label>Siège du Daara</label>
-  <input type="text" id="setup-siege" placeholder="Ex: Touba, Sénégal" maxlength="80"/>
-  <div class="error-msg" id="err-siege">Veuillez entrer le siège du Daara</div>
-</div>
+    <div class="field-group">
+      <label>Siège du Daara</label>
+      <input type="text" id="setup-siege" placeholder="Ex: Touba, Sénégal" maxlength="80"/>
+      <div class="error-msg" id="err-siege">Veuillez entrer le siège du Daara</div>
+    </div>
 
-<div class="field-group">
-  <label>Identifiant administrateur</label>
-  <input type="text" id="setup-id" placeholder="Ex: admin123" maxlength="30"/>
-  <div class="error-msg" id="err-id">Veuillez entrer un identifiant</div>
-</div>
+    <div class="field-group">
+      <label>Identifiant administrateur</label>
+      <input type="text" id="setup-id" placeholder="Ex: admin123" maxlength="30"/>
+      <div class="error-msg" id="err-id">Veuillez entrer un identifiant</div>
+    </div>
 
-<button class="setup-btn" onclick="startApp()">
-  Accéder à l'application →
-</button>
-```
-
+    <button class="setup-btn" onclick="startApp()">Accéder à l'application →</button>
   </div>
 </div>
 
 <!-- ══════════════ MAIN APP ══════════════ -->
-
 <div id="app">
-
-  <!-- Header -->
 
   <div class="header">
     <div class="header-top">
@@ -520,6 +564,7 @@ border-top: 4px solid var(–green);
       <button class="nav-btn active" onclick="showPage('accueil',this)">🏠 Accueil</button>
       <button class="nav-btn" onclick="showPage('kourels',this)">👥 Kourels</button>
       <button class="nav-btn" onclick="showPage('membres',this)">👤 Membres</button>
+      <button class="nav-btn" onclick="showPage('programmes',this)">📅 Programmes</button>
       <button class="nav-btn" onclick="showPage('presences',this)">✅ Présences</button>
       <button class="nav-btn" onclick="showPage('cotisations',this)">💰 Cotisations</button>
       <button class="nav-btn" onclick="showPage('messagerie',this)">💬 Messagerie</button>
@@ -529,204 +574,290 @@ border-top: 4px solid var(–green);
 
   <div class="content">
 
-```
-<!-- ── ACCUEIL ── -->
-<div id="page-accueil" class="page active">
-  <h2 class="page-title">Tableau de Bord</h2>
+    <!-- ── ACCUEIL ── -->
+    <div id="page-accueil" class="page active">
+      <h2 class="page-title">Tableau de Bord</h2>
 
-  <div class="stats-grid">
-    <div class="stat-card" style="background:linear-gradient(135deg,#1a7a3c,#2ea84f)">
-      <div class="stat-icon">👥</div>
-      <div class="stat-value" id="stat-kourels">4</div>
-      <div class="stat-label">Kourels Actifs</div>
+      <div class="stats-grid">
+        <div class="stat-card" style="background:linear-gradient(135deg,#1a7a3c,#2ea84f)">
+          <div class="stat-icon">👥</div>
+          <div class="stat-value" id="stat-kourels">0</div>
+          <div class="stat-label">Kourels Actifs</div>
+        </div>
+        <div class="stat-card" style="background:linear-gradient(135deg,#c05f1a,#e07b2a)">
+          <div class="stat-icon">👤</div>
+          <div class="stat-value" id="stat-membres">0</div>
+          <div class="stat-label">Membres Inscrits</div>
+        </div>
+        <div class="stat-card" style="background:linear-gradient(135deg,#5b21b6,#7c3aed)">
+          <div class="stat-icon">✅</div>
+          <div class="stat-value" id="stat-presence">0%</div>
+          <div class="stat-label">Présence Dernière Session</div>
+        </div>
+        <div class="stat-card" style="background:linear-gradient(135deg,#1d4ed8,#3b82f6)">
+          <div class="stat-icon">📈</div>
+          <div class="stat-value" id="stat-cotisations">—</div>
+          <div class="stat-label">Adiyeu Collectés</div>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="card">
+          <h3>Kourels</h3>
+          <div id="accueil-kourels"></div>
+        </div>
+        <div class="card">
+          <h3>Activités Récentes</h3>
+          <div id="accueil-presences"></div>
+        </div>
+      </div>
     </div>
-    <div class="stat-card" style="background:linear-gradient(135deg,#c05f1a,#e07b2a)">
-      <div class="stat-icon">👤</div>
-      <div class="stat-value" id="stat-membres">7</div>
-      <div class="stat-label">Membres Inscrits</div>
+
+    <!-- ── KOURELS ── -->
+    <div id="page-kourels" class="page">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
+        <h2 class="page-title" style="margin:0">Gestion des Kourels</h2>
+        <button class="add-btn" onclick="toggleForm('form-kourel')">+ Nouveau Kourel</button>
+      </div>
+
+      <div id="form-kourel" class="form-box" style="display:none">
+        <h3 style="margin-bottom:16px;font-size:15px">Ajouter un Kourel</h3>
+        <div class="form-grid">
+          <input type="text" id="k-nom" placeholder="Nom du Kourel"/>
+          <input type="number" id="k-membres" placeholder="Nombre de membres"/>
+          <input type="number" id="k-cotisation" placeholder="Cotisation (FCFA)"/>
+          <select id="k-freq"><option>Mensuel</option><option>Hebdomadaire</option></select>
+          <input type="text" id="k-desc" placeholder="Description"/>
+          <select id="k-statut"><option>Actif</option><option>Inactif</option></select>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-primary" onclick="addKourel()">Enregistrer</button>
+          <button class="btn btn-secondary" onclick="toggleForm('form-kourel')">Annuler</button>
+        </div>
+      </div>
+
+      <div id="kourels-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px"></div>
     </div>
-    <div class="stat-card" style="background:linear-gradient(135deg,#1d4ed8,#3b82f6)">
-      <div class="stat-icon">📈</div>
-      <div class="stat-value" id="stat-cotisations">—</div>
-      <div class="stat-label">Cotisations (Mai)</div>
+
+    <!-- ── MEMBRES ── -->
+    <div id="page-membres" class="page">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
+        <h2 class="page-title" style="margin:0">Gestion des Membres</h2>
+        <button class="add-btn" onclick="toggleForm('form-membre')">+ Nouveau Membre</button>
+      </div>
+
+      <input class="search-box" type="text" id="search-membre" placeholder="🔍 Rechercher un membre..." oninput="renderMembres()"/>
+
+      <div id="form-membre" class="form-box" style="display:none">
+        <h3 style="margin-bottom:16px;font-size:15px">Ajouter un Membre</h3>
+        <div class="form-grid">
+          <input type="text" id="m-prenom" placeholder="Prénom"/>
+          <input type="text" id="m-nom" placeholder="Nom"/>
+          <input type="tel" id="m-tel" placeholder="Téléphone"/>
+          <select id="m-kourel"></select>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-primary" onclick="addMembre()">Enregistrer</button>
+          <button class="btn btn-secondary" onclick="toggleForm('form-membre')">Annuler</button>
+        </div>
+      </div>
+
+      <div class="card" style="padding:0;overflow:hidden">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Nom</th><th>Kourel</th><th>Téléphone</th><th>Statut</th><th>Dern. cotisation</th>
+              </tr>
+            </thead>
+            <tbody id="membres-body"></tbody>
+          </table>
+        </div>
+      </div>
     </div>
-    <div class="stat-card" style="background:linear-gradient(135deg,#5b21b6,#7c3aed)">
-      <div class="stat-icon">✅</div>
-      <div class="stat-value" id="stat-presence">75%</div>
-      <div class="stat-label">Présence Aujourd'hui</div>
+
+    <!-- ── PROGRAMMES ── -->
+    <div id="page-programmes" class="page">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
+        <h2 class="page-title" style="margin:0">Programmes des Kourels</h2>
+        <button class="add-btn" onclick="toggleForm('form-programme')">+ Nouveau Programme</button>
+      </div>
+
+      <div id="form-programme" class="form-box" style="display:none">
+        <h3 style="margin-bottom:16px;font-size:15px">Définir un Programme de Répétition</h3>
+
+        <div class="form-section-title">Informations générales</div>
+        <div class="form-grid">
+          <select id="pr-kourel"></select>
+          <input type="text" id="pr-lieu" placeholder="Lieu de la répétition (ex: Salle Khadim)"/>
+          <input type="text" id="pr-xassida" placeholder="Xassida / Chapitre à répéter"/>
+          <input type="text" id="pr-responsable" placeholder="Responsable / Chanteur principal"/>
+        </div>
+
+        <div class="form-section-title" style="margin-top:16px">Horaires</div>
+        <div class="form-grid">
+          <div>
+            <label style="font-size:12px;font-weight:700;color:var(--text-light);display:block;margin-bottom:6px">Jour de répétition</label>
+            <select id="pr-jour">
+              <option value="Lundi">Lundi</option>
+              <option value="Mardi">Mardi</option>
+              <option value="Mercredi">Mercredi</option>
+              <option value="Jeudi">Jeudi</option>
+              <option value="Vendredi">Vendredi</option>
+              <option value="Samedi">Samedi</option>
+              <option value="Dimanche">Dimanche</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:12px;font-weight:700;color:var(--text-light);display:block;margin-bottom:6px">Heure de début</label>
+            <input type="time" id="pr-heure"/>
+          </div>
+        </div>
+
+        <div style="margin-top:12px">
+          <label style="font-size:12px;font-weight:700;color:var(--text-light);display:block;margin-bottom:8px">Marge de tolérance (retard accepté)</label>
+          <div class="tolerance-selector" id="tolerance-selector">
+            <button class="tol-btn selected" onclick="selectTolerance(this,'0')">Aucune</button>
+            <button class="tol-btn" onclick="selectTolerance(this,'5')">5 min</button>
+            <button class="tol-btn" onclick="selectTolerance(this,'10')">10 min</button>
+            <button class="tol-btn" onclick="selectTolerance(this,'15')">15 min</button>
+            <button class="tol-btn" onclick="selectTolerance(this,'20')">20 min</button>
+            <button class="tol-btn" onclick="selectTolerance(this,'30')">30 min</button>
+          </div>
+          <input type="hidden" id="pr-tolerance" value="0"/>
+        </div>
+
+        <div class="form-section-title" style="margin-top:16px">Son de référence (Xassida)</div>
+        <div class="audio-upload-zone" onclick="document.getElementById('pr-audio-file').click()">
+          <input type="file" id="pr-audio-file" accept="audio/*" onchange="handleAudioUpload(event)"/>
+          <div class="upload-icon">🎵</div>
+          <p><strong>Cliquer pour choisir un fichier audio</strong></p>
+          <p>MP3, WAV, OGG — son de référence pour la répétition</p>
+        </div>
+        <div id="pr-audio-preview" style="display:none;margin-top:12px"></div>
+
+        <div class="form-section-title" style="margin-top:16px">Notes / Instructions</div>
+        <textarea id="pr-notes" rows="3" placeholder="Instructions spéciales, parties à travailler, objectifs de la session..."></textarea>
+
+        <div class="btn-row">
+          <button class="btn btn-primary" onclick="addProgramme()">Enregistrer le Programme</button>
+          <button class="btn btn-secondary" onclick="toggleForm('form-programme')">Annuler</button>
+        </div>
+      </div>
+
+      <!-- Filter par kourel -->
+      <div class="session-filter-bar" id="prog-filter-bar">
+        <button class="filter-btn active" onclick="filterProgrammes('Tous',this)">Tous</button>
+      </div>
+
+      <div id="programmes-list"></div>
     </div>
-  </div>
 
-  <div class="two-col">
-    <div class="card">
-      <h3>Kourels</h3>
-      <div id="accueil-kourels"></div>
+    <!-- ── PRÉSENCES ── -->
+    <div id="page-presences" class="page">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
+        <h2 class="page-title" style="margin:0">Suivi des Présences</h2>
+        <button class="add-btn" onclick="toggleForm('form-presence')">+ Nouvelle Session</button>
+      </div>
+
+      <div id="form-presence" class="form-box" style="display:none">
+        <h3 style="margin-bottom:16px;font-size:15px">Créer une Session de Présence</h3>
+        <div class="form-grid">
+          <input type="date" id="p-date"/>
+          <select id="p-kourel" onchange="loadMembresForPresence()"></select>
+          <select id="p-type">
+            <option>Répétition</option><option>Xam Xam</option><option>Programme</option><option>Réunion</option>
+          </select>
+          <input type="text" id="p-lieu" placeholder="Lieu"/>
+        </div>
+
+        <div id="p-membres-list" style="margin-top:20px"></div>
+
+        <div class="btn-row">
+          <button class="btn btn-primary" onclick="savePresenceSession()">Enregistrer la Session</button>
+          <button class="btn btn-secondary" onclick="toggleForm('form-presence')">Annuler</button>
+        </div>
+      </div>
+
+      <!-- Filter -->
+      <div class="session-filter-bar" id="pres-filter-bar">
+        <button class="filter-btn active" onclick="filterPresences('Tous',this)">Toutes sessions</button>
+      </div>
+
+      <div id="presences-list"></div>
     </div>
-    <div class="card">
-      <h3>Activités Récentes</h3>
-      <div id="accueil-presences"></div>
+
+    <!-- ── COTISATIONS ── -->
+    <div id="page-cotisations" class="page">
+      <h2 class="page-title">Gestion des Adiyeu</h2>
+
+      <div class="stats-grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:24px">
+        <div class="stat-card" style="background:linear-gradient(135deg,#1a7a3c,#2ea84f)">
+          <div class="stat-icon">💵</div>
+          <div class="stat-value" id="cot-total">—</div>
+          <div class="stat-label">Total collecté</div>
+        </div>
+        <div class="stat-card" style="background:linear-gradient(135deg,#c05f1a,#e07b2a)">
+          <div class="stat-icon">✅</div>
+          <div class="stat-value" id="cot-payees">—</div>
+          <div class="stat-label">Payées</div>
+        </div>
+        <div class="stat-card" style="background:linear-gradient(135deg,#b91c1c,#dc2626)">
+          <div class="stat-icon">⏳</div>
+          <div class="stat-value" id="cot-attente">—</div>
+          <div class="stat-label">En attente</div>
+        </div>
+      </div>
+
+      <div class="card" style="padding:0;overflow:hidden">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Membre</th><th>Kourel</th><th>Montant</th><th>Date</th><th>Statut</th><th>Action</th></tr>
+            </thead>
+            <tbody id="cotisations-body"></tbody>
+          </table>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 
-<!-- ── KOURELS ── -->
-<div id="page-kourels" class="page">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
-    <h2 class="page-title" style="margin:0">Gestion des Kourels</h2>
-    <button class="add-btn" onclick="toggleForm('form-kourel')">+ Nouveau Kourel</button>
-  </div>
+    <!-- ── MESSAGERIE ── -->
+    <div id="page-messagerie" class="page">
+      <h2 class="page-title">Messagerie</h2>
 
-  <div id="form-kourel" class="form-box" style="display:none">
-    <h3 style="margin-bottom:16px;font-size:15px">Ajouter un Kourel</h3>
-    <div class="form-grid">
-      <input type="text" id="k-nom" placeholder="Nom du Kourel"/>
-      <input type="number" id="k-membres" placeholder="Nombre de membres"/>
-      <input type="number" id="k-cotisation" placeholder="Cotisation (FCFA)"/>
-      <select id="k-freq"><option>Mensuel</option><option>Hebdomadaire</option></select>
-      <input type="text" id="k-desc" placeholder="Description"/>
-      <select id="k-statut"><option>Actif</option><option>Inactif</option></select>
+      <div class="card" style="margin-bottom:20px">
+        <div style="display:flex;gap:12px;margin-bottom:12px">
+          <select id="msg-kourel" style="max-width:220px"></select>
+        </div>
+        <textarea id="msg-text" rows="3" placeholder="Écrire un message pour le groupe…" style="width:100%;resize:vertical"></textarea>
+        <button class="btn btn-primary" style="margin-top:12px" onclick="sendMsg()">Envoyer →</button>
+      </div>
+
+      <div id="messages-list"></div>
     </div>
-    <div class="btn-row">
-      <button class="btn btn-primary" onclick="addKourel()">Enregistrer</button>
-      <button class="btn btn-secondary" onclick="toggleForm('form-kourel')">Annuler</button>
+
+    <!-- ── RAPPORTS ── -->
+    <div id="page-rapports" class="page">
+      <h2 class="page-title">Rapports & Statistiques</h2>
+
+      <div class="stats-grid" style="margin-bottom:24px" id="rapport-stats"></div>
+
+      <div class="two-col" style="margin-bottom:20px">
+        <div class="card">
+          <h3>Activités par type</h3>
+          <div id="rapport-types"></div>
+        </div>
+        <div class="card">
+          <h3>Cotisations par Kourel</h3>
+          <div id="rapport-kourels"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Présence par Kourel (Présent / Retard / Absent)</h3>
+        <div id="rapport-presence-detail"></div>
+      </div>
     </div>
-  </div>
-
-  <div id="kourels-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px"></div>
-</div>
-
-<!-- ── MEMBRES ── -->
-<div id="page-membres" class="page">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
-    <h2 class="page-title" style="margin:0">Gestion des Membres</h2>
-    <button class="add-btn" onclick="toggleForm('form-membre')">+ Nouveau Membre</button>
-  </div>
-
-  <input class="search-box" type="text" id="search-membre" placeholder="🔍 Rechercher un membre..." oninput="renderMembres()"/>
-
-  <div id="form-membre" class="form-box" style="display:none">
-    <h3 style="margin-bottom:16px;font-size:15px">Ajouter un Membre</h3>
-    <div class="form-grid">
-      <input type="text" id="m-prenom" placeholder="Prénom"/>
-      <input type="text" id="m-nom" placeholder="Nom"/>
-      <input type="tel" id="m-tel" placeholder="Téléphone"/>
-      <select id="m-kourel"></select>
-    </div>
-    <div class="btn-row">
-      <button class="btn btn-primary" onclick="addMembre()">Enregistrer</button>
-      <button class="btn btn-secondary" onclick="toggleForm('form-membre')">Annuler</button>
-    </div>
-  </div>
-
-  <div class="card" style="padding:0;overflow:hidden">
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Nom</th><th>Kourel</th><th>Téléphone</th><th>Statut</th><th>Dern. cotisation</th>
-          </tr>
-        </thead>
-        <tbody id="membres-body"></tbody>
-      </table>
-    </div>
-  </div>
-</div>
-
-<!-- ── PRÉSENCES ── -->
-<div id="page-presences" class="page">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
-    <h2 class="page-title" style="margin:0">Suivi des Présences</h2>
-    <button class="add-btn" onclick="toggleForm('form-presence')">+ Enregistrer</button>
-  </div>
-
-  <div id="form-presence" class="form-box" style="display:none">
-    <div class="form-grid">
-      <input type="date" id="p-date"/>
-      <select id="p-kourel"></select>
-      <select id="p-type">
-        <option>Récitation</option><option>Xam Xam</option><option>Cérémonie</option><option>Réunion</option>
-      </select>
-      <input type="number" id="p-participants" placeholder="Présents"/>
-      <input type="number" id="p-total" placeholder="Total membres"/>
-    </div>
-    <div class="btn-row">
-      <button class="btn btn-primary" onclick="addPresence()">Enregistrer</button>
-      <button class="btn btn-secondary" onclick="toggleForm('form-presence')">Annuler</button>
-    </div>
-  </div>
-
-  <div id="presences-list"></div>
-</div>
-
-<!-- ── COTISATIONS ── -->
-<div id="page-cotisations" class="page">
-  <h2 class="page-title">Gestion des Cotisations</h2>
-
-  <div class="stats-grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:24px">
-    <div class="stat-card" style="background:linear-gradient(135deg,#1a7a3c,#2ea84f)">
-      <div class="stat-icon">💵</div>
-      <div class="stat-value" id="cot-total">—</div>
-      <div class="stat-label">Total collecté</div>
-    </div>
-    <div class="stat-card" style="background:linear-gradient(135deg,#c05f1a,#e07b2a)">
-      <div class="stat-icon">✅</div>
-      <div class="stat-value" id="cot-payees">—</div>
-      <div class="stat-label">Payées</div>
-    </div>
-    <div class="stat-card" style="background:linear-gradient(135deg,#b91c1c,#dc2626)">
-      <div class="stat-icon">⏳</div>
-      <div class="stat-value" id="cot-attente">—</div>
-      <div class="stat-label">En attente</div>
-    </div>
-  </div>
-
-  <div class="card" style="padding:0;overflow:hidden">
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Membre</th><th>Kourel</th><th>Montant</th><th>Date</th><th>Statut</th><th>Action</th>
-          </tr>
-        </thead>
-        <tbody id="cotisations-body"></tbody>
-      </table>
-    </div>
-  </div>
-</div>
-
-<!-- ── MESSAGERIE ── -->
-<div id="page-messagerie" class="page">
-  <h2 class="page-title">Messagerie</h2>
-
-  <div class="card" style="margin-bottom:20px">
-    <div style="display:flex;gap:12px;margin-bottom:12px">
-      <select id="msg-kourel" style="max-width:220px"></select>
-    </div>
-    <textarea id="msg-text" rows="3" placeholder="Écrire un message pour le groupe…" style="width:100%;resize:vertical"></textarea>
-    <button class="btn btn-primary" style="margin-top:12px" onclick="sendMsg()">Envoyer →</button>
-  </div>
-
-  <div id="messages-list"></div>
-</div>
-
-<!-- ── RAPPORTS ── -->
-<div id="page-rapports" class="page">
-  <h2 class="page-title">Rapports & Statistiques</h2>
-
-  <div class="stats-grid" style="margin-bottom:24px" id="rapport-stats"></div>
-
-  <div class="two-col">
-    <div class="card">
-      <h3>Activités par type</h3>
-      <div id="rapport-types"></div>
-    </div>
-    <div class="card">
-      <h3>Cotisations par Kourel</h3>
-      <div id="rapport-kourels"></div>
-    </div>
-  </div>
-</div>
-```
 
   </div><!-- /content -->
 </div><!-- /app -->
@@ -736,44 +867,19 @@ border-top: 4px solid var(–green);
 let daara = { nom: "", siege: "", admin: "" };
 
 let db = {
-  kourels: [
-    { id:1, nom:"Kourel Al-Amine",  membres:25, cotisation:5000, frequence:"Mensuel",      statut:"Actif",   description:"Groupe de récitation du Coran" },
-    { id:2, nom:"Kourel At-Tahara", membres:18, cotisation:3000, frequence:"Hebdomadaire", statut:"Actif",   description:"Groupe d'étude islamique" },
-    { id:3, nom:"Kourel Al-Fath",   membres:30, cotisation:4000, frequence:"Mensuel",      statut:"Actif",   description:"Groupe de cérémonies" },
-    { id:4, nom:"Kourel An-Nour",   membres:12, cotisation:2000, frequence:"Hebdomadaire", statut:"Inactif", description:"Groupe jeunes" },
-  ],
-  membres: [
-    { id:1, prenom:"Moussa",   nom:"Diallo", kourel:"Kourel Al-Amine",  telephone:"77 123 45 67", statut:"Actif",   cotisationJour:"2026-05-01" },
-    { id:2, prenom:"Fatou",    nom:"Ndiaye", kourel:"Kourel At-Tahara", telephone:"78 234 56 78", statut:"Actif",   cotisationJour:"2026-05-03" },
-    { id:3, prenom:"Ibrahim",  nom:"Sow",    kourel:"Kourel Al-Fath",   telephone:"76 345 67 89", statut:"Actif",   cotisationJour:"2026-04-28" },
-    { id:4, prenom:"Aminata",  nom:"Ba",     kourel:"Kourel Al-Amine",  telephone:"70 456 78 90", statut:"Actif",   cotisationJour:"2026-05-05" },
-    { id:5, prenom:"Ousmane",  nom:"Fall",   kourel:"Kourel An-Nour",   telephone:"77 567 89 01", statut:"Inactif", cotisationJour:null },
-    { id:6, prenom:"Mariama",  nom:"Gueye",  kourel:"Kourel At-Tahara", telephone:"78 678 90 12", statut:"Actif",   cotisationJour:"2026-05-02" },
-    { id:7, prenom:"Cheikh",   nom:"Mbaye",  kourel:"Kourel Al-Fath",   telephone:"76 789 01 23", statut:"Actif",   cotisationJour:"2026-05-07" },
-  ],
-  presences: [
-    { id:1, date:"2026-05-09", kourel:"Kourel Al-Amine",  type:"Récitation", participants:20, total:25 },
-    { id:2, date:"2026-05-09", kourel:"Kourel At-Tahara", type:"Xam Xam",    participants:15, total:18 },
-    { id:3, date:"2026-05-08", kourel:"Kourel Al-Fath",   type:"Cérémonie",  participants:28, total:30 },
-    { id:4, date:"2026-05-07", kourel:"Kourel An-Nour",   type:"Réunion",    participants:10, total:12 },
-    { id:5, date:"2026-05-06", kourel:"Kourel Al-Amine",  type:"Récitation", participants:22, total:25 },
-  ],
-  cotisations: [
-    { id:1, membre:"Moussa Diallo",  kourel:"Kourel Al-Amine",  montant:5000, date:"2026-05-01", statut:"Payé" },
-    { id:2, membre:"Fatou Ndiaye",   kourel:"Kourel At-Tahara", montant:3000, date:"2026-05-03", statut:"Payé" },
-    { id:3, membre:"Ibrahim Sow",    kourel:"Kourel Al-Fath",   montant:4000, date:"2026-04-28", statut:"Payé" },
-    { id:4, membre:"Aminata Ba",     kourel:"Kourel Al-Amine",  montant:5000, date:"2026-05-05", statut:"Payé" },
-    { id:5, membre:"Ousmane Fall",   kourel:"Kourel An-Nour",   montant:2000, date:null,          statut:"En attente" },
-    { id:6, membre:"Mariama Gueye",  kourel:"Kourel At-Tahara", montant:3000, date:"2026-05-02", statut:"Payé" },
-    { id:7, membre:"Cheikh Mbaye",   kourel:"Kourel Al-Fath",   montant:4000, date:"2026-05-07", statut:"Payé" },
-  ],
-  messages: [
-    { id:1, de:"Admin",       kourel:"Tous",            contenu:"Rappel: Réunion mensuelle ce samedi à 15h00",         date:"2026-05-09", heure:"08:00" },
-    { id:2, de:"Cheikh Mbaye",kourel:"Kourel Al-Fath",  contenu:"La cérémonie de demain est confirmée, merci à tous", date:"2026-05-09", heure:"10:30" },
-    { id:3, de:"Admin",       kourel:"Kourel Al-Amine", contenu:"Les cotisations du mois de Mai sont dues avant le 15",date:"2026-05-08", heure:"09:00" },
-    { id:4, de:"Fatou Ndiaye",kourel:"Kourel At-Tahara",contenu:"Merci pour l'organisation du Xam Xam d'hier",         date:"2026-05-08", heure:"11:00" },
-  ],
+  kourels: [],
+  membres: [],
+  presences: [],      // sessions with per-member status
+  cotisations: [],
+  messages: [],
+  programmes: [],
 };
+
+let currentToleranceValue = '0';
+let currentAudioDataUrl   = null;
+let currentAudioFileName  = null;
+let presFilterActive = 'Tous';
+let progFilterActive = 'Tous';
 
 // ── SETUP ─────────────────────────────────────────────────────
 function startApp() {
@@ -808,7 +914,11 @@ function showPage(id, btn) {
 
 function toggleForm(id) {
   const el = document.getElementById(id);
-  el.style.display = el.style.display === 'none' ? 'block' : 'none';
+  const visible = el.style.display !== 'none';
+  el.style.display = visible ? 'none' : 'block';
+  if (!visible && id === 'form-presence') {
+    loadMembresForPresence();
+  }
 }
 
 // ── BADGE ─────────────────────────────────────────────────────
@@ -830,6 +940,7 @@ function renderAll() {
   renderAccueil();
   renderKourels();
   renderMembres();
+  renderProgrammes();
   renderPresences();
   renderCotisations();
   renderMessages();
@@ -837,6 +948,9 @@ function renderAll() {
   kourelOptions('m-kourel', false);
   kourelOptions('p-kourel', false);
   kourelOptions('msg-kourel', true);
+  kourelOptions('pr-kourel', false);
+  buildPresenceFilterBar();
+  buildProgFilterBar();
 }
 
 // ── ACCUEIL ───────────────────────────────────────────────────
@@ -844,9 +958,16 @@ function renderAccueil() {
   const actifs = db.kourels.filter(k => k.statut === 'Actif').length;
   const totalM = db.membres.length;
   const payees = db.cotisations.filter(c => c.statut === 'Payé').length;
-  const taux   = Math.round(payees / db.cotisations.length * 100);
-  const dp     = db.presences[0];
-  const tp     = dp ? Math.round(dp.participants / dp.total * 100) : 0;
+  const totalC = db.cotisations.length;
+  const taux   = totalC ? Math.round(payees / totalC * 100) : 0;
+
+  // calc presence from latest session
+  let tp = 0;
+  if (db.presences.length > 0) {
+    const last = db.presences[0];
+    const presents = last.membres.filter(m => m.statut === 'Présent' || m.statut === 'Retard').length;
+    tp = last.membres.length ? Math.round(presents / last.membres.length * 100) : 0;
+  }
 
   document.getElementById('stat-kourels').textContent    = actifs;
   document.getElementById('stat-membres').textContent    = totalM;
@@ -860,14 +981,21 @@ function renderAccueil() {
         <div style="font-size:12px;color:var(--text-light)">${k.membres} membres · ${k.cotisation.toLocaleString()} FCFA/${k.frequence}</div>
       </div>
       ${badge(k.statut)}
-    </div>`).join('');
+    </div>`).join('') || '<p style="color:var(--text-light);font-size:13px">Aucun Kourel créé</p>';
 
-  document.getElementById('accueil-presences').innerHTML = db.presences.map(p => `
+  document.getElementById('accueil-presences').innerHTML = db.presences.slice(0,5).map(p => {
+    const presents = p.membres.filter(m => m.statut === 'Présent').length;
+    const retards  = p.membres.filter(m => m.statut === 'Retard').length;
+    return `
     <div style="padding:10px 0;border-bottom:1px solid var(--border)">
-      <div style="font-weight:700;font-size:14px">${p.type}</div>
-      <div style="font-size:12px;color:var(--text-light)">${p.kourel} · ${p.date}</div>
-      <div style="font-size:12px;color:var(--green);font-weight:700">${p.participants} participants</div>
-    </div>`).join('');
+      <div style="font-weight:700;font-size:14px">${p.type} — ${p.kourel}</div>
+      <div style="font-size:12px;color:var(--text-light)">${p.date} · ${p.lieu || ''}</div>
+      <div style="font-size:12px;margin-top:4px">
+        <span style="color:#16a34a;font-weight:700">✓ ${presents} présents</span>
+        &nbsp;·&nbsp;<span style="color:#d97706;font-weight:700">⏱ ${retards} retards</span>
+      </div>
+    </div>`;
+  }).join('') || '<p style="color:var(--text-light);font-size:13px">Aucune session enregistrée</p>';
 }
 
 // ── KOURELS ───────────────────────────────────────────────────
@@ -890,20 +1018,19 @@ function renderKourels() {
         </div>
       </div>
       <button class="btn btn-danger" onclick="deleteKourel(${k.id})">🗑 Supprimer</button>
-    </div>`).join('');
+    </div>`).join('') || '<p style="color:var(--text-light)">Aucun Kourel. Cliquez sur "+ Nouveau Kourel".</p>';
 }
 
 function addKourel() {
   const nom = document.getElementById('k-nom').value.trim();
   if (!nom) return;
   db.kourels.push({
-    id: Date.now(),
-    nom,
-    membres:     +document.getElementById('k-membres').value || 0,
-    cotisation:  +document.getElementById('k-cotisation').value || 0,
-    frequence:    document.getElementById('k-freq').value,
-    statut:       document.getElementById('k-statut').value,
-    description:  document.getElementById('k-desc').value,
+    id: Date.now(), nom,
+    membres:    +document.getElementById('k-membres').value || 0,
+    cotisation: +document.getElementById('k-cotisation').value || 0,
+    frequence:   document.getElementById('k-freq').value,
+    statut:      document.getElementById('k-statut').value,
+    description: document.getElementById('k-desc').value,
   });
   ['k-nom','k-membres','k-cotisation','k-desc'].forEach(id => document.getElementById(id).value = '');
   toggleForm('form-kourel');
@@ -928,7 +1055,7 @@ function renderMembres() {
       <td>${m.telephone}</td>
       <td>${badge(m.statut)}</td>
       <td style="color:var(--text-light)">${m.cotisationJour || '—'}</td>
-    </tr>`).join('');
+    </tr>`).join('') || '<tr><td colspan="5" style="text-align:center;color:var(--text-light);padding:24px">Aucun membre inscrit</td></tr>';
   kourelOptions('m-kourel', false);
 }
 
@@ -936,19 +1063,19 @@ function addMembre() {
   const prenom = document.getElementById('m-prenom').value.trim();
   const nom    = document.getElementById('m-nom').value.trim();
   if (!prenom || !nom) return;
+  const kourelNom = document.getElementById('m-kourel').value;
   db.membres.push({
     id: Date.now(), prenom, nom,
-    kourel:    document.getElementById('m-kourel').value,
+    kourel: kourelNom,
     telephone: document.getElementById('m-tel').value,
-    statut:    'Actif',
+    statut: 'Actif',
     cotisationJour: null,
   });
-  // add cotisation entry
   db.cotisations.push({
     id: Date.now()+1,
     membre: prenom + ' ' + nom,
-    kourel: document.getElementById('m-kourel').value,
-    montant: db.kourels.find(k => k.nom === document.getElementById('m-kourel').value)?.cotisation || 0,
+    kourel: kourelNom,
+    montant: db.kourels.find(k => k.nom === kourelNom)?.cotisation || 0,
     date: null, statut: 'En attente'
   });
   ['m-prenom','m-nom','m-tel'].forEach(id => document.getElementById(id).value = '');
@@ -956,46 +1083,327 @@ function addMembre() {
   renderAll();
 }
 
-// ── PRÉSENCES ─────────────────────────────────────────────────
-const typeColors = { Récitation: '#1a7a3c', 'Xam Xam': '#2563eb', Cérémonie: '#7c3aed', Réunion: '#e07b2a' };
+// ── PROGRAMMES ────────────────────────────────────────────────
+function selectTolerance(btn, val) {
+  document.querySelectorAll('.tol-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  document.getElementById('pr-tolerance').value = val;
+  currentToleranceValue = val;
+}
 
-function renderPresences() {
-  kourelOptions('p-kourel', false);
-  document.getElementById('presences-list').innerHTML = db.presences.map(p => {
-    const taux = Math.round(p.participants / p.total * 100);
-    const col  = taux >= 80 ? '#1a7a3c' : '#e07b2a';
+function handleAudioUpload(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  currentAudioFileName = file.name;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    currentAudioDataUrl = e.target.result;
+    const preview = document.getElementById('pr-audio-preview');
+    preview.style.display = 'block';
+    preview.innerHTML = `
+      <div class="audio-player">
+        <span class="audio-label">🎵 ${file.name}</span>
+        <audio controls src="${e.target.result}" style="flex:1;height:36px"></audio>
+      </div>`;
+  };
+  reader.readAsDataURL(file);
+}
+
+function addProgramme() {
+  const kourel = document.getElementById('pr-kourel').value;
+  const lieu   = document.getElementById('pr-lieu').value.trim();
+  const xassida = document.getElementById('pr-xassida').value.trim();
+  if (!kourel || !xassida) return;
+
+  db.programmes.push({
+    id: Date.now(),
+    kourel,
+    lieu,
+    xassida,
+    responsable: document.getElementById('pr-responsable').value.trim(),
+    jour:        document.getElementById('pr-jour').value,
+    heure:       document.getElementById('pr-heure').value,
+    tolerance:   document.getElementById('pr-tolerance').value,
+    notes:       document.getElementById('pr-notes').value.trim(),
+    audioUrl:    currentAudioDataUrl,
+    audioName:   currentAudioFileName,
+  });
+
+  // reset
+  ['pr-lieu','pr-xassida','pr-responsable','pr-notes'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('pr-heure').value = '';
+  document.getElementById('pr-audio-preview').style.display = 'none';
+  document.getElementById('pr-audio-file').value = '';
+  currentAudioDataUrl = null;
+  currentAudioFileName = null;
+  // reset tolerance
+  document.querySelectorAll('.tol-btn').forEach(b => b.classList.remove('selected'));
+  document.querySelector('.tol-btn').classList.add('selected');
+  document.getElementById('pr-tolerance').value = '0';
+
+  toggleForm('form-programme');
+  renderAll();
+}
+
+function deleteProgramme(id) {
+  db.programmes = db.programmes.filter(p => p.id !== id);
+  renderAll();
+}
+
+function buildProgFilterBar() {
+  const bar = document.getElementById('prog-filter-bar');
+  const kourels = ['Tous', ...db.kourels.map(k => k.nom)];
+  bar.innerHTML = kourels.map(k => `
+    <button class="filter-btn${progFilterActive === k ? ' active' : ''}" onclick="filterProgrammes('${k}',this)">${k}</button>
+  `).join('');
+}
+
+function filterProgrammes(val, btn) {
+  progFilterActive = val;
+  document.querySelectorAll('#prog-filter-bar .filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderProgrammes();
+}
+
+function renderProgrammes() {
+  const filtered = progFilterActive === 'Tous'
+    ? db.programmes
+    : db.programmes.filter(p => p.kourel === progFilterActive);
+
+  if (filtered.length === 0) {
+    document.getElementById('programmes-list').innerHTML = `
+      <div style="text-align:center;padding:48px;color:var(--text-light)">
+        <div style="font-size:48px;margin-bottom:12px">📅</div>
+        <p style="font-size:16px;font-weight:700">Aucun programme défini</p>
+        <p style="font-size:13px;margin-top:6px">Cliquez sur "+ Nouveau Programme" pour commencer</p>
+      </div>`;
+    return;
+  }
+
+  document.getElementById('programmes-list').innerHTML = filtered.map(p => {
+    const tolLabel = p.tolerance === '0' ? 'Aucune tolérance' : `Tolérance : ${p.tolerance} min`;
     return `
-    <div style="background:#fff;border-radius:14px;padding:20px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,0.06);display:flex;align-items:center;gap:20px">
-      <div style="background:${typeColors[p.type]||'#1a7a3c'};color:#fff;border-radius:10px;padding:8px 14px;font-weight:700;font-size:13px;white-space:nowrap">${p.type}</div>
-      <div style="flex:1">
-        <div style="font-weight:700;font-size:14px">${p.kourel}</div>
-        <div style="font-size:12px;color:var(--text-light)">${p.date}</div>
+    <div class="programme-card">
+      <div class="programme-header">
+        <div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+            <span class="jour-badge">${p.jour}</span>
+            ${p.heure ? `<span style="font-size:16px;font-weight:900;color:var(--green)">⏰ ${p.heure}</span>` : ''}
+          </div>
+          <h3 style="font-size:18px;font-weight:900;color:var(--text)">${p.xassida}</h3>
+          <div style="font-size:13px;color:var(--text-light);margin-top:2px">${p.kourel}</div>
+        </div>
+        <button class="btn btn-danger" onclick="deleteProgramme(${p.id})">🗑</button>
       </div>
-      <div style="text-align:center">
-        <div style="font-weight:900;font-size:20px;color:${col}">${taux}%</div>
-        <div style="font-size:11px;color:var(--text-light)">${p.participants}/${p.total}</div>
+
+      <div class="programme-infos">
+        ${p.lieu ? `<div class="prog-info-item"><div class="prog-info-label">📍 Lieu</div><div class="prog-info-value">${p.lieu}</div></div>` : ''}
+        ${p.responsable ? `<div class="prog-info-item"><div class="prog-info-label">🎤 Responsable</div><div class="prog-info-value">${p.responsable}</div></div>` : ''}
+        <div class="prog-info-item"><div class="prog-info-label">⏱ Tolérance</div><div class="prog-info-value">${tolLabel}</div></div>
+        ${p.heure ? `<div class="prog-info-item"><div class="prog-info-label">🕐 Heure début</div><div class="prog-info-value">${p.heure}</div></div>` : ''}
       </div>
-      <div class="bar-wrap"><div class="bar" style="width:${taux}%;background:${col}"></div></div>
+
+      ${p.notes ? `<div style="margin-top:14px;padding:12px 16px;background:#f4faf4;border-radius:10px;font-size:13px;color:var(--text-light);border-left:3px solid var(--green)"><strong>📝 Notes :</strong> ${p.notes}</div>` : ''}
+
+      ${p.audioUrl ? `
+        <div class="audio-player" style="margin-top:14px">
+          <span class="audio-label">🎵 ${p.audioName || 'Son de référence'}</span>
+          <audio controls src="${p.audioUrl}" style="flex:1;height:36px"></audio>
+        </div>` : ''}
     </div>`;
   }).join('');
 }
 
-function addPresence() {
-  const date = document.getElementById('p-date').value;
-  const part = +document.getElementById('p-participants').value;
-  const tot  = +document.getElementById('p-total').value;
-  if (!date || !part || !tot) return;
+// ── PRÉSENCES DÉTAILLÉES ──────────────────────────────────────
+function loadMembresForPresence() {
+  const kourelNom = document.getElementById('p-kourel').value;
+  const membres = db.membres.filter(m => m.kourel === kourelNom);
+
+  const container = document.getElementById('p-membres-list');
+  if (membres.length === 0) {
+    container.innerHTML = '<p style="color:var(--text-light);font-size:13px;text-align:center;padding:16px">Aucun membre dans ce Kourel</p>';
+    return;
+  }
+
+  container.innerHTML = `
+    <div style="margin-bottom:12px">
+      <div style="font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--green-dark);margin-bottom:4px">
+        Statut de présence par membre
+      </div>
+      <div style="font-size:12px;color:var(--text-light)">Sélectionnez le statut de chaque membre</div>
+    </div>
+    <div style="background:#fff;border-radius:14px;border:1.5px solid var(--border);overflow:hidden">
+      ${membres.map((m, i) => `
+        <div class="membre-presence-row" id="row-${m.id}">
+          <div class="membre-presence-name">${m.prenom} ${m.nom}</div>
+          <div class="membre-presence-kourel">${m.kourel}</div>
+          <div class="status-group">
+            <button class="status-btn present" onclick="setStatus(${m.id},'Présent',this)">✓ Présent</button>
+            <button class="status-btn retard" onclick="setStatus(${m.id},'Retard',this)">⏱ Retard</button>
+            <button class="status-btn absent" onclick="setStatus(${m.id},'Absent',this)">✗ Absent</button>
+          </div>
+          <input type="number" class="retard-input" id="retard-${m.id}" placeholder="min" min="1" max="120"/>
+        </div>`).join('')}
+    </div>
+    <div style="margin-top:12px;display:flex;gap:20px;font-size:12px;color:var(--text-light)">
+      <span id="p-count-present" style="color:#16a34a;font-weight:700">✓ 0 présents</span>
+      <span id="p-count-retard" style="color:#d97706;font-weight:700">⏱ 0 retards</span>
+      <span id="p-count-absent" style="color:#dc2626;font-weight:700">✗ 0 absents</span>
+    </div>
+  `;
+  updatePresenceCounts();
+}
+
+// Map memberId → {statut, retardMin}
+let presenceStatuts = {};
+
+function setStatus(membreId, statut, btn) {
+  // Clear other buttons in the same row
+  const row = document.getElementById('row-' + membreId);
+  row.querySelectorAll('.status-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+
+  // Toggle retard input
+  const retardInput = document.getElementById('retard-' + membreId);
+  if (statut === 'Retard') {
+    retardInput.classList.add('visible');
+  } else {
+    retardInput.classList.remove('visible');
+    retardInput.value = '';
+  }
+
+  presenceStatuts[membreId] = { statut, retardMin: statut === 'Retard' ? null : null };
+  updatePresenceCounts();
+}
+
+function updatePresenceCounts() {
+  const vals = Object.values(presenceStatuts);
+  const p = vals.filter(v => v.statut === 'Présent').length;
+  const r = vals.filter(v => v.statut === 'Retard').length;
+  const a = vals.filter(v => v.statut === 'Absent').length;
+  const ep = document.getElementById('p-count-present');
+  const er = document.getElementById('p-count-retard');
+  const ea = document.getElementById('p-count-absent');
+  if (ep) ep.textContent = `✓ ${p} présents`;
+  if (er) er.textContent = `⏱ ${r} retards`;
+  if (ea) ea.textContent = `✗ ${a} absents`;
+}
+
+function savePresenceSession() {
+  const date  = document.getElementById('p-date').value;
+  const kourelNom = document.getElementById('p-kourel').value;
+  if (!date || !kourelNom) return;
+
+  const membres = db.membres.filter(m => m.kourel === kourelNom);
+  if (membres.length === 0) return;
+
+  const membresList = membres.map(m => {
+    const s = presenceStatuts[m.id];
+    const retardInput = document.getElementById('retard-' + m.id);
+    const retardMin = retardInput ? (+retardInput.value || null) : null;
+    return {
+      id: m.id,
+      nom: m.prenom + ' ' + m.nom,
+      statut: s ? s.statut : 'Absent',
+      retardMin: s && s.statut === 'Retard' ? retardMin : null,
+    };
+  });
+
   db.presences.unshift({
     id: Date.now(),
     date,
-    kourel:      document.getElementById('p-kourel').value,
-    type:        document.getElementById('p-type').value,
-    participants: part,
-    total:        tot,
+    kourel: kourelNom,
+    type:   document.getElementById('p-type').value,
+    lieu:   document.getElementById('p-lieu').value.trim(),
+    membres: membresList,
   });
-  ['p-date','p-participants','p-total'].forEach(id => document.getElementById(id).value = '');
+
+  presenceStatuts = {};
+  document.getElementById('p-date').value = '';
+  document.getElementById('p-lieu').value = '';
+  document.getElementById('p-membres-list').innerHTML = '';
   toggleForm('form-presence');
   renderAll();
+}
+
+function buildPresenceFilterBar() {
+  const bar = document.getElementById('pres-filter-bar');
+  const kourels = ['Tous', ...db.kourels.map(k => k.nom)];
+  bar.innerHTML = kourels.map(k => `
+    <button class="filter-btn${presFilterActive === k ? ' active' : ''}" onclick="filterPresences('${k}',this)">${k}</button>
+  `).join('');
+}
+
+function filterPresences(val, btn) {
+  presFilterActive = val;
+  document.querySelectorAll('#pres-filter-bar .filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderPresences();
+}
+
+function renderPresences() {
+  const filtered = presFilterActive === 'Tous'
+    ? db.presences
+    : db.presences.filter(p => p.kourel === presFilterActive);
+
+  if (filtered.length === 0) {
+    document.getElementById('presences-list').innerHTML = `
+      <div style="text-align:center;padding:48px;color:var(--text-light)">
+        <div style="font-size:48px;margin-bottom:12px">✅</div>
+        <p style="font-size:16px;font-weight:700">Aucune session enregistrée</p>
+        <p style="font-size:13px;margin-top:6px">Cliquez sur "+ Nouvelle Session" pour commencer</p>
+      </div>`;
+    return;
+  }
+
+  const typeColors = { 'Répétition': '#1a7a3c', 'Xam Xam': '#2563eb', 'Programme': '#7c3aed', 'Réunion': '#e07b2a' };
+
+  document.getElementById('presences-list').innerHTML = filtered.map(p => {
+    const presents = p.membres.filter(m => m.statut === 'Présent').length;
+    const retards  = p.membres.filter(m => m.statut === 'Retard').length;
+    const absents  = p.membres.filter(m => m.statut === 'Absent').length;
+    const total    = p.membres.length;
+    const tauxPres = total ? Math.round((presents + retards) / total * 100) : 0;
+    const col = tauxPres >= 80 ? '#16a34a' : tauxPres >= 50 ? '#d97706' : '#dc2626';
+
+    return `
+    <div class="presence-session-card">
+      <div class="presence-session-header">
+        <div>
+          <div class="presence-session-title">${p.type} — ${p.kourel}</div>
+          <div class="presence-session-meta">📅 ${p.date}${p.lieu ? ' · 📍 ' + p.lieu : ''}</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-size:28px;font-weight:900">${tauxPres}%</div>
+          <div style="font-size:12px;opacity:0.88">de présence</div>
+        </div>
+      </div>
+
+      <div class="presence-stats-row">
+        <div class="pstat"><div class="pstat-dot pstat-present"></div><span style="color:#166534">${presents} Présents</span></div>
+        <div class="pstat"><div class="pstat-dot pstat-retard"></div><span style="color:#92400e">${retards} Retards</span></div>
+        <div class="pstat"><div class="pstat-dot pstat-absent"></div><span style="color:#991b1b">${absents} Absents</span></div>
+        <div style="flex:1"></div>
+        <div style="font-size:12px;color:var(--text-light)">${total} membres au total</div>
+      </div>
+
+      ${p.membres.map(m => {
+        let statusStyle = '';
+        let statusIcon  = '';
+        if (m.statut === 'Présent') { statusStyle = 'color:#166534;background:#dcfce7'; statusIcon = '✓'; }
+        else if (m.statut === 'Retard') { statusStyle = 'color:#92400e;background:#fef3c7'; statusIcon = '⏱'; }
+        else { statusStyle = 'color:#991b1b;background:#fee2e2'; statusIcon = '✗'; }
+        return `
+        <div class="membre-presence-row">
+          <div class="membre-presence-name">${m.nom}</div>
+          <div style="flex:1"></div>
+          <span style="padding:4px 14px;border-radius:99px;font-size:12px;font-weight:800;${statusStyle}">
+            ${statusIcon} ${m.statut}${m.retardMin ? ' · ' + m.retardMin + ' min' : ''}
+          </span>
+        </div>`;
+      }).join('')}
+    </div>`;
+  }).join('');
 }
 
 // ── COTISATIONS ───────────────────────────────────────────────
@@ -1016,7 +1424,7 @@ function renderCotisations() {
       <td style="color:var(--text-light)">${c.date || '—'}</td>
       <td>${badge(c.statut)}</td>
       <td>${c.statut !== 'Payé' ? `<button class="btn btn-success" onclick="marquerPaye(${c.id})">Marquer payé</button>` : ''}</td>
-    </tr>`).join('');
+    </tr>`).join('') || '<tr><td colspan="6" style="text-align:center;color:var(--text-light);padding:24px">Aucune cotisation</td></tr>';
 }
 
 function marquerPaye(id) {
@@ -1032,7 +1440,7 @@ function renderMessages() {
     <div class="msg-card">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
         <div style="display:flex;gap:12px;align-items:center">
-          <div class="msg-avatar">${m.de[0]}</div>
+          <div class="msg-avatar">${m.de[0].toUpperCase()}</div>
           <div>
             <div style="font-weight:800;font-size:14px">${m.de}</div>
             <div style="font-size:11px;color:var(--text-light)">→ ${m.kourel}</div>
@@ -1041,7 +1449,7 @@ function renderMessages() {
         <div style="font-size:11px;color:var(--text-light)">${m.date} · ${m.heure}</div>
       </div>
       <p style="font-size:14px;line-height:1.5">${m.contenu}</p>
-    </div>`).join('');
+    </div>`).join('') || '<p style="color:var(--text-light);text-align:center;padding:24px">Aucun message</p>';
 }
 
 function sendMsg() {
@@ -1062,13 +1470,19 @@ function sendMsg() {
 
 // ── RAPPORTS ──────────────────────────────────────────────────
 function renderRapports() {
-  const totalM     = db.membres.length;
-  const actifs     = db.membres.filter(m => m.statut === 'Actif').length;
-  const totalCot   = db.cotisations.filter(c => c.statut === 'Payé').reduce((s,c) => s+c.montant, 0);
-  const tauxPres   = db.presences.length
-    ? Math.round(db.presences.reduce((s,p) => s + p.participants/p.total, 0) / db.presences.length * 100)
-    : 0;
-  const kActifs    = db.kourels.filter(k => k.statut === 'Actif').length;
+  const totalM   = db.membres.length;
+  const actifs   = db.membres.filter(m => m.statut === 'Actif').length;
+  const totalCot = db.cotisations.filter(c => c.statut === 'Payé').reduce((s,c) => s+c.montant, 0);
+  let tauxPres = 0;
+  if (db.presences.length) {
+    tauxPres = Math.round(
+      db.presences.reduce((s,p) => {
+        const pres = p.membres.filter(m => m.statut === 'Présent' || m.statut === 'Retard').length;
+        return s + (p.membres.length ? pres / p.membres.length : 0);
+      }, 0) / db.presences.length * 100
+    );
+  }
+  const kActifs = db.kourels.filter(k => k.statut === 'Actif').length;
 
   document.getElementById('rapport-stats').innerHTML = [
     { label:'Membres actifs',       value:`${actifs}/${totalM}`,             color:'var(--green)' },
@@ -1076,31 +1490,27 @@ function renderRapports() {
     { label:'Présence moyenne',      value:`${tauxPres}%`,                   color:'var(--blue)' },
     { label:'Kourels actifs',        value:`${kActifs}/${db.kourels.length}`,color:'var(--purple)' },
   ].map(s => `
-    <div class="stat-card" style="background:${s.color};position:relative">
+    <div class="stat-card" style="background:${s.color}">
       <div class="stat-value" style="font-size:24px">${s.value}</div>
       <div class="stat-label">${s.label}</div>
     </div>`).join('');
 
-  // Types
-  const types = ['Récitation','Xam Xam','Cérémonie','Réunion'];
+  const types = ['Répétition','Xam Xam','Programme','Réunion'];
   const tColors = ['var(--green)','var(--blue)','var(--purple)','var(--orange)'];
   const total = db.presences.length || 1;
   document.getElementById('rapport-types').innerHTML = types.map((t,i) => {
-    const cnt  = db.presences.filter(p => p.type === t).length;
-    const pct  = Math.round(cnt/total*100);
+    const cnt = db.presences.filter(p => p.type === t).length;
+    const pct = Math.round(cnt/total*100);
     return `
     <div style="margin-bottom:16px">
       <div style="display:flex;justify-content:space-between;margin-bottom:6px">
         <span style="font-size:13px;font-weight:700">${t}</span>
         <span style="font-size:13px;color:var(--text-light)">${cnt} séance${cnt>1?'s':''}</span>
       </div>
-      <div class="rapport-bar-wrap">
-        <div class="rapport-bar" style="width:${pct}%;background:${tColors[i]}"></div>
-      </div>
+      <div class="rapport-bar-wrap"><div class="rapport-bar" style="width:${pct}%;background:${tColors[i]}"></div></div>
     </div>`;
   }).join('');
 
-  // Par kourel
   document.getElementById('rapport-kourels').innerHTML = db.kourels.map(k => {
     const t = db.cotisations.filter(c => c.kourel === k.nom && c.statut === 'Payé').reduce((s,c) => s+c.montant,0);
     return `
@@ -1108,7 +1518,44 @@ function renderRapports() {
       <span style="font-size:13px;font-weight:700">${k.nom}</span>
       <span style="font-size:13px;font-weight:900;color:var(--green)">${t.toLocaleString()} FCFA</span>
     </div>`;
-  }).join('');
+  }).join('') || '<p style="color:var(--text-light);font-size:13px">Aucun Kourel</p>';
+
+  // Presence detail per kourel
+  document.getElementById('rapport-presence-detail').innerHTML = db.kourels.map(k => {
+    const sessions = db.presences.filter(p => p.kourel === k.nom);
+    if (!sessions.length) return `
+      <div style="padding:12px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between">
+        <span style="font-size:13px;font-weight:700">${k.nom}</span>
+        <span style="font-size:12px;color:var(--text-light)">Aucune session</span>
+      </div>`;
+
+    let totPresent = 0, totRetard = 0, totAbsent = 0;
+    sessions.forEach(s => {
+      s.membres.forEach(m => {
+        if (m.statut === 'Présent') totPresent++;
+        else if (m.statut === 'Retard') totRetard++;
+        else totAbsent++;
+      });
+    });
+    const grand = totPresent + totRetard + totAbsent || 1;
+    return `
+    <div style="padding:16px 0;border-bottom:1px solid var(--border)">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <span style="font-size:14px;font-weight:800">${k.nom}</span>
+        <span style="font-size:12px;color:var(--text-light)">${sessions.length} session${sessions.length>1?'s':''}</span>
+      </div>
+      <div style="display:flex;height:14px;border-radius:99px;overflow:hidden;gap:2px">
+        <div style="flex:${totPresent};background:#16a34a;border-radius:99px 0 0 99px;min-width:${totPresent?2:0}px" title="${totPresent} présents"></div>
+        <div style="flex:${totRetard};background:#d97706;min-width:${totRetard?2:0}px" title="${totRetard} retards"></div>
+        <div style="flex:${totAbsent};background:#dc2626;border-radius:0 99px 99px 0;min-width:${totAbsent?2:0}px" title="${totAbsent} absents"></div>
+      </div>
+      <div style="display:flex;gap:16px;margin-top:8px;font-size:12px">
+        <span style="color:#166534;font-weight:700">✓ ${totPresent} (${Math.round(totPresent/grand*100)}%)</span>
+        <span style="color:#92400e;font-weight:700">⏱ ${totRetard} (${Math.round(totRetard/grand*100)}%)</span>
+        <span style="color:#991b1b;font-weight:700">✗ ${totAbsent} (${Math.round(totAbsent/grand*100)}%)</span>
+      </div>
+    </div>`;
+  }).join('') || '<p style="color:var(--text-light);font-size:13px">Aucun Kourel</p>';
 }
 
 // Enter key on setup
@@ -1116,6 +1563,5 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Enter' && document.getElementById('setup-screen').style.display !== 'none') startApp();
 });
 </script>
-
 </body>
 </html>
