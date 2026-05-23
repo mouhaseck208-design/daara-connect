@@ -6,10 +6,6 @@
 <title>DAARA CONNECT</title>
 <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 <style>
-/* ══════════════════════════════════════════════
-   FIX #1 — toutes les variables CSS utilisent
-   -- (double tiret) et non – (tiret en)
-══════════════════════════════════════════════ */
 :root {
   --green: #1a7a3c;
   --green-light: #2ea84f;
@@ -31,7 +27,6 @@
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
 
-/* ── WELCOME / SEARCH SCREEN ── */
 #welcome-screen{
   min-height:100vh;display:flex;align-items:center;justify-content:center;
   background:linear-gradient(160deg,#062617 0%,#0f4c25 40%,#1a7a3c 100%);
@@ -135,15 +130,6 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .fl input:focus,.fl select:focus{border-color:var(--green);box-shadow:0 0 0 4px rgba(26,122,60,.1);background:#fff}
 .fl input::placeholder{color:#aac5aa}
 .err{color:#dc2626;font-size:11px;margin-top:5px;font-weight:600;display:none}
-
-.role-selector{display:flex;gap:10px;margin-bottom:8px}
-.role-opt{flex:1;padding:14px 10px;border-radius:12px;border:2px solid var(--border);cursor:pointer;text-align:center;transition:all .2s;background:#fff;}
-.role-opt:hover{border-color:var(--green);background:var(--green-muted)}
-.role-opt.selected{border-color:var(--green);background:var(--green-muted)}
-.role-opt .role-icon{font-size:22px;display:block;margin-bottom:6px}
-.role-opt .role-name{font-size:12px;font-weight:800;color:var(--text)}
-.role-opt .role-desc{font-size:10px;color:var(--text-light);margin-top:2px}
-.role-opt.selected .role-name{color:var(--green-dark)}
 
 .cta-btn{
   width:100%;padding:17px;background:linear-gradient(135deg,var(--green-dark),var(--green));
@@ -302,7 +288,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--green);box-shadow:0 0
 .audio-upload-zone .upload-icon{font-size:24px;margin-bottom:6px}
 .audio-upload-zone p{font-size:12px;color:var(--text-light)}
 
-.tol-btn{padding:7px 14px;border-radius:99px;border:2px solid var(--border);cursor:pointer;font-size:12px;font-weight:700;font-family:'Plus Jakarta Sans',sans-serif;background:#fff;color:var(--text-light);transition:all .15s}
+.tol-btn{padding:7px 14px;border-radius:99px;border:2px solid var(--border);cursor:pointer;font-size:12px;font-weight:700;font-family:'Plus Jakarta Sans',sans-serif;background:#fff;color:var(--text-light);transition:all .15px}
 .tol-btn.selected{background:var(--green);border-color:var(--green);color:#fff}
 
 .filter-bar{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap}
@@ -370,11 +356,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--green);box-shadow:0 0
 .page{display:none}
 .page.active{display:block}
 
-.access-denied{text-align:center;padding:80px 40px;}
-.access-denied .ad-icon{font-size:60px;margin-bottom:16px}
-.access-denied h2{font-size:20px;font-weight:900;color:var(--text);margin-bottom:8px}
-.access-denied p{font-size:14px;color:var(--text-light);line-height:1.6}
-
 .info-box{background:linear-gradient(135deg,#fef9ee,#fef3c7);border:1.5px solid #fde68a;border-radius:12px;padding:14px 18px;font-size:13px;color:#92400e;font-weight:600;margin-bottom:18px;display:flex;align-items:flex-start;gap:10px;}
 
 @media(max-width:700px){
@@ -432,13 +413,15 @@ input:focus,select:focus,textarea:focus{border-color:var(--green);box-shadow:0 0
       <div id="login-form" style="display:none;animation:fadeIn .3s ease">
         <div class="fl">
           <label>Votre identifiant</label>
-          <input type="text" id="login-id" placeholder="Ex: admin123 ou membre01"/>
+          <input type="text" id="login-id" placeholder="Ex: admin ou membre01"/>
         </div>
         <div class="fl">
           <label>Mot de passe</label>
-          <input type="password" id="login-pwd" placeholder="Votre mot de passe"/>
+          <input type="password" id="login-pwd" placeholder="Votre mot de passe"
+            onkeydown="if(event.key==='Enter')loginUser()"/>
           <div class="err" id="err-login">Identifiant ou mot de passe incorrect</div>
         </div>
+        <!-- FIX: Bouton Connexion déclenché uniquement quand le formulaire est visible -->
         <button class="cta-btn" onclick="loginUser()">Se connecter →</button>
         <div style="text-align:center;margin-top:14px">
           <button class="back-btn" style="display:inline-flex;justify-content:center" onclick="resetLoginForm()">← Changer de Daara</button>
@@ -505,11 +488,11 @@ input:focus,select:focus,textarea:focus{border-color:var(--green);box-shadow:0 0
       <button class="nav-btn active" onclick="showPage('accueil',this)">🏠 Accueil</button>
       <button class="nav-btn" onclick="showPage('kourels',this)">👥 Kourels</button>
       <button class="nav-btn" onclick="showPage('membres',this)">👤 Membres</button>
+      <button class="nav-btn" onclick="showPage('conservatoire',this)">🎵 Conservatoire</button>
       <button class="nav-btn" onclick="showPage('programmes',this)">📅 Programmes</button>
       <button class="nav-btn" onclick="showPage('presences',this)">✅ Présences</button>
-      <button class="nav-btn" onclick="showPage('cotisations',this)">💰 Adiyeu</button>
-      <button class="nav-btn" onclick="showPage('conservatoire',this)">🎵 Conservatoire</button>
       <button class="nav-btn" onclick="showPage('messagerie',this)">💬 Messagerie</button>
+      <button class="nav-btn" onclick="showPage('cotisations',this)">💰 Adiyeu</button>
       <button class="nav-btn" onclick="showPage('rapports',this)">📊 Rapports</button>
     </nav>
   </div>
@@ -520,11 +503,10 @@ input:focus,select:focus,textarea:focus{border-color:var(--green);box-shadow:0 0
     <div id="page-accueil" class="page active">
       <h2 class="page-title">Tableau de Bord</h2>
       <div class="stats-grid">
-        <!-- FIX #2 : labels et IDs corrigés pour correspondre aux bonnes valeurs -->
-        <div class="stat-card" style="background:linear-gradient(135deg,#1a7a3c,#2ea84f)"><div class="stat-icon">👥</div><div class="stat-value" id="stat-kourels">0</div><div class="stat-label">Kourels Actifs</div></div>
-        <div class="stat-card" style="background:linear-gradient(135deg,#c05f1a,#e07b2a)"><div class="stat-icon">👤</div><div class="stat-value" id="stat-membres">0</div><div class="stat-label">Membres Inscrits</div></div>
-        <div class="stat-card" style="background:linear-gradient(135deg,#5b21b6,#7c3aed)"><div class="stat-icon">✅</div><div class="stat-value" id="stat-presence">0%</div><div class="stat-label">Présence Dernière Session</div></div>
-        <div class="stat-card" style="background:linear-gradient(135deg,#1d4ed8,#3b82f6)"><div class="stat-icon">💰</div><div class="stat-value" id="stat-cotisations">—</div><div class="stat-label">Adiyeu Payés</div></div>
+        <div class="stat-card" style="background:var(--green-dark)"><div class="stat-icon">👥</div><div class="stat-value" id="stat-kourels">0</div><div class="stat-label">Kourels Actifs</div></div>
+        <div class="stat-card" style="background:var(--green-dark)"><div class="stat-icon">👨🏽‍💼</div><div class="stat-value" id="stat-membres">0</div><div class="stat-label">Membres Inscrits</div></div>
+        <div class="stat-card" style="background:var(--green-dark)"><div class="stat-icon">✅</div><div class="stat-value" id="stat-presence">0%</div><div class="stat-label">Présence Dernière Session</div></div>
+        <div class="stat-card" style="background:var(--green-dark)"><div class="stat-icon">💰</div><div class="stat-value" id="stat-cotisations">—</div><div class="stat-label">Adiyeu Payés</div></div>
       </div>
       <div class="two-col">
         <div class="card"><h3>Mes Kourels</h3><div id="accueil-kourels"></div></div>
@@ -572,7 +554,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--green);box-shadow:0 0
           <input type="text" id="m-prenom" placeholder="Prénom"/>
           <input type="text" id="m-nom" placeholder="Nom"/>
           <input type="tel" id="m-tel" placeholder="Téléphone"/>
-          <!-- FIX #3 : champ Kourel ajouté dans le formulaire membre -->
           <div>
             <label style="font-size:11px;font-weight:700;color:var(--text-light);display:block;margin-bottom:6px">Kourel</label>
             <select id="m-kourel"></select>
@@ -587,6 +568,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--green);box-shadow:0 0
       <div class="card" style="padding:0;overflow:hidden">
         <div class="table-wrap">
           <table>
+            <!-- FIX: colonne Rôle renommée en accord avec les données -->
             <thead><tr><th>Nom</th><th>Kourel</th><th>Téléphone</th><th>Rôle</th><th>Statut</th><th>Actions</th></tr></thead>
             <tbody id="membres-body"></tbody>
           </table>
@@ -679,9 +661,9 @@ input:focus,select:focus,textarea:focus{border-color:var(--green);box-shadow:0 0
     <div id="page-cotisations" class="page">
       <h2 class="page-title">Gestion des Adiyeu</h2>
       <div class="stats-grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:22px">
-        <div class="stat-card" style="background:linear-gradient(135deg,#1a7a3c,#2ea84f)"><div class="stat-icon">💵</div><div class="stat-value" id="cot-total">—</div><div class="stat-label">Total collecté</div></div>
-        <div class="stat-card" style="background:linear-gradient(135deg,#c05f1a,#e07b2a)"><div class="stat-icon">✅</div><div class="stat-value" id="cot-payees">—</div><div class="stat-label">Payées</div></div>
-        <div class="stat-card" style="background:linear-gradient(135deg,#b91c1c,#dc2626)"><div class="stat-icon">⏳</div><div class="stat-value" id="cot-attente">—</div><div class="stat-label">En attente</div></div>
+        <div class="stat-card" style="background:var(--green-dark)"><div class="stat-icon">💵</div><div class="stat-value" id="cot-total">—</div><div class="stat-label">Total collecté</div></div>
+        <div class="stat-card" style="background:var(--green-dark)"><div class="stat-icon">✅</div><div class="stat-value" id="cot-payees">—</div><div class="stat-label">Payées</div></div>
+        <div class="stat-card" style="background:var(--green-dark)"><div class="stat-icon">⏳</div><div class="stat-value" id="cot-attente">—</div><div class="stat-label">En attente</div></div>
       </div>
       <div class="card" style="padding:0;overflow:hidden">
         <div class="table-wrap">
@@ -797,19 +779,28 @@ let activeChatRoom = null;
 
 function D() { return session.daara; }
 function isAdmin() { return session.user?.role === 'admin'; }
+
 function isKourelAdmin(kourelNom) {
   if (isAdmin()) return true;
   const k = D().kourels.find(k => k.nom === kourelNom);
-  return k && k.adminId === session.user?.id;
+  return k && k.adminId && k.adminId === session.user?.id;
 }
+
+// FIX: myKourels() inclut aussi les kourels dont l'utilisateur est admin (même sans être dans membres)
 function myKourels() {
   if (isAdmin()) return D().kourels.map(k => k.nom);
-  return D().membres.filter(m => m.userId === session.user?.id).map(m => m.kourel);
+  const uid = session.user?.id;
+  const fromMembres = D().membres.filter(m => m.userId === uid).map(m => m.kourel);
+  const fromAdmin   = D().kourels.filter(k => k.adminId === uid).map(k => k.nom);
+  // Union sans doublons
+  return [...new Set([...fromMembres, ...fromAdmin])];
 }
+
 function canAccessKourel(kourelNom) {
   if (isAdmin()) return true;
   return myKourels().includes(kourelNom);
 }
+
 function canAccessConserv(cv) {
   if (isAdmin()) return true;
   if (isKourelAdmin(cv.kourel)) return true;
@@ -823,15 +814,17 @@ function searchDaara() {
   const q = document.getElementById('search-daara-input').value.trim().toLowerCase();
   const res = document.getElementById('daara-results');
   if (!q) { res.style.display = 'none'; return; }
-  const matches = GLOBAL.daaras.filter(d => d.nom.toLowerCase().includes(q) || d.siege.toLowerCase().includes(q));
+  const matches = GLOBAL.daaras.filter(d =>
+    d.nom.toLowerCase().includes(q) || d.siege.toLowerCase().includes(q)
+  );
   if (!matches.length) { res.style.display = 'none'; return; }
   res.style.display = 'block';
   res.innerHTML = matches.map(d => `
     <div class="daara-result-item" onclick="selectDaara(${d.id})">
       <div class="dr-icon">🕌</div>
       <div class="dr-info">
-        <h4>${d.nom}</h4>
-        <p>📍 ${d.siege} · ${d.membres.length} membres</p>
+        <h4>${escHtml(d.nom)}</h4>
+        <p>📍 ${escHtml(d.siege)} · ${d.membres.length} membres</p>
       </div>
       <span class="dr-badge">${d.users.length} utilisateur${d.users.length>1?'s':''}</span>
     </div>`).join('');
@@ -862,12 +855,17 @@ function resetLoginForm() {
   document.getElementById('no-login-form').style.display = 'block';
   document.getElementById('search-daara-input').value = '';
   document.getElementById('err-login').style.display = 'none';
+  document.getElementById('login-id').value = '';
+  document.getElementById('login-pwd').value = '';
 }
 
 function loginUser() {
+  // FIX: vérifier que le formulaire login est bien visible avant de traiter
+  const lf = document.getElementById('login-form');
+  if (!lf || lf.style.display === 'none') return;
   if (!session.daara) return;
   const id  = document.getElementById('login-id').value.trim();
-  const pwd = document.getElementById('login-pwd').value.trim();
+  const pwd = document.getElementById('login-pwd').value;
   const user = session.daara.users.find(u => u.id === id && u.pwd === pwd);
   const errEl = document.getElementById('err-login');
   if (!user) { errEl.style.display = 'block'; return; }
@@ -896,7 +894,6 @@ function createDaara() {
     if (!val) ok = false;
   });
   if (!ok) return;
-  // FIX #4 : vérification doublons d'identifiant
   if (GLOBAL.daaras.some(d => d.users.some(u => u.id === adminId))) {
     showNotif('Cet identifiant est déjà utilisé', true); return;
   }
@@ -918,11 +915,11 @@ function createDaara() {
 function launchApp() {
   document.getElementById('welcome-screen').style.display = 'none';
   document.getElementById('app').style.display = 'block';
-  document.getElementById('hdr-daara').textContent   = D().nom;
-  document.getElementById('hdr-meta').textContent    = D().siege;
+  document.getElementById('hdr-daara').textContent    = D().nom;
+  document.getElementById('hdr-meta').textContent     = D().siege;
   document.getElementById('hdr-username').textContent = session.user.nom;
-  document.getElementById('hdr-avatar').textContent  = session.user.nom[0].toUpperCase();
-  document.getElementById('hdr-role').textContent    = isAdmin() ? 'Admin' : 'Membre';
+  document.getElementById('hdr-avatar').textContent   = session.user.nom[0].toUpperCase();
+  document.getElementById('hdr-role').textContent     = isAdmin() ? 'Admin' : 'Membre';
   updateNavPermissions();
   renderAll();
 }
@@ -931,7 +928,7 @@ function updateNavPermissions() {
   const adminEls = ['btn-add-kourel','btn-add-membre','btn-add-prog','btn-add-pres','btn-add-conserv'];
   adminEls.forEach(id => {
     const el = document.getElementById(id);
-    if (el) el.style.display = isAdmin() ? 'inline-flex' : 'none';
+    if (el) el.style.display = isAdmin() ? '' : 'none';
   });
 }
 
@@ -956,7 +953,6 @@ function showPage(id, btn) {
   document.getElementById('page-'+id).classList.add('active');
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
   if (btn) btn.classList.add('active');
-  // FIX #5 : on re-rend le chat si on revient sur messagerie avec un salon actif
   if (id === 'messagerie') {
     renderChatSidebar();
     if (activeChatRoom) renderChatMain(activeChatRoom);
@@ -969,15 +965,30 @@ function toggleForm(id) {
   const visible = el.style.display !== 'none';
   el.style.display = visible ? 'none' : 'block';
   if (!visible) {
-    if (id === 'form-presence') { kourelOptionsForSelect('p-kourel', true); loadMembresForPresence(); }
-    if (id === 'form-conservatoire') { kourelOptionsForSelect('cv-kourel', false); updateConservMembres(); }
-    if (id === 'form-membre') kourelOptionsForSelect('m-kourel', true);
+    if (id === 'form-presence')     { kourelOptionsForSelect('p-kourel', true); loadMembresForPresence(); }
+    if (id === 'form-conservatoire'){ kourelOptionsForSelect('cv-kourel', false); updateConservMembres(); }
+    if (id === 'form-membre')       kourelOptionsForSelect('m-kourel', true);
+    if (id === 'form-kourel')       renderKourelAdminSelect();
   }
 }
 
+// FIX: fonction dédiée pour peupler le select admin du kourel
+function renderKourelAdminSelect() {
+  const adminSel = document.getElementById('k-admin-membre');
+  if (!adminSel) return;
+  adminSel.innerHTML = '<option value="">— Sans admin spécifique —</option>' +
+    D().membres.map(m => `<option value="${escAttr(m.userId)}">${escHtml(m.prenom+' '+m.nom)}</option>`).join('');
+}
+
+// Échappement HTML pour éviter les injections dans innerHTML
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+function escAttr(s) { return escHtml(s); }
+
 function badge(s) {
-  const map = { 'Actif':'actif','Inactif':'inactif','Payé':'payé','En attente':'attente','admin':'admin','membre':'membre' };
-  return `<span class="badge ${map[s]||''}">${s}</span>`;
+  const map = { 'Actif':'actif','Inactif':'inactif','Payé':'payé','En attente':'attente','Admin Kourel':'admin','Membre':'membre' };
+  return `<span class="badge ${map[s]||''}">${escHtml(s)}</span>`;
 }
 
 function kourelOptionsForSelect(selId, filterAccessible) {
@@ -987,7 +998,7 @@ function kourelOptionsForSelect(selId, filterAccessible) {
     ? D().kourels.filter(k => canAccessKourel(k.nom))
     : D().kourels;
   el.innerHTML = kourels.length
-    ? kourels.map(k => `<option>${k.nom}</option>`).join('')
+    ? kourels.map(k => `<option value="${escAttr(k.nom)}">${escHtml(k.nom)}</option>`).join('')
     : '<option value="">Aucun Kourel disponible</option>';
 }
 
@@ -1025,14 +1036,14 @@ function renderAll() {
 // ACCUEIL
 // ══════════════════════════════════════════════════════════════
 function renderAccueil() {
-  const myK = myKourels();
+  const myK    = myKourels();
   const actifs = D().kourels.filter(k => k.statut === 'Actif' && (isAdmin() || myK.includes(k.nom))).length;
   const totalM = isAdmin() ? D().membres.length : D().membres.filter(m => myK.includes(m.kourel)).length;
   const myCots = isAdmin() ? D().cotisations : D().cotisations.filter(c => myK.includes(c.kourel));
 
-  // FIX #2 : stat-cotisations affiche le nombre payé / total, pas un %
+  // FIX: affiche payé/total avec protection si myCots vide
   const payees = myCots.filter(c => c.statut === 'Payé').length;
-  document.getElementById('stat-cotisations').textContent = payees + '/' + myCots.length;
+  document.getElementById('stat-cotisations').textContent = myCots.length > 0 ? payees + '/' + myCots.length : '0/0';
 
   const myPres = isAdmin() ? D().presences : D().presences.filter(p => myK.includes(p.kourel));
   let tp = 0;
@@ -1041,27 +1052,27 @@ function renderAccueil() {
     const presents = last.membres.filter(m => m.statut === 'Présent' || m.statut === 'Retard').length;
     tp = last.membres.length ? Math.round(presents / last.membres.length * 100) : 0;
   }
-  document.getElementById('stat-kourels').textContent   = actifs;
-  document.getElementById('stat-membres').textContent   = totalM;
-  document.getElementById('stat-presence').textContent  = tp + '%';
+  document.getElementById('stat-kourels').textContent  = actifs;
+  document.getElementById('stat-membres').textContent  = totalM;
+  document.getElementById('stat-presence').textContent = tp + '%';
 
   const visK = D().kourels.filter(k => isAdmin() || myK.includes(k.nom));
   document.getElementById('accueil-kourels').innerHTML = visK.map(k => `
     <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--border)">
       <div>
-        <div style="font-weight:700;font-size:13px">${k.nom}</div>
-        <div style="font-size:11px;color:var(--text-light)">${k.cotisation.toLocaleString()} FCFA/${k.frequence}</div>
+        <div style="font-weight:700;font-size:13px">${escHtml(k.nom)}</div>
+        <div style="font-size:11px;color:var(--text-light)">${k.cotisation.toLocaleString()} FCFA/${escHtml(k.frequence)}</div>
       </div>
       ${badge(k.statut)}
     </div>`).join('') || '<p style="color:var(--text-light);font-size:13px">Aucun Kourel</p>';
 
   document.getElementById('accueil-presences').innerHTML = myPres.slice(0,5).map(p => {
-    const pres  = p.membres.filter(m => m.statut === 'Présent').length;
-    const rds   = p.membres.filter(m => m.statut === 'Retard').length;
+    const pres = p.membres.filter(m => m.statut === 'Présent').length;
+    const rds  = p.membres.filter(m => m.statut === 'Retard').length;
     return `
     <div style="padding:9px 0;border-bottom:1px solid var(--border)">
-      <div style="font-weight:700;font-size:13px">${p.type} — ${p.kourel}</div>
-      <div style="font-size:11px;color:var(--text-light)">${p.date}${p.lieu?' · '+p.lieu:''}</div>
+      <div style="font-weight:700;font-size:13px">${escHtml(p.type)} — ${escHtml(p.kourel)}</div>
+      <div style="font-size:11px;color:var(--text-light)">${escHtml(p.date)}${p.lieu?' · '+escHtml(p.lieu):''}</div>
       <div style="font-size:11px;margin-top:3px"><span style="color:#16a34a;font-weight:700">✓ ${pres}</span> &nbsp;·&nbsp; <span style="color:#d97706;font-weight:700">⏱ ${rds}</span></div>
     </div>`;
   }).join('') || '<p style="color:var(--text-light);font-size:13px">Aucune session</p>';
@@ -1071,11 +1082,6 @@ function renderAccueil() {
 // KOURELS
 // ══════════════════════════════════════════════════════════════
 function renderKourels() {
-  const adminSel = document.getElementById('k-admin-membre');
-  if (adminSel) {
-    adminSel.innerHTML = '<option value="">— Sans admin spécifique —</option>' +
-      D().membres.map(m => `<option value="${m.userId}">${m.prenom} ${m.nom}</option>`).join('');
-  }
   const visK = D().kourels.filter(k => isAdmin() || myKourels().includes(k.nom));
   document.getElementById('kourels-grid').innerHTML = visK.map(k => {
     const kMembers  = D().membres.filter(m => m.kourel === k.nom);
@@ -1083,10 +1089,10 @@ function renderKourels() {
     return `
     <div class="kourel-card">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
-        <h3 style="font-size:15px;font-weight:900">${k.nom}</h3>
+        <h3 style="font-size:15px;font-weight:900">${escHtml(k.nom)}</h3>
         ${badge(k.statut)}
       </div>
-      <p style="font-size:12px;color:var(--text-light);margin-bottom:14px">${k.description||''}</p>
+      <p style="font-size:12px;color:var(--text-light);margin-bottom:14px">${escHtml(k.description||'')}</p>
       <div style="display:flex;gap:16px;margin-bottom:14px">
         <div style="text-align:center">
           <div style="font-size:22px;font-weight:900;color:var(--green)">${kMembers.length}</div>
@@ -1094,10 +1100,10 @@ function renderKourels() {
         </div>
         <div style="text-align:center">
           <div style="font-size:17px;font-weight:800;color:var(--orange)">${k.cotisation.toLocaleString()} F</div>
-          <div style="font-size:11px;color:var(--text-light)">${k.frequence}</div>
+          <div style="font-size:11px;color:var(--text-light)">${escHtml(k.frequence)}</div>
         </div>
       </div>
-      ${adminUser ? `<div style="font-size:12px;color:var(--text-light);margin-bottom:12px">👤 Admin: <strong>${adminUser.nom}</strong></div>` : ''}
+      ${adminUser ? `<div style="font-size:12px;color:var(--text-light);margin-bottom:12px">👤 Admin: <strong>${escHtml(adminUser.nom)}</strong></div>` : ''}
       <div style="display:flex;gap:8px;flex-wrap:wrap">
         ${isAdmin() ? `<button class="btn btn-danger" onclick="deleteKourel(${k.id})">🗑 Supprimer</button>` : ''}
         ${isKourelAdmin(k.nom) && !isAdmin() ? `<span style="font-size:11px;color:var(--green-dark);font-weight:700;padding:5px 10px;background:var(--green-muted);border-radius:8px">⭐ Vous êtes admin</span>` : ''}
@@ -1110,18 +1116,17 @@ function addKourel() {
   if (!isAdmin()) return;
   const nom = document.getElementById('k-nom').value.trim();
   if (!nom) { showNotif('Veuillez entrer un nom de Kourel', true); return; }
-  // FIX #4 : vérification doublon de nom de Kourel
   if (D().kourels.some(k => k.nom.toLowerCase() === nom.toLowerCase())) {
     showNotif('Un Kourel avec ce nom existe déjà', true); return;
   }
   const adminId = document.getElementById('k-admin-membre').value || null;
   D().kourels.push({
     id: Date.now(), nom,
-    cotisation: +document.getElementById('k-cotisation').value || 0,
-    frequence:  document.getElementById('k-freq').value,
-    statut:     document.getElementById('k-statut').value,
+    cotisation:  +document.getElementById('k-cotisation').value || 0,
+    frequence:   document.getElementById('k-freq').value,
+    statut:      document.getElementById('k-statut').value,
     description: document.getElementById('k-desc').value,
-    adminId,
+    adminId: adminId || null,
   });
   if (!D().messages[nom]) D().messages[nom] = [];
   ['k-nom','k-cotisation','k-desc'].forEach(id => document.getElementById(id).value = '');
@@ -1134,12 +1139,11 @@ function deleteKourel(id) {
   if (!isAdmin()) return;
   const k = D().kourels.find(x => x.id === id);
   if (!k) return;
-  // FIX #6 : suppression des données orphelines liées au Kourel
-  D().membres      = D().membres.filter(m => m.kourel !== k.nom);
-  D().cotisations  = D().cotisations.filter(c => c.kourel !== k.nom);
-  D().presences    = D().presences.filter(p => p.kourel !== k.nom);
-  D().programmes   = D().programmes.filter(p => p.kourel !== k.nom);
-  D().conservatoires = D().conservatoires.filter(cv => cv.kourel !== k.nom);
+  D().membres       = D().membres.filter(m => m.kourel !== k.nom);
+  D().cotisations   = D().cotisations.filter(c => c.kourel !== k.nom);
+  D().presences     = D().presences.filter(p => p.kourel !== k.nom);
+  D().programmes    = D().programmes.filter(p => p.kourel !== k.nom);
+  D().conservatoires= D().conservatoires.filter(cv => cv.kourel !== k.nom);
   delete D().messages[k.nom];
   D().kourels = D().kourels.filter(x => x.id !== id);
   renderAll();
@@ -1154,16 +1158,19 @@ function renderMembres() {
   const visMembres = isAdmin()
     ? D().membres
     : D().membres.filter(m => myKourels().includes(m.kourel));
-  const filtered = visMembres.filter(m => (m.prenom+' '+m.nom+' '+m.kourel).toLowerCase().includes(q));
+  const filtered = visMembres.filter(m =>
+    (m.prenom+' '+m.nom+' '+m.kourel).toLowerCase().includes(q)
+  );
   document.getElementById('membres-body').innerHTML = filtered.map(m => {
     const isKAdmin = D().kourels.some(k => k.adminId === m.userId);
+    // FIX: utiliser le bon label dans le badge (était défini mais pas utilisé)
     const roleLabel = isKAdmin ? 'Admin Kourel' : 'Membre';
     return `
     <tr>
-      <td><strong>${m.prenom} ${m.nom}</strong><br><span style="font-size:11px;color:var(--text-light)">ID: ${m.userId}</span></td>
-      <td style="color:var(--text-light)">${m.kourel}</td>
-      <td>${m.telephone||'—'}</td>
-      <td>${badge(isKAdmin ? 'admin' : 'membre')}</td>
+      <td><strong>${escHtml(m.prenom+' '+m.nom)}</strong><br><span style="font-size:11px;color:var(--text-light)">ID: ${escHtml(m.userId)}</span></td>
+      <td style="color:var(--text-light)">${escHtml(m.kourel)}</td>
+      <td>${escHtml(m.telephone||'—')}</td>
+      <td>${badge(roleLabel)}</td>
       <td>${badge(m.statut)}</td>
       <td>${isAdmin() ? `<button class="btn btn-danger" onclick="deleteMembre(${m.id})">🗑</button>` : ''}</td>
     </tr>`;
@@ -1178,15 +1185,21 @@ function addMembre() {
   if (!prenom || !nom) { showNotif('Prénom et nom obligatoires', true); return; }
   const kourelNom = document.getElementById('m-kourel').value;
   if (!kourelNom) { showNotif('Veuillez sélectionner un Kourel', true); return; }
-  const userId = prenom.toLowerCase().replace(/\s+/g,'_') + '_' + nom.toLowerCase().replace(/\s+/g,'_') + '_' + Date.now();
-  const pwd = document.getElementById('m-pwd').value.trim() || 'membre123';
 
-  // FIX #7 : mot de passe n'est PAS affiché en clair dans la notif
+  // FIX: génération d'un userId plus lisible et stable
+  const base = prenom.toLowerCase().replace(/\s+/g,'').replace(/[^a-z0-9]/g,'') +
+               '_' + nom.toLowerCase().replace(/\s+/g,'').replace(/[^a-z0-9]/g,'');
+  // Éviter les doublons d'ID
+  let userId = base;
+  let suffix = 1;
+  while (D().users.some(u => u.id === userId)) { userId = base + suffix; suffix++; }
+
+  const pwd = document.getElementById('m-pwd').value.trim() || 'membre123';
   D().users.push({ id: userId, nom: prenom+' '+nom, pwd, role: 'membre' });
   D().membres.push({
     id: Date.now(), prenom, nom, kourel: kourelNom,
     userId, telephone: document.getElementById('m-tel').value,
-    statut: 'Actif', cotisationJour: null,
+    statut: 'Actif',
   });
   D().cotisations.push({
     id: Date.now()+1,
@@ -1198,15 +1211,18 @@ function addMembre() {
   ['m-prenom','m-nom','m-tel','m-pwd'].forEach(id => document.getElementById(id).value = '');
   toggleForm('form-membre');
   renderAll();
-  showNotif(`Membre "${prenom} ${nom}" ajouté. Login: ${userId}`);
+  showNotif(`Membre "${prenom} ${nom}" ajouté. Identifiant : ${userId}`);
 }
 
 function deleteMembre(id) {
   if (!isAdmin()) return;
   const m = D().membres.find(x => x.id === id);
   if (m) {
-    D().users       = D().users.filter(u => u.id !== m.userId);
-    D().cotisations = D().cotisations.filter(c => c.membre !== m.prenom+' '+m.nom || c.kourel !== m.kourel);
+    D().users = D().users.filter(u => u.id !== m.userId);
+    // FIX: suppression cotisation par membre+kourel combiné (pas juste le nom)
+    D().cotisations = D().cotisations.filter(c =>
+      !(c.membre === m.prenom+' '+m.nom && c.kourel === m.kourel)
+    );
   }
   D().membres = D().membres.filter(x => x.id !== id);
   renderAll();
@@ -1230,7 +1246,7 @@ function handleAudioUpload(event) {
     currentAudioDataUrl = e.target.result;
     const preview = document.getElementById('pr-audio-preview');
     preview.style.display = 'block';
-    preview.innerHTML = `<div class="audio-player"><span class="audio-label">🎵 ${file.name}</span><audio controls src="${e.target.result}" style="flex:1;height:32px"></audio></div>`;
+    preview.innerHTML = `<div class="audio-player"><span class="audio-label">🎵 ${escHtml(file.name)}</span><audio controls src="${e.target.result}" style="flex:1;height:32px"></audio></div>`;
   };
   reader.readAsDataURL(file);
 }
@@ -1270,15 +1286,22 @@ function deleteProgramme(id) {
   renderAll();
 }
 
-// FIX #8 : buildFilterBar utilise un nom de fonction string (appelé via window[name])
-// au lieu de .toString() qui peut créer des closures cassées
+// FIX: buildFilterBar utilise des data-attributes pour éviter les problèmes d'apostrophes
 function buildFilterBar(type, active, fnName) {
   const bar = document.getElementById(type+'-filter-bar');
   if (!bar) return;
   const kourels = isAdmin() ? D().kourels.map(k => k.nom) : myKourels();
-  bar.innerHTML = ['Tous', ...kourels].map(k =>
-    `<button class="filter-btn${active===k?' active':''}" onclick="window['${fnName}']('${k.replace(/'/g,"\\'")}',this)">${k}</button>`
+  const allOptions = ['Tous', ...kourels];
+  bar.innerHTML = allOptions.map(k =>
+    `<button class="filter-btn${active===k?' active':''}" data-filter="${escAttr(k)}" data-fn="${escAttr(fnName)}" onclick="handleFilterClick(this)">${escHtml(k)}</button>`
   ).join('');
+}
+
+function handleFilterClick(btn) {
+  const val = btn.getAttribute('data-filter');
+  const fn  = btn.getAttribute('data-fn');
+  if (fn === 'filterPresences') filterPresences(val, btn);
+  else if (fn === 'filterProgrammes') filterProgrammes(val, btn);
 }
 
 function filterProgrammes(val, btn) {
@@ -1300,21 +1323,21 @@ function renderProgrammes() {
       <div style="display:flex;justify-content:space-between;align-items:flex-start">
         <div>
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
-            <span class="jour-badge">${p.jour}</span>
-            ${p.heure ? `<span style="font-size:15px;font-weight:900;color:var(--green)">⏰ ${p.heure}</span>` : ''}
+            <span class="jour-badge">${escHtml(p.jour)}</span>
+            ${p.heure ? `<span style="font-size:15px;font-weight:900;color:var(--green)">⏰ ${escHtml(p.heure)}</span>` : ''}
           </div>
-          <h3 style="font-size:17px;font-weight:900">${p.xassida}</h3>
-          <div style="font-size:12px;color:var(--text-light);margin-top:2px">${p.kourel}</div>
+          <h3 style="font-size:17px;font-weight:900">${escHtml(p.xassida)}</h3>
+          <div style="font-size:12px;color:var(--text-light);margin-top:2px">${escHtml(p.kourel)}</div>
         </div>
         ${isAdmin()||isKourelAdmin(p.kourel) ? `<button class="btn btn-danger" onclick="deleteProgramme(${p.id})">🗑</button>` : ''}
       </div>
       <div class="prog-info-grid">
-        ${p.lieu ? `<div class="prog-info-item"><div class="prog-info-label">📍 Lieu</div><div class="prog-info-value">${p.lieu}</div></div>` : ''}
-        ${p.responsable ? `<div class="prog-info-item"><div class="prog-info-label">🎤 Responsable</div><div class="prog-info-value">${p.responsable}</div></div>` : ''}
+        ${p.lieu ? `<div class="prog-info-item"><div class="prog-info-label">📍 Lieu</div><div class="prog-info-value">${escHtml(p.lieu)}</div></div>` : ''}
+        ${p.responsable ? `<div class="prog-info-item"><div class="prog-info-label">🎤 Responsable</div><div class="prog-info-value">${escHtml(p.responsable)}</div></div>` : ''}
         <div class="prog-info-item"><div class="prog-info-label">⏱ Tolérance</div><div class="prog-info-value">${p.tolerance==='0'?'Aucune':p.tolerance+' min'}</div></div>
       </div>
-      ${p.notes ? `<div style="margin-top:12px;padding:10px 14px;background:#f4faf4;border-radius:10px;font-size:12px;color:var(--text-light);border-left:3px solid var(--green)"><strong>📝</strong> ${p.notes}</div>` : ''}
-      ${p.audioUrl ? `<div class="audio-player" style="margin-top:12px"><span class="audio-label">🎵 ${p.audioName||'Son de référence'}</span><audio controls src="${p.audioUrl}" style="flex:1;height:30px"></audio></div>` : ''}
+      ${p.notes ? `<div style="margin-top:12px;padding:10px 14px;background:#f4faf4;border-radius:10px;font-size:12px;color:var(--text-light);border-left:3px solid var(--green)"><strong>📝</strong> ${escHtml(p.notes)}</div>` : ''}
+      ${p.audioUrl ? `<div class="audio-player" style="margin-top:12px"><span class="audio-label">🎵 ${escHtml(p.audioName||'Son de référence')}</span><audio controls src="${p.audioUrl}" style="flex:1;height:30px"></audio></div>` : ''}
     </div>`).join('');
 }
 
@@ -1335,7 +1358,7 @@ function loadMembresForPresence() {
     <div style="background:#fff;border-radius:12px;border:1.5px solid var(--border);overflow:hidden">
       ${membres.map(m => `
         <div class="membre-presence-row" id="row-${m.id}">
-          <div class="membre-presence-name">${m.prenom} ${m.nom}</div>
+          <div class="membre-presence-name">${escHtml(m.prenom+' '+m.nom)}</div>
           <div class="status-group">
             <button class="status-btn present" onclick="setPresStatus(${m.id},'Présent',this)">✓ Présent</button>
             <button class="status-btn retard"  onclick="setPresStatus(${m.id},'Retard',this)">⏱ Retard</button>
@@ -1368,8 +1391,8 @@ function updatePresenceCounts() {
   const p = vals.filter(v => v.statut==='Présent').length;
   const r = vals.filter(v => v.statut==='Retard').length;
   const a = vals.filter(v => v.statut==='Absent').length;
-  const map = { 'p-count-present': `✓ ${p} présents`, 'p-count-retard': `⏱ ${r} retards`, 'p-count-absent': `✗ ${a} absents` };
-  Object.entries(map).forEach(([id, txt]) => { const el = document.getElementById(id); if (el) el.textContent = txt; });
+  const map = { 'p-count-present':`✓ ${p} présents`, 'p-count-retard':`⏱ ${r} retards`, 'p-count-absent':`✗ ${a} absents` };
+  Object.entries(map).forEach(([id,txt]) => { const el = document.getElementById(id); if(el) el.textContent = txt; });
 }
 
 function savePresenceSession() {
@@ -1385,7 +1408,11 @@ function savePresenceSession() {
     membres: membres.map(m => {
       const s  = presenceStatuts[m.id];
       const ri = document.getElementById('retard-'+m.id);
-      return { id: m.id, nom: m.prenom+' '+m.nom, statut: s ? s.statut : 'Absent', retardMin: s && s.statut==='Retard' ? (+ri?.value||null) : null };
+      return {
+        id: m.id, nom: m.prenom+' '+m.nom,
+        statut: s ? s.statut : 'Absent',
+        retardMin: s && s.statut==='Retard' ? (+ri?.value||null) : null
+      };
     })
   });
   presenceStatuts = {};
@@ -1419,7 +1446,7 @@ function renderPresences() {
     return `
     <div class="presence-session-card">
       <div class="presence-session-header">
-        <div><div class="presence-session-title">${p.type} — ${p.kourel}</div><div class="presence-session-meta">📅 ${p.date}${p.lieu?' · 📍 '+p.lieu:''}</div></div>
+        <div><div class="presence-session-title">${escHtml(p.type)} — ${escHtml(p.kourel)}</div><div class="presence-session-meta">📅 ${escHtml(p.date)}${p.lieu?' · 📍 '+escHtml(p.lieu):''}</div></div>
         <div style="text-align:right"><div style="font-size:26px;font-weight:900">${tauxP}%</div><div style="font-size:11px;opacity:.88">présence</div></div>
       </div>
       <div class="presence-stats-row">
@@ -1433,7 +1460,7 @@ function renderPresences() {
         if(m.statut==='Présent'){ss='color:#166534;background:#dcfce7';si='✓';}
         else if(m.statut==='Retard'){ss='color:#92400e;background:#fef3c7';si='⏱';}
         else{ss='color:#991b1b;background:#fee2e2';si='✗';}
-        return `<div class="membre-presence-row"><div class="membre-presence-name">${m.nom}</div><div style="flex:1"></div><span style="padding:3px 12px;border-radius:99px;font-size:11px;font-weight:800;${ss}">${si} ${m.statut}${m.retardMin?' · '+m.retardMin+' min':''}</span></div>`;
+        return `<div class="membre-presence-row"><div class="membre-presence-name">${escHtml(m.nom)}</div><div style="flex:1"></div><span style="padding:3px 12px;border-radius:99px;font-size:11px;font-weight:800;${ss}">${si} ${escHtml(m.statut)}${m.retardMin?' · '+m.retardMin+' min':''}</span></div>`;
       }).join('')}
     </div>`;
   }).join('');
@@ -1452,10 +1479,10 @@ function renderCotisations() {
   document.getElementById('cot-attente').textContent = attente.length;
   document.getElementById('cotisations-body').innerHTML = visCots.map(c => `
     <tr>
-      <td><strong>${c.membre}</strong></td>
-      <td style="color:var(--text-light)">${c.kourel}</td>
+      <td><strong>${escHtml(c.membre)}</strong></td>
+      <td style="color:var(--text-light)">${escHtml(c.kourel)}</td>
       <td style="font-weight:700;color:var(--green)">${c.montant.toLocaleString()} F</td>
-      <td style="color:var(--text-light)">${c.date||'—'}</td>
+      <td style="color:var(--text-light)">${escHtml(c.date||'—')}</td>
       <td>${badge(c.statut)}</td>
       <td>${c.statut!=='Payé'&&(isAdmin()||isKourelAdmin(c.kourel)) ? `<button class="btn btn-success" onclick="marquerPaye(${c.id})">Marquer payé</button>` : ''}</td>
     </tr>`).join('') || '<tr><td colspan="6" style="text-align:center;color:var(--text-light);padding:24px">Aucune cotisation</td></tr>';
@@ -1482,10 +1509,10 @@ function updateConservMembres() {
   }
   container.innerHTML = membres.map(m => `
     <label style="display:flex;align-items:center;gap:10px;padding:12px 16px;cursor:pointer;border-bottom:1px solid var(--border);transition:background .15s" onmouseover="this.style.background='#f4faf4'" onmouseout="this.style.background=''">
-      <input type="checkbox" value="${m.userId}" style="width:16px;height:16px;accent-color:var(--green)"/>
+      <input type="checkbox" value="${escAttr(m.userId)}" style="width:16px;height:16px;accent-color:var(--green)"/>
       <div>
-        <div style="font-size:13px;font-weight:700">${m.prenom} ${m.nom}</div>
-        <div style="font-size:11px;color:var(--text-light)">${m.kourel}</div>
+        <div style="font-size:13px;font-weight:700">${escHtml(m.prenom+' '+m.nom)}</div>
+        <div style="font-size:11px;color:var(--text-light)">${escHtml(m.kourel)}</div>
       </div>
     </label>`).join('');
 }
@@ -1494,7 +1521,9 @@ function addConservatoire() {
   const kourel = document.getElementById('cv-kourel').value;
   const nom    = document.getElementById('cv-nom').value.trim();
   if (!kourel || !nom) { showNotif('Kourel et nom du groupe obligatoires', true); return; }
-  if (!isAdmin() && !isKourelAdmin(kourel)) { showNotif('Accès refusé — seul l\'admin du Kourel peut créer un groupe conservatoire', true); return; }
+  if (!isAdmin() && !isKourelAdmin(kourel)) {
+    showNotif('Accès refusé — seul l\'admin du Kourel peut créer un groupe conservatoire', true); return;
+  }
   const checked = [...document.querySelectorAll('#cv-membres-select input:checked')].map(c => c.value);
   const cvId = 'cv_' + Date.now();
   D().conservatoires.push({
@@ -1523,7 +1552,9 @@ function deleteConservatoire(id) {
 function addMemberToConserv(cvId) {
   const cv = D().conservatoires.find(c => c.id === cvId);
   if (!cv) return;
-  if (!isAdmin() && !isKourelAdmin(cv.kourel)) { showNotif('Seul l\'admin du Kourel peut modifier ce groupe', true); return; }
+  if (!isAdmin() && !isKourelAdmin(cv.kourel)) {
+    showNotif('Seul l\'admin du Kourel peut modifier ce groupe', true); return;
+  }
   const sel = document.getElementById('add-member-sel-'+cvId);
   if (!sel || !sel.value) return;
   if (!cv.membres.includes(sel.value)) {
@@ -1536,7 +1567,9 @@ function addMemberToConserv(cvId) {
 function removeMemberFromConserv(cvId, userId) {
   const cv = D().conservatoires.find(c => c.id === cvId);
   if (!cv) return;
-  if (!isAdmin() && !isKourelAdmin(cv.kourel)) { showNotif('Seul l\'admin du Kourel peut modifier ce groupe', true); return; }
+  if (!isAdmin() && !isKourelAdmin(cv.kourel)) {
+    showNotif('Seul l\'admin du Kourel peut modifier ce groupe', true); return;
+  }
   cv.membres = cv.membres.filter(id => id !== userId);
   renderConservatoires();
 }
@@ -1548,46 +1581,47 @@ function renderConservatoires() {
     return;
   }
   document.getElementById('conservatoires-list').innerHTML = visCV.map(cv => {
-    const cvMembers    = cv.membres.map(uid => D().membres.find(m => (m.userId||'') === uid));
-    const canManage    = isAdmin() || isKourelAdmin(cv.kourel);
-    const kourelMembers = D().membres.filter(m => m.kourel === cv.kourel && !cv.membres.includes(m.userId||''));
+    const cvMembers     = cv.membres.map(uid => D().membres.find(m => m.userId === uid)).filter(Boolean);
+    const canManage     = isAdmin() || isKourelAdmin(cv.kourel);
+    const kourelMembers = D().membres.filter(m => m.kourel === cv.kourel && !cv.membres.includes(m.userId));
     return `
     <div class="conserv-card">
       <div class="conserv-header">
         <div>
-          <div class="conserv-title">🎵 ${cv.nom}</div>
-          <div class="conserv-meta">Kourel: ${cv.kourel}${cv.responsable?' · Resp: '+cv.responsable:''}${cv.xassida?' · '+cv.xassida:''}</div>
+          <div class="conserv-title">🎵 ${escHtml(cv.nom)}</div>
+          <div class="conserv-meta">Kourel: ${escHtml(cv.kourel)}${cv.responsable?' · Resp: '+escHtml(cv.responsable):''}${cv.xassida?' · '+escHtml(cv.xassida):''}</div>
         </div>
         <div style="display:flex;gap:8px;align-items:center">
           <span style="background:var(--green-muted);color:var(--green-dark);border-radius:99px;padding:3px 10px;font-size:11px;font-weight:700">${cv.membres.length} membres</span>
-          ${canManage ? `<button class="btn btn-danger" onclick="deleteConservatoire('${cv.id}')">🗑</button>` : ''}
+          ${canManage ? `<button class="btn btn-danger" onclick="deleteConservatoire('${escAttr(cv.id)}')">🗑</button>` : ''}
         </div>
       </div>
       <div style="margin-bottom:12px">
         <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--text-light);margin-bottom:8px">Membres du groupe</div>
         <div style="display:flex;flex-wrap:wrap">
-          ${cvMembers.map(m => m ? `
+          ${cvMembers.map(m => `
             <div class="member-chip">
-              ${m.prenom} ${m.nom}
-              ${canManage ? `<span class="rm" onclick="removeMemberFromConserv('${cv.id}','${m.userId}')">×</span>` : ''}
-            </div>` : '').join('')}
+              ${escHtml(m.prenom+' '+m.nom)}
+              ${canManage ? `<span class="rm" onclick="removeMemberFromConserv('${escAttr(cv.id)}','${escAttr(m.userId)}')">×</span>` : ''}
+            </div>`).join('')}
           ${!cv.membres.length ? '<span style="color:var(--text-light);font-size:12px;padding:4px">Aucun membre</span>' : ''}
         </div>
       </div>
       ${canManage && kourelMembers.length ? `
         <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-          <select id="add-member-sel-${cv.id}" style="max-width:220px;padding:8px 12px;border-radius:8px;border:1.5px solid var(--border);font-size:12px">
-            ${kourelMembers.map(m => `<option value="${m.userId}">${m.prenom} ${m.nom}</option>`).join('')}
+          <select id="add-member-sel-${escAttr(cv.id)}" style="max-width:220px;padding:8px 12px;border-radius:8px;border:1.5px solid var(--border);font-size:12px">
+            ${kourelMembers.map(m => `<option value="${escAttr(m.userId)}">${escHtml(m.prenom+' '+m.nom)}</option>`).join('')}
           </select>
-          <button class="btn btn-primary" style="font-size:12px;padding:7px 14px" onclick="addMemberToConserv('${cv.id}')">+ Ajouter</button>
+          <button class="btn btn-primary" style="font-size:12px;padding:7px 14px" onclick="addMemberToConserv('${escAttr(cv.id)}')">+ Ajouter</button>
         </div>` : ''}
     </div>`;
   }).join('');
 }
 
 // ══════════════════════════════════════════════════════════════
-// MESSAGERIE PRIVÉE PAR KOUREL
+// MESSAGERIE
 // ══════════════════════════════════════════════════════════════
+// FIX: utiliser des data-attributes au lieu d'inline JS string pour éviter les bugs avec apostrophes
 function renderChatSidebar() {
   const list = document.getElementById('chat-room-list');
   if (!list) return;
@@ -1598,26 +1632,31 @@ function renderChatSidebar() {
     const hasAccess = isAdmin() || myK.includes(k.nom);
     rooms.push({ id: k.nom, name: k.nom, icon: '👥', desc: 'Groupe principal', gold: false, locked: !hasAccess });
   });
-
   D().conservatoires.forEach(cv => {
     const hasAccess = canAccessConserv(cv);
-    rooms.push({ id: cv.id, name: cv.nom, icon: '🎵', desc: 'Conservatoire · ' + cv.kourel, gold: true, locked: !hasAccess });
+    rooms.push({ id: cv.id, name: cv.nom, icon: '🎵', desc: 'Conservatoire · '+cv.kourel, gold: true, locked: !hasAccess });
   });
 
   list.innerHTML = rooms.map(r => `
     <div class="chat-room-item${r.locked?' locked':''}${activeChatRoom===r.id?' active':''}"
-         onclick="${r.locked ? 'showLockedMsg()' : "openChatRoom('"+r.id.replace(/'/g,"\\'")+"')"}">
+         data-room-id="${escAttr(r.id)}"
+         data-locked="${r.locked?'1':'0'}"
+         onclick="handleRoomClick(this)">
       <div class="room-icon${r.gold?' gold':''}">${r.icon}</div>
       <div>
-        <div class="room-name">${r.name}</div>
-        <div class="room-desc">${r.desc}</div>
+        <div class="room-name">${escHtml(r.name)}</div>
+        <div class="room-desc">${escHtml(r.desc)}</div>
       </div>
       ${r.locked ? '<span class="lock-icon">🔒</span>' : ''}
     </div>`).join('') || '<div style="padding:20px;text-align:center;font-size:12px;color:var(--text-light)">Aucun groupe disponible</div>';
 }
 
-function showLockedMsg() {
-  showNotif('Accès refusé — vous n\'êtes pas membre de ce groupe', true);
+function handleRoomClick(el) {
+  if (el.getAttribute('data-locked') === '1') {
+    showNotif('Accès refusé — vous n\'êtes pas membre de ce groupe', true);
+    return;
+  }
+  openChatRoom(el.getAttribute('data-room-id'));
 }
 
 function openChatRoom(roomId) {
@@ -1633,45 +1672,52 @@ function renderChatMain(roomId) {
   const isKourel = D().kourels.some(k => k.nom === roomId);
   const cv       = D().conservatoires.find(c => c.id === roomId);
   const roomName = isKourel ? roomId : (cv ? cv.nom : roomId);
-  const roomDesc = isKourel ? 'Groupe Kourel' : (cv ? 'Conservatoire · ' + cv.kourel : '');
+  const roomDesc = isKourel ? 'Groupe Kourel' : (cv ? 'Conservatoire · '+cv.kourel : '');
 
+  // FIX: utiliser data-attribute pour le roomId dans le bouton d'envoi
   main.innerHTML = `
     <div class="chat-main-header">
       <div class="chat-main-icon">${isKourel ? '👥' : '🎵'}</div>
       <div>
-        <div class="chat-main-title">${roomName}</div>
-        <div class="chat-main-sub">${roomDesc}</div>
+        <div class="chat-main-title">${escHtml(roomName)}</div>
+        <div class="chat-main-sub">${escHtml(roomDesc)}</div>
       </div>
     </div>
-    <div class="chat-messages" id="chat-msgs-${roomId}">
+    <div class="chat-messages" id="chat-msgs-area">
       ${msgs.length ? msgs.map(m => {
         const isMine = m.userId === session.user.id;
         return `<div style="display:flex;flex-direction:column;align-items:${isMine?'flex-end':'flex-start'}">
           <div class="msg-bubble ${isMine?'msg-mine':'msg-other'}">
-            ${!isMine ? `<div class="msg-sender">${m.nom}</div>` : ''}
-            ${m.text}
-            <div class="msg-time">${m.time}</div>
+            ${!isMine ? `<div class="msg-sender">${escHtml(m.nom)}</div>` : ''}
+            ${escHtml(m.text)}
+            <div class="msg-time">${escHtml(m.time)}</div>
           </div>
         </div>`;
       }).join('') : `<div class="chat-empty"><div class="ce-icon">💬</div><p>Aucun message dans ce groupe</p><p style="font-size:12px;margin-top:4px;color:var(--text-light)">Soyez le premier à écrire !</p></div>`}
     </div>
     <div class="chat-input-bar">
-      <textarea id="chat-input-${roomId}" placeholder="Écrire un message…" rows="1"
-        onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChatMsg('${roomId.replace(/'/g,"\\'")}')}"
+      <textarea id="chat-input-field" placeholder="Écrire un message…" rows="1"
+        onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendCurrentMsg()}"
       ></textarea>
-      <button class="chat-send-btn" onclick="sendChatMsg('${roomId.replace(/'/g,"\\'")}')">➤</button>
+      <button class="chat-send-btn" onclick="sendCurrentMsg()">➤</button>
     </div>`;
 
+  // Stocker le roomId actif pour l'envoi
+  main.setAttribute('data-current-room', roomId);
+
   setTimeout(() => {
-    const msgEl = document.getElementById('chat-msgs-'+roomId);
+    const msgEl = document.getElementById('chat-msgs-area');
     if (msgEl) msgEl.scrollTop = msgEl.scrollHeight;
   }, 50);
 }
 
-function sendChatMsg(roomId) {
-  // FIX #5 : ID unique par salon pour éviter les conflits de getElementById
-  const input = document.getElementById('chat-input-'+roomId);
-  if (!input) return;
+// FIX: fonction d'envoi séparée utilisant data-attribute au lieu d'ID dynamique
+function sendCurrentMsg() {
+  const main  = document.getElementById('chat-main');
+  const input = document.getElementById('chat-input-field');
+  if (!main || !input) return;
+  const roomId = main.getAttribute('data-current-room');
+  if (!roomId) return;
   const text = input.value.trim();
   if (!text) return;
   if (!D().messages[roomId]) D().messages[roomId] = [];
@@ -1707,11 +1753,11 @@ function renderRapports() {
   }
 
   document.getElementById('rapport-stats').innerHTML = [
-    { label:'Membres actifs',  value:`${actifs}/${visM.length}`,         color:'var(--green)' },
-    { label:'Adiyeu collectés',value:`${totalCot.toLocaleString()} F`,   color:'var(--orange)' },
-    { label:'Présence moyenne',value:`${tauxPres}%`,                     color:'var(--blue)' },
-    { label:'Kourels actifs',  value:`${visK.filter(k=>k.statut==='Actif').length}/${visK.length}`, color:'var(--purple)' },
-  ].map(s => `<div class="stat-card" style="background:${s.color}"><div class="stat-value" style="font-size:22px">${s.value}</div><div class="stat-label">${s.label}</div></div>`).join('');
+    { label:'Membres actifs',   value:`${actifs}/${visM.length}`,          color:'var(--green)' },
+    { label:'Adiyeu collectés', value:`${totalCot.toLocaleString()} F`,    color:'var(--orange)' },
+    { label:'Présence moyenne', value:`${tauxPres}%`,                      color:'var(--blue)' },
+    { label:'Kourels actifs',   value:`${visK.filter(k=>k.statut==='Actif').length}/${visK.length}`, color:'var(--purple)' },
+  ].map(s => `<div class="stat-card" style="background:${s.color}"><div class="stat-value" style="font-size:22px">${escHtml(s.value)}</div><div class="stat-label">${escHtml(s.label)}</div></div>`).join('');
 
   const types   = ['Répétition','Xam Xam','Programme','Réunion'];
   const tColors = ['var(--green)','var(--blue)','var(--purple)','var(--orange)'];
@@ -1719,24 +1765,26 @@ function renderRapports() {
   document.getElementById('rapport-types').innerHTML = types.map((t,i) => {
     const cnt = visPres.filter(p => p.type === t).length;
     const pct = Math.round(cnt / total * 100);
-    return `<div style="margin-bottom:14px"><div style="display:flex;justify-content:space-between;margin-bottom:5px"><span style="font-size:12px;font-weight:700">${t}</span><span style="font-size:12px;color:var(--text-light)">${cnt}</span></div><div class="rapport-bar-wrap"><div class="rapport-bar" style="width:${pct}%;background:${tColors[i]}"></div></div></div>`;
+    return `<div style="margin-bottom:14px"><div style="display:flex;justify-content:space-between;margin-bottom:5px"><span style="font-size:12px;font-weight:700">${escHtml(t)}</span><span style="font-size:12px;color:var(--text-light)">${cnt}</span></div><div class="rapport-bar-wrap"><div class="rapport-bar" style="width:${pct}%;background:${tColors[i]}"></div></div></div>`;
   }).join('');
 
   document.getElementById('rapport-kourels').innerHTML = visK.map(k => {
     const t = visCots.filter(c => c.kourel===k.nom && c.statut==='Payé').reduce((s,c) => s+c.montant, 0);
-    return `<div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border)"><span style="font-size:12px;font-weight:700">${k.nom}</span><span style="font-size:12px;font-weight:900;color:var(--green)">${t.toLocaleString()} F</span></div>`;
+    return `<div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border)"><span style="font-size:12px;font-weight:700">${escHtml(k.nom)}</span><span style="font-size:12px;font-weight:900;color:var(--green)">${t.toLocaleString()} F</span></div>`;
   }).join('') || '<p style="color:var(--text-light);font-size:12px">Aucun Kourel</p>';
 
   document.getElementById('rapport-presence-detail').innerHTML = visK.map(k => {
     const sessions = visPres.filter(p => p.kourel === k.nom);
-    if (!sessions.length) return `<div style="padding:10px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between"><span style="font-size:12px;font-weight:700">${k.nom}</span><span style="font-size:11px;color:var(--text-light)">Aucune session</span></div>`;
-    let tP=0, tR=0, tA=0;
-    sessions.forEach(s => s.membres.forEach(m => { if(m.statut==='Présent')tP++; else if(m.statut==='Retard')tR++; else tA++; }));
+    if (!sessions.length) return `<div style="padding:10px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between"><span style="font-size:12px;font-weight:700">${escHtml(k.nom)}</span><span style="font-size:11px;color:var(--text-light)">Aucune session</span></div>`;
+    let tP=0,tR=0,tA=0;
+    sessions.forEach(s => s.membres.forEach(m => {
+      if(m.statut==='Présent')tP++; else if(m.statut==='Retard')tR++; else tA++;
+    }));
     const g = tP+tR+tA || 1;
     return `
     <div style="padding:14px 0;border-bottom:1px solid var(--border)">
       <div style="display:flex;justify-content:space-between;margin-bottom:8px">
-        <span style="font-size:13px;font-weight:800">${k.nom}</span>
+        <span style="font-size:13px;font-weight:800">${escHtml(k.nom)}</span>
         <span style="font-size:11px;color:var(--text-light)">${sessions.length} session${sessions.length>1?'s':''}</span>
       </div>
       <div style="display:flex;height:12px;border-radius:99px;overflow:hidden;gap:2px">
@@ -1752,17 +1800,6 @@ function renderRapports() {
     </div>`;
   }).join('') || '<p style="color:var(--text-light);font-size:12px">Aucun Kourel</p>';
 }
-
-// Entrée clavier sur l'écran de connexion
-document.addEventListener('keydown', e => {
-  if (e.key === 'Enter') {
-    const ws = document.getElementById('welcome-screen');
-    if (ws.style.display !== 'none') {
-      const lf = document.getElementById('login-form');
-      if (lf.style.display !== 'none') loginUser();
-    }
-  }
-});
 </script>
 </body>
 </html>
