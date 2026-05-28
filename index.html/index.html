@@ -1,390 +1,209 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>DAARA CONNECT</title>
-<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
-<style>
-:root {
-  --green: #1a7a3c;
-  --green-light: #2ea84f;
-  --green-dark: #0f4c25;
-  --green-muted: #e8f5e8;
-  --orange: #e07b2a;
-  --orange-light: #f0953d;
-  --blue: #2563eb;
-  --purple: #7c3aed;
-  --gold: #c5992a;
-  --bg: #f2f7f2;
-  --card: #ffffff;
-  --text: #1a2e1a;
-  --text-light: #5a7a5a;
-  --border: #d0e4d0;
-  --shadow: 0 2px 20px rgba(15,76,37,0.08);
-  --shadow-lg: 0 8px 40px rgba(15,76,37,0.15);
-}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
-
-#welcome-screen{
-  min-height:100vh;display:flex;align-items:center;justify-content:center;
-  background:linear-gradient(160deg,#062617 0%,#0f4c25 40%,#1a7a3c 100%);
-  position:relative;overflow:hidden;
-}
-.bg-pattern{
-  position:absolute;inset:0;
-  background-image:
-    radial-gradient(circle at 20% 50%, rgba(46,168,79,0.15) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(197,153,42,0.1) 0%, transparent 40%),
-    radial-gradient(circle at 60% 80%, rgba(46,168,79,0.08) 0%, transparent 35%);
-}
-.geo-lines{
-  position:absolute;inset:0;
-  background-image:
-    repeating-linear-gradient(0deg,transparent,transparent 60px,rgba(255,255,255,0.02) 60px,rgba(255,255,255,0.02) 61px),
-    repeating-linear-gradient(90deg,transparent,transparent 60px,rgba(255,255,255,0.02) 60px,rgba(255,255,255,0.02) 61px);
-}
-.floating-orb{position:absolute;border-radius:50%;filter:blur(40px);animation:orbFloat 12s ease-in-out infinite;}
-.orb1{width:400px;height:400px;background:rgba(46,168,79,0.12);top:-100px;right:-100px;animation-delay:0s;}
-.orb2{width:300px;height:300px;background:rgba(197,153,42,0.08);bottom:-50px;left:-80px;animation-delay:4s;}
-.orb3{width:200px;height:200px;background:rgba(46,168,79,0.1);top:40%;left:20%;animation-delay:8s;}
-@keyframes orbFloat{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-30px) rotate(5deg)}}
-
-.welcome-card{
-  background:rgba(255,255,255,0.97);border-radius:28px;padding:52px 48px;
-  width:100%;max-width:520px;position:relative;z-index:10;
-  box-shadow:0 40px 100px rgba(0,0,0,0.4),0 0 0 1px rgba(255,255,255,0.1);
-  animation:cardReveal .7s cubic-bezier(.22,1,.36,1) both;
-}
-@keyframes cardReveal{from{opacity:0;transform:translateY(50px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
-
-.brand{text-align:center;margin-bottom:40px}
-.mosque-icon{
-  width:80px;height:80px;background:linear-gradient(135deg,var(--green-dark),var(--green));
-  border-radius:24px;display:inline-flex;align-items:center;justify-content:center;
-  font-size:40px;margin-bottom:16px;
-  box-shadow:0 12px 32px rgba(15,76,37,0.4);
-  animation:iconPulse 3s ease-in-out infinite;
-}
-@keyframes iconPulse{0%,100%{transform:scale(1) rotate(0deg)}50%{transform:scale(1.06) rotate(-2deg)}}
-.brand h1{font-family:'Amiri',serif;font-size:34px;color:var(--green-dark);letter-spacing:3px;font-weight:700}
-.brand .tagline{font-size:13px;color:var(--text-light);margin-top:6px;font-weight:500;letter-spacing:.5px}
-.divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:0 auto 36px;}
-
-.search-phase{animation:fadeIn .4s ease}
-.search-phase h2{font-size:17px;font-weight:800;color:var(--green-dark);margin-bottom:6px}
-.search-phase p{font-size:13px;color:var(--text-light);margin-bottom:20px}
-.search-wrap{position:relative;margin-bottom:16px}
-.search-wrap input{
-  width:100%;padding:16px 20px 16px 52px;border-radius:14px;
-  border:2px solid var(--border);font-size:15px;
-  font-family:'Plus Jakarta Sans',sans-serif;color:var(--text);
-  outline:none;background:#f8fbf8;transition:all .2s;
-}
-.search-wrap input:focus{border-color:var(--green);box-shadow:0 0 0 4px rgba(26,122,60,.1);background:#fff}
-.search-wrap .icon{position:absolute;left:18px;top:50%;transform:translateY(-50%);font-size:20px}
-.daara-results{border:1.5px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:20px;display:none}
-.daara-result-item{
-  padding:16px 20px;cursor:pointer;transition:background .15s;
-  border-bottom:1px solid var(--border);display:flex;align-items:center;gap:14px;
-}
-.daara-result-item:last-child{border-bottom:none}
-.daara-result-item:hover{background:#f4faf4}
-.daara-result-item.selected{background:var(--green-muted)}
-.dr-icon{
-  width:44px;height:44px;border-radius:12px;
-  background:linear-gradient(135deg,var(--green-dark),var(--green));
-  display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;
-}
-.dr-info h4{font-size:14px;font-weight:800;color:var(--text)}
-.dr-info p{font-size:12px;color:var(--text-light);margin-top:2px}
-.dr-badge{
-  margin-left:auto;padding:3px 10px;border-radius:99px;font-size:11px;font-weight:700;
-  background:var(--green-muted);color:var(--green-dark);
-}
-.or-divider{text-align:center;font-size:12px;color:var(--text-light);margin:16px 0;font-weight:600;letter-spacing:1px}
-.new-daara-btn{
-  width:100%;padding:14px;border:2px dashed var(--border);border-radius:14px;
-  background:transparent;color:var(--text-light);font-size:14px;font-weight:700;
-  cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:all .2s;
-}
-.new-daara-btn:hover{border-color:var(--green);color:var(--green);background:var(--green-muted)}
-
-.create-phase{display:none;animation:fadeIn .4s ease}
-@keyframes fadeIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
-.back-btn{
-  background:none;border:none;color:var(--text-light);font-size:13px;font-weight:700;
-  cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;margin-bottom:20px;
-  display:flex;align-items:center;gap:6px;transition:color .2s;
-}
-.back-btn:hover{color:var(--green)}
-
-.fl{margin-bottom:18px}
-.fl label{display:block;font-size:11px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--green-dark);margin-bottom:8px}
-.fl input,.fl select{
-  width:100%;padding:14px 18px;border-radius:12px;border:2px solid var(--border);
-  font-size:14px;font-family:'Plus Jakarta Sans',sans-serif;color:var(--text);
-  outline:none;background:#f8fbf8;transition:all .2s;
-}
-.fl input:focus,.fl select:focus{border-color:var(--green);box-shadow:0 0 0 4px rgba(26,122,60,.1);background:#fff}
-.fl input::placeholder{color:#aac5aa}
-.err{color:#dc2626;font-size:11px;margin-top:5px;font-weight:600;display:none}
-
-.cta-btn{
-  width:100%;padding:17px;background:linear-gradient(135deg,var(--green-dark),var(--green));
-  color:#fff;border:none;border-radius:14px;font-size:15px;font-weight:800;
-  font-family:'Plus Jakarta Sans',sans-serif;cursor:pointer;
-  box-shadow:0 8px 28px rgba(15,76,37,.35);transition:all .2s;margin-top:8px;
-}
-.cta-btn:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(15,76,37,.45)}
-.cta-btn:active{transform:translateY(0)}
-
-/* ── MAIN APP ── */
-#app{display:none}
-
-.header{
-  background:linear-gradient(135deg,var(--green-dark) 0%,var(--green) 100%);
-  color:#fff;padding:0;position:sticky;top:0;z-index:100;
-  box-shadow:0 4px 24px rgba(15,76,37,.3);
-}
-.header-top{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 28px;height:64px;
-}
-.header-logo{display:flex;align-items:center;gap:12px}
-.logo-icon{width:38px;height:38px;background:rgba(255,255,255,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;}
-.logo-text{font-family:'Amiri',serif;font-size:22px;letter-spacing:2px;font-weight:700}
-.header-center{text-align:center}
-.hdr-daara{font-size:15px;font-weight:800;letter-spacing:.5px}
-.hdr-meta{font-size:11px;opacity:.8;margin-top:2px}
-.header-right{display:flex;align-items:center;gap:12px}
-.hdr-user{
-  display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);
-  border-radius:10px;padding:6px 14px;font-size:13px;font-weight:700;cursor:pointer;transition:background .2s;
-}
-.hdr-user:hover{background:rgba(255,255,255,.2)}
-.user-avatar{width:28px;height:28px;background:rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;}
-.hdr-switch{background:rgba(255,255,255,.12);border:none;border-radius:8px;padding:6px 14px;color:#fff;font-size:12px;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:background .2s;}
-.hdr-switch:hover{background:rgba(255,255,255,.2)}
-
-nav{display:flex;gap:1px;overflow-x:auto;padding:0 20px;border-top:1px solid rgba(255,255,255,.1)}
-nav::-webkit-scrollbar{display:none}
-.nav-btn{
-  background:transparent;color:rgba(255,255,255,.8);border:none;
-  border-bottom:3px solid transparent;padding:11px 15px;cursor:pointer;
-  font-weight:600;font-size:13px;font-family:'Plus Jakarta Sans',sans-serif;
-  white-space:nowrap;transition:all .2s;
-}
-.nav-btn.active{color:#fff;border-bottom-color:#fff;font-weight:800;background:rgba(255,255,255,.1)}
-.nav-btn:hover:not(.active){color:#fff;background:rgba(255,255,255,.06)}
-
-.role-badge{padding:4px 10px;border-radius:99px;font-size:11px;font-weight:800;background:rgba(255,255,255,.18);color:#fff;}
-
-.content{max-width:1100px;margin:0 auto;padding:28px 22px}
-.page-title{font-size:24px;font-weight:900;color:var(--text);margin-bottom:22px}
-
-.card{background:var(--card);border-radius:18px;padding:24px;box-shadow:var(--shadow)}
-.card h3{font-size:15px;font-weight:800;margin-bottom:16px;color:var(--text)}
-
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:26px}
-.stat-card{border-radius:18px;padding:22px 18px;color:#fff;box-shadow:0 6px 24px rgba(0,0,0,.15);position:relative;overflow:hidden;}
-.stat-card::after{content:'';position:absolute;bottom:-15px;right:-15px;width:70px;height:70px;border-radius:50%;background:rgba(255,255,255,.12);}
-.stat-icon{font-size:26px;margin-bottom:8px}
-.stat-value{font-size:30px;font-weight:900}
-.stat-label{font-size:11px;opacity:.88;margin-top:3px;font-weight:500}
-
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-
-.badge{padding:3px 11px;border-radius:99px;font-size:11px;font-weight:700}
-.badge.actif,.badge.payé{background:#dcfce7;color:#166534}
-.badge.inactif,.badge.attente{background:#fee2e2;color:#991b1b}
-.badge.admin{background:#fef3c7;color:#92400e}
-.badge.membre{background:var(--green-muted);color:var(--green-dark)}
-
-.table-wrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse}
-th{background:var(--green);color:#fff;padding:13px 16px;text-align:left;font-size:12px;font-weight:700}
-th:first-child{border-radius:8px 0 0 0}
-th:last-child{border-radius:0 8px 0 0}
-td{padding:11px 16px;font-size:13px;border-bottom:1px solid var(--border)}
-tr:nth-child(even) td{background:#f7fbf7}
-tr:hover td{background:#edf7ed}
-
-.form-box{background:#f4faf4;border-radius:16px;padding:24px;margin-bottom:22px;border:1.5px solid var(--border);animation:fadeIn .3s ease;}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.form-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
-input[type=text],input[type=number],input[type=date],input[type=time],
-input[type=tel],input[type=password],select,textarea{
-  width:100%;padding:11px 14px;border-radius:10px;border:1.5px solid var(--border);
-  font-size:13px;font-family:'Plus Jakarta Sans',sans-serif;color:var(--text);
-  outline:none;transition:all .2s;background:#fff;
-}
-input:focus,select:focus,textarea:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(26,122,60,.1)}
-
-.btn{padding:9px 20px;border-radius:10px;border:none;cursor:pointer;font-weight:700;font-size:13px;font-family:'Plus Jakarta Sans',sans-serif;transition:all .15s}
-.btn:hover{transform:translateY(-1px)}
-.btn-primary{background:var(--green);color:#fff;box-shadow:0 4px 14px rgba(26,122,60,.25)}
-.btn-secondary{background:var(--green-muted);color:var(--green-dark)}
-.btn-danger{background:#fee2e2;color:#991b1b;font-size:12px;padding:6px 12px}
-.btn-success{background:var(--green);color:#fff;font-size:12px;padding:6px 12px}
-.btn-gold{background:linear-gradient(135deg,#c5992a,#e0b840);color:#fff;font-size:12px;padding:6px 14px}
-.btn-row{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
-
-.add-btn{
-  background:linear-gradient(135deg,var(--green-dark),var(--green));color:#fff;
-  border:none;border-radius:12px;padding:11px 22px;font-weight:800;font-size:13px;
-  cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;
-  box-shadow:0 4px 16px rgba(26,122,60,.3);transition:all .15s;
-}
-.add-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(26,122,60,.4)}
-
-.search-box{
-  width:100%;padding:13px 18px;border-radius:12px;border:2px solid var(--border);
-  font-size:13px;font-family:'Plus Jakarta Sans',sans-serif;outline:none;
-  margin-bottom:18px;transition:all .2s;background:#fff;
-}
-.search-box:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(26,122,60,.08)}
-
-.form-section-title{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.2px;color:var(--green-dark);margin:16px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--border);}
-
-.kourel-card{background:var(--card);border-radius:18px;padding:22px;box-shadow:var(--shadow);border-top:4px solid var(--green);transition:transform .2s,box-shadow .2s;}
-.kourel-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
-
-.programme-card{background:var(--card);border-radius:18px;padding:22px;box-shadow:var(--shadow);border-left:5px solid var(--green);margin-bottom:14px;transition:all .2s;}
-.programme-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
-.prog-info-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:12px}
-.prog-info-item{background:#f4faf4;border-radius:10px;padding:10px 14px;border:1px solid var(--border)}
-.prog-info-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--text-light);margin-bottom:4px}
-.prog-info-value{font-size:13px;font-weight:700;color:var(--text)}
-.jour-badge{background:var(--green);color:#fff;border-radius:8px;padding:4px 12px;font-size:11px;font-weight:800;display:inline-block}
-
-.presence-session-card{background:var(--card);border-radius:18px;margin-bottom:18px;box-shadow:var(--shadow);overflow:hidden}
-.presence-session-header{background:linear-gradient(135deg,var(--green-dark),var(--green));color:#fff;padding:18px 24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
-.presence-session-title{font-size:15px;font-weight:800}
-.presence-session-meta{font-size:12px;opacity:.88}
-.presence-stats-row{display:flex;gap:14px;padding:14px 24px;background:#f4faf4;border-bottom:1px solid var(--border);flex-wrap:wrap;align-items:center}
-.pstat{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:700}
-.pstat-dot{width:10px;height:10px;border-radius:50%}
-.pstat-present{background:#16a34a}.pstat-retard{background:#d97706}.pstat-absent{background:#dc2626}
-.membre-presence-row{display:flex;align-items:center;padding:12px 24px;border-bottom:1px solid var(--border);gap:14px}
-.membre-presence-row:last-child{border-bottom:none}
-.membre-presence-name{flex:1;font-weight:700;font-size:13px}
-.status-group{display:flex;gap:5px}
-.status-btn{padding:5px 12px;border-radius:99px;border:2px solid transparent;cursor:pointer;font-size:11px;font-weight:800;font-family:'Plus Jakarta Sans',sans-serif;transition:all .15s;background:#f0f0f0;color:#666;}
-.status-btn.present.selected{background:#dcfce7;border-color:#16a34a;color:#166534}
-.status-btn.retard.selected{background:#fef3c7;border-color:#d97706;color:#92400e}
-.status-btn.absent.selected{background:#fee2e2;border-color:#dc2626;color:#991b1b}
-.status-btn:hover{transform:scale(1.05)}
-.retard-input{width:55px;padding:4px 8px;border-radius:8px;border:1.5px solid var(--border);font-size:11px;font-family:'Plus Jakarta Sans',sans-serif;display:none}
-.retard-input.visible{display:block}
-
-.audio-player{background:linear-gradient(135deg,#0f4c25,#1a7a3c);border-radius:12px;padding:10px 14px;display:flex;align-items:center;gap:10px;margin-top:10px}
-.audio-player audio{flex:1;height:30px;accent-color:var(--green-light)}
-.audio-label{color:rgba(255,255,255,.9);font-size:11px;font-weight:700;white-space:nowrap}
-.audio-upload-zone{border:2px dashed var(--border);border-radius:12px;padding:18px;text-align:center;cursor:pointer;transition:all .2s;background:#f8fbf8}
-.audio-upload-zone:hover{border-color:var(--green);background:#f0f7f0}
-.audio-upload-zone input{display:none}
-.audio-upload-zone .upload-icon{font-size:24px;margin-bottom:6px}
-.audio-upload-zone p{font-size:12px;color:var(--text-light)}
-
-.tol-btn{padding:7px 14px;border-radius:99px;border:2px solid var(--border);cursor:pointer;font-size:12px;font-weight:700;font-family:'Plus Jakarta Sans',sans-serif;background:#fff;color:var(--text-light);transition:all .15px}
-.tol-btn.selected{background:var(--green);border-color:var(--green);color:#fff}
-
-.filter-bar{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap}
-.filter-btn{padding:7px 16px;border-radius:99px;border:2px solid var(--border);cursor:pointer;font-size:12px;font-weight:700;font-family:'Plus Jakarta Sans',sans-serif;background:#fff;color:var(--text-light);transition:all .15s}
-.filter-btn.active{background:var(--green);border-color:var(--green);color:#fff}
-
-.msg-card{background:var(--card);border-radius:14px;padding:16px;margin-bottom:10px;box-shadow:0 2px 8px rgba(0,0,0,.06);border-left:4px solid var(--green)}
-.msg-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--green-dark),var(--green));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;flex-shrink:0}
-
-.conserv-card{background:var(--card);border-radius:18px;padding:22px;box-shadow:var(--shadow);margin-bottom:16px;border-left:5px solid var(--gold)}
-.conserv-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px}
-.conserv-title{font-size:17px;font-weight:900;color:var(--text)}
-.conserv-meta{font-size:12px;color:var(--text-light);margin-top:3px}
-.member-chip{display:inline-flex;align-items:center;gap:6px;background:var(--green-muted);border-radius:99px;padding:5px 12px;font-size:12px;font-weight:700;color:var(--green-dark);margin:3px;}
-.member-chip .rm{cursor:pointer;color:var(--green);font-weight:900;font-size:14px;margin-left:2px}
-.member-chip .rm:hover{color:#dc2626}
-
-.chat-container{display:flex;gap:18px;height:600px}
-.chat-sidebar{width:240px;flex-shrink:0;background:var(--card);border-radius:18px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
-.chat-sidebar-header{background:linear-gradient(135deg,var(--green-dark),var(--green));padding:16px;color:#fff}
-.chat-sidebar-title{font-size:14px;font-weight:800}
-.chat-sidebar-sub{font-size:11px;opacity:.8;margin-top:2px}
-.chat-room-list{overflow-y:auto;flex:1}
-.chat-room-item{padding:13px 16px;cursor:pointer;border-bottom:1px solid var(--border);transition:background .15s;display:flex;align-items:center;gap:10px;}
-.chat-room-item:hover{background:#f4faf4}
-.chat-room-item.active{background:var(--green-muted)}
-.chat-room-item.locked{opacity:.5;cursor:not-allowed}
-.room-icon{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--green-dark),var(--green));display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
-.room-icon.gold{background:linear-gradient(135deg,#92400e,#c5992a)}
-.room-name{font-size:13px;font-weight:700}
-.room-desc{font-size:11px;color:var(--text-light);margin-top:1px}
-.lock-icon{margin-left:auto;font-size:14px;opacity:.5}
-
-.chat-main{flex:1;background:var(--card);border-radius:18px;box-shadow:var(--shadow);display:flex;flex-direction:column;overflow:hidden}
-.chat-main-header{background:linear-gradient(135deg,var(--green-dark),var(--green));padding:16px 20px;color:#fff;display:flex;align-items:center;gap:12px}
-.chat-main-icon{width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:18px}
-.chat-main-title{font-size:15px;font-weight:800}
-.chat-main-sub{font-size:11px;opacity:.8;margin-top:1px}
-.chat-messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;background:#fafcfa}
-.chat-empty{text-align:center;padding:40px;color:var(--text-light)}
-.chat-empty .ce-icon{font-size:40px;margin-bottom:10px}
-.chat-empty p{font-size:13px;font-weight:600}
-.msg-bubble{max-width:75%;padding:10px 14px;border-radius:14px;font-size:13px;line-height:1.5;position:relative}
-.msg-mine{background:linear-gradient(135deg,var(--green-dark),var(--green));color:#fff;border-bottom-right-radius:4px;align-self:flex-end}
-.msg-other{background:#fff;color:var(--text);border:1px solid var(--border);border-bottom-left-radius:4px;align-self:flex-start}
-.msg-sender{font-size:10px;font-weight:800;opacity:.7;margin-bottom:4px}
-.msg-time{font-size:10px;opacity:.6;margin-top:3px;text-align:right}
-.chat-input-bar{padding:14px 16px;border-top:1px solid var(--border);display:flex;gap:10px;align-items:flex-end}
-.chat-input-bar textarea{flex:1;resize:none;max-height:100px;padding:10px 14px;border-radius:12px;border:1.5px solid var(--border);font-size:13px;font-family:'Plus Jakarta Sans',sans-serif;outline:none;transition:border-color .2s}
-.chat-input-bar textarea:focus{border-color:var(--green)}
-.chat-send-btn{width:40px;height:40px;border-radius:12px;border:none;cursor:pointer;background:linear-gradient(135deg,var(--green-dark),var(--green));color:#fff;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s;box-shadow:0 4px 12px rgba(26,122,60,.3);}
-.chat-send-btn:hover{transform:scale(1.08)}
-.chat-locked-overlay{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#f4faf4;}
-.chat-locked-overlay .lock-big{font-size:48px;margin-bottom:14px}
-.chat-locked-overlay h3{font-size:16px;font-weight:800;color:var(--text);margin-bottom:8px}
-.chat-locked-overlay p{font-size:13px;color:var(--text-light);text-align:center;max-width:280px;line-height:1.5}
-
-.rapport-bar-wrap{background:#e0f0e0;border-radius:99px;height:10px;flex:1}
-.rapport-bar{height:10px;border-radius:99px;transition:width .6s ease}
-
-.notif{position:fixed;bottom:20px;right:20px;z-index:9999;background:linear-gradient(135deg,var(--green-dark),var(--green));color:#fff;border-radius:14px;padding:14px 20px;font-size:13px;font-weight:700;box-shadow:0 8px 28px rgba(15,76,37,.4);max-width:300px;animation:notifIn .3s cubic-bezier(.22,1,.36,1) both;}
-@keyframes notifIn{from{opacity:0;transform:translateY(20px) scale(.9)}to{opacity:1;transform:translateY(0) scale(1)}}
-.notif-err{background:linear-gradient(135deg,#991b1b,#dc2626)}
-
-.page{display:none}
-.page.active{display:block}
-
-.info-box{background:linear-gradient(135deg,#fef9ee,#fef3c7);border:1.5px solid #fde68a;border-radius:12px;padding:14px 18px;font-size:13px;color:#92400e;font-weight:600;margin-bottom:18px;display:flex;align-items:flex-start;gap:10px;}
-
-@media(max-width:700px){
-  .stats-grid{grid-template-columns:1fr 1fr}
-  .two-col{grid-template-columns:1fr}
-  .form-grid{grid-template-columns:1fr}
-  .form-grid-3{grid-template-columns:1fr}
-  .content{padding:16px 12px}
-  .header-top{padding:0 14px}
-  .chat-container{flex-direction:column;height:auto}
-  .chat-sidebar{width:100%;height:200px}
-  .chat-main{height:400px}
-}
-@media(max-width:480px){
-  .stats-grid{grid-template-columns:1fr}
-  .welcome-card{padding:32px 20px}
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DAARA CONNECT</title>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --green: #1a7a3c; --green-light: #2ea84f; --green-dark: #0f4c25;
+      --green-muted: #e8f5e8; --orange: #e07b2a; --orange-light: #f0953d;
+      --blue: #2563eb; --purple: #7c3aed; --gold: #c5992a;
+      --bg: #f2f7f2; --card: #ffffff; --text: #1a2e1a;
+      --text-light: #5a7a5a; --border: #d0e4d0;
+      --shadow: 0 2px 20px rgba(15,76,37,.08);
+      --shadow-lg: 0 8px 40px rgba(15,76,37,.15);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+    #welcome-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(160deg,#062617 0%,#0f4c25 40%,#1a7a3c 100%);position:relative;overflow:hidden}
+    .bg-pattern{position:absolute;inset:0;background-image:radial-gradient(circle at 20% 50%,rgba(46,168,79,.15) 0%,transparent 50%),radial-gradient(circle at 80% 20%,rgba(197,153,42,.1) 0%,transparent 40%),radial-gradient(circle at 60% 80%,rgba(46,168,79,.08) 0%,transparent 35%)}
+    .geo-lines{position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,transparent,transparent 60px,rgba(255,255,255,.02) 60px,rgba(255,255,255,.02) 61px),repeating-linear-gradient(90deg,transparent,transparent 60px,rgba(255,255,255,.02) 60px,rgba(255,255,255,.02) 61px)}
+    .floating-orb{position:absolute;border-radius:50%;filter:blur(40px);animation:orbFloat 12s ease-in-out infinite}
+    .orb1{width:400px;height:400px;background:rgba(46,168,79,.12);top:-100px;right:-100px;animation-delay:0s}
+    .orb2{width:300px;height:300px;background:rgba(197,153,42,.08);bottom:-50px;left:-80px;animation-delay:4s}
+    .orb3{width:200px;height:200px;background:rgba(46,168,79,.1);top:40%;left:20%;animation-delay:8s}
+    @keyframes orbFloat{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-30px) rotate(5deg)}}
+    .welcome-card{background:rgba(255,255,255,.97);border-radius:28px;padding:52px 48px;width:100%;max-width:520px;position:relative;z-index:10;box-shadow:0 40px 100px rgba(0,0,0,.4),0 0 0 1px rgba(255,255,255,.1);animation:cardReveal .7s cubic-bezier(.22,1,.36,1) both}
+    @keyframes cardReveal{from{opacity:0;transform:translateY(50px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+    .brand{text-align:center;margin-bottom:40px}
+    .mosque-icon{width:80px;height:80px;background:linear-gradient(135deg,var(--green-dark),var(--green));border-radius:24px;display:inline-flex;align-items:center;justify-content:center;font-size:40px;margin-bottom:16px;box-shadow:0 12px 32px rgba(15,76,37,.4);animation:iconPulse 3s ease-in-out infinite}
+    @keyframes iconPulse{0%,100%{transform:scale(1) rotate(0deg)}50%{transform:scale(1.06) rotate(-2deg)}}
+    .brand h1{font-family:'Amiri',serif;font-size:34px;color:var(--green-dark);letter-spacing:3px;font-weight:700}
+    .brand .tagline{font-size:13px;color:var(--text-light);margin-top:6px;font-weight:500;letter-spacing:.5px}
+    .divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:0 auto 36px}
+    .search-phase{animation:fadeIn .4s ease}
+    .search-phase h2{font-size:17px;font-weight:800;color:var(--green-dark);margin-bottom:6px}
+    .search-phase p{font-size:13px;color:var(--text-light);margin-bottom:20px}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+    .create-phase{display:none;animation:fadeIn .4s ease}
+    .back-btn{background:none;border:none;color:var(--text-light);font-size:13px;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;margin-bottom:20px;display:flex;align-items:center;gap:6px;transition:color .2s}
+    .back-btn:hover{color:var(--green)}
+    .fl{margin-bottom:18px}
+    .fl label{display:block;font-size:11px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--green-dark);margin-bottom:8px}
+    .fl input,.fl select{width:100%;padding:14px 18px;border-radius:12px;border:2px solid var(--border);font-size:14px;font-family:'Plus Jakarta Sans',sans-serif;color:var(--text);outline:none;background:#f8fbf8;transition:all .2s}
+    .fl input:focus,.fl select:focus{border-color:var(--green);box-shadow:0 0 0 4px rgba(26,122,60,.1);background:#fff}
+    .fl input::placeholder{color:#aac5aa}
+    .err{color:#dc2626;font-size:11px;margin-top:5px;font-weight:600;display:none}
+    .or-divider{text-align:center;font-size:12px;color:var(--text-light);margin:16px 0;font-weight:600;letter-spacing:1px}
+    .new-daara-btn{width:100%;padding:14px;border:2px dashed var(--border);border-radius:14px;background:transparent;color:var(--text-light);font-size:14px;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:all .2s}
+    .new-daara-btn:hover{border-color:var(--green);color:var(--green);background:var(--green-muted)}
+    .cta-btn{width:100%;padding:17px;background:linear-gradient(135deg,var(--green-dark),var(--green));color:#fff;border:none;border-radius:14px;font-size:15px;font-weight:800;font-family:'Plus Jakarta Sans',sans-serif;cursor:pointer;box-shadow:0 8px 28px rgba(15,76,37,.35);transition:all .2s;margin-top:8px}
+    .cta-btn:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(15,76,37,.45)}
+    .cta-btn:active{transform:translateY(0)}
+    .cta-btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
+    #app{display:none}
+    .header{background:linear-gradient(135deg,var(--green-dark) 0%,var(--green) 100%);color:#fff;padding:0;position:sticky;top:0;z-index:100;box-shadow:0 4px 24px rgba(15,76,37,.3)}
+    .header-top{display:flex;align-items:center;justify-content:space-between;padding:0 28px;height:64px}
+    .header-logo{display:flex;align-items:center;gap:12px}
+    .logo-icon{width:38px;height:38px;background:rgba(255,255,255,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px}
+    .logo-text{font-family:'Amiri',serif;font-size:22px;letter-spacing:2px;font-weight:700}
+    .header-center{text-align:center}
+    .hdr-daara{font-size:15px;font-weight:800;letter-spacing:.5px}
+    .hdr-meta{font-size:11px;opacity:.8;margin-top:2px}
+    .header-right{display:flex;align-items:center;gap:12px}
+    .hdr-user{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border-radius:10px;padding:6px 14px;font-size:13px;font-weight:700}
+    .user-avatar{width:28px;height:28px;background:rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900}
+    .hdr-switch{background:rgba(255,255,255,.12);border:none;border-radius:8px;padding:6px 14px;color:#fff;font-size:12px;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:background .2s}
+    .hdr-switch:hover{background:rgba(255,255,255,.2)}
+    nav{display:flex;gap:1px;overflow-x:auto;padding:0 20px;border-top:1px solid rgba(255,255,255,.1)}
+    nav::-webkit-scrollbar{display:none}
+    .nav-btn{background:transparent;color:rgba(255,255,255,.8);border:none;border-bottom:3px solid transparent;padding:11px 15px;cursor:pointer;font-weight:600;font-size:13px;font-family:'Plus Jakarta Sans',sans-serif;white-space:nowrap;transition:all .2s}
+    .nav-btn.active{color:#fff;border-bottom-color:#fff;font-weight:800;background:rgba(255,255,255,.1)}
+    .nav-btn:hover:not(.active){color:#fff;background:rgba(255,255,255,.06)}
+    .role-badge{padding:4px 10px;border-radius:99px;font-size:11px;font-weight:800;background:rgba(255,255,255,.18);color:#fff}
+    .content{max-width:1100px;margin:0 auto;padding:28px 22px}
+    .page-title{font-size:24px;font-weight:900;color:var(--text);margin-bottom:22px}
+    .card{background:var(--card);border-radius:18px;padding:24px;box-shadow:var(--shadow)}
+    .card h3{font-size:15px;font-weight:800;margin-bottom:16px;color:var(--text)}
+    .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:26px}
+    .stat-card{border-radius:18px;padding:22px 18px;color:#fff;box-shadow:0 6px 24px rgba(0,0,0,.15);position:relative;overflow:hidden}
+    .stat-card::after{content:'';position:absolute;bottom:-15px;right:-15px;width:70px;height:70px;border-radius:50%;background:rgba(255,255,255,.12)}
+    .stat-icon{font-size:26px;margin-bottom:8px}
+    .stat-value{font-size:30px;font-weight:900}
+    .stat-label{font-size:11px;opacity:.88;margin-top:3px;font-weight:500}
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .badge{padding:3px 11px;border-radius:99px;font-size:11px;font-weight:700}
+    .badge.actif,.badge.payé{background:#dcfce7;color:#166534}
+    .badge.inactif,.badge.attente{background:#fee2e2;color:#991b1b}
+    .badge.admin{background:#fef3c7;color:#92400e}
+    .badge.membre{background:var(--green-muted);color:var(--green-dark)}
+    .table-wrap{overflow-x:auto}
+    table{width:100%;border-collapse:collapse}
+    th{background:var(--green);color:#fff;padding:13px 16px;text-align:left;font-size:12px;font-weight:700}
+    th:first-child{border-radius:8px 0 0 0}
+    th:last-child{border-radius:0 8px 0 0}
+    td{padding:11px 16px;font-size:13px;border-bottom:1px solid var(--border)}
+    tr:nth-child(even) td{background:#f7fbf7}
+    tr:hover td{background:#edf7ed}
+    .form-box{background:#f4faf4;border-radius:16px;padding:24px;margin-bottom:22px;border:1.5px solid var(--border);animation:fadeIn .3s ease}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    input[type=text],input[type=number],input[type=date],input[type=time],input[type=tel],input[type=password],select,textarea{width:100%;padding:11px 14px;border-radius:10px;border:1.5px solid var(--border);font-size:13px;font-family:'Plus Jakarta Sans',sans-serif;color:var(--text);outline:none;transition:all .2s;background:#fff}
+    input:focus,select:focus,textarea:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(26,122,60,.1)}
+    .btn{padding:9px 20px;border-radius:10px;border:none;cursor:pointer;font-weight:700;font-size:13px;font-family:'Plus Jakarta Sans',sans-serif;transition:all .15s}
+    .btn:hover{transform:translateY(-1px)}
+    .btn-primary{background:var(--green);color:#fff;box-shadow:0 4px 14px rgba(26,122,60,.25)}
+    .btn-secondary{background:var(--green-muted);color:var(--green-dark)}
+    .btn-danger{background:#fee2e2;color:#991b1b;font-size:12px;padding:6px 12px}
+    .btn-success{background:var(--green);color:#fff;font-size:12px;padding:6px 12px}
+    .btn-row{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+    .add-btn{background:linear-gradient(135deg,var(--green-dark),var(--green));color:#fff;border:none;border-radius:12px;padding:11px 22px;font-weight:800;font-size:13px;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;box-shadow:0 4px 16px rgba(26,122,60,.3);transition:all .15s}
+    .add-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(26,122,60,.4)}
+    .search-box{width:100%;padding:13px 18px;border-radius:12px;border:2px solid var(--border);font-size:13px;font-family:'Plus Jakarta Sans',sans-serif;outline:none;margin-bottom:18px;transition:all .2s;background:#fff}
+    .search-box:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(26,122,60,.08)}
+    .form-section-title{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.2px;color:var(--green-dark);margin:16px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--border)}
+    .kourel-card{background:var(--card);border-radius:18px;padding:22px;box-shadow:var(--shadow);border-top:4px solid var(--green);transition:transform .2s,box-shadow .2s}
+    .kourel-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+    .programme-card{background:var(--card);border-radius:18px;padding:22px;box-shadow:var(--shadow);border-left:5px solid var(--green);margin-bottom:14px;transition:all .2s}
+    .programme-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+    .prog-info-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:12px}
+    .prog-info-item{background:#f4faf4;border-radius:10px;padding:10px 14px;border:1px solid var(--border)}
+    .prog-info-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--text-light);margin-bottom:4px}
+    .prog-info-value{font-size:13px;font-weight:700;color:var(--text)}
+    .jour-badge{background:var(--green);color:#fff;border-radius:8px;padding:4px 12px;font-size:11px;font-weight:800;display:inline-block}
+    .presence-session-card{background:var(--card);border-radius:18px;margin-bottom:18px;box-shadow:var(--shadow);overflow:hidden}
+    .presence-session-header{background:linear-gradient(135deg,var(--green-dark),var(--green));color:#fff;padding:18px 24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+    .presence-session-title{font-size:15px;font-weight:800}
+    .presence-session-meta{font-size:12px;opacity:.88}
+    .presence-stats-row{display:flex;gap:14px;padding:14px 24px;background:#f4faf4;border-bottom:1px solid var(--border);flex-wrap:wrap;align-items:center}
+    .pstat{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:700}
+    .pstat-dot{width:10px;height:10px;border-radius:50%}
+    .pstat-present{background:#16a34a}
+    .pstat-retard{background:#d97706}
+    .pstat-absent{background:#dc2626}
+    .membre-presence-row{display:flex;align-items:center;padding:12px 24px;border-bottom:1px solid var(--border);gap:14px}
+    .membre-presence-row:last-child{border-bottom:none}
+    .membre-presence-name{flex:1;font-weight:700;font-size:13px}
+    .status-group{display:flex;gap:5px}
+    .status-btn{padding:5px 12px;border-radius:99px;border:2px solid transparent;cursor:pointer;font-size:11px;font-weight:800;font-family:'Plus Jakarta Sans',sans-serif;transition:all .15s;background:#f0f0f0;color:#666}
+    .status-btn.present.selected{background:#dcfce7;border-color:#16a34a;color:#166534}
+    .status-btn.retard.selected{background:#fef3c7;border-color:#d97706;color:#92400e}
+    .status-btn.absent.selected{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+    .status-btn:hover{transform:scale(1.05)}
+    .tol-btn{padding:7px 14px;border-radius:99px;border:2px solid var(--border);cursor:pointer;font-size:12px;font-weight:700;font-family:'Plus Jakarta Sans',sans-serif;background:#fff;color:var(--text-light);transition:all .15s}
+    .tol-btn.selected{background:var(--green);border-color:var(--green);color:#fff}
+    .conserv-card{background:var(--card);border-radius:18px;padding:22px;box-shadow:var(--shadow);margin-bottom:16px;border-left:5px solid var(--gold)}
+    .conserv-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px}
+    .conserv-title{font-size:17px;font-weight:900;color:var(--text)}
+    .conserv-meta{font-size:12px;color:var(--text-light);margin-top:3px}
+    .member-chip{display:inline-flex;align-items:center;gap:6px;background:var(--green-muted);border-radius:99px;padding:5px 12px;font-size:12px;font-weight:700;color:var(--green-dark);margin:3px}
+    .chat-container{display:flex;gap:18px;height:600px}
+    .chat-sidebar{width:240px;flex-shrink:0;background:var(--card);border-radius:18px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+    .chat-sidebar-header{background:linear-gradient(135deg,var(--green-dark),var(--green));padding:16px;color:#fff}
+    .chat-sidebar-title{font-size:14px;font-weight:800}
+    .chat-room-list{overflow-y:auto;flex:1}
+    .chat-room-item{padding:13px 16px;cursor:pointer;border-bottom:1px solid var(--border);transition:background .15s;display:flex;align-items:center;gap:10px}
+    .chat-room-item:hover{background:#f4faf4}
+    .chat-room-item.active{background:var(--green-muted)}
+    .room-icon{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--green-dark),var(--green));display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+    .room-name{font-size:13px;font-weight:700}
+    .room-desc{font-size:11px;color:var(--text-light);margin-top:1px}
+    .chat-main{flex:1;background:var(--card);border-radius:18px;box-shadow:var(--shadow);display:flex;flex-direction:column;overflow:hidden}
+    .chat-main-header{background:linear-gradient(135deg,var(--green-dark),var(--green));padding:16px 20px;color:#fff;display:flex;align-items:center;gap:12px}
+    .chat-main-icon{width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:18px}
+    .chat-main-title{font-size:15px;font-weight:800}
+    .chat-messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;background:#fafcfa}
+    .chat-empty{text-align:center;padding:40px;color:var(--text-light)}
+    .chat-empty .ce-icon{font-size:40px;margin-bottom:10px}
+    .chat-empty p{font-size:13px;font-weight:600}
+    .msg-bubble{max-width:75%;padding:10px 14px;border-radius:14px;font-size:13px;line-height:1.5}
+    .msg-mine{background:linear-gradient(135deg,var(--green-dark),var(--green));color:#fff;border-bottom-right-radius:4px;align-self:flex-end}
+    .msg-other{background:#fff;color:var(--text);border:1px solid var(--border);border-bottom-left-radius:4px;align-self:flex-start}
+    .msg-sender{font-size:10px;font-weight:800;opacity:.7;margin-bottom:4px}
+    .msg-time{font-size:10px;opacity:.6;margin-top:3px;text-align:right}
+    .chat-input-bar{padding:14px 16px;border-top:1px solid var(--border);display:flex;gap:10px;align-items:flex-end}
+    .chat-input-bar textarea{flex:1;resize:none;max-height:100px;padding:10px 14px;border-radius:12px;border:1.5px solid var(--border);font-size:13px;font-family:'Plus Jakarta Sans',sans-serif;outline:none;transition:border-color .2s}
+    .chat-input-bar textarea:focus{border-color:var(--green)}
+    .chat-send-btn{width:40px;height:40px;border-radius:12px;border:none;cursor:pointer;background:linear-gradient(135deg,var(--green-dark),var(--green));color:#fff;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s}
+    .chat-send-btn:hover{transform:scale(1.08)}
+    .chat-locked-overlay{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#f4faf4}
+    .chat-locked-overlay .lock-big{font-size:48px;margin-bottom:14px}
+    .chat-locked-overlay h3{font-size:16px;font-weight:800;color:var(--text);margin-bottom:8px}
+    .chat-locked-overlay p{font-size:13px;color:var(--text-light);text-align:center;max-width:280px;line-height:1.5}
+    .rapport-bar-wrap{background:#e0f0e0;border-radius:99px;height:10px;flex:1}
+    .rapport-bar{height:10px;border-radius:99px;transition:width .6s ease}
+    .notif{position:fixed;bottom:20px;right:20px;z-index:9999;background:linear-gradient(135deg,var(--green-dark),var(--green));color:#fff;border-radius:14px;padding:14px 20px;font-size:13px;font-weight:700;box-shadow:0 8px 28px rgba(15,76,37,.4);max-width:300px;animation:notifIn .3s cubic-bezier(.22,1,.36,1) both}
+    @keyframes notifIn{from{opacity:0;transform:translateY(20px) scale(.9)}to{opacity:1;transform:translateY(0) scale(1)}}
+    .notif-err{background:linear-gradient(135deg,#991b1b,#dc2626)}
+    .page{display:none}
+    .page.active{display:block}
+    .info-box{background:linear-gradient(135deg,#fef9ee,#fef3c7);border:1.5px solid #fde68a;border-radius:12px;padding:14px 18px;font-size:13px;color:#92400e;font-weight:600;margin-bottom:18px;display:flex;align-items:flex-start;gap:10px}
+    @media(max-width:700px){
+      .stats-grid{grid-template-columns:1fr 1fr}.two-col{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.content{padding:16px 12px}.header-top{padding:0 14px}.chat-container{flex-direction:column;height:auto}.chat-sidebar{width:100%;height:200px}.chat-main{height:400px}
+    }
+    @media(max-width:480px){.stats-grid{grid-template-columns:1fr}.welcome-card{padding:32px 20px}}
+  </style>
 </head>
 <body>
 
-<!-- ══════════════ WELCOME / SEARCH ══════════════ -->
+<!-- WELCOME -->
 <div id="welcome-screen">
   <div class="bg-pattern"></div>
   <div class="geo-lines"></div>
   <div class="floating-orb orb1"></div>
   <div class="floating-orb orb2"></div>
   <div class="floating-orb orb3"></div>
-
   <div class="welcome-card">
     <div class="brand">
       <div class="mosque-icon">🕌</div>
@@ -393,77 +212,55 @@ input:focus,select:focus,textarea:focus{border-color:var(--green);box-shadow:0 0
     </div>
     <div class="divider"></div>
 
-    <!-- SEARCH PHASE -->
+    <!-- LOGIN -->
     <div id="search-phase" class="search-phase">
-      <h2>Rechercher votre Daara</h2>
-      <p>Entrez le nom de votre Daara pour le rejoindre ou en créer un nouveau</p>
-      <div class="search-wrap">
-        <span class="icon">🔍</span>
-        <input type="text" id="search-daara-input" placeholder="Nom du Daara…" autocomplete="off"
-          oninput="searchDaara()" onkeydown="if(event.key==='Enter')selectFirstDaara()"/>
-      </div>
-      <div id="daara-results" class="daara-results"></div>
-
-      <div id="selected-daara-info" style="display:none;background:var(--green-muted);border-radius:12px;padding:14px 18px;margin-bottom:16px;border:1.5px solid var(--border)">
-        <div style="font-size:12px;font-weight:800;color:var(--green-dark);margin-bottom:4px">DAARA SÉLECTIONNÉ</div>
-        <div id="sel-daara-name" style="font-size:16px;font-weight:900;color:var(--text)"></div>
-        <div id="sel-daara-siege" style="font-size:12px;color:var(--text-light);margin-top:2px"></div>
-      </div>
-
-      <div id="login-form" style="display:none;animation:fadeIn .3s ease">
-        <div class="fl">
-          <label>Votre identifiant</label>
-          <input type="text" id="login-id" placeholder="Ex: admin ou membre01"/>
-        </div>
-        <div class="fl">
-          <label>Mot de passe</label>
-          <input type="password" id="login-pwd" placeholder="Votre mot de passe"
-            onkeydown="if(event.key==='Enter')loginUser()"/>
-          <div class="err" id="err-login">Identifiant ou mot de passe incorrect</div>
-        </div>
-        <!-- FIX: Bouton Connexion déclenché uniquement quand le formulaire est visible -->
-        <button class="cta-btn" onclick="loginUser()">Se connecter →</button>
-        <div style="text-align:center;margin-top:14px">
-          <button class="back-btn" style="display:inline-flex;justify-content:center" onclick="resetLoginForm()">← Changer de Daara</button>
-        </div>
-      </div>
-
-      <div id="no-login-form">
-        <div class="or-divider">— OU —</div>
-        <button class="new-daara-btn" onclick="showCreatePhase()">+ Créer un nouveau Daara</button>
-      </div>
-    </div>
-
-    <!-- CREATE PHASE -->
-    <div id="create-phase" class="create-phase">
-      <button class="back-btn" onclick="showSearchPhase()">← Retour à la recherche</button>
-      <h2 style="font-size:17px;font-weight:800;color:var(--green-dark);margin-bottom:20px">Créer un nouveau Daara</h2>
+      <h2>Connexion à votre Daara</h2>
+      <p>Entrez vos identifiants pour accéder à votre espace</p>
       <div class="fl">
-        <label>Nom du Daara</label>
-        <input type="text" id="new-daara-nom" placeholder="Ex: Daara Touba Mbacké" maxlength="60"/>
-        <div class="err" id="err-new-nom">Veuillez entrer le nom du Daara</div>
-      </div>
-      <div class="fl">
-        <label>Siège</label>
-        <input type="text" id="new-daara-siege" placeholder="Ex: Touba, Sénégal" maxlength="80"/>
-        <div class="err" id="err-new-siege">Veuillez entrer le siège</div>
-      </div>
-      <div class="fl">
-        <label>Votre identifiant administrateur</label>
-        <input type="text" id="new-admin-id" placeholder="Ex: serigne_daara" maxlength="30"/>
-        <div class="err" id="err-new-id">Veuillez entrer un identifiant</div>
+        <label>Identifiant</label>
+        <input type="text" id="login-id" placeholder="Ex: admin" />
       </div>
       <div class="fl">
         <label>Mot de passe</label>
-        <input type="password" id="new-admin-pwd" placeholder="Choisir un mot de passe"/>
-        <div class="err" id="err-new-pwd">Veuillez entrer un mot de passe</div>
+        <input type="password" id="login-pwd" placeholder="Votre mot de passe"
+          onkeydown="if(event.key==='Enter')loginUser()" />
+        <div class="err" id="err-login">Identifiant ou mot de passe incorrect</div>
       </div>
-      <button class="cta-btn" onclick="createDaara()">Créer le Daara →</button>
+      <button class="cta-btn" id="btn-login" onclick="loginUser()">Se connecter →</button>
+      <div class="or-divider" style="margin-top:20px">— OU —</div>
+      <button class="new-daara-btn" onclick="showCreatePhase()">+ Créer un nouveau Daara</button>
+    </div>
+
+    <!-- CREATE -->
+    <div id="create-phase" class="create-phase">
+      <button class="back-btn" onclick="showSearchPhase()">← Retour</button>
+      <h2 style="font-size:17px;font-weight:800;color:var(--green-dark);margin-bottom:20px">Créer un nouveau Daara</h2>
+      <div class="fl">
+        <label>Nom du Daara</label>
+        <input type="text" id="new-daara-nom" placeholder="Ex: Daara Touba Mbacké" />
+        <div class="err" id="err-new-nom">Champ obligatoire</div>
+      </div>
+      <div class="fl">
+        <label>Siège</label>
+        <input type="text" id="new-daara-siege" placeholder="Ex: Touba, Sénégal" />
+        <div class="err" id="err-new-siege">Champ obligatoire</div>
+      </div>
+      <div class="fl">
+        <label>Identifiant administrateur</label>
+        <input type="text" id="new-admin-id" placeholder="Ex: serigne_daara" />
+        <div class="err" id="err-new-id">Champ obligatoire</div>
+      </div>
+      <div class="fl">
+        <label>Mot de passe</label>
+        <input type="password" id="new-admin-pwd" placeholder="Choisir un mot de passe" />
+        <div class="err" id="err-new-pwd">Champ obligatoire</div>
+      </div>
+      <button class="cta-btn" id="btn-create" onclick="createDaara()">Créer le Daara →</button>
     </div>
   </div>
 </div>
 
-<!-- ══════════════ MAIN APP ══════════════ -->
+<!-- APP -->
 <div id="app">
   <div class="header">
     <div class="header-top">
@@ -476,15 +273,15 @@ input:focus,select:focus,textarea:focus{border-color:var(--green);box-shadow:0 0
         <div class="hdr-meta" id="hdr-meta">—</div>
       </div>
       <div class="header-right">
-        <div class="hdr-user" id="hdr-user">
+        <div class="hdr-user">
           <div class="user-avatar" id="hdr-avatar">?</div>
           <span id="hdr-username">—</span>
           <span class="role-badge" id="hdr-role">—</span>
         </div>
-        <button class="hdr-switch" onclick="switchDaara()">Changer →</button>
+        <button class="hdr-switch" onclick="logout()">Déconnexion</button>
       </div>
     </div>
-    <nav id="nav">
+    <nav>
       <button class="nav-btn active" onclick="showPage('accueil',this)">🏠 Accueil</button>
       <button class="nav-btn" onclick="showPage('kourels',this)">👥 Kourels</button>
       <button class="nav-btn" onclick="showPage('membres',this)">👤 Membres</button>
@@ -499,39 +296,33 @@ input:focus,select:focus,textarea:focus{border-color:var(--green);box-shadow:0 0
 
   <div class="content">
 
-    <!-- ── ACCUEIL ── -->
+    <!-- ACCUEIL -->
     <div id="page-accueil" class="page active">
       <h2 class="page-title">Tableau de Bord</h2>
       <div class="stats-grid">
-        <div class="stat-card" style="background:var(--green-dark)"><div class="stat-icon">👥</div><div class="stat-value" id="stat-kourels">0</div><div class="stat-label">Kourels Actifs</div></div>
-        <div class="stat-card" style="background:var(--green-dark)"><div class="stat-icon">👨🏽‍💼</div><div class="stat-value" id="stat-membres">0</div><div class="stat-label">Membres Inscrits</div></div>
-        <div class="stat-card" style="background:var(--green-dark)"><div class="stat-icon">✅</div><div class="stat-value" id="stat-presence">0%</div><div class="stat-label">Présence Dernière Session</div></div>
-        <div class="stat-card" style="background:var(--green-dark)"><div class="stat-icon">💰</div><div class="stat-value" id="stat-cotisations">—</div><div class="stat-label">Adiyeu Payés</div></div>
+        <div class="stat-card" style="background:var(--green-dark)"><div class="stat-icon">👥</div><div class="stat-value" id="stat-kourels">0</div><div class="stat-label">Kourels</div></div>
+        <div class="stat-card" style="background:var(--green-dark)"><div class="stat-icon">👨🏽‍💼</div><div class="stat-value" id="stat-membres">0</div><div class="stat-label">Membres</div></div>
+        <div class="stat-card" style="background:var(--green-dark)"><div class="stat-icon">✅</div><div class="stat-value" id="stat-presence">0</div><div class="stat-label">Sessions</div></div>
+        <div class="stat-card" style="background:var(--green-dark)"><div class="stat-icon">🎵</div><div class="stat-value" id="stat-conserv">0</div><div class="stat-label">Groupes Conserv.</div></div>
       </div>
       <div class="two-col">
-        <div class="card"><h3>Mes Kourels</h3><div id="accueil-kourels"></div></div>
-        <div class="card"><h3>Activités Récentes</h3><div id="accueil-presences"></div></div>
+        <div class="card"><h3>Kourels</h3><div id="accueil-kourels"></div></div>
+        <div class="card"><h3>Membres récents</h3><div id="accueil-membres"></div></div>
       </div>
     </div>
 
-    <!-- ── KOURELS ── -->
+    <!-- KOURELS -->
     <div id="page-kourels" class="page">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:22px">
         <h2 class="page-title" style="margin:0">Gestion des Kourels</h2>
-        <button class="add-btn" id="btn-add-kourel" onclick="toggleForm('form-kourel')">+ Nouveau Kourel</button>
+        <button class="add-btn" onclick="toggleForm('form-kourel')">+ Nouveau Kourel</button>
       </div>
       <div id="form-kourel" class="form-box" style="display:none">
         <h3 style="margin-bottom:16px;font-size:14px">Ajouter un Kourel</h3>
         <div class="form-grid">
-          <input type="text" id="k-nom" placeholder="Nom du Kourel"/>
-          <input type="number" id="k-cotisation" placeholder="Cotisation (FCFA)"/>
-          <select id="k-freq"><option>Mensuel</option><option>Hebdomadaire</option></select>
-          <input type="text" id="k-desc" placeholder="Description"/>
+          <input type="text" id="k-nom" placeholder="Nom du Kourel" />
+          <select id="k-type"><option>Mensuel</option><option>Hebdomadaire</option></select>
           <select id="k-statut"><option>Actif</option><option>Inactif</option></select>
-          <div>
-            <label style="font-size:11px;font-weight:700;color:var(--text-light);display:block;margin-bottom:6px">Admin du Kourel</label>
-            <select id="k-admin-membre"></select>
-          </div>
         </div>
         <div class="btn-row">
           <button class="btn btn-primary" onclick="addKourel()">Enregistrer</button>
@@ -541,24 +332,23 @@ input:focus,select:focus,textarea:focus{border-color:var(--green);box-shadow:0 0
       <div id="kourels-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px"></div>
     </div>
 
-    <!-- ── MEMBRES ── -->
+    <!-- MEMBRES -->
     <div id="page-membres" class="page">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:22px">
         <h2 class="page-title" style="margin:0">Gestion des Membres</h2>
-        <button class="add-btn" id="btn-add-membre" onclick="toggleForm('form-membre')">+ Nouveau Membre</button>
+        <button class="add-btn" onclick="toggleForm('form-membre')">+ Nouveau Membre</button>
       </div>
-      <input class="search-box" type="text" id="search-membre" placeholder="🔍 Rechercher un membre…" oninput="renderMembres()"/>
+      <input class="search-box" type="text" id="search-membre" placeholder="🔍 Rechercher un membre…" oninput="filtrerMembres()" />
       <div id="form-membre" class="form-box" style="display:none">
         <h3 style="margin-bottom:16px;font-size:14px">Ajouter un Membre</h3>
         <div class="form-grid">
-          <input type="text" id="m-prenom" placeholder="Prénom"/>
-          <input type="text" id="m-nom" placeholder="Nom"/>
-          <input type="tel" id="m-tel" placeholder="Téléphone"/>
+          <input type="text" id="m-prenom" placeholder="Prénom" />
+          <input type="text" id="m-nom" placeholder="Nom" />
+          <input type="tel" id="m-tel" placeholder="Téléphone" />
           <div>
             <label style="font-size:11px;font-weight:700;color:var(--text-light);display:block;margin-bottom:6px">Kourel</label>
             <select id="m-kourel"></select>
           </div>
-          <input type="text" id="m-pwd" placeholder="Mot de passe (facultatif)"/>
         </div>
         <div class="btn-row">
           <button class="btn btn-primary" onclick="addMembre()">Enregistrer</button>
@@ -568,7 +358,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--green);box-shadow:0 0
       <div class="card" style="padding:0;overflow:hidden">
         <div class="table-wrap">
           <table>
-            <!-- FIX: colonne Rôle renommée en accord avec les données -->
             <thead><tr><th>Nom</th><th>Kourel</th><th>Téléphone</th><th>Rôle</th><th>Statut</th><th>Actions</th></tr></thead>
             <tbody id="membres-body"></tbody>
           </table>
@@ -576,34 +365,50 @@ input:focus,select:focus,textarea:focus{border-color:var(--green);box-shadow:0 0
       </div>
     </div>
 
-    <!-- ── PROGRAMMES ── -->
+    <!-- CONSERVATOIRE -->
+    <div id="page-conservatoire" class="page">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:22px">
+        <h2 class="page-title" style="margin:0">Groupes Conservatoires</h2>
+        <button class="add-btn" onclick="toggleForm('form-conservatoire')">+ Nouveau Groupe</button>
+      </div>
+      <div id="form-conservatoire" class="form-box" style="display:none">
+        <h3 style="margin-bottom:16px;font-size:14px">Créer un Groupe Conservatoire</h3>
+        <div class="form-grid">
+          <div>
+            <label style="font-size:11px;font-weight:700;color:var(--text-light);display:block;margin-bottom:6px">Kourel</label>
+            <select id="cv-kourel" onchange="updateConservMembres()"></select>
+          </div>
+          <input type="text" id="cv-nom" placeholder="Nom du groupe" />
+        </div>
+        <div style="margin-top:14px">
+          <label style="font-size:11px;font-weight:700;color:var(--text-light);display:block;margin-bottom:8px">Membres</label>
+          <div id="cv-membres-select" style="border:1.5px solid var(--border);border-radius:12px;overflow:hidden;max-height:220px;overflow-y:auto;background:#fff"></div>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-primary" onclick="addConservatoire()">Créer</button>
+          <button class="btn btn-secondary" onclick="toggleForm('form-conservatoire')">Annuler</button>
+        </div>
+      </div>
+      <div id="conservatoires-list"></div>
+    </div>
+
+    <!-- PROGRAMMES -->
     <div id="page-programmes" class="page">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:22px">
-        <h2 class="page-title" style="margin:0">Programmes des Kourels</h2>
-        <button class="add-btn" id="btn-add-prog" onclick="toggleForm('form-programme')">+ Nouveau Programme</button>
+        <h2 class="page-title" style="margin:0">Programmes</h2>
+        <button class="add-btn" onclick="toggleForm('form-programme')">+ Nouveau Programme</button>
       </div>
       <div id="form-programme" class="form-box" style="display:none">
-        <h3 style="margin-bottom:16px;font-size:14px">Définir un Programme de Répétition</h3>
-        <div class="form-section-title">Informations générales</div>
         <div class="form-grid">
           <select id="pr-kourel"></select>
-          <input type="text" id="pr-lieu" placeholder="Lieu de la répétition"/>
-          <input type="text" id="pr-xassida" placeholder="Xassida / Chapitre à répéter"/>
-          <input type="text" id="pr-responsable" placeholder="Responsable / Chanteur principal"/>
-        </div>
-        <div class="form-section-title" style="margin-top:14px">Horaires</div>
-        <div class="form-grid">
-          <div>
-            <label style="font-size:11px;font-weight:700;color:var(--text-light);display:block;margin-bottom:6px">Jour de répétition</label>
-            <select id="pr-jour"><option>Lundi</option><option>Mardi</option><option>Mercredi</option><option>Jeudi</option><option>Vendredi</option><option>Samedi</option><option>Dimanche</option></select>
-          </div>
-          <div>
-            <label style="font-size:11px;font-weight:700;color:var(--text-light);display:block;margin-bottom:6px">Heure de début</label>
-            <input type="time" id="pr-heure"/>
-          </div>
+          <input type="text" id="pr-xassida" placeholder="Xassida" />
+          <input type="text" id="pr-lieu" placeholder="Lieu" />
+          <input type="text" id="pr-responsable" placeholder="Responsable" />
+          <select id="pr-jour"><option>Lundi</option><option>Mardi</option><option>Mercredi</option><option>Jeudi</option><option>Vendredi</option><option>Samedi</option><option>Dimanche</option></select>
+          <input type="time" id="pr-heure" />
         </div>
         <div style="margin-top:12px">
-          <label style="font-size:11px;font-weight:700;color:var(--text-light);display:block;margin-bottom:8px">Marge de tolérance</label>
+          <label style="font-size:11px;font-weight:700;color:var(--text-light);display:block;margin-bottom:8px">Tolérance</label>
           <div style="display:flex;gap:8px;flex-wrap:wrap" id="tol-buttons">
             <button class="tol-btn selected" onclick="selectTolerance(this,'0')">Aucune</button>
             <button class="tol-btn" onclick="selectTolerance(this,'5')">5 min</button>
@@ -612,54 +417,42 @@ input:focus,select:focus,textarea:focus{border-color:var(--green);box-shadow:0 0
             <button class="tol-btn" onclick="selectTolerance(this,'20')">20 min</button>
             <button class="tol-btn" onclick="selectTolerance(this,'30')">30 min</button>
           </div>
-          <input type="hidden" id="pr-tolerance" value="0"/>
+          <input type="hidden" id="pr-tolerance" value="0" />
         </div>
-        <div class="form-section-title" style="margin-top:14px">Son de référence (Xassida)</div>
-        <div class="audio-upload-zone" onclick="document.getElementById('pr-audio-file').click()">
-          <input type="file" id="pr-audio-file" accept="audio/*" onchange="handleAudioUpload(event)"/>
-          <div class="upload-icon">🎵</div>
-          <p><strong>Cliquer pour choisir un fichier audio</strong></p>
-          <p>MP3, WAV, OGG — son de référence pour la répétition</p>
-        </div>
-        <div id="pr-audio-preview" style="display:none;margin-top:10px"></div>
-        <div class="form-section-title" style="margin-top:14px">Notes</div>
-        <textarea id="pr-notes" rows="3" placeholder="Instructions spéciales, objectifs de la session…"></textarea>
+        <textarea id="pr-notes" rows="2" placeholder="Notes…" style="margin-top:12px"></textarea>
         <div class="btn-row">
-          <button class="btn btn-primary" onclick="addProgramme()">Enregistrer le Programme</button>
+          <button class="btn btn-primary" onclick="addProgramme()">Enregistrer</button>
           <button class="btn btn-secondary" onclick="toggleForm('form-programme')">Annuler</button>
         </div>
       </div>
-      <div class="filter-bar" id="prog-filter-bar"></div>
       <div id="programmes-list"></div>
     </div>
 
-    <!-- ── PRÉSENCES ── -->
+    <!-- PRESENCES -->
     <div id="page-presences" class="page">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:22px">
-        <h2 class="page-title" style="margin:0">Suivi des Présences</h2>
-        <button class="add-btn" id="btn-add-pres" onclick="toggleForm('form-presence')">+ Nouvelle Session</button>
+        <h2 class="page-title" style="margin:0">Présences</h2>
+        <button class="add-btn" onclick="toggleForm('form-presence')">+ Nouvelle Session</button>
       </div>
       <div id="form-presence" class="form-box" style="display:none">
-        <h3 style="margin-bottom:16px;font-size:14px">Créer une Session de Présence</h3>
         <div class="form-grid">
-          <input type="date" id="p-date"/>
+          <input type="date" id="p-date" />
           <select id="p-kourel" onchange="loadMembresForPresence()"></select>
           <select id="p-type"><option>Répétition</option><option>Xam Xam</option><option>Programme</option><option>Réunion</option></select>
-          <input type="text" id="p-lieu" placeholder="Lieu"/>
+          <input type="text" id="p-lieu" placeholder="Lieu" />
         </div>
         <div id="p-membres-list" style="margin-top:18px"></div>
         <div class="btn-row">
-          <button class="btn btn-primary" onclick="savePresenceSession()">Enregistrer la Session</button>
+          <button class="btn btn-primary" onclick="savePresenceSession()">Enregistrer</button>
           <button class="btn btn-secondary" onclick="toggleForm('form-presence')">Annuler</button>
         </div>
       </div>
-      <div class="filter-bar" id="pres-filter-bar"></div>
       <div id="presences-list"></div>
     </div>
 
-    <!-- ── COTISATIONS ── -->
+    <!-- COTISATIONS -->
     <div id="page-cotisations" class="page">
-      <h2 class="page-title">Gestion des Adiyeu</h2>
+      <h2 class="page-title">Adiyeu</h2>
       <div class="stats-grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:22px">
         <div class="stat-card" style="background:var(--green-dark)"><div class="stat-icon">💵</div><div class="stat-value" id="cot-total">—</div><div class="stat-label">Total collecté</div></div>
         <div class="stat-card" style="background:var(--green-dark)"><div class="stat-icon">✅</div><div class="stat-value" id="cot-payees">—</div><div class="stat-label">Payées</div></div>
@@ -675,51 +468,13 @@ input:focus,select:focus,textarea:focus{border-color:var(--green);box-shadow:0 0
       </div>
     </div>
 
-    <!-- ── CONSERVATOIRE ── -->
-    <div id="page-conservatoire" class="page">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:22px">
-        <h2 class="page-title" style="margin:0">Groupes Conservatoires</h2>
-        <button class="add-btn" id="btn-add-conserv" onclick="toggleForm('form-conservatoire')">+ Nouveau Groupe</button>
-      </div>
-      <div class="info-box">
-        <span>ℹ️</span>
-        <div><strong>Groupes Conservatoires :</strong> Chaque Kourel peut avoir un ou plusieurs groupes conservatoires. L'admin du Kourel choisit les membres qui y participent. Ces groupes sont privés — seuls les membres invités y ont accès.</div>
-      </div>
-      <div id="form-conservatoire" class="form-box" style="display:none">
-        <h3 style="margin-bottom:16px;font-size:14px">Créer un Groupe Conservatoire</h3>
-        <div class="form-grid">
-          <div>
-            <label style="font-size:11px;font-weight:700;color:var(--text-light);display:block;margin-bottom:6px">Kourel associé</label>
-            <select id="cv-kourel" onchange="updateConservMembres()"></select>
-          </div>
-          <input type="text" id="cv-nom" placeholder="Nom du groupe (ex: Groupe Ndeye Mariama)"/>
-          <input type="text" id="cv-xassida" placeholder="Xassida principal du groupe"/>
-          <input type="text" id="cv-responsable" placeholder="Responsable du groupe"/>
-        </div>
-        <div style="margin-top:14px">
-          <label style="font-size:11px;font-weight:700;color:var(--text-light);display:block;margin-bottom:8px">Ajouter des membres au groupe</label>
-          <div id="cv-membres-select" style="border:1.5px solid var(--border);border-radius:12px;overflow:hidden;max-height:220px;overflow-y:auto;background:#fff"></div>
-        </div>
-        <div class="btn-row">
-          <button class="btn btn-primary" onclick="addConservatoire()">Créer le Groupe</button>
-          <button class="btn btn-secondary" onclick="toggleForm('form-conservatoire')">Annuler</button>
-        </div>
-      </div>
-      <div id="conservatoires-list"></div>
-    </div>
-
-    <!-- ── MESSAGERIE ── -->
+    <!-- MESSAGERIE -->
     <div id="page-messagerie" class="page">
-      <h2 class="page-title">Messagerie des Kourels</h2>
-      <div class="info-box">
-        <span>🔒</span>
-        <div>Chaque Kourel a son groupe de concertation privé. Vous ne pouvez accéder qu'aux groupes dont vous êtes membre ou admin.</div>
-      </div>
+      <h2 class="page-title">Messagerie</h2>
       <div class="chat-container">
         <div class="chat-sidebar">
           <div class="chat-sidebar-header">
             <div class="chat-sidebar-title">💬 Groupes</div>
-            <div class="chat-sidebar-sub">Vos canaux de communication</div>
           </div>
           <div class="chat-room-list" id="chat-room-list"></div>
         </div>
@@ -727,23 +482,19 @@ input:focus,select:focus,textarea:focus{border-color:var(--green);box-shadow:0 0
           <div class="chat-locked-overlay">
             <div class="lock-big">💬</div>
             <h3>Sélectionnez un groupe</h3>
-            <p>Choisissez un groupe dans la liste à gauche pour commencer à communiquer</p>
+            <p>Choisissez un groupe dans la liste pour commencer</p>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ── RAPPORTS ── -->
+    <!-- RAPPORTS -->
     <div id="page-rapports" class="page">
-      <h2 class="page-title">Rapports & Statistiques</h2>
+      <h2 class="page-title">Rapports</h2>
       <div class="stats-grid" id="rapport-stats" style="margin-bottom:22px"></div>
-      <div class="two-col" style="margin-bottom:18px">
-        <div class="card"><h3>Activités par type</h3><div id="rapport-types"></div></div>
-        <div class="card"><h3>Adiyeu par Kourel</h3><div id="rapport-kourels"></div></div>
-      </div>
-      <div class="card">
-        <h3>Présence par Kourel</h3>
-        <div id="rapport-presence-detail"></div>
+      <div class="two-col">
+        <div class="card"><h3>Membres par Kourel</h3><div id="rapport-kourels"></div></div>
+        <div class="card"><h3>Sessions par type</h3><div id="rapport-types"></div></div>
       </div>
     </div>
 
@@ -752,126 +503,133 @@ input:focus,select:focus,textarea:focus{border-color:var(--green);box-shadow:0 0
 
 <script>
 // ══════════════════════════════════════════════════════════════
-// GLOBAL DATA STORE (multi-daara)
+// ✅ CONFIG — pointe vers ton backend Node.js port 5000
 // ══════════════════════════════════════════════════════════════
-let GLOBAL = {
-  daaras: [
-    {
-      id: 1, nom: "Daara Touba Mbacké", siege: "Touba, Sénégal",
-      users: [{ id: 'admin', nom: 'Serigne Admin', pwd: 'admin123', role: 'admin' }],
-      kourels: [], membres: [], presences: [], cotisations: [],
-      messages: {}, programmes: [], conservatoires: []
-    },
-    {
-      id: 2, nom: "Daara Médina Baye", siege: "Kaolack, Sénégal",
-      users: [{ id: 'admin2', nom: 'Admin Médina', pwd: 'admin456', role: 'admin' }],
-      kourels: [], membres: [], presences: [], cotisations: [],
-      messages: {}, programmes: [], conservatoires: []
-    }
-  ]
-};
+const API = 'http://localhost:5000/api';
 
-let session = { daara: null, user: null };
-let currentAudioDataUrl = null, currentAudioFileName = null;
+// Récupérer le token et les infos depuis localStorage (persistance)
+let token       = localStorage.getItem('dc_token') || '';
+let currentUser = JSON.parse(localStorage.getItem('dc_user')  || 'null');
+let currentDaara= JSON.parse(localStorage.getItem('dc_daara') || 'null');
+
+// Cache local (données chargées depuis le backend)
+let cacheKourels = [];
+let cacheMembres = [];
 let presenceStatuts = {};
-let presFilterActive = 'Tous', progFilterActive = 'Tous';
-let activeChatRoom = null;
+let activeChatRoom  = null;
 
-function D() { return session.daara; }
-function isAdmin() { return session.user?.role === 'admin'; }
-
-function isKourelAdmin(kourelNom) {
-  if (isAdmin()) return true;
-  const k = D().kourels.find(k => k.nom === kourelNom);
-  return k && k.adminId && k.adminId === session.user?.id;
+// ══════════════════════════════════════════════════════════════
+// HELPERS
+// ══════════════════════════════════════════════════════════════
+function escHtml(s) {
+  return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-// FIX: myKourels() inclut aussi les kourels dont l'utilisateur est admin (même sans être dans membres)
-function myKourels() {
-  if (isAdmin()) return D().kourels.map(k => k.nom);
-  const uid = session.user?.id;
-  const fromMembres = D().membres.filter(m => m.userId === uid).map(m => m.kourel);
-  const fromAdmin   = D().kourels.filter(k => k.adminId === uid).map(k => k.nom);
-  // Union sans doublons
-  return [...new Set([...fromMembres, ...fromAdmin])];
+function badge(s) {
+  const map = {'Actif':'actif','Inactif':'inactif','Payé':'payé','En attente':'attente','Admin':'admin','Membre':'membre'};
+  return `<span class="badge ${map[s]||''}">${escHtml(s)}</span>`;
 }
 
-function canAccessKourel(kourelNom) {
-  if (isAdmin()) return true;
-  return myKourels().includes(kourelNom);
+function showNotif(msg, isErr) {
+  const n = document.createElement('div');
+  n.className = 'notif' + (isErr ? ' notif-err' : '');
+  n.textContent = msg;
+  document.body.appendChild(n);
+  setTimeout(() => n.remove(), 3500);
 }
 
-function canAccessConserv(cv) {
-  if (isAdmin()) return true;
-  if (isKourelAdmin(cv.kourel)) return true;
-  return cv.membres.some(id => id === session.user?.id);
+function getHeaders() {
+  return { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token };
+}
+
+// ✅ Fonction centrale d'appel API — gère les erreurs proprement
+async function api(method, path, body) {
+  const opts = { method, headers: getHeaders() };
+  if (body) opts.body = JSON.stringify(body);
+  const res  = await fetch(API + path, opts);
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.message || 'Erreur serveur');
+  return data;
+}
+
+function isAdmin() { return currentUser?.role === 'admin'; }
+
+function selectTolerance(btn, val) {
+  document.querySelectorAll('#tol-buttons .tol-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  document.getElementById('pr-tolerance').value = val;
 }
 
 // ══════════════════════════════════════════════════════════════
-// WELCOME / SEARCH
+// AUTH
 // ══════════════════════════════════════════════════════════════
-function searchDaara() {
-  const q = document.getElementById('search-daara-input').value.trim().toLowerCase();
-  const res = document.getElementById('daara-results');
-  if (!q) { res.style.display = 'none'; return; }
-  const matches = GLOBAL.daaras.filter(d =>
-    d.nom.toLowerCase().includes(q) || d.siege.toLowerCase().includes(q)
-  );
-  if (!matches.length) { res.style.display = 'none'; return; }
-  res.style.display = 'block';
-  res.innerHTML = matches.map(d => `
-    <div class="daara-result-item" onclick="selectDaara(${d.id})">
-      <div class="dr-icon">🕌</div>
-      <div class="dr-info">
-        <h4>${escHtml(d.nom)}</h4>
-        <p>📍 ${escHtml(d.siege)} · ${d.membres.length} membres</p>
-      </div>
-      <span class="dr-badge">${d.users.length} utilisateur${d.users.length>1?'s':''}</span>
-    </div>`).join('');
+async function loginUser() {
+  const identifiant = document.getElementById('login-id').value.trim();
+  const motDePasse  = document.getElementById('login-pwd').value;
+  const errEl = document.getElementById('err-login');
+  const btn   = document.getElementById('btn-login');
+  if (!identifiant || !motDePasse) {
+    errEl.textContent = 'Veuillez remplir tous les champs';
+    errEl.style.display = 'block';
+    return;
+  }
+  btn.disabled = true;
+  btn.textContent = 'Connexion…';
+  try {
+    const data = await api('POST', '/auth/login', { identifiant, motDePasse });
+    token        = data.token;
+    currentUser  = { id: data.utilisateur?._id || data.utilisateur?.id, nom: data.utilisateur?.nom || data.daara?.nom, role: data.utilisateur?.role || 'admin' };
+    currentDaara = data.daara;
+    localStorage.setItem('dc_token',  token);
+    localStorage.setItem('dc_user',   JSON.stringify(currentUser));
+    localStorage.setItem('dc_daara',  JSON.stringify(currentDaara));
+    errEl.style.display = 'none';
+    launchApp();
+  } catch(e) {
+    errEl.textContent = e.message;
+    errEl.style.display = 'block';
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Se connecter →';
+  }
 }
 
-function selectFirstDaara() {
-  const q = document.getElementById('search-daara-input').value.trim().toLowerCase();
-  const matches = GLOBAL.daaras.filter(d => d.nom.toLowerCase().includes(q));
-  if (matches.length) selectDaara(matches[0].id);
+async function createDaara() {
+  const nom         = document.getElementById('new-daara-nom').value.trim();
+  const siege       = document.getElementById('new-daara-siege').value.trim();
+  const identifiant = document.getElementById('new-admin-id').value.trim();
+  const motDePasse  = document.getElementById('new-admin-pwd').value.trim();
+  let ok = true;
+  [['err-new-nom',nom],['err-new-siege',siege],['err-new-id',identifiant],['err-new-pwd',motDePasse]]
+    .forEach(([id,v]) => { document.getElementById(id).style.display = v ? 'none' : 'block'; if (!v) ok = false; });
+  if (!ok) return;
+  const btn = document.getElementById('btn-create');
+  btn.disabled = true;
+  btn.textContent = 'Création…';
+  try {
+    await api('POST', '/auth/register', { nom, siege, identifiant, motDePasse });
+    showNotif('Daara créé ! Connectez-vous.');
+    showSearchPhase();
+    document.getElementById('login-id').value = identifiant;
+  } catch(e) {
+    showNotif(e.message, true);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Créer le Daara →';
+  }
 }
 
-function selectDaara(id) {
-  const d = GLOBAL.daaras.find(x => x.id === id);
-  session.daara = d;
-  document.getElementById('daara-results').style.display = 'none';
-  document.getElementById('search-daara-input').value = d.nom;
-  document.getElementById('selected-daara-info').style.display = 'block';
-  document.getElementById('sel-daara-name').textContent = d.nom;
-  document.getElementById('sel-daara-siege').textContent = '📍 ' + d.siege;
-  document.getElementById('login-form').style.display = 'block';
-  document.getElementById('no-login-form').style.display = 'none';
-}
-
-function resetLoginForm() {
-  session.daara = null;
-  document.getElementById('selected-daara-info').style.display = 'none';
-  document.getElementById('login-form').style.display = 'none';
-  document.getElementById('no-login-form').style.display = 'block';
-  document.getElementById('search-daara-input').value = '';
-  document.getElementById('err-login').style.display = 'none';
+function logout() {
+  localStorage.removeItem('dc_token');
+  localStorage.removeItem('dc_user');
+  localStorage.removeItem('dc_daara');
+  token = ''; currentUser = null; currentDaara = null;
+  cacheKourels = []; cacheMembres = [];
+  document.getElementById('app').style.display = 'none';
+  document.getElementById('welcome-screen').style.display = 'flex';
   document.getElementById('login-id').value = '';
   document.getElementById('login-pwd').value = '';
-}
-
-function loginUser() {
-  // FIX: vérifier que le formulaire login est bien visible avant de traiter
-  const lf = document.getElementById('login-form');
-  if (!lf || lf.style.display === 'none') return;
-  if (!session.daara) return;
-  const id  = document.getElementById('login-id').value.trim();
-  const pwd = document.getElementById('login-pwd').value;
-  const user = session.daara.users.find(u => u.id === id && u.pwd === pwd);
-  const errEl = document.getElementById('err-login');
-  if (!user) { errEl.style.display = 'block'; return; }
-  errEl.style.display = 'none';
-  session.user = user;
-  launchApp();
+  document.getElementById('err-login').style.display = 'none';
 }
 
 function showCreatePhase() {
@@ -883,81 +641,26 @@ function showSearchPhase() {
   document.getElementById('search-phase').style.display = 'block';
 }
 
-function createDaara() {
-  const nom      = document.getElementById('new-daara-nom').value.trim();
-  const siege    = document.getElementById('new-daara-siege').value.trim();
-  const adminId  = document.getElementById('new-admin-id').value.trim();
-  const adminPwd = document.getElementById('new-admin-pwd').value.trim();
-  let ok = true;
-  [['err-new-nom',nom],['err-new-siege',siege],['err-new-id',adminId],['err-new-pwd',adminPwd]].forEach(([eid,val]) => {
-    document.getElementById(eid).style.display = val ? 'none' : 'block';
-    if (!val) ok = false;
-  });
-  if (!ok) return;
-  if (GLOBAL.daaras.some(d => d.users.some(u => u.id === adminId))) {
-    showNotif('Cet identifiant est déjà utilisé', true); return;
-  }
-  const newDaara = {
-    id: Date.now(), nom, siege,
-    users: [{ id: adminId, nom: 'Admin ' + nom, pwd: adminPwd, role: 'admin' }],
-    kourels: [], membres: [], presences: [], cotisations: [],
-    messages: {}, programmes: [], conservatoires: []
-  };
-  GLOBAL.daaras.push(newDaara);
-  session.daara = newDaara;
-  session.user  = newDaara.users[0];
-  launchApp();
-}
-
 // ══════════════════════════════════════════════════════════════
-// APP LAUNCH & NAVIGATION
+// APP LAUNCH
 // ══════════════════════════════════════════════════════════════
 function launchApp() {
   document.getElementById('welcome-screen').style.display = 'none';
   document.getElementById('app').style.display = 'block';
-  document.getElementById('hdr-daara').textContent    = D().nom;
-  document.getElementById('hdr-meta').textContent     = D().siege;
-  document.getElementById('hdr-username').textContent = session.user.nom;
-  document.getElementById('hdr-avatar').textContent   = session.user.nom[0].toUpperCase();
-  document.getElementById('hdr-role').textContent     = isAdmin() ? 'Admin' : 'Membre';
-  updateNavPermissions();
+  document.getElementById('hdr-daara').textContent   = currentDaara?.nom   || '—';
+  document.getElementById('hdr-meta').textContent    = currentDaara?.siege  || '—';
+  document.getElementById('hdr-username').textContent = currentUser?.nom    || '—';
+  document.getElementById('hdr-avatar').textContent  = (currentUser?.nom || currentDaara?.nom || '?')[0].toUpperCase();
+  document.getElementById('hdr-role').textContent    = isAdmin() ? 'Admin' : 'Membre';
   renderAll();
-}
-
-function updateNavPermissions() {
-  const adminEls = ['btn-add-kourel','btn-add-membre','btn-add-prog','btn-add-pres','btn-add-conserv'];
-  adminEls.forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.style.display = isAdmin() ? '' : 'none';
-  });
-}
-
-function switchDaara() {
-  document.getElementById('app').style.display = 'none';
-  document.getElementById('welcome-screen').style.display = 'flex';
-  document.getElementById('search-phase').style.display = 'block';
-  document.getElementById('create-phase').style.display = 'none';
-  document.getElementById('search-daara-input').value = '';
-  document.getElementById('selected-daara-info').style.display = 'none';
-  document.getElementById('login-form').style.display = 'none';
-  document.getElementById('no-login-form').style.display = 'block';
-  document.getElementById('err-login').style.display = 'none';
-  document.getElementById('login-id').value = '';
-  document.getElementById('login-pwd').value = '';
-  session = { daara: null, user: null };
-  activeChatRoom = null;
 }
 
 function showPage(id, btn) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('page-'+id).classList.add('active');
+  document.getElementById('page-' + id).classList.add('active');
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
   if (btn) btn.classList.add('active');
-  if (id === 'messagerie') {
-    renderChatSidebar();
-    if (activeChatRoom) renderChatMain(activeChatRoom);
-  }
-  if (id === 'conservatoire') renderConservatoires();
+  if (id === 'messagerie') renderChatSidebar();
 }
 
 function toggleForm(id) {
@@ -965,841 +668,503 @@ function toggleForm(id) {
   const visible = el.style.display !== 'none';
   el.style.display = visible ? 'none' : 'block';
   if (!visible) {
-    if (id === 'form-presence')     { kourelOptionsForSelect('p-kourel', true); loadMembresForPresence(); }
-    if (id === 'form-conservatoire'){ kourelOptionsForSelect('cv-kourel', false); updateConservMembres(); }
-    if (id === 'form-membre')       kourelOptionsForSelect('m-kourel', true);
-    if (id === 'form-kourel')       renderKourelAdminSelect();
+    if (id === 'form-membre')        remplirSelectKourels('m-kourel');
+    if (id === 'form-programme')     remplirSelectKourels('pr-kourel');
+    if (id === 'form-presence')      { remplirSelectKourels('p-kourel'); loadMembresForPresence(); }
+    if (id === 'form-conservatoire') { remplirSelectKourels('cv-kourel'); updateConservMembres(); }
   }
 }
 
-// FIX: fonction dédiée pour peupler le select admin du kourel
-function renderKourelAdminSelect() {
-  const adminSel = document.getElementById('k-admin-membre');
-  if (!adminSel) return;
-  adminSel.innerHTML = '<option value="">— Sans admin spécifique —</option>' +
-    D().membres.map(m => `<option value="${escAttr(m.userId)}">${escHtml(m.prenom+' '+m.nom)}</option>`).join('');
-}
-
-// Échappement HTML pour éviter les injections dans innerHTML
-function escHtml(s) {
-  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
-}
-function escAttr(s) { return escHtml(s); }
-
-function badge(s) {
-  const map = { 'Actif':'actif','Inactif':'inactif','Payé':'payé','En attente':'attente','Admin Kourel':'admin','Membre':'membre' };
-  return `<span class="badge ${map[s]||''}">${escHtml(s)}</span>`;
-}
-
-function kourelOptionsForSelect(selId, filterAccessible) {
+function remplirSelectKourels(selId) {
   const el = document.getElementById(selId);
   if (!el) return;
-  const kourels = filterAccessible
-    ? D().kourels.filter(k => canAccessKourel(k.nom))
-    : D().kourels;
-  el.innerHTML = kourels.length
-    ? kourels.map(k => `<option value="${escAttr(k.nom)}">${escHtml(k.nom)}</option>`).join('')
-    : '<option value="">Aucun Kourel disponible</option>';
-}
-
-function showNotif(msg, isErr) {
-  const n = document.createElement('div');
-  n.className = 'notif' + (isErr ? ' notif-err' : '');
-  n.textContent = msg;
-  document.body.appendChild(n);
-  setTimeout(() => n.remove(), 3500);
+  el.innerHTML = cacheKourels.length
+    ? cacheKourels.map(k => `<option value="${k._id}">${escHtml(k.nom)}</option>`).join('')
+    : '<option value="">Aucun Kourel</option>';
 }
 
 // ══════════════════════════════════════════════════════════════
 // RENDER ALL
 // ══════════════════════════════════════════════════════════════
-function renderAll() {
-  renderAccueil();
-  renderKourels();
-  renderMembres();
-  renderProgrammes();
-  renderPresences();
-  renderCotisations();
-  renderConservatoires();
-  renderChatSidebar();
-  renderRapports();
-  kourelOptionsForSelect('p-kourel', true);
-  kourelOptionsForSelect('pr-kourel', true);
-  kourelOptionsForSelect('cv-kourel', false);
-  kourelOptionsForSelect('m-kourel', true);
-  buildFilterBar('pres', presFilterActive, 'filterPresences');
-  buildFilterBar('prog', progFilterActive, 'filterProgrammes');
-  updateNavPermissions();
+async function renderAll() {
+  try {
+    await Promise.all([renderKourels(), renderMembres()]);
+    await Promise.all([renderProgrammes(), renderPresences(), renderConservatoires(), renderCotisations()]);
+    renderAccueil();
+    renderChatSidebar();
+    renderRapports();
+  } catch(e) {
+    console.error('renderAll error:', e);
+  }
 }
 
 // ══════════════════════════════════════════════════════════════
 // ACCUEIL
 // ══════════════════════════════════════════════════════════════
 function renderAccueil() {
-  const myK    = myKourels();
-  const actifs = D().kourels.filter(k => k.statut === 'Actif' && (isAdmin() || myK.includes(k.nom))).length;
-  const totalM = isAdmin() ? D().membres.length : D().membres.filter(m => myK.includes(m.kourel)).length;
-  const myCots = isAdmin() ? D().cotisations : D().cotisations.filter(c => myK.includes(c.kourel));
-
-  // FIX: affiche payé/total avec protection si myCots vide
-  const payees = myCots.filter(c => c.statut === 'Payé').length;
-  document.getElementById('stat-cotisations').textContent = myCots.length > 0 ? payees + '/' + myCots.length : '0/0';
-
-  const myPres = isAdmin() ? D().presences : D().presences.filter(p => myK.includes(p.kourel));
-  let tp = 0;
-  if (myPres.length) {
-    const last = myPres[0];
-    const presents = last.membres.filter(m => m.statut === 'Présent' || m.statut === 'Retard').length;
-    tp = last.membres.length ? Math.round(presents / last.membres.length * 100) : 0;
-  }
-  document.getElementById('stat-kourels').textContent  = actifs;
-  document.getElementById('stat-membres').textContent  = totalM;
-  document.getElementById('stat-presence').textContent = tp + '%';
-
-  const visK = D().kourels.filter(k => isAdmin() || myK.includes(k.nom));
-  document.getElementById('accueil-kourels').innerHTML = visK.map(k => `
-    <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--border)">
-      <div>
-        <div style="font-weight:700;font-size:13px">${escHtml(k.nom)}</div>
-        <div style="font-size:11px;color:var(--text-light)">${k.cotisation.toLocaleString()} FCFA/${escHtml(k.frequence)}</div>
-      </div>
-      ${badge(k.statut)}
+  document.getElementById('stat-kourels').textContent = cacheKourels.length;
+  document.getElementById('stat-membres').textContent = cacheMembres.length;
+  document.getElementById('accueil-kourels').innerHTML = cacheKourels.map(k => `
+    <div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border)">
+      <div style="font-weight:700;font-size:13px">${escHtml(k.nom)}</div>
+      <div style="font-size:12px;color:var(--text-light)">${cacheMembres.filter(m=>(m.kourel?._id||m.kourel)===k._id).length} membres</div>
     </div>`).join('') || '<p style="color:var(--text-light);font-size:13px">Aucun Kourel</p>';
-
-  document.getElementById('accueil-presences').innerHTML = myPres.slice(0,5).map(p => {
-    const pres = p.membres.filter(m => m.statut === 'Présent').length;
-    const rds  = p.membres.filter(m => m.statut === 'Retard').length;
-    return `
-    <div style="padding:9px 0;border-bottom:1px solid var(--border)">
-      <div style="font-weight:700;font-size:13px">${escHtml(p.type)} — ${escHtml(p.kourel)}</div>
-      <div style="font-size:11px;color:var(--text-light)">${escHtml(p.date)}${p.lieu?' · '+escHtml(p.lieu):''}</div>
-      <div style="font-size:11px;margin-top:3px"><span style="color:#16a34a;font-weight:700">✓ ${pres}</span> &nbsp;·&nbsp; <span style="color:#d97706;font-weight:700">⏱ ${rds}</span></div>
-    </div>`;
-  }).join('') || '<p style="color:var(--text-light);font-size:13px">Aucune session</p>';
+  document.getElementById('accueil-membres').innerHTML = cacheMembres.slice(0,5).map(m => `
+    <div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border)">
+      <div style="font-weight:700;font-size:13px">${escHtml(m.prenom + ' ' + m.nom)}</div>
+      <div style="font-size:12px;color:var(--text-light)">${escHtml(m.telephone || '—')}</div>
+    </div>`).join('') || '<p style="color:var(--text-light);font-size:13px">Aucun membre</p>';
 }
 
 // ══════════════════════════════════════════════════════════════
 // KOURELS
 // ══════════════════════════════════════════════════════════════
-function renderKourels() {
-  const visK = D().kourels.filter(k => isAdmin() || myKourels().includes(k.nom));
-  document.getElementById('kourels-grid').innerHTML = visK.map(k => {
-    const kMembers  = D().membres.filter(m => m.kourel === k.nom);
-    const adminUser = D().users.find(u => u.id === k.adminId);
-    return `
-    <div class="kourel-card">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
-        <h3 style="font-size:15px;font-weight:900">${escHtml(k.nom)}</h3>
-        ${badge(k.statut)}
-      </div>
-      <p style="font-size:12px;color:var(--text-light);margin-bottom:14px">${escHtml(k.description||'')}</p>
-      <div style="display:flex;gap:16px;margin-bottom:14px">
-        <div style="text-align:center">
-          <div style="font-size:22px;font-weight:900;color:var(--green)">${kMembers.length}</div>
-          <div style="font-size:11px;color:var(--text-light)">Membres</div>
-        </div>
-        <div style="text-align:center">
-          <div style="font-size:17px;font-weight:800;color:var(--orange)">${k.cotisation.toLocaleString()} F</div>
-          <div style="font-size:11px;color:var(--text-light)">${escHtml(k.frequence)}</div>
-        </div>
-      </div>
-      ${adminUser ? `<div style="font-size:12px;color:var(--text-light);margin-bottom:12px">👤 Admin: <strong>${escHtml(adminUser.nom)}</strong></div>` : ''}
-      <div style="display:flex;gap:8px;flex-wrap:wrap">
-        ${isAdmin() ? `<button class="btn btn-danger" onclick="deleteKourel(${k.id})">🗑 Supprimer</button>` : ''}
-        ${isKourelAdmin(k.nom) && !isAdmin() ? `<span style="font-size:11px;color:var(--green-dark);font-weight:700;padding:5px 10px;background:var(--green-muted);border-radius:8px">⭐ Vous êtes admin</span>` : ''}
-      </div>
-    </div>`;
-  }).join('') || '<p style="color:var(--text-light)">Aucun Kourel accessible.</p>';
+async function renderKourels() {
+  try {
+    cacheKourels = await api('GET', '/kourels');
+    document.getElementById('kourels-grid').innerHTML = cacheKourels.length
+      ? cacheKourels.map(k => `
+          <div class="kourel-card">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+              <h3 style="font-size:15px;font-weight:900">${escHtml(k.nom)}</h3>
+              ${badge(k.statut || 'Actif')}
+            </div>
+            <div style="font-size:13px;color:var(--text-light);margin-bottom:10px">${escHtml(k.description || '')}</div>
+            <div style="display:flex;gap:16px;margin-bottom:14px">
+              <div style="text-align:center">
+                <div style="font-size:17px;font-weight:800;color:var(--green)">${escHtml(k.type || '—')}</div>
+                <div style="font-size:11px;color:var(--text-light)">Type</div>
+              </div>
+            </div>
+            <button class="btn btn-danger" onclick="deleteKourel('${k._id}')">🗑 Supprimer</button>
+          </div>`).join('')
+      : '<p style="color:var(--text-light)">Aucun Kourel.</p>';
+  } catch(e) { showNotif('Erreur chargement Kourels', true); }
 }
 
-function addKourel() {
-  if (!isAdmin()) return;
+async function addKourel() {
   const nom = document.getElementById('k-nom').value.trim();
-  if (!nom) { showNotif('Veuillez entrer un nom de Kourel', true); return; }
-  if (D().kourels.some(k => k.nom.toLowerCase() === nom.toLowerCase())) {
-    showNotif('Un Kourel avec ce nom existe déjà', true); return;
-  }
-  const adminId = document.getElementById('k-admin-membre').value || null;
-  D().kourels.push({
-    id: Date.now(), nom,
-    cotisation:  +document.getElementById('k-cotisation').value || 0,
-    frequence:   document.getElementById('k-freq').value,
-    statut:      document.getElementById('k-statut').value,
-    description: document.getElementById('k-desc').value,
-    adminId: adminId || null,
-  });
-  if (!D().messages[nom]) D().messages[nom] = [];
-  ['k-nom','k-cotisation','k-desc'].forEach(id => document.getElementById(id).value = '');
-  toggleForm('form-kourel');
-  renderAll();
-  showNotif('Kourel "' + nom + '" créé !');
+  if (!nom) { showNotif('Nom obligatoire', true); return; }
+  try {
+    await api('POST', '/kourels', {
+      nom,
+      type:   document.getElementById('k-type').value,
+      statut: document.getElementById('k-statut').value
+    });
+    document.getElementById('k-nom').value = '';
+    toggleForm('form-kourel');
+    await renderKourels();
+    renderAccueil();
+    showNotif('Kourel créé !');
+  } catch(e) { showNotif(e.message, true); }
 }
 
-function deleteKourel(id) {
-  if (!isAdmin()) return;
-  const k = D().kourels.find(x => x.id === id);
-  if (!k) return;
-  D().membres       = D().membres.filter(m => m.kourel !== k.nom);
-  D().cotisations   = D().cotisations.filter(c => c.kourel !== k.nom);
-  D().presences     = D().presences.filter(p => p.kourel !== k.nom);
-  D().programmes    = D().programmes.filter(p => p.kourel !== k.nom);
-  D().conservatoires= D().conservatoires.filter(cv => cv.kourel !== k.nom);
-  delete D().messages[k.nom];
-  D().kourels = D().kourels.filter(x => x.id !== id);
-  renderAll();
-  showNotif('Kourel "' + k.nom + '" supprimé.');
+async function deleteKourel(id) {
+  if (!confirm('Supprimer ce Kourel ?')) return;
+  try {
+    await api('DELETE', '/kourels/' + id);
+    await renderKourels();
+    renderAccueil();
+    showNotif('Kourel supprimé ✅');
+  } catch(e) { showNotif(e.message, true); }
 }
 
 // ══════════════════════════════════════════════════════════════
 // MEMBRES
 // ══════════════════════════════════════════════════════════════
-function renderMembres() {
-  const q = (document.getElementById('search-membre')?.value || '').toLowerCase();
-  const visMembres = isAdmin()
-    ? D().membres
-    : D().membres.filter(m => myKourels().includes(m.kourel));
-  const filtered = visMembres.filter(m =>
-    (m.prenom+' '+m.nom+' '+m.kourel).toLowerCase().includes(q)
-  );
-  document.getElementById('membres-body').innerHTML = filtered.map(m => {
-    const isKAdmin = D().kourels.some(k => k.adminId === m.userId);
-    // FIX: utiliser le bon label dans le badge (était défini mais pas utilisé)
-    const roleLabel = isKAdmin ? 'Admin Kourel' : 'Membre';
-    return `
-    <tr>
-      <td><strong>${escHtml(m.prenom+' '+m.nom)}</strong><br><span style="font-size:11px;color:var(--text-light)">ID: ${escHtml(m.userId)}</span></td>
-      <td style="color:var(--text-light)">${escHtml(m.kourel)}</td>
-      <td>${escHtml(m.telephone||'—')}</td>
-      <td>${badge(roleLabel)}</td>
-      <td>${badge(m.statut)}</td>
-      <td>${isAdmin() ? `<button class="btn btn-danger" onclick="deleteMembre(${m.id})">🗑</button>` : ''}</td>
-    </tr>`;
-  }).join('') || '<tr><td colspan="6" style="text-align:center;color:var(--text-light);padding:24px">Aucun membre</td></tr>';
-  kourelOptionsForSelect('m-kourel', true);
+async function renderMembres() {
+  try {
+    cacheMembres = await api('GET', '/membres');
+    filtrerMembres();
+  } catch(e) { showNotif('Erreur chargement membres', true); }
 }
 
-function addMembre() {
-  if (!isAdmin()) return;
+function filtrerMembres() {
+  const q = (document.getElementById('search-membre')?.value || '').toLowerCase();
+  const membres = q
+    ? cacheMembres.filter(m => (m.prenom + ' ' + m.nom + ' ' + (m.telephone || '')).toLowerCase().includes(q))
+    : cacheMembres;
+  document.getElementById('membres-body').innerHTML = membres.length
+    ? membres.map(m => `
+        <tr>
+          <td><strong>${escHtml(m.prenom + ' ' + m.nom)}</strong></td>
+          <td style="color:var(--text-light)">${escHtml(m.kourel?.nom || '—')}</td>
+          <td>${escHtml(m.telephone || '—')}</td>
+          <td>${badge(m.role || 'Membre')}</td>
+          <td>${badge(m.statut || 'Actif')}</td>
+          <td><button class="btn btn-danger" onclick="deleteMembre('${m._id}')">🗑</button></td>
+        </tr>`).join('')
+    : '<tr><td colspan="6" style="text-align:center;color:var(--text-light);padding:24px">Aucun membre</td></tr>';
+}
+
+async function addMembre() {
   const prenom = document.getElementById('m-prenom').value.trim();
   const nom    = document.getElementById('m-nom').value.trim();
-  if (!prenom || !nom) { showNotif('Prénom et nom obligatoires', true); return; }
-  const kourelNom = document.getElementById('m-kourel').value;
-  if (!kourelNom) { showNotif('Veuillez sélectionner un Kourel', true); return; }
-
-  // FIX: génération d'un userId plus lisible et stable
-  const base = prenom.toLowerCase().replace(/\s+/g,'').replace(/[^a-z0-9]/g,'') +
-               '_' + nom.toLowerCase().replace(/\s+/g,'').replace(/[^a-z0-9]/g,'');
-  // Éviter les doublons d'ID
-  let userId = base;
-  let suffix = 1;
-  while (D().users.some(u => u.id === userId)) { userId = base + suffix; suffix++; }
-
-  const pwd = document.getElementById('m-pwd').value.trim() || 'membre123';
-  D().users.push({ id: userId, nom: prenom+' '+nom, pwd, role: 'membre' });
-  D().membres.push({
-    id: Date.now(), prenom, nom, kourel: kourelNom,
-    userId, telephone: document.getElementById('m-tel').value,
-    statut: 'Actif',
-  });
-  D().cotisations.push({
-    id: Date.now()+1,
-    membre: prenom+' '+nom, kourel: kourelNom,
-    montant: D().kourels.find(k => k.nom === kourelNom)?.cotisation || 0,
-    date: null, statut: 'En attente'
-  });
-  if (!D().messages[kourelNom]) D().messages[kourelNom] = [];
-  ['m-prenom','m-nom','m-tel','m-pwd'].forEach(id => document.getElementById(id).value = '');
-  toggleForm('form-membre');
-  renderAll();
-  showNotif(`Membre "${prenom} ${nom}" ajouté. Identifiant : ${userId}`);
+  const kourel = document.getElementById('m-kourel').value;
+  if (!prenom || !nom) { showNotif('Prénom et Nom obligatoires', true); return; }
+  try {
+    await api('POST', '/membres', {
+      prenom, nom,
+      telephone: document.getElementById('m-tel').value.trim(),
+      kourel:    kourel || undefined,
+      role:      'Membre'
+    });
+    ['m-prenom','m-nom','m-tel'].forEach(id => document.getElementById(id).value = '');
+    toggleForm('form-membre');
+    await renderMembres();
+    renderAccueil();
+    showNotif('Membre ajouté !');
+  } catch(e) { showNotif(e.message, true); }
 }
 
-function deleteMembre(id) {
-  if (!isAdmin()) return;
-  const m = D().membres.find(x => x.id === id);
-  if (m) {
-    D().users = D().users.filter(u => u.id !== m.userId);
-    // FIX: suppression cotisation par membre+kourel combiné (pas juste le nom)
-    D().cotisations = D().cotisations.filter(c =>
-      !(c.membre === m.prenom+' '+m.nom && c.kourel === m.kourel)
-    );
-  }
-  D().membres = D().membres.filter(x => x.id !== id);
-  renderAll();
-}
-
-// ══════════════════════════════════════════════════════════════
-// PROGRAMMES
-// ══════════════════════════════════════════════════════════════
-function selectTolerance(btn, val) {
-  document.querySelectorAll('#tol-buttons .tol-btn').forEach(b => b.classList.remove('selected'));
-  btn.classList.add('selected');
-  document.getElementById('pr-tolerance').value = val;
-}
-
-function handleAudioUpload(event) {
-  const file = event.target.files[0];
-  if (!file) return;
-  currentAudioFileName = file.name;
-  const reader = new FileReader();
-  reader.onload = e => {
-    currentAudioDataUrl = e.target.result;
-    const preview = document.getElementById('pr-audio-preview');
-    preview.style.display = 'block';
-    preview.innerHTML = `<div class="audio-player"><span class="audio-label">🎵 ${escHtml(file.name)}</span><audio controls src="${e.target.result}" style="flex:1;height:32px"></audio></div>`;
-  };
-  reader.readAsDataURL(file);
-}
-
-function addProgramme() {
-  const kourel  = document.getElementById('pr-kourel').value;
-  const xassida = document.getElementById('pr-xassida').value.trim();
-  if (!kourel || !xassida) { showNotif('Kourel et Xassida obligatoires', true); return; }
-  if (!isAdmin() && !isKourelAdmin(kourel)) { showNotif('Accès refusé', true); return; }
-  D().programmes.push({
-    id: Date.now(), kourel, xassida,
-    lieu:        document.getElementById('pr-lieu').value.trim(),
-    responsable: document.getElementById('pr-responsable').value.trim(),
-    jour:        document.getElementById('pr-jour').value,
-    heure:       document.getElementById('pr-heure').value,
-    tolerance:   document.getElementById('pr-tolerance').value,
-    notes:       document.getElementById('pr-notes').value.trim(),
-    audioUrl:    currentAudioDataUrl,
-    audioName:   currentAudioFileName,
-  });
-  ['pr-lieu','pr-xassida','pr-responsable','pr-notes'].forEach(id => document.getElementById(id).value = '');
-  document.getElementById('pr-heure').value = '';
-  document.getElementById('pr-audio-preview').style.display = 'none';
-  document.getElementById('pr-audio-file').value = '';
-  currentAudioDataUrl = null; currentAudioFileName = null;
-  document.querySelectorAll('#tol-buttons .tol-btn').forEach(b => b.classList.remove('selected'));
-  document.querySelector('#tol-buttons .tol-btn').classList.add('selected');
-  document.getElementById('pr-tolerance').value = '0';
-  toggleForm('form-programme');
-  renderAll();
-  showNotif('Programme enregistré !');
-}
-
-function deleteProgramme(id) {
-  if (!isAdmin()) return;
-  D().programmes = D().programmes.filter(p => p.id !== id);
-  renderAll();
-}
-
-// FIX: buildFilterBar utilise des data-attributes pour éviter les problèmes d'apostrophes
-function buildFilterBar(type, active, fnName) {
-  const bar = document.getElementById(type+'-filter-bar');
-  if (!bar) return;
-  const kourels = isAdmin() ? D().kourels.map(k => k.nom) : myKourels();
-  const allOptions = ['Tous', ...kourels];
-  bar.innerHTML = allOptions.map(k =>
-    `<button class="filter-btn${active===k?' active':''}" data-filter="${escAttr(k)}" data-fn="${escAttr(fnName)}" onclick="handleFilterClick(this)">${escHtml(k)}</button>`
-  ).join('');
-}
-
-function handleFilterClick(btn) {
-  const val = btn.getAttribute('data-filter');
-  const fn  = btn.getAttribute('data-fn');
-  if (fn === 'filterPresences') filterPresences(val, btn);
-  else if (fn === 'filterProgrammes') filterProgrammes(val, btn);
-}
-
-function filterProgrammes(val, btn) {
-  progFilterActive = val;
-  document.querySelectorAll('#prog-filter-bar .filter-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  renderProgrammes();
-}
-
-function renderProgrammes() {
-  const accessible = isAdmin() ? D().programmes : D().programmes.filter(p => canAccessKourel(p.kourel));
-  const filtered   = progFilterActive === 'Tous' ? accessible : accessible.filter(p => p.kourel === progFilterActive);
-  if (!filtered.length) {
-    document.getElementById('programmes-list').innerHTML = `<div style="text-align:center;padding:48px;color:var(--text-light)"><div style="font-size:44px;margin-bottom:10px">📅</div><p style="font-size:15px;font-weight:700">Aucun programme défini</p></div>`;
-    return;
-  }
-  document.getElementById('programmes-list').innerHTML = filtered.map(p => `
-    <div class="programme-card">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start">
-        <div>
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
-            <span class="jour-badge">${escHtml(p.jour)}</span>
-            ${p.heure ? `<span style="font-size:15px;font-weight:900;color:var(--green)">⏰ ${escHtml(p.heure)}</span>` : ''}
-          </div>
-          <h3 style="font-size:17px;font-weight:900">${escHtml(p.xassida)}</h3>
-          <div style="font-size:12px;color:var(--text-light);margin-top:2px">${escHtml(p.kourel)}</div>
-        </div>
-        ${isAdmin()||isKourelAdmin(p.kourel) ? `<button class="btn btn-danger" onclick="deleteProgramme(${p.id})">🗑</button>` : ''}
-      </div>
-      <div class="prog-info-grid">
-        ${p.lieu ? `<div class="prog-info-item"><div class="prog-info-label">📍 Lieu</div><div class="prog-info-value">${escHtml(p.lieu)}</div></div>` : ''}
-        ${p.responsable ? `<div class="prog-info-item"><div class="prog-info-label">🎤 Responsable</div><div class="prog-info-value">${escHtml(p.responsable)}</div></div>` : ''}
-        <div class="prog-info-item"><div class="prog-info-label">⏱ Tolérance</div><div class="prog-info-value">${p.tolerance==='0'?'Aucune':p.tolerance+' min'}</div></div>
-      </div>
-      ${p.notes ? `<div style="margin-top:12px;padding:10px 14px;background:#f4faf4;border-radius:10px;font-size:12px;color:var(--text-light);border-left:3px solid var(--green)"><strong>📝</strong> ${escHtml(p.notes)}</div>` : ''}
-      ${p.audioUrl ? `<div class="audio-player" style="margin-top:12px"><span class="audio-label">🎵 ${escHtml(p.audioName||'Son de référence')}</span><audio controls src="${p.audioUrl}" style="flex:1;height:30px"></audio></div>` : ''}
-    </div>`).join('');
-}
-
-// ══════════════════════════════════════════════════════════════
-// PRÉSENCES
-// ══════════════════════════════════════════════════════════════
-function loadMembresForPresence() {
-  const kourelNom = document.getElementById('p-kourel').value;
-  const membres   = D().membres.filter(m => m.kourel === kourelNom);
-  presenceStatuts = {};
-  const container = document.getElementById('p-membres-list');
-  if (!membres.length) {
-    container.innerHTML = '<p style="color:var(--text-light);font-size:12px;text-align:center;padding:16px">Aucun membre dans ce Kourel</p>';
-    return;
-  }
-  container.innerHTML = `
-    <div style="margin-bottom:10px"><div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--green-dark)">Statut de présence</div></div>
-    <div style="background:#fff;border-radius:12px;border:1.5px solid var(--border);overflow:hidden">
-      ${membres.map(m => `
-        <div class="membre-presence-row" id="row-${m.id}">
-          <div class="membre-presence-name">${escHtml(m.prenom+' '+m.nom)}</div>
-          <div class="status-group">
-            <button class="status-btn present" onclick="setPresStatus(${m.id},'Présent',this)">✓ Présent</button>
-            <button class="status-btn retard"  onclick="setPresStatus(${m.id},'Retard',this)">⏱ Retard</button>
-            <button class="status-btn absent"  onclick="setPresStatus(${m.id},'Absent',this)">✗ Absent</button>
-          </div>
-          <input type="number" class="retard-input" id="retard-${m.id}" placeholder="min" min="1" max="120"/>
-        </div>`).join('')}
-    </div>
-    <div style="margin-top:10px;display:flex;gap:16px;font-size:12px">
-      <span id="p-count-present" style="color:#16a34a;font-weight:700">✓ 0 présents</span>
-      <span id="p-count-retard"  style="color:#d97706;font-weight:700">⏱ 0 retards</span>
-      <span id="p-count-absent"  style="color:#dc2626;font-weight:700">✗ 0 absents</span>
-    </div>`;
-  updatePresenceCounts();
-}
-
-function setPresStatus(membreId, statut, btn) {
-  const row = document.getElementById('row-'+membreId);
-  row.querySelectorAll('.status-btn').forEach(b => b.classList.remove('selected'));
-  btn.classList.add('selected');
-  const ri = document.getElementById('retard-'+membreId);
-  if (statut === 'Retard') ri.classList.add('visible');
-  else { ri.classList.remove('visible'); ri.value = ''; }
-  presenceStatuts[membreId] = { statut };
-  updatePresenceCounts();
-}
-
-function updatePresenceCounts() {
-  const vals = Object.values(presenceStatuts);
-  const p = vals.filter(v => v.statut==='Présent').length;
-  const r = vals.filter(v => v.statut==='Retard').length;
-  const a = vals.filter(v => v.statut==='Absent').length;
-  const map = { 'p-count-present':`✓ ${p} présents`, 'p-count-retard':`⏱ ${r} retards`, 'p-count-absent':`✗ ${a} absents` };
-  Object.entries(map).forEach(([id,txt]) => { const el = document.getElementById(id); if(el) el.textContent = txt; });
-}
-
-function savePresenceSession() {
-  const date      = document.getElementById('p-date').value;
-  const kourelNom = document.getElementById('p-kourel').value;
-  if (!date || !kourelNom) { showNotif('Date et Kourel obligatoires', true); return; }
-  if (!isAdmin() && !isKourelAdmin(kourelNom)) { showNotif('Accès refusé', true); return; }
-  const membres = D().membres.filter(m => m.kourel === kourelNom);
-  D().presences.unshift({
-    id: Date.now(), date, kourel: kourelNom,
-    type: document.getElementById('p-type').value,
-    lieu: document.getElementById('p-lieu').value.trim(),
-    membres: membres.map(m => {
-      const s  = presenceStatuts[m.id];
-      const ri = document.getElementById('retard-'+m.id);
-      return {
-        id: m.id, nom: m.prenom+' '+m.nom,
-        statut: s ? s.statut : 'Absent',
-        retardMin: s && s.statut==='Retard' ? (+ri?.value||null) : null
-      };
-    })
-  });
-  presenceStatuts = {};
-  ['p-date','p-lieu'].forEach(id => document.getElementById(id).value = '');
-  document.getElementById('p-membres-list').innerHTML = '';
-  toggleForm('form-presence');
-  renderAll();
-  showNotif('Session enregistrée !');
-}
-
-function filterPresences(val, btn) {
-  presFilterActive = val;
-  document.querySelectorAll('#pres-filter-bar .filter-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  renderPresences();
-}
-
-function renderPresences() {
-  const accessible = isAdmin() ? D().presences : D().presences.filter(p => canAccessKourel(p.kourel));
-  const filtered   = presFilterActive === 'Tous' ? accessible : accessible.filter(p => p.kourel === presFilterActive);
-  if (!filtered.length) {
-    document.getElementById('presences-list').innerHTML = `<div style="text-align:center;padding:48px;color:var(--text-light)"><div style="font-size:44px;margin-bottom:10px">✅</div><p style="font-size:15px;font-weight:700">Aucune session enregistrée</p></div>`;
-    return;
-  }
-  document.getElementById('presences-list').innerHTML = filtered.map(p => {
-    const presents = p.membres.filter(m => m.statut==='Présent').length;
-    const retards  = p.membres.filter(m => m.statut==='Retard').length;
-    const absents  = p.membres.filter(m => m.statut==='Absent').length;
-    const total    = p.membres.length;
-    const tauxP    = total ? Math.round((presents+retards)/total*100) : 0;
-    return `
-    <div class="presence-session-card">
-      <div class="presence-session-header">
-        <div><div class="presence-session-title">${escHtml(p.type)} — ${escHtml(p.kourel)}</div><div class="presence-session-meta">📅 ${escHtml(p.date)}${p.lieu?' · 📍 '+escHtml(p.lieu):''}</div></div>
-        <div style="text-align:right"><div style="font-size:26px;font-weight:900">${tauxP}%</div><div style="font-size:11px;opacity:.88">présence</div></div>
-      </div>
-      <div class="presence-stats-row">
-        <div class="pstat"><div class="pstat-dot pstat-present"></div><span style="color:#166534">${presents} Présents</span></div>
-        <div class="pstat"><div class="pstat-dot pstat-retard"></div><span style="color:#92400e">${retards} Retards</span></div>
-        <div class="pstat"><div class="pstat-dot pstat-absent"></div><span style="color:#991b1b">${absents} Absents</span></div>
-        <div style="flex:1"></div><div style="font-size:11px;color:var(--text-light)">${total} membres</div>
-      </div>
-      ${p.membres.map(m => {
-        let ss='',si='';
-        if(m.statut==='Présent'){ss='color:#166534;background:#dcfce7';si='✓';}
-        else if(m.statut==='Retard'){ss='color:#92400e;background:#fef3c7';si='⏱';}
-        else{ss='color:#991b1b;background:#fee2e2';si='✗';}
-        return `<div class="membre-presence-row"><div class="membre-presence-name">${escHtml(m.nom)}</div><div style="flex:1"></div><span style="padding:3px 12px;border-radius:99px;font-size:11px;font-weight:800;${ss}">${si} ${escHtml(m.statut)}${m.retardMin?' · '+m.retardMin+' min':''}</span></div>`;
-      }).join('')}
-    </div>`;
-  }).join('');
-}
-
-// ══════════════════════════════════════════════════════════════
-// COTISATIONS
-// ══════════════════════════════════════════════════════════════
-function renderCotisations() {
-  const visCots = isAdmin() ? D().cotisations : D().cotisations.filter(c => canAccessKourel(c.kourel));
-  const payees  = visCots.filter(c => c.statut === 'Payé');
-  const attente = visCots.filter(c => c.statut !== 'Payé');
-  const total   = payees.reduce((s,c) => s + c.montant, 0);
-  document.getElementById('cot-total').textContent   = total.toLocaleString() + ' F';
-  document.getElementById('cot-payees').textContent  = payees.length;
-  document.getElementById('cot-attente').textContent = attente.length;
-  document.getElementById('cotisations-body').innerHTML = visCots.map(c => `
-    <tr>
-      <td><strong>${escHtml(c.membre)}</strong></td>
-      <td style="color:var(--text-light)">${escHtml(c.kourel)}</td>
-      <td style="font-weight:700;color:var(--green)">${c.montant.toLocaleString()} F</td>
-      <td style="color:var(--text-light)">${escHtml(c.date||'—')}</td>
-      <td>${badge(c.statut)}</td>
-      <td>${c.statut!=='Payé'&&(isAdmin()||isKourelAdmin(c.kourel)) ? `<button class="btn btn-success" onclick="marquerPaye(${c.id})">Marquer payé</button>` : ''}</td>
-    </tr>`).join('') || '<tr><td colspan="6" style="text-align:center;color:var(--text-light);padding:24px">Aucune cotisation</td></tr>';
-}
-
-function marquerPaye(id) {
-  const c = D().cotisations.find(c => c.id === id);
-  if (c) { c.statut = 'Payé'; c.date = new Date().toISOString().split('T')[0]; }
-  renderAll();
+async function deleteMembre(id) {
+  if (!confirm('Supprimer ce membre ?')) return;
+  try {
+    await api('DELETE', '/membres/' + id);
+    await renderMembres();
+    renderAccueil();
+    showNotif('Membre supprimé ✅');
+  } catch(e) { showNotif(e.message, true); }
 }
 
 // ══════════════════════════════════════════════════════════════
 // CONSERVATOIRE
 // ══════════════════════════════════════════════════════════════
-function updateConservMembres() {
-  const kourelNom = document.getElementById('cv-kourel')?.value;
-  if (!kourelNom) return;
-  const membres   = D().membres.filter(m => m.kourel === kourelNom);
-  const container = document.getElementById('cv-membres-select');
-  if (!container) return;
-  if (!membres.length) {
-    container.innerHTML = '<div style="padding:14px;color:var(--text-light);font-size:12px;text-align:center">Aucun membre dans ce Kourel</div>';
-    return;
-  }
-  container.innerHTML = membres.map(m => `
-    <label style="display:flex;align-items:center;gap:10px;padding:12px 16px;cursor:pointer;border-bottom:1px solid var(--border);transition:background .15s" onmouseover="this.style.background='#f4faf4'" onmouseout="this.style.background=''">
-      <input type="checkbox" value="${escAttr(m.userId)}" style="width:16px;height:16px;accent-color:var(--green)"/>
-      <div>
-        <div style="font-size:13px;font-weight:700">${escHtml(m.prenom+' '+m.nom)}</div>
-        <div style="font-size:11px;color:var(--text-light)">${escHtml(m.kourel)}</div>
-      </div>
-    </label>`).join('');
+async function renderConservatoires() {
+  try {
+    const groupes = await api('GET', '/conservatoire');
+    document.getElementById('stat-conserv').textContent = groupes.length;
+    document.getElementById('conservatoires-list').innerHTML = groupes.length
+      ? groupes.map(cv => {
+          const membres = cv.membres || [];
+          return `
+          <div class="conserv-card">
+            <div class="conserv-header">
+              <div>
+                <div class="conserv-title">🎵 ${escHtml(cv.nom)}</div>
+                <div class="conserv-meta">Kourel : ${escHtml(cv.kourel?.nom || '—')}</div>
+              </div>
+              <button class="btn btn-danger" onclick="deleteConservatoire('${cv._id}')">🗑</button>
+            </div>
+            <div>${membres.map(m => `<span class="member-chip">${escHtml((m.prenom||'') + ' ' + (m.nom||''))}</span>`).join('') || '<span style="font-size:12px;color:var(--text-light)">Aucun membre</span>'}</div>
+          </div>`;
+        }).join('')
+      : '<p style="color:var(--text-light)">Aucun groupe conservatoire.</p>';
+  } catch(e) { showNotif('Erreur chargement conservatoire', true); }
 }
 
-function addConservatoire() {
+function updateConservMembres() {
+  const kourelId = document.getElementById('cv-kourel')?.value;
+  const membres  = kourelId ? cacheMembres.filter(m => (m.kourel?._id || m.kourel) === kourelId) : [];
+  document.getElementById('cv-membres-select').innerHTML = membres.length
+    ? membres.map(m => `
+        <label style="display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;border-bottom:1px solid var(--border)">
+          <input type="checkbox" value="${m._id}" style="width:16px;height:16px;accent-color:var(--green)" />
+          <span style="font-size:13px;font-weight:700">${escHtml(m.prenom + ' ' + m.nom)}</span>
+        </label>`).join('')
+    : '<div style="padding:14px;color:var(--text-light);font-size:13px">Aucun membre dans ce Kourel</div>';
+}
+
+async function addConservatoire() {
   const kourel = document.getElementById('cv-kourel').value;
   const nom    = document.getElementById('cv-nom').value.trim();
-  if (!kourel || !nom) { showNotif('Kourel et nom du groupe obligatoires', true); return; }
-  if (!isAdmin() && !isKourelAdmin(kourel)) {
-    showNotif('Accès refusé — seul l\'admin du Kourel peut créer un groupe conservatoire', true); return;
-  }
-  const checked = [...document.querySelectorAll('#cv-membres-select input:checked')].map(c => c.value);
-  const cvId = 'cv_' + Date.now();
-  D().conservatoires.push({
-    id: cvId, kourel, nom,
-    xassida:     document.getElementById('cv-xassida').value.trim(),
-    responsable: document.getElementById('cv-responsable').value.trim(),
-    membres:     checked,
-    createdAt:   new Date().toISOString().split('T')[0]
-  });
-  if (!D().messages[cvId]) D().messages[cvId] = [];
-  ['cv-nom','cv-xassida','cv-responsable'].forEach(id => document.getElementById(id).value = '');
-  toggleForm('form-conservatoire');
-  renderAll();
-  showNotif('Groupe conservatoire "' + nom + '" créé !');
+  if (!kourel || !nom) { showNotif('Kourel et nom obligatoires', true); return; }
+  const membres = [...document.querySelectorAll('#cv-membres-select input:checked')].map(i => i.value);
+  try {
+    await api('POST', '/conservatoire', { nom, kourel, membres });
+    document.getElementById('cv-nom').value = '';
+    toggleForm('form-conservatoire');
+    await renderConservatoires();
+    showNotif('Groupe créé !');
+  } catch(e) { showNotif(e.message, true); }
 }
 
-function deleteConservatoire(id) {
-  const cv = D().conservatoires.find(c => c.id === id);
-  if (!cv) return;
-  if (!isAdmin() && !isKourelAdmin(cv.kourel)) { showNotif('Accès refusé', true); return; }
-  delete D().messages[id];
-  D().conservatoires = D().conservatoires.filter(c => c.id !== id);
-  renderAll();
+async function deleteConservatoire(id) {
+  if (!confirm('Supprimer ce groupe ?')) return;
+  try {
+    await api('DELETE', '/conservatoire/' + id);
+    await renderConservatoires();
+    showNotif('Groupe supprimé ✅');
+  } catch(e) { showNotif(e.message, true); }
 }
 
-function addMemberToConserv(cvId) {
-  const cv = D().conservatoires.find(c => c.id === cvId);
-  if (!cv) return;
-  if (!isAdmin() && !isKourelAdmin(cv.kourel)) {
-    showNotif('Seul l\'admin du Kourel peut modifier ce groupe', true); return;
-  }
-  const sel = document.getElementById('add-member-sel-'+cvId);
-  if (!sel || !sel.value) return;
-  if (!cv.membres.includes(sel.value)) {
-    cv.membres.push(sel.value);
-    renderConservatoires();
-    showNotif('Membre ajouté !');
-  }
+// ══════════════════════════════════════════════════════════════
+// PROGRAMMES
+// ══════════════════════════════════════════════════════════════
+async function renderProgrammes() {
+  try {
+    const progs = await api('GET', '/programmes');
+    document.getElementById('programmes-list').innerHTML = progs.length
+      ? progs.map(p => `
+          <div class="programme-card">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start">
+              <div>
+                <span class="jour-badge">${escHtml(p.jour || '—')}</span>
+                <h3 style="font-size:16px;font-weight:900;margin-top:8px">${escHtml(p.xassida)}</h3>
+                <div style="font-size:12px;color:var(--text-light)">${escHtml(p.kourel?.nom || '—')}</div>
+              </div>
+              <button class="btn btn-danger" onclick="deleteProgramme('${p._id}')">🗑</button>
+            </div>
+            <div class="prog-info-grid">
+              ${p.lieu ? `<div class="prog-info-item"><div class="prog-info-label">Lieu</div><div class="prog-info-value">${escHtml(p.lieu)}</div></div>` : ''}
+              ${p.heure ? `<div class="prog-info-item"><div class="prog-info-label">Heure</div><div class="prog-info-value">${escHtml(p.heure)}</div></div>` : ''}
+              ${p.responsable ? `<div class="prog-info-item"><div class="prog-info-label">Responsable</div><div class="prog-info-value">${escHtml(p.responsable)}</div></div>` : ''}
+              <div class="prog-info-item"><div class="prog-info-label">Tolérance</div><div class="prog-info-value">${p.tolerance || 0} min</div></div>
+            </div>
+            ${p.notes ? `<div style="margin-top:10px;font-size:12px;color:var(--text-light)">${escHtml(p.notes)}</div>` : ''}
+          </div>`).join('')
+      : '<p style="color:var(--text-light)">Aucun programme.</p>';
+  } catch(e) { showNotif('Erreur chargement programmes', true); }
 }
 
-function removeMemberFromConserv(cvId, userId) {
-  const cv = D().conservatoires.find(c => c.id === cvId);
-  if (!cv) return;
-  if (!isAdmin() && !isKourelAdmin(cv.kourel)) {
-    showNotif('Seul l\'admin du Kourel peut modifier ce groupe', true); return;
-  }
-  cv.membres = cv.membres.filter(id => id !== userId);
-  renderConservatoires();
+async function addProgramme() {
+  const kourel  = document.getElementById('pr-kourel').value;
+  const xassida = document.getElementById('pr-xassida').value.trim();
+  if (!kourel || !xassida) { showNotif('Kourel et Xassida obligatoires', true); return; }
+  try {
+    await api('POST', '/programmes', {
+      kourel, xassida,
+      lieu:        document.getElementById('pr-lieu').value.trim(),
+      responsable: document.getElementById('pr-responsable').value.trim(),
+      jour:        document.getElementById('pr-jour').value,
+      heure:       document.getElementById('pr-heure').value,
+      tolerance:   parseInt(document.getElementById('pr-tolerance').value) || 0,
+      notes:       document.getElementById('pr-notes').value.trim()
+    });
+    ['pr-xassida','pr-lieu','pr-responsable','pr-notes','pr-heure'].forEach(id => document.getElementById(id).value = '');
+    toggleForm('form-programme');
+    await renderProgrammes();
+    showNotif('Programme enregistré !');
+  } catch(e) { showNotif(e.message, true); }
 }
 
-function renderConservatoires() {
-  const visCV = D().conservatoires.filter(cv => isAdmin() || canAccessConserv(cv));
-  if (!visCV.length) {
-    document.getElementById('conservatoires-list').innerHTML = `<div style="text-align:center;padding:48px;color:var(--text-light)"><div style="font-size:44px;margin-bottom:10px">🎵</div><p style="font-size:15px;font-weight:700">Aucun groupe conservatoire</p><p style="font-size:12px;margin-top:6px">L'admin d'un Kourel peut créer des groupes conservatoires privés</p></div>`;
-    return;
-  }
-  document.getElementById('conservatoires-list').innerHTML = visCV.map(cv => {
-    const cvMembers     = cv.membres.map(uid => D().membres.find(m => m.userId === uid)).filter(Boolean);
-    const canManage     = isAdmin() || isKourelAdmin(cv.kourel);
-    const kourelMembers = D().membres.filter(m => m.kourel === cv.kourel && !cv.membres.includes(m.userId));
-    return `
-    <div class="conserv-card">
-      <div class="conserv-header">
-        <div>
-          <div class="conserv-title">🎵 ${escHtml(cv.nom)}</div>
-          <div class="conserv-meta">Kourel: ${escHtml(cv.kourel)}${cv.responsable?' · Resp: '+escHtml(cv.responsable):''}${cv.xassida?' · '+escHtml(cv.xassida):''}</div>
-        </div>
-        <div style="display:flex;gap:8px;align-items:center">
-          <span style="background:var(--green-muted);color:var(--green-dark);border-radius:99px;padding:3px 10px;font-size:11px;font-weight:700">${cv.membres.length} membres</span>
-          ${canManage ? `<button class="btn btn-danger" onclick="deleteConservatoire('${escAttr(cv.id)}')">🗑</button>` : ''}
-        </div>
-      </div>
-      <div style="margin-bottom:12px">
-        <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--text-light);margin-bottom:8px">Membres du groupe</div>
-        <div style="display:flex;flex-wrap:wrap">
-          ${cvMembers.map(m => `
-            <div class="member-chip">
-              ${escHtml(m.prenom+' '+m.nom)}
-              ${canManage ? `<span class="rm" onclick="removeMemberFromConserv('${escAttr(cv.id)}','${escAttr(m.userId)}')">×</span>` : ''}
-            </div>`).join('')}
-          ${!cv.membres.length ? '<span style="color:var(--text-light);font-size:12px;padding:4px">Aucun membre</span>' : ''}
-        </div>
-      </div>
-      ${canManage && kourelMembers.length ? `
-        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-          <select id="add-member-sel-${escAttr(cv.id)}" style="max-width:220px;padding:8px 12px;border-radius:8px;border:1.5px solid var(--border);font-size:12px">
-            ${kourelMembers.map(m => `<option value="${escAttr(m.userId)}">${escHtml(m.prenom+' '+m.nom)}</option>`).join('')}
-          </select>
-          <button class="btn btn-primary" style="font-size:12px;padding:7px 14px" onclick="addMemberToConserv('${escAttr(cv.id)}')">+ Ajouter</button>
-        </div>` : ''}
-    </div>`;
-  }).join('');
+async function deleteProgramme(id) {
+  if (!confirm('Supprimer ce programme ?')) return;
+  try {
+    await api('DELETE', '/programmes/' + id);
+    await renderProgrammes();
+    showNotif('Programme supprimé ✅');
+  } catch(e) { showNotif(e.message, true); }
+}
+
+// ══════════════════════════════════════════════════════════════
+// PRESENCES
+// ══════════════════════════════════════════════════════════════
+function loadMembresForPresence() {
+  const kourelId = document.getElementById('p-kourel').value;
+  const membres  = cacheMembres.filter(m => (m.kourel?._id || m.kourel) === kourelId);
+  presenceStatuts = {};
+  document.getElementById('p-membres-list').innerHTML = membres.length
+    ? `<div style="background:#fff;border-radius:12px;border:1.5px solid var(--border);overflow:hidden">
+        ${membres.map(m => `
+          <div class="membre-presence-row" id="row-${m._id}">
+            <div class="membre-presence-name">${escHtml(m.prenom + ' ' + m.nom)}</div>
+            <div class="status-group">
+              <button class="status-btn present" onclick="setPresStatus('${m._id}','Présent',this)">✓ Présent</button>
+              <button class="status-btn retard"  onclick="setPresStatus('${m._id}','Retard',this)">⏱ Retard</button>
+              <button class="status-btn absent"  onclick="setPresStatus('${m._id}','Absent',this)">✗ Absent</button>
+            </div>
+          </div>`).join('')}
+      </div>`
+    : '<p style="color:var(--text-light);font-size:13px">Aucun membre dans ce Kourel</p>';
+}
+
+function setPresStatus(membreId, statut, btn) {
+  const row = document.getElementById('row-' + membreId);
+  row.querySelectorAll('.status-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  presenceStatuts[membreId] = statut;
+}
+
+async function savePresenceSession() {
+  const date   = document.getElementById('p-date').value;
+  const kourel = document.getElementById('p-kourel').value;
+  if (!date || !kourel) { showNotif('Date et Kourel obligatoires', true); return; }
+  const membres = cacheMembres
+    .filter(m => (m.kourel?._id || m.kourel) === kourel)
+    .map(m => ({ membre: m._id, statut: presenceStatuts[m._id] || 'Absent' }));
+  try {
+    await api('POST', '/presences', {
+      kourel, date,
+      type: document.getElementById('p-type').value,
+      lieu: document.getElementById('p-lieu').value.trim(),
+      membres
+    });
+    presenceStatuts = {};
+    ['p-date','p-lieu'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('p-membres-list').innerHTML = '';
+    toggleForm('form-presence');
+    await renderPresences();
+    showNotif('Session enregistrée !');
+  } catch(e) { showNotif(e.message, true); }
+}
+
+async function renderPresences() {
+  try {
+    const sessions = await api('GET', '/presences');
+    document.getElementById('stat-presence').textContent = sessions.length;
+    document.getElementById('presences-list').innerHTML = sessions.length
+      ? sessions.map(p => {
+          const presents = p.membres.filter(m => m.statut === 'Présent').length;
+          const retards  = p.membres.filter(m => m.statut === 'Retard').length;
+          const absents  = p.membres.filter(m => m.statut === 'Absent').length;
+          const total    = p.membres.length;
+          const pct      = total ? Math.round((presents + retards) / total * 100) : 0;
+          return `
+          <div class="presence-session-card">
+            <div class="presence-session-header">
+              <div>
+                <div class="presence-session-title">${escHtml(p.type)} — ${escHtml(p.kourel?.nom || '—')}</div>
+                <div class="presence-session-meta">${escHtml(new Date(p.date).toLocaleDateString('fr-FR'))}${p.lieu ? ' · ' + escHtml(p.lieu) : ''}</div>
+              </div>
+              <div style="font-size:24px;font-weight:900">${pct}%</div>
+            </div>
+            <div class="presence-stats-row">
+              <div class="pstat"><div class="pstat-dot pstat-present"></div>${presents} Présents</div>
+              <div class="pstat"><div class="pstat-dot pstat-retard"></div>${retards} Retards</div>
+              <div class="pstat"><div class="pstat-dot pstat-absent"></div>${absents} Absents</div>
+            </div>
+          </div>`;
+        }).join('')
+      : '<p style="color:var(--text-light)">Aucune session.</p>';
+  } catch(e) { showNotif('Erreur chargement présences', true); }
+}
+
+// ══════════════════════════════════════════════════════════════
+// COTISATIONS
+// ══════════════════════════════════════════════════════════════
+async function renderCotisations() {
+  try {
+    const cots    = await api('GET', '/adiyeu');
+    const payees  = cots.filter(c => c.statut === 'Payé');
+    const attente = cots.filter(c => c.statut !== 'Payé');
+    const total   = payees.reduce((s, c) => s + (c.montant || 0), 0);
+    document.getElementById('cot-total').textContent   = total.toLocaleString() + ' F';
+    document.getElementById('cot-payees').textContent  = payees.length;
+    document.getElementById('cot-attente').textContent = attente.length;
+    document.getElementById('cotisations-body').innerHTML = cots.length
+      ? cots.map(c => `
+          <tr>
+            <td><strong>${escHtml((c.membre?.prenom || '') + ' ' + (c.membre?.nom || ''))}</strong></td>
+            <td>${escHtml(c.kourel?.nom || '—')}</td>
+            <td>${(c.montant || 0).toLocaleString()} F</td>
+            <td>${escHtml(c.date ? new Date(c.date).toLocaleDateString('fr-FR') : '—')}</td>
+            <td>${badge(c.statut)}</td>
+            <td>${c.statut !== 'Payé' ? `<button class="btn btn-success" onclick="payerCotisation('${c._id}')">✓ Payer</button>` : ''}</td>
+          </tr>`).join('')
+      : '<tr><td colspan="6" style="text-align:center;color:var(--text-light);padding:24px">Aucune cotisation</td></tr>';
+  } catch(e) { /* silencieux si pas de route */ }
+}
+
+async function payerCotisation(id) {
+  try {
+    await api('PUT', '/adiyeu/' + id, { statut: 'Payé', date: new Date().toISOString().split('T')[0] });
+    await renderCotisations();
+    showNotif('Cotisation payée ✅');
+  } catch(e) { showNotif(e.message, true); }
 }
 
 // ══════════════════════════════════════════════════════════════
 // MESSAGERIE
 // ══════════════════════════════════════════════════════════════
-// FIX: utiliser des data-attributes au lieu d'inline JS string pour éviter les bugs avec apostrophes
 function renderChatSidebar() {
   const list = document.getElementById('chat-room-list');
   if (!list) return;
-  const myK  = myKourels();
-  const rooms = [];
-
-  D().kourels.forEach(k => {
-    const hasAccess = isAdmin() || myK.includes(k.nom);
-    rooms.push({ id: k.nom, name: k.nom, icon: '👥', desc: 'Groupe principal', gold: false, locked: !hasAccess });
-  });
-  D().conservatoires.forEach(cv => {
-    const hasAccess = canAccessConserv(cv);
-    rooms.push({ id: cv.id, name: cv.nom, icon: '🎵', desc: 'Conservatoire · '+cv.kourel, gold: true, locked: !hasAccess });
-  });
-
-  list.innerHTML = rooms.map(r => `
-    <div class="chat-room-item${r.locked?' locked':''}${activeChatRoom===r.id?' active':''}"
-         data-room-id="${escAttr(r.id)}"
-         data-locked="${r.locked?'1':'0'}"
-         onclick="handleRoomClick(this)">
-      <div class="room-icon${r.gold?' gold':''}">${r.icon}</div>
+  list.innerHTML = cacheKourels.map(k => `
+    <div class="chat-room-item${activeChatRoom === k._id ? ' active' : ''}" onclick="openChatRoom('${k._id}','${escHtml(k.nom)}')">
+      <div class="room-icon">👥</div>
       <div>
-        <div class="room-name">${escHtml(r.name)}</div>
-        <div class="room-desc">${escHtml(r.desc)}</div>
+        <div class="room-name">${escHtml(k.nom)}</div>
+        <div class="room-desc">Groupe Kourel</div>
       </div>
-      ${r.locked ? '<span class="lock-icon">🔒</span>' : ''}
-    </div>`).join('') || '<div style="padding:20px;text-align:center;font-size:12px;color:var(--text-light)">Aucun groupe disponible</div>';
+    </div>`).join('') || '<div style="padding:16px;font-size:12px;color:var(--text-light)">Aucun groupe</div>';
 }
 
-function handleRoomClick(el) {
-  if (el.getAttribute('data-locked') === '1') {
-    showNotif('Accès refusé — vous n\'êtes pas membre de ce groupe', true);
-    return;
-  }
-  openChatRoom(el.getAttribute('data-room-id'));
-}
-
-function openChatRoom(roomId) {
-  activeChatRoom = roomId;
+async function openChatRoom(kourelId, nom) {
+  activeChatRoom = kourelId;
   renderChatSidebar();
-  renderChatMain(roomId);
-}
-
-function renderChatMain(roomId) {
-  const main = document.getElementById('chat-main');
-  if (!main) return;
-  const msgs     = D().messages[roomId] || [];
-  const isKourel = D().kourels.some(k => k.nom === roomId);
-  const cv       = D().conservatoires.find(c => c.id === roomId);
-  const roomName = isKourel ? roomId : (cv ? cv.nom : roomId);
-  const roomDesc = isKourel ? 'Groupe Kourel' : (cv ? 'Conservatoire · '+cv.kourel : '');
-
-  // FIX: utiliser data-attribute pour le roomId dans le bouton d'envoi
-  main.innerHTML = `
-    <div class="chat-main-header">
-      <div class="chat-main-icon">${isKourel ? '👥' : '🎵'}</div>
-      <div>
-        <div class="chat-main-title">${escHtml(roomName)}</div>
-        <div class="chat-main-sub">${escHtml(roomDesc)}</div>
+  try {
+    const msgs = await api('GET', '/messages/' + kourelId);
+    const main = document.getElementById('chat-main');
+    main.innerHTML = `
+      <div class="chat-main-header">
+        <div class="chat-main-icon">👥</div>
+        <div><div class="chat-main-title">${escHtml(nom)}</div></div>
       </div>
-    </div>
-    <div class="chat-messages" id="chat-msgs-area">
-      ${msgs.length ? msgs.map(m => {
-        const isMine = m.userId === session.user.id;
-        return `<div style="display:flex;flex-direction:column;align-items:${isMine?'flex-end':'flex-start'}">
-          <div class="msg-bubble ${isMine?'msg-mine':'msg-other'}">
-            ${!isMine ? `<div class="msg-sender">${escHtml(m.nom)}</div>` : ''}
-            ${escHtml(m.text)}
-            <div class="msg-time">${escHtml(m.time)}</div>
-          </div>
-        </div>`;
-      }).join('') : `<div class="chat-empty"><div class="ce-icon">💬</div><p>Aucun message dans ce groupe</p><p style="font-size:12px;margin-top:4px;color:var(--text-light)">Soyez le premier à écrire !</p></div>`}
-    </div>
-    <div class="chat-input-bar">
-      <textarea id="chat-input-field" placeholder="Écrire un message…" rows="1"
-        onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendCurrentMsg()}"
-      ></textarea>
-      <button class="chat-send-btn" onclick="sendCurrentMsg()">➤</button>
-    </div>`;
-
-  // Stocker le roomId actif pour l'envoi
-  main.setAttribute('data-current-room', roomId);
-
-  setTimeout(() => {
-    const msgEl = document.getElementById('chat-msgs-area');
-    if (msgEl) msgEl.scrollTop = msgEl.scrollHeight;
-  }, 50);
+      <div class="chat-messages" id="chat-msgs-area">
+        ${msgs.length ? msgs.map(m => {
+          const isMine = m.auteur?._id === currentUser?.id;
+          return `<div style="display:flex;flex-direction:column;align-items:${isMine ? 'flex-end' : 'flex-start'}">
+            <div class="msg-bubble ${isMine ? 'msg-mine' : 'msg-other'}">
+              ${!isMine ? `<div class="msg-sender">${escHtml(m.auteur?.prenom || m.auteur?.nom || '')}</div>` : ''}
+              ${escHtml(m.texte)}
+              <div class="msg-time">${new Date(m.createdAt).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}</div>
+            </div></div>`;
+        }).join('') : '<div class="chat-empty"><div class="ce-icon">💬</div><p>Aucun message — soyez le premier !</p></div>'}
+      </div>
+      <div class="chat-input-bar">
+        <textarea id="chat-input-field" placeholder="Écrire un message…" rows="1"
+          onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMsg('${kourelId}')}"></textarea>
+        <button class="chat-send-btn" onclick="sendMsg('${kourelId}')">➤</button>
+      </div>`;
+    setTimeout(() => { const el = document.getElementById('chat-msgs-area'); if (el) el.scrollTop = el.scrollHeight; }, 50);
+  } catch(e) { showNotif('Erreur chargement messages', true); }
 }
 
-// FIX: fonction d'envoi séparée utilisant data-attribute au lieu d'ID dynamique
-function sendCurrentMsg() {
-  const main  = document.getElementById('chat-main');
+async function sendMsg(kourelId) {
   const input = document.getElementById('chat-input-field');
-  if (!main || !input) return;
-  const roomId = main.getAttribute('data-current-room');
-  if (!roomId) return;
-  const text = input.value.trim();
-  if (!text) return;
-  if (!D().messages[roomId]) D().messages[roomId] = [];
-  const now = new Date();
-  D().messages[roomId].push({
-    id: Date.now(),
-    userId: session.user.id,
-    nom:    session.user.nom,
-    text,
-    time: now.toLocaleTimeString('fr-FR', { hour:'2-digit', minute:'2-digit' }),
-    date: now.toISOString().split('T')[0]
-  });
-  input.value = '';
-  renderChatMain(roomId);
+  const texte = input?.value.trim();
+  if (!texte) return;
+  try {
+    await api('POST', '/messages', { kourel: kourelId, texte });
+    input.value = '';
+    const nom = cacheKourels.find(k => k._id === kourelId)?.nom || '';
+    await openChatRoom(kourelId, nom);
+  } catch(e) { showNotif('Erreur envoi message', true); }
 }
 
 // ══════════════════════════════════════════════════════════════
 // RAPPORTS
 // ══════════════════════════════════════════════════════════════
 function renderRapports() {
-  const visK    = isAdmin() ? D().kourels    : D().kourels.filter(k => myKourels().includes(k.nom));
-  const visM    = isAdmin() ? D().membres    : D().membres.filter(m => myKourels().includes(m.kourel));
-  const visPres = isAdmin() ? D().presences  : D().presences.filter(p => myKourels().includes(p.kourel));
-  const visCots = isAdmin() ? D().cotisations: D().cotisations.filter(c => myKourels().includes(c.kourel));
-  const actifs  = visM.filter(m => m.statut === 'Actif').length;
-  const totalCot = visCots.filter(c => c.statut === 'Payé').reduce((s,c) => s + c.montant, 0);
-  let tauxPres = 0;
-  if (visPres.length) {
-    tauxPres = Math.round(visPres.reduce((s,p) => {
-      const pres = p.membres.filter(m => m.statut==='Présent'||m.statut==='Retard').length;
-      return s + (p.membres.length ? pres / p.membres.length : 0);
-    }, 0) / visPres.length * 100);
-  }
-
-  document.getElementById('rapport-stats').innerHTML = [
-    { label:'Membres actifs',   value:`${actifs}/${visM.length}`,          color:'var(--green)' },
-    { label:'Adiyeu collectés', value:`${totalCot.toLocaleString()} F`,    color:'var(--orange)' },
-    { label:'Présence moyenne', value:`${tauxPres}%`,                      color:'var(--blue)' },
-    { label:'Kourels actifs',   value:`${visK.filter(k=>k.statut==='Actif').length}/${visK.length}`, color:'var(--purple)' },
-  ].map(s => `<div class="stat-card" style="background:${s.color}"><div class="stat-value" style="font-size:22px">${escHtml(s.value)}</div><div class="stat-label">${escHtml(s.label)}</div></div>`).join('');
-
-  const types   = ['Répétition','Xam Xam','Programme','Réunion'];
-  const tColors = ['var(--green)','var(--blue)','var(--purple)','var(--orange)'];
-  const total   = visPres.length || 1;
-  document.getElementById('rapport-types').innerHTML = types.map((t,i) => {
-    const cnt = visPres.filter(p => p.type === t).length;
-    const pct = Math.round(cnt / total * 100);
-    return `<div style="margin-bottom:14px"><div style="display:flex;justify-content:space-between;margin-bottom:5px"><span style="font-size:12px;font-weight:700">${escHtml(t)}</span><span style="font-size:12px;color:var(--text-light)">${cnt}</span></div><div class="rapport-bar-wrap"><div class="rapport-bar" style="width:${pct}%;background:${tColors[i]}"></div></div></div>`;
-  }).join('');
-
-  document.getElementById('rapport-kourels').innerHTML = visK.map(k => {
-    const t = visCots.filter(c => c.kourel===k.nom && c.statut==='Payé').reduce((s,c) => s+c.montant, 0);
-    return `<div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border)"><span style="font-size:12px;font-weight:700">${escHtml(k.nom)}</span><span style="font-size:12px;font-weight:900;color:var(--green)">${t.toLocaleString()} F</span></div>`;
-  }).join('') || '<p style="color:var(--text-light);font-size:12px">Aucun Kourel</p>';
-
-  document.getElementById('rapport-presence-detail').innerHTML = visK.map(k => {
-    const sessions = visPres.filter(p => p.kourel === k.nom);
-    if (!sessions.length) return `<div style="padding:10px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between"><span style="font-size:12px;font-weight:700">${escHtml(k.nom)}</span><span style="font-size:11px;color:var(--text-light)">Aucune session</span></div>`;
-    let tP=0,tR=0,tA=0;
-    sessions.forEach(s => s.membres.forEach(m => {
-      if(m.statut==='Présent')tP++; else if(m.statut==='Retard')tR++; else tA++;
-    }));
-    const g = tP+tR+tA || 1;
-    return `
-    <div style="padding:14px 0;border-bottom:1px solid var(--border)">
-      <div style="display:flex;justify-content:space-between;margin-bottom:8px">
-        <span style="font-size:13px;font-weight:800">${escHtml(k.nom)}</span>
-        <span style="font-size:11px;color:var(--text-light)">${sessions.length} session${sessions.length>1?'s':''}</span>
+  document.getElementById('rapport-stats').innerHTML = `
+    <div class="stat-card" style="background:var(--green)"><div class="stat-value">${cacheKourels.length}</div><div class="stat-label">Kourels</div></div>
+    <div class="stat-card" style="background:var(--blue)"><div class="stat-value">${cacheMembres.length}</div><div class="stat-label">Membres</div></div>
+    <div class="stat-card" style="background:var(--orange)"><div class="stat-value">${cacheMembres.filter(m => m.statut === 'Actif').length}</div><div class="stat-label">Membres actifs</div></div>
+    <div class="stat-card" style="background:var(--purple)"><div class="stat-value">${cacheKourels.length}</div><div class="stat-label">Groupes</div></div>`;
+  document.getElementById('rapport-kourels').innerHTML = cacheKourels.map(k => {
+    const nb  = cacheMembres.filter(m => (m.kourel?._id || m.kourel) === k._id).length;
+    const pct = cacheMembres.length ? Math.round(nb / cacheMembres.length * 100) : 0;
+    return `<div style="margin-bottom:12px">
+      <div style="display:flex;justify-content:space-between;margin-bottom:5px">
+        <span style="font-size:12px;font-weight:700">${escHtml(k.nom)}</span>
+        <span style="font-size:12px;color:var(--text-light)">${nb} membres</span>
       </div>
-      <div style="display:flex;height:12px;border-radius:99px;overflow:hidden;gap:2px">
-        <div style="flex:${tP};background:#16a34a;border-radius:99px 0 0 99px;min-width:${tP?2:0}px"></div>
-        <div style="flex:${tR};background:#d97706;min-width:${tR?2:0}px"></div>
-        <div style="flex:${tA};background:#dc2626;border-radius:0 99px 99px 0;min-width:${tA?2:0}px"></div>
-      </div>
-      <div style="display:flex;gap:14px;margin-top:7px;font-size:11px">
-        <span style="color:#166534;font-weight:700">✓ ${tP} (${Math.round(tP/g*100)}%)</span>
-        <span style="color:#92400e;font-weight:700">⏱ ${tR} (${Math.round(tR/g*100)}%)</span>
-        <span style="color:#991b1b;font-weight:700">✗ ${tA} (${Math.round(tA/g*100)}%)</span>
-      </div>
+      <div class="rapport-bar-wrap"><div class="rapport-bar" style="width:${pct}%;background:var(--green)"></div></div>
     </div>`;
   }).join('') || '<p style="color:var(--text-light);font-size:12px">Aucun Kourel</p>';
+  document.getElementById('rapport-types').innerHTML = `
+    <div style="padding:9px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between"><span style="font-weight:700">Kourels</span><span>${cacheKourels.length}</span></div>
+    <div style="padding:9px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between"><span style="font-weight:700">Membres</span><span>${cacheMembres.length}</span></div>`;
 }
+
+// ══════════════════════════════════════════════════════════════
+// INIT — auto-login si token existant en localStorage
+// ══════════════════════════════════════════════════════════════
+window.addEventListener('DOMContentLoaded', () => {
+  if (token && currentDaara) {
+    // Vérifier que le token est encore valide
+    api('GET', '/kourels')
+      .then(() => launchApp())
+      .catch(() => {
+        // Token expiré — on nettoie
+        localStorage.removeItem('dc_token');
+        localStorage.removeItem('dc_user');
+        localStorage.removeItem('dc_daara');
+        token = ''; currentUser = null; currentDaara = null;
+      });
+  }
+});
 </script>
 </body>
 </html>
