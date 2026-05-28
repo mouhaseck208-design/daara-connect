@@ -212,24 +212,50 @@
     </div>
     <div class="divider"></div>
 
-    <!-- LOGIN -->
-    <div id="search-phase" class="search-phase">
-      <h2>Connexion à votre Daara</h2>
-      <p>Entrez vos identifiants pour accéder à votre espace</p>
-      <div class="fl">
-        <label>Identifiant</label>
-        <input type="text" id="login-id" placeholder="Ex: admin" />
-      </div>
-      <div class="fl">
-        <label>Mot de passe</label>
-        <input type="password" id="login-pwd" placeholder="Votre mot de passe"
-          onkeydown="if(event.key==='Enter')loginUser()" />
-        <div class="err" id="err-login">Identifiant ou mot de passe incorrect</div>
-      </div>
-      <button class="cta-btn" id="btn-login" onclick="loginUser()">Se connecter →</button>
-      <div class="or-divider" style="margin-top:20px">— OU —</div>
-      <button class="new-daara-btn" onclick="showCreatePhase()">+ Créer un nouveau Daara</button>
+   <!-- SEARCH PHASE -->
+<div id="search-phase" class="search-phase">
+  <h2>Connexion à DAARA CONNECT</h2>
+  
+  <!-- Onglets Admin / Membre -->
+  <div style="display:flex;gap:8px;margin-bottom:20px">
+    <button id="btn-tab-admin" onclick="switchTab('admin')"
+      style="flex:1;padding:10px;border-radius:10px;border:2px solid var(--green);background:var(--green);color:#fff;font-weight:800;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">
+      🔑 Admin
+    </button>
+    <button id="btn-tab-membre" onclick="switchTab('membre')"
+      style="flex:1;padding:10px;border-radius:10px;border:2px solid var(--border);background:#fff;color:var(--text-light);font-weight:800;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">
+      👤 Membre
+    </button>
+  </div>
+
+  <!-- Formulaire Admin -->
+  <div id="form-admin">
+    <div class="fl">
+      <label>Identifiant</label>
+      <input type="text" id="login-id" placeholder="Ex: admin2" />
     </div>
+    <div class="fl">
+      <label>Mot de passe</label>
+      <input type="password" id="login-pwd" placeholder="Votre mot de passe"
+        onkeydown="if(event.key==='Enter')loginUser()" />
+      <div class="err" id="err-login">Identifiant ou mot de passe incorrect</div>
+    </div>
+    <button class="cta-btn" id="btn-login" onclick="loginUser()">Se connecter →</button>
+  </div>
+
+  <!-- Formulaire Membre -->
+  <div id="form-membre-login" style="display:none">
+    <div class="fl">
+      <label>Votre numéro de téléphone</label>
+      <input type="tel" id="login-tel" placeholder="Ex: 771234567" />
+      <div class="err" id="err-login-membre">Numéro introuvable</div>
+    </div>
+    <button class="cta-btn" id="btn-login-membre" onclick="loginMembre()">Accéder →</button>
+  </div>
+
+  <div class="or-divider" style="margin-top:20px">— OU —</div>
+  <button class="new-daara-btn" onclick="showCreatePhase()">+ Créer un nouveau Daara</button>
+</div>
 
     <!-- CREATE -->
     <div id="create-phase" class="create-phase">
@@ -502,10 +528,53 @@
 </div>
 
 <script>
+  // Switcher entre Admin et Membre
+function switchTab(tab) {
+  if (tab === 'admin') {
+    document.getElementById('form-admin').style.display = 'block';
+    document.getElementById('form-membre-login').style.display = 'none';
+    document.getElementById('btn-tab-admin').style.background = 'var(--green)';
+    document.getElementById('btn-tab-admin').style.color = '#fff';
+    document.getElementById('btn-tab-membre').style.background = '#fff';
+    document.getElementById('btn-tab-membre').style.color = 'var(--text-light)';
+  } else {
+    document.getElementById('form-admin').style.display = 'none';
+    document.getElementById('form-membre-login').style.display = 'block';
+    document.getElementById('btn-tab-admin').style.background = '#fff';
+    document.getElementById('btn-tab-admin').style.color = 'var(--text-light)';
+    document.getElementById('btn-tab-membre').style.background = 'var(--green)';
+    document.getElementById('btn-tab-membre').style.color = '#fff';
+  }
+}
+
+// Connexion membre par téléphone
+async function loginMembre() {
+  const telephone = document.getElementById('login-tel').value.trim();
+  const errEl = document.getElementById('err-login-membre');
+  const btn   = document.getElementById('btn-login-membre');
+  if (!telephone) { errEl.style.display = 'block'; errEl.textContent = 'Entrez votre numéro'; return; }
+  btn.disabled = true; btn.textContent = 'Connexion…';
+  try {
+    const data = await api('POST', '/auth/login-membre', { telephone });
+    token = data.token;
+    currentUser  = { id: data.membre.id, nom: data.membre.prenom + ' ' + data.membre.nom, role: 'membre' };
+    currentDaara = { id: data.membre.daara, nom: 'Daara Connect' };
+    localStorage.setItem('dc_token', token);
+    localStorage.setItem('dc_user', JSON.stringify(currentUser));
+    localStorage.setItem('dc_daara', JSON.stringify(currentDaara));
+    errEl.style.display = 'none';
+    launchApp();
+  } catch(e) {
+    errEl.style.display = 'block';
+    errEl.textContent = e.message;
+  } finally {
+    btn.disabled = false; btn.textContent = 'Accéder →';
+  }
+}
 // ══════════════════════════════════════════════════════════════
 // ✅ CONFIG — pointe vers ton backend Node.js port 5000
 // ══════════════════════════════════════════════════════════════
-const API = 'http://localhost:5000/api';
+const API = 'https://daara-connect-backend.onrender.com/api';
 
 // Récupérer le token et les infos depuis localStorage (persistance)
 let token       = localStorage.getItem('dc_token') || '';
