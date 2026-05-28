@@ -817,8 +817,7 @@ async function addKourel() {
   try {
     await api('POST', '/kourels', {
       nom,
-      type:   document.getElementById('k-type').value,
-      statut: document.getElementById('k-statut').value
+      type:   document.getElementById('k-desc').value.trim(),
     });
     document.getElementById('k-nom').value = '';
     toggleForm('form-kourel');
