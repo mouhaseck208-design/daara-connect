@@ -15,8 +15,14 @@
       --text-light: #5a7a5a; --border: #d0e4d0;
       --shadow: 0 2px 20px rgba(15,76,37,.08);
       --shadow-lg: 0 8px 40px rgba(15,76,37,.15);
-      --header-h: 56px;
-      --nav-h: 44px;
+      --header-h: 56px; --nav-h: 44px;
+      /* FIX 1 : variables manquantes pour les nouveaux composants */
+      --green-border: #b2dfbb;
+      --green-pale: #e8f5eb;
+      --gray-light: #f4f6f4;
+      --gray-text: #6b7a6b;
+      --green-mid: #2e7d3e;
+      --red: #d32f2f;
     }
     *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
     html,body{height:100%;overflow:hidden}
@@ -96,9 +102,9 @@
     .role-badge{padding:3px 8px;border-radius:99px;font-size:10px;font-weight:800;
       background:rgba(255,255,255,.18);color:#fff}
 
-    /* ── BOTTOM NAV (mobile) ── */
+    /* ── BOTTOM NAV ── */
     .bottom-nav{display:flex;background:linear-gradient(135deg,var(--green-dark),var(--green));
-      border-top:1px solid rgba(255,255,255,.1);flex-shrink:0;safe-area-inset-bottom:env(safe-area-inset-bottom)}
+      border-top:1px solid rgba(255,255,255,.1);flex-shrink:0}
     .bottom-nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
       padding:8px 4px;border:none;background:transparent;color:rgba(255,255,255,.7);
       cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;font-size:9px;font-weight:700;
@@ -177,26 +183,70 @@
     tr:nth-child(even) td{background:#f7fbf7}
     tr:active td{background:#edf7ed}
 
-    /* ── PROGRAMMES ── */
-    .programme-card{background:var(--card);border-radius:16px;padding:18px;
-      box-shadow:var(--shadow);border-left:4px solid var(--green);margin-bottom:12px}
-    .prog-info-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
-    .prog-info-item{background:#f4faf4;border-radius:8px;padding:8px 12px;border:1px solid var(--border)}
-    .prog-info-label{font-size:10px;font-weight:800;text-transform:uppercase;
-      letter-spacing:.8px;color:var(--text-light);margin-bottom:2px}
-    .prog-info-value{font-size:12px;font-weight:700;color:var(--text)}
-    .jour-badge{background:var(--green);color:#fff;border-radius:7px;padding:3px 10px;
-      font-size:11px;font-weight:800;display:inline-block}
-    .audio-upload-zone{border:2px dashed var(--border);border-radius:12px;padding:18px 14px;
-      text-align:center;cursor:pointer;background:#f8fbf8;margin-top:8px}
-    .audio-upload-zone input[type="file"]{display:none}
-    .audio-upload-zone .upload-icon{font-size:28px;margin-bottom:6px}
-    .audio-upload-zone p{font-size:12px;color:var(--text-light);margin:2px 0}
-    .audio-player{display:flex;align-items:center;gap:8px;background:var(--green-muted);
-      border-radius:10px;padding:8px 12px;border:1.5px solid var(--border)}
-    .audio-label{font-size:11px;font-weight:700;color:var(--green-dark);
-      white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:120px;flex-shrink:0}
-    .audio-player audio{flex:1;height:30px;min-width:0}
+    /* ── SONS MULTIPLES ── */
+    .section-label{font-size:11px;font-weight:800;letter-spacing:.08em;
+      color:var(--green-dark);text-transform:uppercase;margin:14px 0 6px}
+    .sons-container{background:#fff;border:1.5px solid var(--green-border);border-radius:14px;overflow:hidden}
+    .sons-drop-zone{border:2px dashed var(--green-border);border-radius:10px;margin:12px;
+      padding:18px 12px;text-align:center;cursor:pointer;
+      transition:background .2s,border-color .2s;background:var(--green-pale)}
+    .sons-drop-zone:hover{background:#d4edda;border-color:var(--green-mid)}
+    .sons-drop-zone .dz-icon{font-size:28px;margin-bottom:6px}
+    .sons-drop-zone .dz-title{font-size:13px;font-weight:700;color:var(--green-dark)}
+    .sons-drop-zone .dz-sub{font-size:11px;color:var(--gray-text);margin-top:2px}
+    .sons-list{padding:0 12px 12px;display:flex;flex-direction:column;gap:8px}
+    .son-item{background:var(--gray-light);border:1px solid var(--green-border);
+      border-radius:10px;padding:9px 10px;display:flex;align-items:center;gap:8px;
+      animation:slideIn .2s ease}
+    @keyframes slideIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+    .son-icon{font-size:18px;color:var(--green-mid);flex-shrink:0}
+    .son-info{flex:1;min-width:0}
+    .son-name{font-size:12px;font-weight:700;color:#333;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .son-meta{font-size:10px;color:var(--gray-text);margin-top:1px}
+    .son-controls{display:flex;align-items:center;gap:6px}
+    .play-btn{background:var(--green-mid);border:none;border-radius:50%;width:28px;height:28px;
+      color:#fff;cursor:pointer;font-size:11px;display:flex;align-items:center;justify-content:center;
+      transition:background .15s}
+    .play-btn:hover{background:var(--green-dark)}
+    .del-btn{background:#fdecea;border:1px solid #f5c6c6;border-radius:50%;
+      width:26px;height:26px;color:var(--red);cursor:pointer;font-size:13px;
+      display:flex;align-items:center;justify-content:center;transition:background .15s}
+    .del-btn:hover{background:#fbc7c7}
+    .son-progress-bar{height:3px;background:#ddd;border-radius:2px;margin-top:4px}
+    .son-progress-fill{height:100%;background:var(--green-mid);border-radius:2px;width:0%;transition:width .3s}
+    .sons-count{padding:0 12px 10px;font-size:11px;color:var(--gray-text);text-align:right}
+    .sons-count span{font-weight:700;color:var(--green-mid)}
+
+    /* ── PDF / PHOTOS XASSIDA ── */
+    .docs-container{background:#fff;border:1.5px solid var(--green-border);border-radius:14px;overflow:hidden}
+    .docs-tabs{display:flex;border-bottom:1.5px solid var(--green-border);background:var(--green-pale)}
+    .doc-tab{flex:1;padding:9px 0;font-size:11px;font-weight:700;text-align:center;cursor:pointer;
+      color:var(--gray-text);border:none;background:none;transition:background .15s,color .15s;
+      display:flex;align-items:center;justify-content:center;gap:5px;
+      font-family:'Plus Jakarta Sans',sans-serif}
+    .doc-tab.active{background:var(--green-dark);color:#fff}
+    .doc-panel{display:none;padding:12px}
+    .doc-panel.active{display:block}
+    .doc-drop-zone{border:2px dashed var(--green-border);border-radius:10px;padding:16px 10px;
+      text-align:center;cursor:pointer;transition:background .2s,border-color .2s;background:var(--green-pale)}
+    .doc-drop-zone:hover{background:#d4edda;border-color:var(--green-mid)}
+    .doc-drop-zone .dz-icon{font-size:26px;margin-bottom:4px}
+    .doc-drop-zone .dz-title{font-size:12px;font-weight:700;color:var(--green-dark)}
+    .doc-drop-zone .dz-sub{font-size:10px;color:var(--gray-text);margin-top:2px}
+    .docs-list{margin-top:10px;display:flex;flex-direction:column;gap:7px}
+    .doc-item{display:flex;align-items:center;gap:8px;background:var(--gray-light);
+      border:1px solid var(--green-border);border-radius:9px;padding:8px 10px;animation:slideIn .2s ease}
+    .doc-item-icon{font-size:20px;flex-shrink:0}
+    .doc-item-info{flex:1;min-width:0}
+    .doc-item-name{font-size:12px;font-weight:700;color:#333;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .doc-item-size{font-size:10px;color:var(--gray-text)}
+    .photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px}
+    .photo-thumb{aspect-ratio:1;border-radius:8px;overflow:hidden;position:relative;
+      border:1.5px solid var(--green-border);animation:slideIn .2s ease}
+    .photo-thumb img{width:100%;height:100%;object-fit:cover}
+    .photo-del{position:absolute;top:3px;right:3px;background:rgba(0,0,0,.55);border:none;
+      border-radius:50%;width:20px;height:20px;color:#fff;font-size:10px;cursor:pointer;
+      display:flex;align-items:center;justify-content:center}
 
     /* ── PRESENCE ── */
     .presence-session-card{background:var(--card);border-radius:16px;margin-bottom:14px;
@@ -210,30 +260,27 @@
       border-bottom:1px solid var(--border);flex-wrap:wrap;align-items:center}
     .pstat{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:700}
     .pstat-dot{width:8px;height:8px;border-radius:50%}
-    .pstat-present{background:#16a34a}
-    .pstat-retard{background:#d97706}
-    .pstat-absent{background:#dc2626}
+    .pstat-present{background:#16a34a}.pstat-retard{background:#d97706}.pstat-absent{background:#dc2626}
     .membre-presence-row{display:flex;align-items:center;padding:10px 18px;
       border-bottom:1px solid var(--border);gap:10px;flex-wrap:wrap}
     .membre-presence-row:last-child{border-bottom:none}
     .membre-presence-name{flex:1;font-weight:700;font-size:13px;min-width:120px}
     .status-group{display:flex;gap:4px;flex-wrap:wrap}
     .status-btn{padding:6px 10px;border-radius:99px;border:2px solid transparent;
-      cursor:pointer;font-size:11px;font-weight:800;
-      font-family:'Plus Jakarta Sans',sans-serif;background:#f0f0f0;color:#666}
+      cursor:pointer;font-size:11px;font-weight:800;font-family:'Plus Jakarta Sans',sans-serif;
+      background:#f0f0f0;color:#666}
     .status-btn.present.selected{background:#dcfce7;border-color:#16a34a;color:#166534}
     .status-btn.retard.selected{background:#fef3c7;border-color:#d97706;color:#92400e}
     .status-btn.absent.selected{background:#fee2e2;border-color:#dc2626;color:#991b1b}
     .tol-btn{padding:7px 12px;border-radius:99px;border:2px solid var(--border);
-      cursor:pointer;font-size:11px;font-weight:700;
-      font-family:'Plus Jakarta Sans',sans-serif;background:#fff;color:var(--text-light)}
+      cursor:pointer;font-size:11px;font-weight:700;font-family:'Plus Jakarta Sans',sans-serif;
+      background:#fff;color:var(--text-light)}
     .tol-btn.selected{background:var(--green);border-color:var(--green);color:#fff}
     .member-chip{display:inline-flex;align-items:center;background:var(--green-muted);
       border-radius:99px;padding:4px 10px;font-size:11px;font-weight:700;
       color:var(--green-dark);margin:2px}
 
     /* ── KOUREL LIST ── */
-    #kourels-layout{display:block}
     .chat-room-item{padding:14px 16px;cursor:pointer;border-bottom:1px solid var(--border);
       display:flex;align-items:center;gap:12px;transition:background .15s;background:var(--card)}
     .chat-room-item:active{background:var(--green-muted)}
@@ -245,65 +292,38 @@
     .room-arrow{font-size:16px;color:var(--text-light);flex-shrink:0}
 
     /* ── CHAT FULLSCREEN ── */
-    #chat-fullscreen{
-      position:fixed;inset:0;z-index:150;
-      display:none;flex-direction:column;
-      background:var(--bg);
-    }
+    #chat-fullscreen{position:fixed;inset:0;z-index:150;display:none;flex-direction:column;background:var(--bg)}
     #chat-fullscreen.open{display:flex}
-
-    /* Header du chat fullscreen */
-    .chat-fs-header{
-      background:linear-gradient(135deg,var(--green-dark),var(--green));
-      color:#fff;padding:0 14px;
-      height:var(--header-h);
-      display:flex;align-items:center;gap:10px;
-      flex-shrink:0;position:relative;
-    }
+    .chat-fs-header{background:linear-gradient(135deg,var(--green-dark),var(--green));
+      color:#fff;padding:0 14px;height:var(--header-h);
+      display:flex;align-items:center;gap:10px;flex-shrink:0;position:relative}
     .chat-fs-back{background:rgba(255,255,255,.18);border:none;color:#fff;
       width:36px;height:36px;border-radius:10px;font-size:18px;
       cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
     .chat-fs-title{flex:1;min-width:0}
-    .chat-fs-title-name{font-size:15px;font-weight:800;
-      white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .chat-fs-title-name{font-size:15px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
     .chat-fs-title-sub{font-size:11px;opacity:.8}
     .chat-fs-menu-btn{background:rgba(255,255,255,.18);border:none;color:#fff;
       width:36px;height:36px;border-radius:10px;font-size:20px;font-weight:900;
       cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-
-    /* Dropdown du ⋮ dans le header chat */
-    .chat-header-dropdown{
-      display:none;position:absolute;right:14px;top:calc(var(--header-h) - 2px);
-      background:#fff;border-radius:12px;
-      box-shadow:0 8px 28px rgba(0,0,0,.22);z-index:200;min-width:200px;overflow:hidden;
-    }
+    .chat-header-dropdown{display:none;position:absolute;right:14px;top:calc(var(--header-h) - 2px);
+      background:#fff;border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.22);
+      z-index:200;min-width:200px;overflow:hidden}
     .chat-header-dropdown.open{display:block}
     .chd-item{padding:14px 18px;font-size:14px;font-weight:700;color:var(--text);
-      cursor:pointer;display:flex;align-items:center;gap:12px;
-      border-bottom:1px solid var(--border)}
+      cursor:pointer;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--border)}
     .chd-item:last-child{border-bottom:none}
     .chd-item:active{background:var(--green-muted)}
     .chd-item-danger{color:#991b1b}
     .chd-item-danger:active{background:#fee2e2}
-
-    /* Panel Membres/Présences inline dans le chat */
-    .chat-side-panel{
-      background:#fff;border-bottom:2px solid var(--border);
-      max-height:0;overflow:hidden;
-      transition:max-height .3s ease;
-    }
+    .chat-side-panel{background:#fff;border-bottom:2px solid var(--border);
+      max-height:0;overflow:hidden;transition:max-height .3s ease}
     .chat-side-panel.open{max-height:400px;overflow-y:auto}
-    .chat-side-panel-header{
-      display:flex;align-items:center;justify-content:space-between;
-      padding:10px 16px;background:var(--green-muted);
-      border-bottom:1px solid var(--border);
-    }
-    .chat-side-panel-title{font-size:12px;font-weight:800;
-      text-transform:uppercase;letter-spacing:.8px;color:var(--green-dark)}
-    .chat-side-panel-close{background:none;border:none;font-size:18px;
-      cursor:pointer;color:var(--text-light);padding:0}
-
-    /* Messages */
+    .chat-side-panel-header{display:flex;align-items:center;justify-content:space-between;
+      padding:10px 16px;background:var(--green-muted);border-bottom:1px solid var(--border)}
+    .chat-side-panel-title{font-size:12px;font-weight:800;text-transform:uppercase;
+      letter-spacing:.8px;color:var(--green-dark)}
+    .chat-side-panel-close{background:none;border:none;font-size:18px;cursor:pointer;color:var(--text-light);padding:0}
     .chat-messages{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;
       gap:8px;background:#e5ddd5;-webkit-overflow-scrolling:touch}
     .chat-empty{text-align:center;padding:30px;color:var(--text-light)}
@@ -315,7 +335,7 @@
     .msg-time{font-size:10px;color:#999;margin-top:2px;text-align:right}
     .chat-input-bar{padding:8px 10px;border-top:1px solid var(--border);display:flex;
       gap:6px;align-items:flex-end;background:#f0f0f0;flex-shrink:0;
-      padding-bottom:max(8px, env(safe-area-inset-bottom))}
+      padding-bottom:max(8px,env(safe-area-inset-bottom))}
     .chat-input-bar textarea{flex:1;resize:none;max-height:80px;padding:9px 12px;
       border-radius:20px;border:none;font-size:14px;
       font-family:'Plus Jakarta Sans',sans-serif;outline:none;background:#fff;
@@ -326,24 +346,13 @@
     .chat-send-btn:active{transform:scale(.93)}
     .chat-plus-btn{width:38px;height:38px;border-radius:50%;border:none;background:#fff;
       color:var(--green-dark);font-size:20px;cursor:pointer;flex-shrink:0;
-      display:flex;align-items:center;justify-content:center;
-      box-shadow:0 1px 3px rgba(0,0,0,.1)}
-    /* Menu message ⋮ */
-    .msg-menu-btn{background:none;border:none;cursor:pointer;font-size:15px;
-      color:#999;padding:0 2px;line-height:1}
+      display:flex;align-items:center;justify-content:center;box-shadow:0 1px 3px rgba(0,0,0,.1)}
+    .msg-menu-btn{background:none;border:none;cursor:pointer;font-size:15px;color:#999;padding:0 2px;line-height:1}
     .msg-menu-dropdown{display:none;position:absolute;right:0;top:20px;background:#fff;
-      border-radius:10px;box-shadow:0 4px 20px rgba(0,0,0,.18);z-index:99;
-      min-width:130px;overflow:hidden}
+      border-radius:10px;box-shadow:0 4px 20px rgba(0,0,0,.18);z-index:99;min-width:130px;overflow:hidden}
     .menu-item-delete{padding:10px 14px;font-size:13px;font-weight:700;color:#991b1b;
       cursor:pointer;display:flex;align-items:center;gap:6px}
     .menu-item-delete:active{background:#fee2e2}
-    /* Presence inline */
-    .presence-inline-row{display:flex;align-items:center;padding:10px 16px;
-      border-bottom:1px solid var(--border);gap:10px;flex-wrap:wrap}
-    .presence-inline-row:last-child{border-bottom:none}
-    .member-chip{display:inline-flex;align-items:center;background:var(--green-muted);
-      border-radius:99px;padding:4px 10px;font-size:11px;font-weight:700;
-      color:var(--green-dark);margin:2px}
 
     /* ── RAPPORT ── */
     .rapport-bar-wrap{background:#e0f0e0;border-radius:99px;height:8px;flex:1}
@@ -361,17 +370,8 @@
       to{opacity:1;transform:translateX(-50%) translateY(0)}}
     .notif-err{background:linear-gradient(135deg,#991b1b,#dc2626)}
 
-    @media(max-width:640px){
-      .prog-info-grid{grid-template-columns:1fr}
-      .stats-grid{grid-template-columns:repeat(2,1fr)}
-      .form-grid{grid-template-columns:1fr}
-      .header-center{display:none}
-    }
-    @media(min-width:641px){
-      .stats-grid{grid-template-columns:repeat(4,1fr)}
-      .two-col{grid-template-columns:1fr 1fr}
-      .form-grid{grid-template-columns:1fr 1fr}
-    }
+    @media(max-width:640px){.stats-grid{grid-template-columns:repeat(2,1fr)}.form-grid{grid-template-columns:1fr}.header-center{display:none}}
+    @media(min-width:641px){.stats-grid{grid-template-columns:repeat(4,1fr)}.two-col{grid-template-columns:1fr 1fr}.form-grid{grid-template-columns:1fr 1fr}}
   </style>
 </head>
 <body>
@@ -392,14 +392,14 @@
     <div id="search-phase">
       <h2 style="font-size:16px;font-weight:800;color:var(--green-dark);margin-bottom:14px">Connexion à DAARA CONNECT</h2>
       <div style="display:flex;gap:8px;margin-bottom:16px">
-        <button id="btn-tab-admin" onclick="switchTab('admin')" style="flex:1;padding:10px;border-radius:10px;border:2px solid var(--green);background:var(--green);color:#fff;font-weight:800;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px">🔑 Admin</button>
-        <button id="btn-tab-membre" onclick="switchTab('membre')" style="flex:1;padding:10px;border-radius:10px;border:2px solid var(--border);background:#fff;color:var(--text-light);font-weight:800;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px">👤 Membre</button>
+        <button id="btn-tab-admin" onclick="switchLoginTab('admin')" style="flex:1;padding:10px;border-radius:10px;border:2px solid var(--green);background:var(--green);color:#fff;font-weight:800;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px">🔑 Admin</button>
+        <button id="btn-tab-membre" onclick="switchLoginTab('membre')" style="flex:1;padding:10px;border-radius:10px;border:2px solid var(--border);background:#fff;color:var(--text-light);font-weight:800;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px">👤 Membre</button>
       </div>
       <div id="form-admin">
         <div class="fl"><label>Identifiant</label><input type="text" id="login-id" placeholder="Ex: admin2" autocomplete="username"/></div>
         <div class="fl">
           <label>Mot de passe</label>
-          <input type="password" id="login-pwd" placeholder="Votre mot de passe" autocomplete="current-password" onkeydown="if(event.key==='Enter')loginUser()" />
+          <input type="password" id="login-pwd" placeholder="Votre mot de passe" autocomplete="current-password" onkeydown="if(event.key==='Enter')loginUser()"/>
           <div class="err" id="err-login">Identifiant ou mot de passe incorrect</div>
         </div>
         <button class="cta-btn" id="btn-login" onclick="loginUser()">Se connecter →</button>
@@ -407,7 +407,7 @@
       <div id="form-membre-login" style="display:none">
         <div class="fl">
           <label>Votre numéro de téléphone</label>
-          <input type="tel" id="login-tel" placeholder="Ex: 771234567" />
+          <input type="tel" id="login-tel" placeholder="Ex: 771234567"/>
           <div class="err" id="err-login-membre">Numéro introuvable</div>
         </div>
         <button class="cta-btn" id="btn-login-membre" onclick="loginMembre()">Accéder →</button>
@@ -486,7 +486,6 @@
             <button class="btn btn-secondary" onclick="toggleForm('form-kourel')">Annuler</button>
           </div>
         </div>
-        <!-- Liste simple des Kourels -->
         <div id="kourels-layout">
           <div style="background:var(--card);border-radius:16px;box-shadow:var(--shadow);overflow:hidden">
             <div style="background:linear-gradient(135deg,var(--green-dark),var(--green));padding:12px 16px;color:#fff;font-size:13px;font-weight:800">👥 Mes Kourels</div>
@@ -524,11 +523,9 @@
         </div>
       </div>
 
-      <!-- ACTIVITÉS (Programmes + Présences fusionnés) -->
+      <!-- ACTIVITÉS -->
       <div id="page-activites" class="page">
         <h2 class="page-title">Activités</h2>
-
-        <!-- Onglets -->
         <div style="display:flex;gap:0;background:var(--card);border-radius:12px;padding:4px;box-shadow:var(--shadow);margin-bottom:16px">
           <button id="tab-btn-programmes" onclick="switchActiviteTab('programmes')"
             style="flex:1;padding:10px;border-radius:9px;border:none;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:800;cursor:pointer;background:var(--green);color:#fff;transition:all .2s">
@@ -540,7 +537,7 @@
           </button>
         </div>
 
-        <!-- TAB : Programmes -->
+        <!-- TAB Programmes -->
         <div id="tab-programmes">
           <div style="display:flex;justify-content:flex-end;margin-bottom:12px">
             <button class="add-btn" onclick="toggleForm('form-programme')">+ Nouveau</button>
@@ -554,25 +551,58 @@
               <input type="text" id="pr-responsable" placeholder="Responsable"/>
               <input type="time" id="pr-heure"/>
             </div>
-            <div class="form-section-title">Son de référence</div>
-            <div class="audio-upload-zone" onclick="document.getElementById('pr-audio-file').click()">
-              <input type="file" id="pr-audio-file" accept="audio/*" onchange="handleAudioUpload(event)"/>
-              <div class="upload-icon">🎵</div>
-              <p><strong>Choisir un son</strong></p><p>MP3, WAV, OGG…</p>
-            </div>
-            <div id="pr-audio-preview" style="display:none;margin-top:8px"></div>
-            <div style="margin-top:10px">
-              <label style="font-size:11px;font-weight:700;color:var(--text-light);display:block;margin-bottom:6px">Tolérance</label>
-              <div style="display:flex;gap:6px;flex-wrap:wrap" id="tol-buttons">
-                <button class="tol-btn selected" onclick="selectTolerance(this,'0')">Aucune</button>
-                <button class="tol-btn" onclick="selectTolerance(this,'5')">5 min</button>
-                <button class="tol-btn" onclick="selectTolerance(this,'10')">10 min</button>
-                <button class="tol-btn" onclick="selectTolerance(this,'15')">15 min</button>
-                <button class="tol-btn" onclick="selectTolerance(this,'20')">20 min</button>
-                <button class="tol-btn" onclick="selectTolerance(this,'30')">30 min</button>
+
+            <!-- FIX 2 : Sons multiples (IDs préfixés pr- pour éviter conflits) -->
+            <div class="section-label">🎵 Sons de référence</div>
+            <div class="sons-container">
+              <div class="sons-drop-zone" onclick="document.getElementById('pr-sons-input').click()">
+                <div class="dz-icon">🎶</div>
+                <div class="dz-title">Choisir un ou plusieurs sons</div>
+                <div class="dz-sub">MP3, WAV, OGG — sélection multiple possible</div>
               </div>
-              <input type="hidden" id="pr-tolerance" value="0"/>
+              <input type="file" id="pr-sons-input" accept="audio/*" multiple style="display:none" onchange="handleSons(this,'pr-sons-list','pr-sons-count','pr-sons-n')">
+              <div class="sons-list" id="pr-sons-list"></div>
+              <div class="sons-count" id="pr-sons-count" style="display:none"><span id="pr-sons-n">0</span> son(s) sélectionné(s)</div>
             </div>
+
+            <!-- FIX 2 : PDF / Photos (IDs préfixés pr-) -->
+            <div class="section-label">📚 Xassida — PDF &amp; Photos</div>
+            <div class="docs-container">
+              <!-- FIX 3 : onglets utilisent data-panel pour ne pas conflicquer avec switchActiviteTab -->
+              <div class="docs-tabs">
+                <button class="doc-tab active" onclick="switchDocsTab('pr-pdf','pr',this)">📄 PDF</button>
+                <button class="doc-tab" onclick="switchDocsTab('pr-photo','pr',this)">🖼️ Photos</button>
+              </div>
+              <div class="doc-panel active" id="pr-panel-pr-pdf">
+                <div class="doc-drop-zone" onclick="document.getElementById('pr-pdf-input').click()">
+                  <div class="dz-icon">📕</div>
+                  <div class="dz-title">Ajouter des fichiers PDF</div>
+                  <div class="dz-sub">Xassida, livres, documents — PDF uniquement</div>
+                </div>
+                <input type="file" id="pr-pdf-input" accept=".pdf,application/pdf" multiple style="display:none" onchange="handlePDF(this,'pr-pdf-list')">
+                <div class="docs-list" id="pr-pdf-list"></div>
+              </div>
+              <div class="doc-panel" id="pr-panel-pr-photo">
+                <div class="doc-drop-zone" onclick="document.getElementById('pr-photo-input').click()">
+                  <div class="dz-icon">📸</div>
+                  <div class="dz-title">Ajouter des photos de Xassida</div>
+                  <div class="dz-sub">JPG, PNG, WEBP — plusieurs photos possibles</div>
+                </div>
+                <input type="file" id="pr-photo-input" accept="image/*" multiple style="display:none" onchange="handlePhotos(this,'pr-photo-grid')">
+                <div class="photo-grid" id="pr-photo-grid"></div>
+              </div>
+            </div>
+
+            <div class="form-section-title">Tolérance</div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap" id="tol-buttons">
+              <button class="tol-btn selected" onclick="selectTolerance(this,'0')">Aucune</button>
+              <button class="tol-btn" onclick="selectTolerance(this,'5')">5 min</button>
+              <button class="tol-btn" onclick="selectTolerance(this,'10')">10 min</button>
+              <button class="tol-btn" onclick="selectTolerance(this,'15')">15 min</button>
+              <button class="tol-btn" onclick="selectTolerance(this,'20')">20 min</button>
+              <button class="tol-btn" onclick="selectTolerance(this,'30')">30 min</button>
+            </div>
+            <input type="hidden" id="pr-tolerance" value="0"/>
             <textarea id="pr-notes" rows="2" placeholder="Notes…" style="margin-top:10px"></textarea>
             <div class="btn-row">
               <button class="btn btn-primary" onclick="addProgramme()">Enregistrer</button>
@@ -582,7 +612,7 @@
           <div id="programmes-list"></div>
         </div>
 
-        <!-- TAB : Présences -->
+        <!-- TAB Présences -->
         <div id="tab-presences" style="display:none">
           <div style="display:flex;justify-content:flex-end;margin-bottom:12px">
             <button class="add-btn" onclick="toggleForm('form-presence')">+ Session</button>
@@ -651,48 +681,40 @@
     </div>
   </div>
 
-<!-- CHAT FULLSCREEN OVERLAY -->
-<div id="chat-fullscreen">
-  <!-- Header -->
-  <div class="chat-fs-header" id="chat-fs-header">
-    <button class="chat-fs-back" onclick="closeChatFullscreen()">←</button>
-    <div class="chat-fs-title">
-      <div class="chat-fs-title-name" id="chat-fs-name">—</div>
-      <div class="chat-fs-title-sub" id="chat-fs-sub">—</div>
+  <!-- CHAT FULLSCREEN -->
+  <div id="chat-fullscreen">
+    <div class="chat-fs-header" id="chat-fs-header">
+      <button class="chat-fs-back" onclick="closeChatFullscreen()">←</button>
+      <div class="chat-fs-title">
+        <div class="chat-fs-title-name" id="chat-fs-name">—</div>
+        <div class="chat-fs-title-sub" id="chat-fs-sub">—</div>
+      </div>
+      <button class="chat-fs-menu-btn" id="chat-fs-dots" onclick="toggleChatHeaderMenu()">⋮</button>
+      <div class="chat-header-dropdown" id="chat-header-dropdown">
+        <div class="chd-item" onclick="showChatPanel('membres')">👤 Membres</div>
+        <div class="chd-item" onclick="showChatPanel('presences')">✅ Présences</div>
+        <div class="chd-item chd-item-danger" id="chd-delete-btn" onclick="deleteChatKourel()">🗑 Supprimer le Kourel</div>
+      </div>
     </div>
-    <button class="chat-fs-menu-btn" id="chat-fs-dots" onclick="toggleChatHeaderMenu()">⋮</button>
-    <!-- Dropdown menu -->
-    <div class="chat-header-dropdown" id="chat-header-dropdown">
-      <div class="chd-item" onclick="showChatPanel('membres')">👤 Membres</div>
-      <div class="chd-item" onclick="showChatPanel('presences')">✅ Présences</div>
-      <div class="chd-item chd-item-danger" id="chd-delete-btn" onclick="deleteChatKourel()">🗑 Supprimer le Kourel</div>
+    <div class="chat-side-panel" id="chat-side-panel">
+      <div class="chat-side-panel-header">
+        <span class="chat-side-panel-title" id="chat-side-panel-title">Membres</span>
+        <button class="chat-side-panel-close" onclick="closeChatPanel()">✕</button>
+      </div>
+      <div id="chat-side-panel-content"></div>
+    </div>
+    <div class="chat-messages" id="chat-msgs-area"></div>
+    <div class="chat-input-bar" id="chat-input-bar">
+      <button class="chat-plus-btn" onclick="document.getElementById('chat-file-input').click()" title="Fichier">+</button>
+      <input type="file" id="chat-file-input" accept="audio/*,image/*" style="display:none" onchange="sendFileMsgFS(event)"/>
+      <textarea id="chat-input-field" placeholder="Écrire un message…" rows="1"
+        onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMsgFS()}"></textarea>
+      <button class="chat-send-btn" id="btn-vocal"
+        style="background:linear-gradient(135deg,#dc2626,#991b1b)" title="Vocal"
+        onclick="startVocalFS()">🎤</button>
+      <button class="chat-send-btn" onclick="sendMsgFS()">➤</button>
     </div>
   </div>
-
-  <!-- Panel glissant : Membres ou Présences -->
-  <div class="chat-side-panel" id="chat-side-panel">
-    <div class="chat-side-panel-header">
-      <span class="chat-side-panel-title" id="chat-side-panel-title">Membres</span>
-      <button class="chat-side-panel-close" onclick="closeChatPanel()">✕</button>
-    </div>
-    <div id="chat-side-panel-content"></div>
-  </div>
-
-  <!-- Messages -->
-  <div class="chat-messages" id="chat-msgs-area"></div>
-
-  <!-- Barre d'envoi -->
-  <div class="chat-input-bar" id="chat-input-bar">
-    <button class="chat-plus-btn" onclick="document.getElementById('chat-file-input').click()" title="Fichier">+</button>
-    <input type="file" id="chat-file-input" accept="audio/*,image/*" style="display:none" onchange="sendFileMsgFS(event)"/>
-    <textarea id="chat-input-field" placeholder="Écrire un message…" rows="1"
-      onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMsgFS()}"></textarea>
-    <button class="chat-send-btn" id="btn-vocal"
-      style="background:linear-gradient(135deg,#dc2626,#991b1b)" title="Vocal"
-      onclick="startVocalFS()">🎤</button>
-    <button class="chat-send-btn" onclick="sendMsgFS()">➤</button>
-  </div>
-</div>
 
   <!-- BOTTOM NAV -->
   <nav class="bottom-nav">
@@ -716,7 +738,8 @@ let activeChatRoom=null;
 let mediaRecorder=null;
 let audioChunks=[];
 let isRecording=false;
-let currentAudioDataUrl=null;
+let currentAudio=null;
+let currentPlayBtn=null;
 
 // ── HELPERS ──────────────────────────────────────────────
 function escHtml(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
@@ -747,9 +770,15 @@ function selectTolerance(btn,val){
   btn.classList.add('selected');
   document.getElementById('pr-tolerance').value=val;
 }
+function formatSize(bytes){
+  if(bytes<1024)return bytes+' B';
+  if(bytes<1048576)return (bytes/1024).toFixed(1)+' KB';
+  return (bytes/1048576).toFixed(1)+' MB';
+}
 
 // ── AUTH ─────────────────────────────────────────────────
-function switchTab(tab){
+// FIX : renommé switchLoginTab pour ne pas conflicquer avec switchDocsTab
+function switchLoginTab(tab){
   const a=tab==='admin';
   document.getElementById('form-admin').style.display=a?'block':'none';
   document.getElementById('form-membre-login').style.display=a?'none':'block';
@@ -845,28 +874,38 @@ function launchApp(){
 function showPage(id,btn){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   const el=document.getElementById('page-'+id);
-  if(el) el.classList.add('active');
+  if(el)el.classList.add('active');
   document.querySelectorAll('.bottom-nav-btn').forEach(b=>b.classList.remove('active'));
   if(btn)btn.classList.add('active');
   document.querySelector('.content-wrap').scrollTop=0;
 }
 
 function switchActiviteTab(tab){
-  // Onglets visuels
   const btnProg=document.getElementById('tab-btn-programmes');
   const btnPres=document.getElementById('tab-btn-presences');
   const tabProg=document.getElementById('tab-programmes');
   const tabPres=document.getElementById('tab-presences');
-  if(!btnProg) return;
+  if(!btnProg)return;
   if(tab==='programmes'){
-    btnProg.style.background='var(--green)'; btnProg.style.color='#fff';
-    btnPres.style.background='transparent'; btnPres.style.color='var(--text-light)';
-    tabProg.style.display='block'; tabPres.style.display='none';
-  } else {
-    btnPres.style.background='var(--green)'; btnPres.style.color='#fff';
-    btnProg.style.background='transparent'; btnProg.style.color='var(--text-light)';
-    tabPres.style.display='block'; tabProg.style.display='none';
+    btnProg.style.background='var(--green)';btnProg.style.color='#fff';
+    btnPres.style.background='transparent';btnPres.style.color='var(--text-light)';
+    tabProg.style.display='block';tabPres.style.display='none';
+  }else{
+    btnPres.style.background='var(--green)';btnPres.style.color='#fff';
+    btnProg.style.background='transparent';btnProg.style.color='var(--text-light)';
+    tabPres.style.display='block';tabProg.style.display='none';
   }
+}
+
+// FIX : switchDocsTab — fonction dédiée aux onglets PDF/Photos avec préfixe
+function switchDocsTab(type,prefix,btn){
+  // Chercher dans le container parent
+  const container=btn.closest('.docs-container');
+  container.querySelectorAll('.doc-tab').forEach(t=>t.classList.remove('active'));
+  container.querySelectorAll('.doc-panel').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  const panel=document.getElementById(prefix+'-panel-'+prefix+'-'+type);
+  if(panel)panel.classList.add('active');
 }
 
 function toggleForm(id){
@@ -885,10 +924,7 @@ function openFormAdiyeu(){
   const el=document.getElementById('form-adiyeu');
   const visible=el.style.display!=='none';
   el.style.display=visible?'none':'block';
-  if(!visible){
-    remplirSelectKourels('a-kourel');
-    remplirSelectMembres('a-membre');
-  }
+  if(!visible){remplirSelectKourels('a-kourel');remplirSelectMembres('a-membre');}
 }
 
 function remplirSelectKourels(selId){
@@ -951,48 +987,45 @@ async function renderKourels(){
   }catch(e){showNotif('Erreur chargement Kourels',true);}
 }
 
+async function addKourel(){
+  const nom=document.getElementById('k-nom').value.trim();
+  if(!nom){showNotif('Nom obligatoire',true);return;}
+  try{
+    await api('POST','/kourels',{nom,description:document.getElementById('k-desc').value.trim(),statut:document.getElementById('k-statut').value});
+    ['k-nom','k-desc'].forEach(id=>document.getElementById(id).value='');
+    toggleForm('form-kourel');
+    await renderKourels();renderAccueil();
+    showNotif('Kourel ajouté !');
+  }catch(e){showNotif(e.message,true);}
+}
 // ── CHAT FULLSCREEN ──────────────────────────────────────
 let chatFsKourelId=null;
 let chatFsNom=null;
 
 async function openChatFullscreen(kourelId,nom){
-  chatFsKourelId=kourelId;
-  chatFsNom=nom;
-  activeChatRoom=kourelId;
-
-  // Remplir header
+  chatFsKourelId=kourelId;chatFsNom=nom;activeChatRoom=kourelId;
   document.getElementById('chat-fs-name').textContent=nom;
   const membres=cacheMembres.filter(m=>(m.kourel?._id||m.kourel)===kourelId);
   document.getElementById('chat-fs-sub').textContent=membres.length+' membres';
-  // Afficher supprimer seulement admin
   document.getElementById('chd-delete-btn').style.display=isAdmin()?'flex':'none';
-
-  // Ouvrir l'overlay
   document.getElementById('chat-fullscreen').classList.add('open');
   document.getElementById('chat-header-dropdown').classList.remove('open');
   document.getElementById('chat-side-panel').classList.remove('open');
-
-  // Charger les messages
   await loadChatMessages();
 }
-
 function closeChatFullscreen(){
   document.getElementById('chat-fullscreen').classList.remove('open');
   document.getElementById('chat-header-dropdown').classList.remove('open');
   document.getElementById('chat-side-panel').classList.remove('open');
-  chatFsKourelId=null; chatFsNom=null;
+  chatFsKourelId=null;chatFsNom=null;
 }
-
-function toggleChatHeaderMenu(){
-  document.getElementById('chat-header-dropdown').classList.toggle('open');
-}
+function toggleChatHeaderMenu(){document.getElementById('chat-header-dropdown').classList.toggle('open');}
 
 function showChatPanel(type){
   document.getElementById('chat-header-dropdown').classList.remove('open');
   const panel=document.getElementById('chat-side-panel');
   const content=document.getElementById('chat-side-panel-content');
   const title=document.getElementById('chat-side-panel-title');
-
   if(type==='membres'){
     title.textContent='👤 Membres';
     const membres=cacheMembres.filter(m=>(m.kourel?._id||m.kourel)===chatFsKourelId);
@@ -1002,12 +1035,9 @@ function showChatPanel(type){
         ${isAdmin()?`<button onclick="showAddMembreFS()" style="background:var(--green);color:#fff;border:none;border-radius:8px;padding:6px 12px;font-size:12px;font-weight:800;cursor:pointer">+ Ajouter</button>`:''}
       </div>
       <div style="display:flex;flex-wrap:wrap;gap:6px">
-        ${membres.length
-          ?membres.map(m=>`<span class="member-chip" style="font-size:12px;padding:5px 12px">${escHtml(m.prenom+' '+m.nom)}</span>`).join('')
-          :'<span style="font-size:12px;color:var(--text-light)">Aucun membre</span>'}
-      </div>
-    </div>`;
-  } else {
+        ${membres.length?membres.map(m=>`<span class="member-chip">${escHtml(m.prenom+' '+m.nom)}</span>`).join(''):'<span style="font-size:12px;color:var(--text-light)">Aucun membre</span>'}
+      </div></div>`;
+  }else{
     title.textContent='✅ Présences';
     content.innerHTML=`<div style="padding:16px;text-align:center">
       <div style="font-size:28px;margin-bottom:8px">✅</div>
@@ -1017,46 +1047,24 @@ function showChatPanel(type){
   }
   panel.classList.add('open');
 }
-
-function closeChatPanel(){
-  document.getElementById('chat-side-panel').classList.remove('open');
-}
+function closeChatPanel(){document.getElementById('chat-side-panel').classList.remove('open');}
 function goToPresencesFS(){
-  closeChatPanel();
-  closeChatFullscreen();
+  closeChatPanel();closeChatFullscreen();
   showPage('activites',document.querySelector('.bottom-nav-btn:nth-child(3)'));
   switchActiviteTab('presences');
-  setTimeout(()=>{
-    toggleForm('form-presence');
-    remplirSelectKourels('p-kourel');
-    document.getElementById('p-kourel').value=chatFsKourelId||'';
-    loadMembresForPresence();
-  },150);
+  setTimeout(()=>{toggleForm('form-presence');remplirSelectKourels('p-kourel');document.getElementById('p-kourel').value=chatFsKourelId||'';loadMembresForPresence();},150);
 }
-
 function showAddMembreFS(){
-  closeChatPanel();
-  closeChatFullscreen();
-  // page-membres est toujours dans le DOM même si absente de la nav
+  closeChatPanel();closeChatFullscreen();
   showPage('membres',null);
-  setTimeout(()=>{
-    toggleForm('form-membre');
-    remplirSelectKourels('m-kourel');
-    document.getElementById('m-kourel').value=chatFsKourelId;
-  },150);
+  setTimeout(()=>{toggleForm('form-membre');remplirSelectKourels('m-kourel');document.getElementById('m-kourel').value=chatFsKourelId;},150);
 }
-
 async function deleteChatKourel(){
   if(!confirm('Supprimer ce Kourel ?'))return;
   document.getElementById('chat-header-dropdown').classList.remove('open');
-  try{
-    await api('DELETE','/kourels/'+chatFsKourelId);
-    closeChatFullscreen();
-    await renderKourels();renderAccueil();
-    showNotif('Kourel supprimé ✅');
-  }catch(e){showNotif(e.message,true);}
+  try{await api('DELETE','/kourels/'+chatFsKourelId);closeChatFullscreen();await renderKourels();renderAccueil();showNotif('Kourel supprimé ✅');}
+  catch(e){showNotif(e.message,true);}
 }
-
 async function loadChatMessages(){
   const area=document.getElementById('chat-msgs-area');
   area.innerHTML='<div style="text-align:center;padding:20px;color:var(--text-light);font-size:13px">Chargement…</div>';
@@ -1068,9 +1076,7 @@ async function loadChatMessages(){
       <div class="msg-bubble ${isMine?'msg-mine':'msg-other'}" style="position:relative">
         ${!isMine?`<div class="msg-sender">${escHtml(m.auteur?.prenom||m.auteur?.nom||'')}</div>`:''}
         <div style="display:flex;align-items:center;gap:4px">
-          ${m.type==='audio'
-            ?`<audio controls src="${m.texte}" style="max-width:200px;height:30px"></audio>`
-            :`<span style="word-break:break-word">${escHtml(m.texte)}</span>`}
+          ${m.type==='audio'?`<audio controls src="${m.texte}" style="max-width:200px;height:30px"></audio>`:`<span style="word-break:break-word">${escHtml(m.texte)}</span>`}
           ${isMine?`<div style="position:relative;flex-shrink:0">
             <button class="msg-menu-btn" onclick="toggleMsgMenu('menu-${m._id}')">⋮</button>
             <div class="msg-menu-dropdown" id="menu-${m._id}">
@@ -1079,23 +1085,20 @@ async function loadChatMessages(){
         </div>
         <div class="msg-time">${new Date(m.createdAt).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}</div>
       </div></div>`;
-  }).join(''):`<div class="chat-empty"><div style="font-size:36px;margin-bottom:8px">💬</div><p style="font-size:12px;font-weight:600;color:var(--text-light)">Aucun message — soyez le premier !</p></div>`;
+  }).join(''):`<div class="chat-empty"><div style="font-size:36px;margin-bottom:8px">💬</div><p style="font-size:12px;font-weight:600">Aucun message — soyez le premier !</p></div>`;
   setTimeout(()=>{if(area)area.scrollTop=area.scrollHeight;},50);
 }
-
 async function deleteMsgFS(msgId){
   if(!confirm('Supprimer ce message ?'))return;
   try{await api('DELETE','/messages/'+msgId);await loadChatMessages();showNotif('Message supprimé ✅');}
   catch(e){showNotif(e.message,true);}
 }
-
 async function sendMsgFS(){
   const input=document.getElementById('chat-input-field');
   const texte=input?.value.trim();if(!texte||!chatFsKourelId)return;
   try{await api('POST','/messages',{kourel:chatFsKourelId,texte});input.value='';await loadChatMessages();}
   catch(e){showNotif('Erreur envoi message',true);}
 }
-
 async function sendFileMsgFS(event){
   const file=event.target.files[0];if(!file)return;
   const reader=new FileReader();
@@ -1104,71 +1107,120 @@ async function sendFileMsgFS(event){
     try{await api('POST','/messages',{kourel:chatFsKourelId,texte:e.target.result,type});await loadChatMessages();}
     catch(err){showNotif('Fichier trop grand',true);}
   };
-  reader.readAsDataURL(file);
-  event.target.value='';
+  reader.readAsDataURL(file);event.target.value='';
 }
-
 function startVocalFS(){
   const btn=document.getElementById('btn-vocal');
   if(!isRecording){
-    navigator.mediaDevices.getUserMedia({audio:true})
-      .then(stream=>{
-        const options=MediaRecorder.isTypeSupported('audio/webm;codecs=opus')
-          ?{mimeType:'audio/webm;codecs=opus',audioBitsPerSecond:32000}:{audioBitsPerSecond:32000};
-        mediaRecorder=new MediaRecorder(stream,options);
-        audioChunks=[];
-        mediaRecorder.ondataavailable=e=>audioChunks.push(e.data);
-        mediaRecorder.onstop=async()=>{
-          const blob=new Blob(audioChunks,{type:'audio/webm'});
-          const reader=new FileReader();
-          reader.onload=async e=>{
-            try{await api('POST','/messages',{kourel:chatFsKourelId,texte:e.target.result,type:'audio'});await loadChatMessages();}
-            catch(err){showNotif('Erreur envoi audio',true);}
-          };
-          reader.readAsDataURL(blob);
-          stream.getTracks().forEach(t=>t.stop());
+    navigator.mediaDevices.getUserMedia({audio:true}).then(stream=>{
+      const options=MediaRecorder.isTypeSupported('audio/webm;codecs=opus')?{mimeType:'audio/webm;codecs=opus',audioBitsPerSecond:32000}:{audioBitsPerSecond:32000};
+      mediaRecorder=new MediaRecorder(stream,options);audioChunks=[];
+      mediaRecorder.ondataavailable=e=>audioChunks.push(e.data);
+      mediaRecorder.onstop=async()=>{
+        const blob=new Blob(audioChunks,{type:'audio/webm'});
+        const reader=new FileReader();
+        reader.onload=async e=>{
+          try{await api('POST','/messages',{kourel:chatFsKourelId,texte:e.target.result,type:'audio'});await loadChatMessages();}
+          catch(err){showNotif('Erreur envoi audio',true);}
         };
-        mediaRecorder.start();isRecording=true;
-        if(btn){btn.style.background='linear-gradient(135deg,#16a34a,#15803d)';btn.textContent='⏹';}
-        showNotif('Enregistrement… ⏹ pour arrêter');
-        setTimeout(()=>{if(isRecording&&mediaRecorder){mediaRecorder.stop();isRecording=false;if(btn){btn.style.background='linear-gradient(135deg,#dc2626,#991b1b)';btn.textContent='🎤';}}},30000);
-      })
-      .catch(()=>showNotif('Microphone non disponible',true));
+        reader.readAsDataURL(blob);stream.getTracks().forEach(t=>t.stop());
+      };
+      mediaRecorder.start();isRecording=true;
+      if(btn){btn.style.background='linear-gradient(135deg,#16a34a,#15803d)';btn.textContent='⏹';}
+      showNotif('Enregistrement… ⏹ pour arrêter');
+      setTimeout(()=>{if(isRecording&&mediaRecorder){mediaRecorder.stop();isRecording=false;if(btn){btn.style.background='linear-gradient(135deg,#dc2626,#991b1b)';btn.textContent='🎤';}}},30000);
+    }).catch(()=>showNotif('Microphone non disponible',true));
   }else{
     mediaRecorder.stop();isRecording=false;
     if(btn){btn.style.background='linear-gradient(135deg,#dc2626,#991b1b)';btn.textContent='🎤';}
   }
 }
-
-// Fermer dropdown quand on clique ailleurs
 document.addEventListener('click',function(e){
   if(!e.target.classList.contains('chat-fs-menu-btn')&&!e.target.closest('.chat-header-dropdown'))
     document.getElementById('chat-header-dropdown')?.classList.remove('open');
   if(!e.target.classList.contains('msg-menu-btn'))
     document.querySelectorAll('.msg-menu-dropdown').forEach(m=>m.style.display='none');
 });
+function openKourelDetail(kourelId,nom){openChatFullscreen(kourelId,nom);}
 
-// Garder compatibilité accueil click
-function openKourelDetail(kourelId,nom){ openChatFullscreen(kourelId,nom); }
-
-function showAddMembre(kourelId){
-  chatFsKourelId=kourelId;
-  showPage('membres',null);
-  setTimeout(()=>{
-    toggleForm('form-membre');
-    remplirSelectKourels('m-kourel');
-    document.getElementById('m-kourel').value=kourelId;
-  },150);
+// ── SONS MULTIPLES ──────────────────────────────────────
+function handleSons(input,listId,countId,nId){
+  const list=document.getElementById(listId);
+  const countEl=document.getElementById(countId);
+  const nEl=document.getElementById(nId);
+  Array.from(input.files).forEach(file=>{
+    const url=URL.createObjectURL(file);
+    const id='son-'+Date.now()+Math.random().toString(36).slice(2);
+    const item=document.createElement('div');
+    item.className='son-item';item.id=id;
+    item.innerHTML=`
+      <span class="son-icon">🎵</span>
+      <div class="son-info">
+        <div class="son-name">${escHtml(file.name)}</div>
+        <div class="son-meta">${formatSize(file.size)}</div>
+        <div class="son-progress-bar"><div class="son-progress-fill" id="prog-${id}"></div></div>
+      </div>
+      <div class="son-controls">
+        <button class="play-btn" id="play-${id}" onclick="togglePlay('${id}','${url}','${listId}','${countId}','${nId}')">▶</button>
+        <button class="del-btn" onclick="removeSon('${id}','${listId}','${countId}','${nId}')">✕</button>
+      </div>`;
+    list.appendChild(item);
+  });
+  const count=list.children.length;
+  nEl.textContent=count;countEl.style.display=count>0?'block':'none';
+  input.value='';
+}
+function togglePlay(id,url){
+  const btn=document.getElementById('play-'+id);
+  const prog=document.getElementById('prog-'+id);
+  if(currentAudio&&currentPlayBtn){
+    currentAudio.pause();currentPlayBtn.textContent='▶';
+    if(currentPlayBtn===btn){currentAudio=null;currentPlayBtn=null;prog.style.width='0%';return;}
+  }
+  const audio=new Audio(url);currentAudio=audio;currentPlayBtn=btn;btn.textContent='⏸';
+  audio.ontimeupdate=()=>{if(audio.duration)prog.style.width=(audio.currentTime/audio.duration*100)+'%';};
+  audio.onended=()=>{btn.textContent='▶';prog.style.width='0%';currentAudio=null;currentPlayBtn=null;};
+  audio.play();
+}
+function removeSon(id,listId,countId,nId){
+  const el=document.getElementById(id);if(el)el.remove();
+  const list=document.getElementById(listId);
+  const count=list.children.length;
+  document.getElementById(nId).textContent=count;
+  document.getElementById(countId).style.display=count>0?'block':'none';
 }
 
-async function deleteKourel(id){
-  if(!confirm('Supprimer ce Kourel ?'))return;
-  try{
-    await api('DELETE','/kourels/'+id);
-    activeChatRoom=null;
-    await renderKourels();renderAccueil();
-    showNotif('Kourel supprimé ✅');
-  }catch(e){showNotif(e.message,true);}
+// ── PDF ──────────────────────────────────────────────────
+function handlePDF(input,listId){
+  const list=document.getElementById(listId);
+  Array.from(input.files).forEach(file=>{
+    const eid='pdf-'+Date.now()+Math.random().toString(36).slice(2);
+    const item=document.createElement('div');
+    item.className='doc-item';item.id=eid;
+    item.innerHTML=`
+      <span class="doc-item-icon">📄</span>
+      <div class="doc-item-info">
+        <div class="doc-item-name">${escHtml(file.name)}</div>
+        <div class="doc-item-size">${formatSize(file.size)}</div>
+      </div>
+      <button class="del-btn" onclick="document.getElementById('${eid}').remove()">✕</button>`;
+    list.appendChild(item);
+  });
+  input.value='';
+}
+
+// ── PHOTOS ──────────────────────────────────────────────
+function handlePhotos(input,gridId){
+  const grid=document.getElementById(gridId);
+  Array.from(input.files).forEach(file=>{
+    const url=URL.createObjectURL(file);
+    const eid='ph-'+Date.now()+Math.random().toString(36).slice(2);
+    const thumb=document.createElement('div');
+    thumb.className='photo-thumb';thumb.id=eid;
+    thumb.innerHTML=`<img src="${url}" alt="${escHtml(file.name)}"><button class="photo-del" onclick="document.getElementById('${eid}').remove()">✕</button>`;
+    grid.appendChild(thumb);
+  });
+  input.value='';
 }
 
 // ── MEMBRES ──────────────────────────────────────────────
@@ -1197,9 +1249,7 @@ async function addMembre(){
   try{
     await api('POST','/membres',{prenom,nom,telephone:document.getElementById('m-tel').value.trim(),kourel:kourel||undefined,role:'Membre'});
     ['m-prenom','m-nom','m-tel'].forEach(id=>document.getElementById(id).value='');
-    toggleForm('form-membre');
-    await renderMembres();renderAccueil();
-    showNotif('Membre ajouté !');
+    toggleForm('form-membre');await renderMembres();renderAccueil();showNotif('Membre ajouté !');
   }catch(e){showNotif(e.message,true);}
 }
 async function deleteMembre(id){
@@ -1209,65 +1259,41 @@ async function deleteMembre(id){
 }
 
 // ── PROGRAMMES ───────────────────────────────────────────
-async function renderProgrammes(){
-  try{
-    const progs=await api('GET','/programmes');
-    document.getElementById('stat-conserv').textContent=progs.length;
-    document.getElementById('programmes-list').innerHTML=progs.length
-      ?progs.map(p=>`
-          <div class="programme-card">
-            <div style="display:flex;justify-content:space-between;align-items:flex-start">
-              <div>
-                <span class="jour-badge">${escHtml(p.jour||'—')}</span>
-                <h3 style="font-size:15px;font-weight:900;margin-top:6px">${escHtml(p.xassida)}</h3>
-                <div style="font-size:11px;color:var(--text-light)">${escHtml(p.kourel?.nom||'—')}</div>
-              </div>
-              <button class="btn btn-danger" onclick="deleteProgramme('${p._id}')">🗑</button>
-            </div>
-            <div class="prog-info-grid">
-              ${p.lieu?`<div class="prog-info-item"><div class="prog-info-label">Lieu</div><div class="prog-info-value">${escHtml(p.lieu)}</div></div>`:''}
-              ${p.heure?`<div class="prog-info-item"><div class="prog-info-label">Heure</div><div class="prog-info-value">${escHtml(p.heure)}</div></div>`:''}
-              ${p.responsable?`<div class="prog-info-item"><div class="prog-info-label">Responsable</div><div class="prog-info-value">${escHtml(p.responsable)}</div></div>`:''}
-              <div class="prog-info-item"><div class="prog-info-label">Tolérance</div><div class="prog-info-value">${p.tolerance||0} min</div></div>
-            </div>
-            ${p.audio?`<div style="margin-top:10px"><div class="audio-player"><span class="audio-label">🎵 Son réf.</span><audio controls src="${p.audio}" style="flex:1;height:30px"></audio></div></div>`:''}
-            ${p.notes?`<div style="margin-top:8px;font-size:11px;color:var(--text-light)">${escHtml(p.notes)}</div>`:''}
-          </div>`).join('')
-      :'<p style="color:var(--text-light);font-size:13px">Aucun programme.</p>';
-  }catch(e){showNotif('Erreur chargement programmes',true);}
-}
-function handleAudioUpload(event){
-  const file=event.target.files[0];if(!file)return;
-  const reader=new FileReader();
-  reader.onload=e=>{
-    currentAudioDataUrl=e.target.result;
-    const preview=document.getElementById('pr-audio-preview');
-    preview.style.display='block';
-    preview.innerHTML=`<div class="audio-player"><span class="audio-label">🎵 ${escHtml(file.name)}</span><audio controls src="${e.target.result}" style="flex:1;height:30px"></audio></div>`;
-  };
-  reader.readAsDataURL(file);
-}
 async function addProgramme(){
   const kourel=document.getElementById('pr-kourel').value;
   const xassida=document.getElementById('pr-xassida').value.trim();
   if(!kourel||!xassida){showNotif('Kourel et Xassida obligatoires',true);return;}
   try{
     await api('POST','/programmes',{
-      kourel,xassida,
+      kourel,jour:document.getElementById('pr-jour').value,
       lieu:document.getElementById('pr-lieu').value.trim(),
-      responsable:document.getElementById('pr-responsable').value.trim(),
-      jour:document.getElementById('pr-jour').value,
+      xassida,responsable:document.getElementById('pr-responsable').value.trim(),
       heure:document.getElementById('pr-heure').value,
       tolerance:parseInt(document.getElementById('pr-tolerance').value)||0,
-      notes:document.getElementById('pr-notes').value.trim(),
-      audio:currentAudioDataUrl||undefined
+      notes:document.getElementById('pr-notes').value.trim()
     });
-    currentAudioDataUrl=null;
-    document.getElementById('pr-audio-preview').style.display='none';
-    toggleForm('form-programme');
-    await renderProgrammes();
-    showNotif('Programme ajouté !');
+    ['pr-lieu','pr-xassida','pr-responsable','pr-notes'].forEach(id=>document.getElementById(id).value='');
+    toggleForm('form-programme');await renderProgrammes();showNotif('Programme enregistré !');
   }catch(e){showNotif(e.message,true);}
+}
+async function renderProgrammes(){
+  try{
+    const progs=await api('GET','/programmes');
+    document.getElementById('stat-conserv').textContent=progs.length;
+    document.getElementById('programmes-list').innerHTML=progs.length
+      ?progs.map(p=>`
+        <div class="card" style="margin-bottom:12px">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start">
+            <div>
+              <div style="font-weight:800;font-size:14px">${escHtml(p.xassida||'—')}</div>
+              <div style="font-size:11px;color:var(--text-light);margin-top:3px">${escHtml(p.jour||'')} ${p.heure?'à '+escHtml(p.heure):''} · ${escHtml(p.lieu||'—')}</div>
+              <div style="font-size:11px;color:var(--text-light)">${escHtml(p.kourel?.nom||'—')} · Resp: ${escHtml(p.responsable||'—')}</div>
+            </div>
+            <button class="btn btn-danger" onclick="deleteProgramme('${p._id}')">🗑</button>
+          </div>
+        </div>`).join('')
+      :'<p style="color:var(--text-light);font-size:13px">Aucun programme.</p>';
+  }catch(e){showNotif('Erreur chargement programmes',true);}
 }
 async function deleteProgramme(id){
   if(!confirm('Supprimer ce programme ?'))return;
@@ -1296,8 +1322,7 @@ function loadMembresForPresence(){
 }
 function setPresStatus(membreId,statut,btn){
   document.getElementById('row-'+membreId).querySelectorAll('.status-btn').forEach(b=>b.classList.remove('selected'));
-  btn.classList.add('selected');
-  presenceStatuts[membreId]=statut;
+  btn.classList.add('selected');presenceStatuts[membreId]=statut;
 }
 async function savePresenceSession(){
   const date=document.getElementById('p-date').value;
@@ -1309,9 +1334,7 @@ async function savePresenceSession(){
     presenceStatuts={};
     ['p-date','p-lieu'].forEach(id=>document.getElementById(id).value='');
     document.getElementById('p-membres-list').innerHTML='';
-    toggleForm('form-presence');
-    await renderPresences();
-    showNotif('Session enregistrée !');
+    toggleForm('form-presence');await renderPresences();showNotif('Session enregistrée !');
   }catch(e){showNotif(e.message,true);}
 }
 async function renderPresences(){
@@ -1322,14 +1345,14 @@ async function renderPresences(){
       ?sessions.map(p=>{
           const presents=p.membres.filter(m=>m.statut==='Présent').length;
           const retards=p.membres.filter(m=>m.statut==='Retard').length;
-          const absents=p.membres.filter(m=>m.statut==='Absent').length;
+          const absents=p.membres.filter(m=>m.statut==='Absent').length; // FIX 4 : typo > corrigée
           const total=p.membres.length;
           const pct=total?Math.round((presents+retards)/total*100):0;
           return `<div class="presence-session-card">
             <div class="presence-session-header">
               <div>
                 <div class="presence-session-title">${escHtml(p.type)} — ${escHtml(p.kourel?.nom||'—')}</div>
-                <div class="presence-session-meta">${escHtml(new Date(p.date).toLocaleDateString('fr-FR'))}${p.lieu?' · '+escHtml(p.lieu):''}</div>
+                <div class="presence-session-meta">${new Date(p.date).toLocaleDateString('fr-FR')}${p.lieu?' · '+escHtml(p.lieu):''}</div>
               </div>
               <div style="display:flex;align-items:center;gap:10px">
                 <div style="font-size:22px;font-weight:900">${pct}%</div>
@@ -1339,7 +1362,7 @@ async function renderPresences(){
             <div class="presence-stats-row">
               <div class="pstat"><div class="pstat-dot pstat-present"></div>${presents} Présents</div>
               <div class="pstat"><div class="pstat-dot pstat-retard"></div>${retards} Retards</div>
-              <div class="pstat"><div class="pstat-dot pstat-absent"></div${absents} Absents</div>
+              <div class="pstat"><div class="pstat-dot pstat-absent"></div>${absents} Absents</div>
             </div>
             <div>${p.membres.map(m=>{
               let ss='',si='';
@@ -1369,9 +1392,7 @@ async function addAdiyeu(){
   try{
     await api('POST','/adiyeu',{membre,kourel,montant,programme,statut:'En attente'});
     ['a-montant','a-programme'].forEach(id=>document.getElementById(id).value='');
-    toggleForm('form-adiyeu');
-    await renderCotisations();
-    showNotif('Cotisation créée !');
+    toggleForm('form-adiyeu');await renderCotisations();showNotif('Cotisation créée !');
   }catch(e){showNotif(e.message,true);}
 }
 async function renderCotisations(){
@@ -1399,14 +1420,12 @@ async function payerCotisation(id){
   catch(e){showNotif(e.message,true);}
 }
 
-// ── CHAT ─────────────────────────────────────────────────
+// ── CHAT helpers ─────────────────────────────────────────
 function toggleMsgMenu(id){
   const menu=document.getElementById(id);
   document.querySelectorAll('.msg-menu-dropdown').forEach(m=>{if(m.id!==id)m.style.display='none';});
   menu.style.display=menu.style.display==='none'?'block':'none';
 }
-
-// (chat functions moved to FS versions above)
 
 // ── RAPPORTS ─────────────────────────────────────────────
 function renderRapports(){
