@@ -501,18 +501,38 @@
           <button class="add-btn" onclick="toggleForm('form-membre')">+ Nouveau</button>
         </div>
         <input class="search-box" type="text" id="search-membre" placeholder="🔍 Rechercher…" oninput="filtrerMembres()"/>
+
+        <!-- Formulaire nouveau membre avec anti-doublon -->
         <div id="form-membre" class="form-box" style="display:none">
+          <!-- Sélecteur du Kourel cible en premier -->
+          <div style="margin-bottom:12px">
+            <label style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--green-dark);display:block;margin-bottom:6px">Kourel cible</label>
+            <select id="m-kourel" onchange="refreshMembreExistants()"></select>
+          </div>
+
+          <!-- Membres existants à ajouter (clic = rattache au kourel) -->
+          <div id="membres-existants-wrap" style="display:none;margin-bottom:14px">
+            <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--green-dark);margin-bottom:8px">
+              ✅ Membres déjà enregistrés — cliquer pour rattacher
+            </div>
+            <div id="membres-existants-list" style="display:flex;flex-wrap:wrap;gap:6px"></div>
+            <div style="height:1px;background:var(--border);margin:14px 0"></div>
+            <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--green-dark);margin-bottom:8px">
+              ➕ Ou créer un nouveau membre
+            </div>
+          </div>
+
           <div class="form-grid">
             <input type="text" id="m-prenom" placeholder="Prénom"/>
             <input type="text" id="m-nom" placeholder="Nom"/>
             <input type="tel" id="m-tel" placeholder="Téléphone"/>
-            <select id="m-kourel"></select>
           </div>
           <div class="btn-row">
-            <button class="btn btn-primary" onclick="addMembre()">Enregistrer</button>
+            <button class="btn btn-primary" onclick="addMembre()">Enregistrer nouveau</button>
             <button class="btn btn-secondary" onclick="toggleForm('form-membre')">Annuler</button>
           </div>
         </div>
+
         <div class="card" style="padding:0;overflow:hidden">
           <div class="table-wrap">
             <table>
@@ -796,8 +816,11 @@ async function loginUser(){
   try{
     const data=await api('POST','/auth/login',{identifiant,motDePasse});
     token=data.token;
-    currentUser={id:data.utilisateur?._id||data.utilisateur?.id||data.daara?._id,nom:data.utilisateur?.nom||data.daara?.nom,role:data.utilisateur?.role||'admin'};
-    currentDaara=data.daara;
+    // Décoder le JWT pour récupérer l'ID exact utilisé par le backend
+    const payload=JSON.parse(atob(token.split('.')[1]));
+    const adminId=payload.id; // même valeur que decoded.id dans auth.middleware
+    currentUser={id:adminId, _id:adminId, nom:data.daara?.nom||identifiant, role:'admin'};
+    currentDaara=data.daara||{};
     localStorage.setItem('dc_token',token);
     localStorage.setItem('dc_user',JSON.stringify(currentUser));
     localStorage.setItem('dc_daara',JSON.stringify(currentDaara));
@@ -914,7 +937,7 @@ function toggleForm(id){
   const visible=el.style.display!=='none';
   el.style.display=visible?'none':'block';
   if(!visible){
-    if(id==='form-membre')remplirSelectKourels('m-kourel');
+    if(id==='form-membre'){remplirSelectKourels('m-kourel');setTimeout(refreshMembreExistants,50);}
     if(id==='form-programme')remplirSelectKourels('pr-kourel');
     if(id==='form-presence'){remplirSelectKourels('p-kourel');loadMembresForPresence();}
   }
@@ -998,6 +1021,7 @@ async function addKourel(){
     showNotif('Kourel ajouté !');
   }catch(e){showNotif(e.message,true);}
 }
+
 // ── CHAT FULLSCREEN ──────────────────────────────────────
 let chatFsKourelId=null;
 let chatFsNom=null;
@@ -1070,21 +1094,54 @@ async function loadChatMessages(){
   area.innerHTML='<div style="text-align:center;padding:20px;color:var(--text-light);font-size:13px">Chargement…</div>';
   let msgs=[];
   try{msgs=await api('GET','/messages/'+chatFsKourelId);}catch(e){}
+
+  // Palette de couleurs pour identifier chaque auteur
+  const COLORS=['#2563eb','#7c3aed','#db2777','#059669','#d97706','#dc2626','#0891b2','#65a30d'];
+  const authorColors={};
+  let colorIdx=0;
+  function getAuthorColor(authorId){
+    if(!authorId)return '#888';
+    if(!authorColors[authorId]){authorColors[authorId]=COLORS[colorIdx%COLORS.length];colorIdx++;}
+    return authorColors[authorId];
+  }
+
   area.innerHTML=msgs.length?msgs.map(m=>{
-    const isMine=m.auteur?._id===currentUser?.id||m.auteur===currentUser?.id;
-    return `<div style="display:flex;flex-direction:column;align-items:${isMine?'flex-end':'flex-start'}">
-      <div class="msg-bubble ${isMine?'msg-mine':'msg-other'}" style="position:relative">
-        ${!isMine?`<div class="msg-sender">${escHtml(m.auteur?.prenom||m.auteur?.nom||'')}</div>`:''}
-        <div style="display:flex;align-items:center;gap:4px">
-          ${m.type==='audio'?`<audio controls src="${m.texte}" style="max-width:200px;height:30px"></audio>`:`<span style="word-break:break-word">${escHtml(m.texte)}</span>`}
-          ${isMine?`<div style="position:relative;flex-shrink:0">
+    // Comparaison robuste : convertir en string pour éviter les mismatches ObjectId vs string
+    const authorId=String(m.auteur?._id||m.auteur||'');
+    const myId=String(currentUser?.id||currentUser?._id||'');
+    const isMine= myId && authorId && authorId===myId;
+
+    // Nom de l'auteur : essayer prenom+nom, puis nom, puis identifiant, sinon "Membre"
+    const authorName= m.auteur?.prenom
+      ? (m.auteur.prenom + (m.auteur.nom ? ' '+m.auteur.nom : ''))
+      : (m.auteur?.nom || m.auteur?.identifiant || m.auteur?.username || (authorId?'Membre #'+authorId.slice(-4):'Membre'));
+
+    const color=isMine?'#1a7a3c':getAuthorColor(authorId);
+
+    return `<div style="display:flex;flex-direction:column;align-items:${isMine?'flex-end':'flex-start'};margin-bottom:6px;padding:0 8px">
+      ${!isMine?`<div style="font-size:10px;font-weight:800;color:${color};margin:0 4px 3px 4px">${escHtml(authorName)}</div>`:''}
+      <div style="max-width:78%;padding:9px 13px;border-radius:${isMine?'16px 4px 16px 16px':'4px 16px 16px 16px'};
+          background:${isMine?'#dcf8c6':'#ffffff'};
+          border:1px solid ${isMine?'#b5e8a0':'#e0e0e0'};
+          ${!isMine?'border-left:3px solid '+color:''}
+          position:relative;">
+        <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+          ${m.type==='audio'
+            ?`<audio controls src="${m.texte}" style="max-width:220px;height:34px;border-radius:8px"></audio>`
+            :m.type==='image'
+              ?`<img src="${m.texte}" style="max-width:200px;border-radius:8px;display:block"/>`
+              :`<span style="font-size:13px;line-height:1.5;word-break:break-word;color:#111">${escHtml(m.texte)}</span>`}
+          ${isMine?`<div style="position:relative;flex-shrink:0;align-self:flex-start">
             <button class="msg-menu-btn" onclick="toggleMsgMenu('menu-${m._id}')">⋮</button>
             <div class="msg-menu-dropdown" id="menu-${m._id}">
               <div class="menu-item-delete" onclick="deleteMsgFS('${m._id}')">🗑 Supprimer</div>
             </div></div>`:''}
         </div>
-        <div class="msg-time">${new Date(m.createdAt).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}</div>
-      </div></div>`;
+        <div style="font-size:10px;color:#999;margin-top:4px;text-align:right">
+          ${isMine?'&check; ':''} ${new Date(m.createdAt).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}
+        </div>
+      </div>
+    </div>`;
   }).join(''):`<div class="chat-empty"><div style="font-size:36px;margin-bottom:8px">💬</div><p style="font-size:12px;font-weight:600">Aucun message — soyez le premier !</p></div>`;
   setTimeout(()=>{if(area)area.scrollTop=area.scrollHeight;},50);
 }
@@ -1224,6 +1281,37 @@ function handlePhotos(input,gridId){
 }
 
 // ── MEMBRES ──────────────────────────────────────────────
+// Affiche les membres déjà enregistrés mais pas encore dans ce Kourel
+function refreshMembreExistants(){
+  const kourelId=document.getElementById('m-kourel').value;
+  const wrap=document.getElementById('membres-existants-wrap');
+  const list=document.getElementById('membres-existants-list');
+  if(!kourelId){wrap.style.display='none';return;}
+  // Membres PAS dans ce kourel (pour éviter doublon)
+  const dehors=cacheMembres.filter(m=>(m.kourel?._id||m.kourel)!==kourelId);
+  if(dehors.length===0){wrap.style.display='none';return;}
+  wrap.style.display='block';
+  list.innerHTML=dehors.map(m=>`
+    <span onclick="rattacherMembre('${m._id}','${kourelId}')"
+      style="display:inline-flex;align-items:center;gap:5px;background:var(--green-muted);
+        border:1.5px solid var(--green-border);border-radius:99px;padding:5px 12px;
+        font-size:12px;font-weight:700;color:var(--green-dark);cursor:pointer;transition:background .15s"
+      onmouseover="this.style.background='#c8ecd0'" onmouseout="this.style.background='var(--green-muted)'">
+      👤 ${escHtml(m.prenom+' '+m.nom)}
+      <span style="font-size:10px;color:var(--text-light)">${escHtml(m.kourel?.nom||'sans kourel')}</span>
+    </span>`).join('');
+}
+
+// Rattache un membre existant à un nouveau kourel (PUT)
+async function rattacherMembre(membreId,kourelId){
+  try{
+    await api('PUT','/membres/'+membreId,{kourel:kourelId});
+    await renderMembres();
+    refreshMembreExistants();
+    showNotif('Membre rattaché au Kourel ✅');
+  }catch(e){showNotif(e.message,true);}
+}
+
 async function renderMembres(){
   try{cacheMembres=await api('GET','/membres');filtrerMembres();}
   catch(e){showNotif('Erreur chargement membres',true);}
@@ -1282,14 +1370,37 @@ async function renderProgrammes(){
     document.getElementById('stat-conserv').textContent=progs.length;
     document.getElementById('programmes-list').innerHTML=progs.length
       ?progs.map(p=>`
-        <div class="card" style="margin-bottom:12px">
-          <div style="display:flex;justify-content:space-between;align-items:flex-start">
+        <div style="background:#fff;border-radius:16px;box-shadow:0 2px 14px rgba(15,76,37,.10);margin-bottom:12px;overflow:hidden;border:1.5px solid var(--border)">
+          <!-- Bandeau titre Kourel -->
+          <div style="background:linear-gradient(135deg,var(--green-dark),var(--green));padding:12px 16px;display:flex;justify-content:space-between;align-items:center">
             <div>
-              <div style="font-weight:800;font-size:14px">${escHtml(p.xassida||'—')}</div>
-              <div style="font-size:11px;color:var(--text-light);margin-top:3px">${escHtml(p.jour||'')} ${p.heure?'à '+escHtml(p.heure):''} · ${escHtml(p.lieu||'—')}</div>
-              <div style="font-size:11px;color:var(--text-light)">${escHtml(p.kourel?.nom||'—')} · Resp: ${escHtml(p.responsable||'—')}</div>
+              <div style="color:#fff;font-size:15px;font-weight:900;letter-spacing:.5px">${escHtml(p.kourel?.nom||'—')}</div>
+              <div style="color:rgba(255,255,255,.75);font-size:11px;margin-top:2px">${escHtml(p.xassida||'')}</div>
             </div>
-            <button class="btn btn-danger" onclick="deleteProgramme('${p._id}')">🗑</button>
+            <button class="btn btn-danger" style="background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3)" onclick="deleteProgramme('${p._id}')">🗑</button>
+          </div>
+          <!-- Infos principales style croquis -->
+          <div style="padding:14px 16px;display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;align-items:center;gap:10px">
+              <span style="font-size:18px">📅</span>
+              <span style="font-size:14px;font-weight:800;color:var(--text)">${escHtml(p.jour||'—')} à ${p.heure||'—'}</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px">
+              <span style="font-size:18px">📍</span>
+              <span style="font-size:13px;color:var(--text-light);font-weight:600">${escHtml(p.lieu||'—')}</span>
+            </div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px">
+              <div style="background:var(--green-muted);border-radius:99px;padding:5px 12px;display:flex;align-items:center;gap:6px">
+                <span style="font-size:14px">🎵</span>
+                <span style="font-size:12px;font-weight:700;color:var(--green-dark)">Sons à répéter</span>
+              </div>
+              <div style="background:#fef3e8;border-radius:99px;padding:5px 12px;display:flex;align-items:center;gap:6px">
+                <span style="font-size:14px">📕</span>
+                <span style="font-size:12px;font-weight:700;color:#92400e">PDF Xassida</span>
+              </div>
+            </div>
+            ${p.responsable?`<div style="font-size:11px;color:var(--text-light);margin-top:2px">👤 Responsable : <strong>${escHtml(p.responsable)}</strong></div>`:''}
+            ${p.notes?`<div style="font-size:11px;color:var(--text-light);font-style:italic;background:#f4faf4;border-radius:8px;padding:6px 10px">${escHtml(p.notes)}</div>`:''}
           </div>
         </div>`).join('')
       :'<p style="color:var(--text-light);font-size:13px">Aucun programme.</p>';
