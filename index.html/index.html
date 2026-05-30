@@ -1,198 +1,326 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+  <link rel="icon" href="data:,">
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>DAARA CONNECT</title>
   <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
     :root {
       --green: #1a7a3c; --green-light: #2ea84f; --green-dark: #0f4c25;
-      --green-muted: #e8f5e8; --orange: #e07b2a; --orange-light: #f0953d;
-      --blue: #2563eb; --purple: #7c3aed; --gold: #c5992a;
+      --green-muted: #e8f5e8; --orange: #e07b2a; --blue: #2563eb;
+      --purple: #7c3aed; --gold: #c5992a;
       --bg: #f2f7f2; --card: #ffffff; --text: #1a2e1a;
       --text-light: #5a7a5a; --border: #d0e4d0;
       --shadow: 0 2px 20px rgba(15,76,37,.08);
       --shadow-lg: 0 8px 40px rgba(15,76,37,.15);
+      --header-h: 56px;
+      --nav-h: 44px;
     }
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
-    #welcome-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(160deg,#062617 0%,#0f4c25 40%,#1a7a3c 100%);position:relative;overflow:hidden}
-    .bg-pattern{position:absolute;inset:0;background-image:radial-gradient(circle at 20% 50%,rgba(46,168,79,.15) 0%,transparent 50%),radial-gradient(circle at 80% 20%,rgba(197,153,42,.1) 0%,transparent 40%),radial-gradient(circle at 60% 80%,rgba(46,168,79,.08) 0%,transparent 35%)}
-    .geo-lines{position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,transparent,transparent 60px,rgba(255,255,255,.02) 60px,rgba(255,255,255,.02) 61px),repeating-linear-gradient(90deg,transparent,transparent 60px,rgba(255,255,255,.02) 60px,rgba(255,255,255,.02) 61px)}
-    .floating-orb{position:absolute;border-radius:50%;filter:blur(40px);animation:orbFloat 12s ease-in-out infinite}
-    .orb1{width:400px;height:400px;background:rgba(46,168,79,.12);top:-100px;right:-100px;animation-delay:0s}
-    .orb2{width:300px;height:300px;background:rgba(197,153,42,.08);bottom:-50px;left:-80px;animation-delay:4s}
-    .orb3{width:200px;height:200px;background:rgba(46,168,79,.1);top:40%;left:20%;animation-delay:8s}
-    @keyframes orbFloat{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-30px) rotate(5deg)}}
-    .welcome-card{background:rgba(255,255,255,.97);border-radius:28px;padding:52px 48px;width:100%;max-width:520px;position:relative;z-index:10;box-shadow:0 40px 100px rgba(0,0,0,.4),0 0 0 1px rgba(255,255,255,.1);animation:cardReveal .7s cubic-bezier(.22,1,.36,1) both}
-    @keyframes cardReveal{from{opacity:0;transform:translateY(50px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
-    .brand{text-align:center;margin-bottom:40px}
-    .mosque-icon{width:80px;height:80px;background:linear-gradient(135deg,var(--green-dark),var(--green));border-radius:24px;display:inline-flex;align-items:center;justify-content:center;font-size:40px;margin-bottom:16px;box-shadow:0 12px 32px rgba(15,76,37,.4);animation:iconPulse 3s ease-in-out infinite}
-    @keyframes iconPulse{0%,100%{transform:scale(1) rotate(0deg)}50%{transform:scale(1.06) rotate(-2deg)}}
-    .brand h1{font-family:'Amiri',serif;font-size:34px;color:var(--green-dark);letter-spacing:3px;font-weight:700}
-    .brand .tagline{font-size:13px;color:var(--text-light);margin-top:6px;font-weight:500;letter-spacing:.5px}
-    .divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:0 auto 36px}
-    .search-phase{animation:fadeIn .4s ease}
-    .search-phase h2{font-size:17px;font-weight:800;color:var(--green-dark);margin-bottom:6px}
-    .search-phase p{font-size:13px;color:var(--text-light);margin-bottom:20px}
-    @keyframes fadeIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
-    .create-phase{display:none;animation:fadeIn .4s ease}
-    .back-btn{background:none;border:none;color:var(--text-light);font-size:13px;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;margin-bottom:20px;display:flex;align-items:center;gap:6px;transition:color .2s}
-    .back-btn:hover{color:var(--green)}
-    .fl{margin-bottom:18px}
-    .fl label{display:block;font-size:11px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--green-dark);margin-bottom:8px}
-    .fl input,.fl select{width:100%;padding:14px 18px;border-radius:12px;border:2px solid var(--border);font-size:14px;font-family:'Plus Jakarta Sans',sans-serif;color:var(--text);outline:none;background:#f8fbf8;transition:all .2s}
-    .fl input:focus,.fl select:focus{border-color:var(--green);box-shadow:0 0 0 4px rgba(26,122,60,.1);background:#fff}
+    *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+    html,body{height:100%;overflow:hidden}
+    body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);
+      display:flex;flex-direction:column}
+
+    /* ── WELCOME ── */
+    #welcome-screen{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
+      background:linear-gradient(160deg,#062617 0%,#0f4c25 40%,#1a7a3c 100%);
+      z-index:200;overflow-y:auto;padding:16px}
+    .bg-pattern{position:absolute;inset:0;pointer-events:none;
+      background-image:radial-gradient(circle at 20% 50%,rgba(46,168,79,.15) 0%,transparent 50%),
+        radial-gradient(circle at 80% 20%,rgba(197,153,42,.1) 0%,transparent 40%),
+        radial-gradient(circle at 60% 80%,rgba(46,168,79,.08) 0%,transparent 35%)}
+    .floating-orb{position:absolute;border-radius:50%;filter:blur(40px);animation:orbFloat 12s ease-in-out infinite;pointer-events:none}
+    .orb1{width:300px;height:300px;background:rgba(46,168,79,.12);top:-80px;right:-80px}
+    .orb2{width:220px;height:220px;background:rgba(197,153,42,.08);bottom:-40px;left:-60px;animation-delay:4s}
+    .orb3{width:160px;height:160px;background:rgba(46,168,79,.1);top:40%;left:20%;animation-delay:8s}
+    @keyframes orbFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
+    .welcome-card{background:rgba(255,255,255,.97);border-radius:24px;padding:36px 28px;
+      width:100%;max-width:460px;position:relative;z-index:10;
+      box-shadow:0 30px 80px rgba(0,0,0,.4);animation:cardReveal .6s cubic-bezier(.22,1,.36,1) both}
+    @keyframes cardReveal{from{opacity:0;transform:translateY(40px) scale(.97)}to{opacity:1;transform:none}}
+    .brand{text-align:center;margin-bottom:28px}
+    .mosque-icon{width:68px;height:68px;background:linear-gradient(135deg,var(--green-dark),var(--green));
+      border-radius:20px;display:inline-flex;align-items:center;justify-content:center;
+      font-size:34px;margin-bottom:12px;box-shadow:0 10px 28px rgba(15,76,37,.4);
+      animation:iconPulse 3s ease-in-out infinite}
+    @keyframes iconPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+    .brand h1{font-family:'Amiri',serif;font-size:28px;color:var(--green-dark);letter-spacing:2px;font-weight:700}
+    .brand .tagline{font-size:12px;color:var(--text-light);margin-top:4px;font-weight:500}
+    .divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:0 auto 24px}
+    .fl{margin-bottom:14px}
+    .fl label{display:block;font-size:11px;font-weight:800;letter-spacing:1px;
+      text-transform:uppercase;color:var(--green-dark);margin-bottom:6px}
+    .fl input,.fl select{width:100%;padding:13px 16px;border-radius:12px;border:2px solid var(--border);
+      font-size:14px;font-family:'Plus Jakarta Sans',sans-serif;color:var(--text);
+      outline:none;background:#f8fbf8;transition:all .2s}
+    .fl input:focus,.fl select:focus{border-color:var(--green);background:#fff;
+      box-shadow:0 0 0 4px rgba(26,122,60,.1)}
     .fl input::placeholder{color:#aac5aa}
-    .err{color:#dc2626;font-size:11px;margin-top:5px;font-weight:600;display:none}
-    .or-divider{text-align:center;font-size:12px;color:var(--text-light);margin:16px 0;font-weight:600;letter-spacing:1px}
-    .new-daara-btn{width:100%;padding:14px;border:2px dashed var(--border);border-radius:14px;background:transparent;color:var(--text-light);font-size:14px;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:all .2s}
+    .err{color:#dc2626;font-size:11px;margin-top:4px;font-weight:600;display:none}
+    .or-divider{text-align:center;font-size:12px;color:var(--text-light);margin:14px 0;font-weight:600;letter-spacing:1px}
+    .new-daara-btn{width:100%;padding:13px;border:2px dashed var(--border);border-radius:12px;
+      background:transparent;color:var(--text-light);font-size:14px;font-weight:700;
+      cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:all .2s}
     .new-daara-btn:hover{border-color:var(--green);color:var(--green);background:var(--green-muted)}
-    .cta-btn{width:100%;padding:17px;background:linear-gradient(135deg,var(--green-dark),var(--green));color:#fff;border:none;border-radius:14px;font-size:15px;font-weight:800;font-family:'Plus Jakarta Sans',sans-serif;cursor:pointer;box-shadow:0 8px 28px rgba(15,76,37,.35);transition:all .2s;margin-top:8px}
-    .cta-btn:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(15,76,37,.45)}
-    .cta-btn:active{transform:translateY(0)}
-    .cta-btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
-    #app{display:none}
-    .header{background:linear-gradient(135deg,var(--green-dark) 0%,var(--green) 100%);color:#fff;padding:0;position:sticky;top:0;z-index:100;box-shadow:0 4px 24px rgba(15,76,37,.3)}
-    .header-top{display:flex;align-items:center;justify-content:space-between;padding:0 28px;height:64px}
-    .header-logo{display:flex;align-items:center;gap:12px}
-    .logo-icon{width:38px;height:38px;background:rgba(255,255,255,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px}
-    .logo-text{font-family:'Amiri',serif;font-size:22px;letter-spacing:2px;font-weight:700}
-    .header-center{text-align:center}
-    .hdr-daara{font-size:15px;font-weight:800;letter-spacing:.5px}
-    .hdr-meta{font-size:11px;opacity:.8;margin-top:2px}
-    .header-right{display:flex;align-items:center;gap:12px}
-    .hdr-user{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border-radius:10px;padding:6px 14px;font-size:13px;font-weight:700}
-    .user-avatar{width:28px;height:28px;background:rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900}
-    .hdr-switch{background:rgba(255,255,255,.12);border:none;border-radius:8px;padding:6px 14px;color:#fff;font-size:12px;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:background .2s}
-    .hdr-switch:hover{background:rgba(255,255,255,.2)}
-    nav{display:flex;gap:1px;overflow-x:auto;padding:0 20px;border-top:1px solid rgba(255,255,255,.1)}
-    nav::-webkit-scrollbar{display:none}
-    .nav-btn{background:transparent;color:rgba(255,255,255,.8);border:none;border-bottom:3px solid transparent;padding:11px 15px;cursor:pointer;font-weight:600;font-size:13px;font-family:'Plus Jakarta Sans',sans-serif;white-space:nowrap;transition:all .2s}
-    .nav-btn.active{color:#fff;border-bottom-color:#fff;font-weight:800;background:rgba(255,255,255,.1)}
-    .nav-btn:hover:not(.active){color:#fff;background:rgba(255,255,255,.06)}
-    .role-badge{padding:4px 10px;border-radius:99px;font-size:11px;font-weight:800;background:rgba(255,255,255,.18);color:#fff}
-    .content{max-width:1100px;margin:0 auto;padding:28px 22px}
-    .page-title{font-size:24px;font-weight:900;color:var(--text);margin-bottom:22px}
-    .card{background:var(--card);border-radius:18px;padding:24px;box-shadow:var(--shadow)}
-    .card h3{font-size:15px;font-weight:800;margin-bottom:16px;color:var(--text)}
-    .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:26px}
-    .stat-card{border-radius:18px;padding:22px 18px;color:#fff;box-shadow:0 6px 24px rgba(0,0,0,.15);position:relative;overflow:hidden}
-    .stat-card::after{content:'';position:absolute;bottom:-15px;right:-15px;width:70px;height:70px;border-radius:50%;background:rgba(255,255,255,.12)}
-    .stat-icon{font-size:26px;margin-bottom:8px}
-    .stat-value{font-size:30px;font-weight:900}
-    .stat-label{font-size:11px;opacity:.88;margin-top:3px;font-weight:500}
-    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-    .badge{padding:3px 11px;border-radius:99px;font-size:11px;font-weight:700}
+    .cta-btn{width:100%;padding:15px;background:linear-gradient(135deg,var(--green-dark),var(--green));
+      color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:800;
+      font-family:'Plus Jakarta Sans',sans-serif;cursor:pointer;
+      box-shadow:0 6px 22px rgba(15,76,37,.35);transition:all .2s;margin-top:6px}
+    .cta-btn:active{transform:scale(.98)}
+    .cta-btn:disabled{opacity:.6;cursor:not-allowed}
+    .create-phase{display:none}
+    .back-btn{background:none;border:none;color:var(--text-light);font-size:13px;font-weight:700;
+      cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;margin-bottom:16px;
+      display:flex;align-items:center;gap:6px}
+
+    /* ── APP SHELL ── */
+    #app{display:none;flex-direction:column;height:100%;overflow:hidden}
+    .header{background:linear-gradient(135deg,var(--green-dark) 0%,var(--green) 100%);
+      color:#fff;flex-shrink:0;position:sticky;top:0;z-index:100;
+      box-shadow:0 4px 20px rgba(15,76,37,.3)}
+    .header-top{display:flex;align-items:center;justify-content:space-between;
+      padding:0 16px;height:var(--header-h)}
+    .header-logo{display:flex;align-items:center;gap:8px}
+    .logo-icon{width:34px;height:34px;background:rgba(255,255,255,.15);border-radius:9px;
+      display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+    .logo-text{font-family:'Amiri',serif;font-size:18px;letter-spacing:1.5px;font-weight:700}
+    .hdr-user-pill{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.12);
+      border-radius:8px;padding:5px 10px;font-size:12px;font-weight:700;cursor:pointer}
+    .user-avatar{width:26px;height:26px;background:rgba(255,255,255,.2);border-radius:50%;
+      display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0}
+    .hdr-switch{background:rgba(255,255,255,.12);border:none;border-radius:7px;
+      padding:5px 10px;color:#fff;font-size:11px;font-weight:700;cursor:pointer;
+      font-family:'Plus Jakarta Sans',sans-serif}
+    .role-badge{padding:3px 8px;border-radius:99px;font-size:10px;font-weight:800;
+      background:rgba(255,255,255,.18);color:#fff}
+
+    /* ── BOTTOM NAV (mobile) ── */
+    .bottom-nav{display:flex;background:linear-gradient(135deg,var(--green-dark),var(--green));
+      border-top:1px solid rgba(255,255,255,.1);flex-shrink:0;safe-area-inset-bottom:env(safe-area-inset-bottom)}
+    .bottom-nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+      padding:8px 4px;border:none;background:transparent;color:rgba(255,255,255,.7);
+      cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;font-size:9px;font-weight:700;
+      border-top:3px solid transparent;transition:all .2s;gap:3px;min-height:var(--nav-h)}
+    .bottom-nav-btn .nav-icon{font-size:18px;line-height:1}
+    .bottom-nav-btn.active{color:#fff;border-top-color:#fff;background:rgba(255,255,255,.1)}
+    .bottom-nav-btn:active{background:rgba(255,255,255,.15)}
+
+    /* ── CONTENT AREA ── */
+    .content-wrap{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+    .content{max-width:900px;margin:0 auto;padding:16px 14px}
+    .page{display:none}
+    .page.active{display:block}
+    .page-title{font-size:20px;font-weight:900;color:var(--text);margin-bottom:16px}
+
+    /* ── CARDS & STATS ── */
+    .card{background:var(--card);border-radius:16px;padding:18px;box-shadow:var(--shadow)}
+    .card h3{font-size:14px;font-weight:800;margin-bottom:14px}
+    .stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:20px}
+    .stat-card{border-radius:14px;padding:16px 14px;color:#fff;
+      box-shadow:0 4px 16px rgba(0,0,0,.15);position:relative;overflow:hidden}
+    .stat-card::after{content:'';position:absolute;bottom:-12px;right:-12px;
+      width:55px;height:55px;border-radius:50%;background:rgba(255,255,255,.12)}
+    .stat-icon{font-size:22px;margin-bottom:6px}
+    .stat-value{font-size:26px;font-weight:900}
+    .stat-label{font-size:10px;opacity:.88;margin-top:2px;font-weight:500}
+
+    /* ── BADGES ── */
+    .badge{padding:3px 10px;border-radius:99px;font-size:11px;font-weight:700}
     .badge.actif,.badge.payé{background:#dcfce7;color:#166534}
     .badge.inactif,.badge.attente{background:#fee2e2;color:#991b1b}
     .badge.admin{background:#fef3c7;color:#92400e}
     .badge.membre{background:var(--green-muted);color:var(--green-dark)}
-    .table-wrap{overflow-x:auto}
-    table{width:100%;border-collapse:collapse}
-    th{background:var(--green);color:#fff;padding:13px 16px;text-align:left;font-size:12px;font-weight:700}
-    th:first-child{border-radius:8px 0 0 0}
-    th:last-child{border-radius:0 8px 0 0}
-    td{padding:11px 16px;font-size:13px;border-bottom:1px solid var(--border)}
-    tr:nth-child(even) td{background:#f7fbf7}
-    tr:hover td{background:#edf7ed}
-    .form-box{background:#f4faf4;border-radius:16px;padding:24px;margin-bottom:22px;border:1.5px solid var(--border);animation:fadeIn .3s ease}
-    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    input[type=text],input[type=number],input[type=date],input[type=time],input[type=tel],input[type=password],select,textarea{width:100%;padding:11px 14px;border-radius:10px;border:1.5px solid var(--border);font-size:13px;font-family:'Plus Jakarta Sans',sans-serif;color:var(--text);outline:none;transition:all .2s;background:#fff}
-    input:focus,select:focus,textarea:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(26,122,60,.1)}
-    .btn{padding:9px 20px;border-radius:10px;border:none;cursor:pointer;font-weight:700;font-size:13px;font-family:'Plus Jakarta Sans',sans-serif;transition:all .15s}
-    .btn:hover{transform:translateY(-1px)}
+
+    /* ── FORMS ── */
+    .form-box{background:#f4faf4;border-radius:14px;padding:18px;margin-bottom:16px;
+      border:1.5px solid var(--border);animation:fadeIn .3s ease}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+    .form-grid{display:grid;grid-template-columns:1fr;gap:10px}
+    input[type=text],input[type=number],input[type=date],input[type=time],
+    input[type=tel],input[type=password],select,textarea{
+      width:100%;padding:12px 14px;border-radius:10px;border:1.5px solid var(--border);
+      font-size:15px;font-family:'Plus Jakarta Sans',sans-serif;color:var(--text);
+      outline:none;transition:all .2s;background:#fff;-webkit-appearance:none}
+    input:focus,select:focus,textarea:focus{border-color:var(--green);
+      box-shadow:0 0 0 3px rgba(26,122,60,.1)}
+    .btn{padding:10px 18px;border-radius:10px;border:none;cursor:pointer;font-weight:700;
+      font-size:13px;font-family:'Plus Jakarta Sans',sans-serif;transition:all .15s}
+    .btn:active{transform:scale(.97)}
     .btn-primary{background:var(--green);color:#fff;box-shadow:0 4px 14px rgba(26,122,60,.25)}
     .btn-secondary{background:var(--green-muted);color:var(--green-dark)}
-    .btn-danger{background:#fee2e2;color:#991b1b;font-size:12px;padding:6px 12px}
-    .btn-success{background:var(--green);color:#fff;font-size:12px;padding:6px 12px}
-    .btn-row{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
-    .add-btn{background:linear-gradient(135deg,var(--green-dark),var(--green));color:#fff;border:none;border-radius:12px;padding:11px 22px;font-weight:800;font-size:13px;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;box-shadow:0 4px 16px rgba(26,122,60,.3);transition:all .15s}
-    .add-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(26,122,60,.4)}
-    .search-box{width:100%;padding:13px 18px;border-radius:12px;border:2px solid var(--border);font-size:13px;font-family:'Plus Jakarta Sans',sans-serif;outline:none;margin-bottom:18px;transition:all .2s;background:#fff}
-    .search-box:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(26,122,60,.08)}
-    .form-section-title{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.2px;color:var(--green-dark);margin:16px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--border)}
-    .kourel-card{background:var(--card);border-radius:18px;padding:22px;box-shadow:var(--shadow);border-top:4px solid var(--green);transition:transform .2s,box-shadow .2s}
-    .kourel-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
-    .programme-card{background:var(--card);border-radius:18px;padding:22px;box-shadow:var(--shadow);border-left:5px solid var(--green);margin-bottom:14px;transition:all .2s}
-    .programme-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
-    .prog-info-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:12px}
-    .prog-info-item{background:#f4faf4;border-radius:10px;padding:10px 14px;border:1px solid var(--border)}
-    .prog-info-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--text-light);margin-bottom:4px}
-    .prog-info-value{font-size:13px;font-weight:700;color:var(--text)}
-    .jour-badge{background:var(--green);color:#fff;border-radius:8px;padding:4px 12px;font-size:11px;font-weight:800;display:inline-block}
-    .presence-session-card{background:var(--card);border-radius:18px;margin-bottom:18px;box-shadow:var(--shadow);overflow:hidden}
-    .presence-session-header{background:linear-gradient(135deg,var(--green-dark),var(--green));color:#fff;padding:18px 24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
-    .presence-session-title{font-size:15px;font-weight:800}
-    .presence-session-meta{font-size:12px;opacity:.88}
-    .presence-stats-row{display:flex;gap:14px;padding:14px 24px;background:#f4faf4;border-bottom:1px solid var(--border);flex-wrap:wrap;align-items:center}
-    .pstat{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:700}
-    .pstat-dot{width:10px;height:10px;border-radius:50%}
+    .btn-danger{background:#fee2e2;color:#991b1b;font-size:12px;padding:7px 12px}
+    .btn-success{background:var(--green);color:#fff;font-size:12px;padding:7px 12px}
+    .btn-row{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+    .add-btn{background:linear-gradient(135deg,var(--green-dark),var(--green));color:#fff;
+      border:none;border-radius:10px;padding:10px 18px;font-weight:800;font-size:13px;
+      cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;
+      box-shadow:0 4px 14px rgba(26,122,60,.3);transition:all .15s;white-space:nowrap}
+    .add-btn:active{transform:scale(.97)}
+    .search-box{width:100%;padding:12px 16px;border-radius:12px;border:2px solid var(--border);
+      font-size:14px;font-family:'Plus Jakarta Sans',sans-serif;outline:none;
+      margin-bottom:14px;background:#fff;-webkit-appearance:none}
+    .search-box:focus{border-color:var(--green)}
+    .form-section-title{font-size:11px;font-weight:800;text-transform:uppercase;
+      letter-spacing:1px;color:var(--green-dark);margin:14px 0 8px;
+      padding-bottom:5px;border-bottom:2px solid var(--border)}
+
+    /* ── TABLE ── */
+    .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+    table{width:100%;border-collapse:collapse;min-width:480px}
+    th{background:var(--green);color:#fff;padding:11px 14px;text-align:left;
+      font-size:12px;font-weight:700}
+    th:first-child{border-radius:8px 0 0 0}
+    th:last-child{border-radius:0 8px 0 0}
+    td{padding:10px 14px;font-size:12px;border-bottom:1px solid var(--border)}
+    tr:nth-child(even) td{background:#f7fbf7}
+    tr:active td{background:#edf7ed}
+
+    /* ── PROGRAMMES ── */
+    .programme-card{background:var(--card);border-radius:16px;padding:18px;
+      box-shadow:var(--shadow);border-left:4px solid var(--green);margin-bottom:12px}
+    .prog-info-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+    .prog-info-item{background:#f4faf4;border-radius:8px;padding:8px 12px;border:1px solid var(--border)}
+    .prog-info-label{font-size:10px;font-weight:800;text-transform:uppercase;
+      letter-spacing:.8px;color:var(--text-light);margin-bottom:2px}
+    .prog-info-value{font-size:12px;font-weight:700;color:var(--text)}
+    .jour-badge{background:var(--green);color:#fff;border-radius:7px;padding:3px 10px;
+      font-size:11px;font-weight:800;display:inline-block}
+    .audio-upload-zone{border:2px dashed var(--border);border-radius:12px;padding:18px 14px;
+      text-align:center;cursor:pointer;background:#f8fbf8;margin-top:8px}
+    .audio-upload-zone input[type="file"]{display:none}
+    .audio-upload-zone .upload-icon{font-size:28px;margin-bottom:6px}
+    .audio-upload-zone p{font-size:12px;color:var(--text-light);margin:2px 0}
+    .audio-player{display:flex;align-items:center;gap:8px;background:var(--green-muted);
+      border-radius:10px;padding:8px 12px;border:1.5px solid var(--border)}
+    .audio-label{font-size:11px;font-weight:700;color:var(--green-dark);
+      white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:120px;flex-shrink:0}
+    .audio-player audio{flex:1;height:30px;min-width:0}
+
+    /* ── PRESENCE ── */
+    .presence-session-card{background:var(--card);border-radius:16px;margin-bottom:14px;
+      box-shadow:var(--shadow);overflow:hidden}
+    .presence-session-header{background:linear-gradient(135deg,var(--green-dark),var(--green));
+      color:#fff;padding:14px 18px;display:flex;justify-content:space-between;
+      align-items:center;flex-wrap:wrap;gap:8px}
+    .presence-session-title{font-size:14px;font-weight:800}
+    .presence-session-meta{font-size:11px;opacity:.88}
+    .presence-stats-row{display:flex;gap:12px;padding:10px 18px;background:#f4faf4;
+      border-bottom:1px solid var(--border);flex-wrap:wrap;align-items:center}
+    .pstat{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:700}
+    .pstat-dot{width:8px;height:8px;border-radius:50%}
     .pstat-present{background:#16a34a}
     .pstat-retard{background:#d97706}
     .pstat-absent{background:#dc2626}
-    .membre-presence-row{display:flex;align-items:center;padding:12px 24px;border-bottom:1px solid var(--border);gap:14px}
+    .membre-presence-row{display:flex;align-items:center;padding:10px 18px;
+      border-bottom:1px solid var(--border);gap:10px;flex-wrap:wrap}
     .membre-presence-row:last-child{border-bottom:none}
-    .membre-presence-name{flex:1;font-weight:700;font-size:13px}
-    .status-group{display:flex;gap:5px}
-    .status-btn{padding:5px 12px;border-radius:99px;border:2px solid transparent;cursor:pointer;font-size:11px;font-weight:800;font-family:'Plus Jakarta Sans',sans-serif;transition:all .15s;background:#f0f0f0;color:#666}
+    .membre-presence-name{flex:1;font-weight:700;font-size:13px;min-width:120px}
+    .status-group{display:flex;gap:4px;flex-wrap:wrap}
+    .status-btn{padding:6px 10px;border-radius:99px;border:2px solid transparent;
+      cursor:pointer;font-size:11px;font-weight:800;
+      font-family:'Plus Jakarta Sans',sans-serif;background:#f0f0f0;color:#666}
     .status-btn.present.selected{background:#dcfce7;border-color:#16a34a;color:#166534}
     .status-btn.retard.selected{background:#fef3c7;border-color:#d97706;color:#92400e}
     .status-btn.absent.selected{background:#fee2e2;border-color:#dc2626;color:#991b1b}
-    .status-btn:hover{transform:scale(1.05)}
-    .tol-btn{padding:7px 14px;border-radius:99px;border:2px solid var(--border);cursor:pointer;font-size:12px;font-weight:700;font-family:'Plus Jakarta Sans',sans-serif;background:#fff;color:var(--text-light);transition:all .15s}
+    .tol-btn{padding:7px 12px;border-radius:99px;border:2px solid var(--border);
+      cursor:pointer;font-size:11px;font-weight:700;
+      font-family:'Plus Jakarta Sans',sans-serif;background:#fff;color:var(--text-light)}
     .tol-btn.selected{background:var(--green);border-color:var(--green);color:#fff}
-    .conserv-card{background:var(--card);border-radius:18px;padding:22px;box-shadow:var(--shadow);margin-bottom:16px;border-left:5px solid var(--gold)}
-    .conserv-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px}
-    .conserv-title{font-size:17px;font-weight:900;color:var(--text)}
-    .conserv-meta{font-size:12px;color:var(--text-light);margin-top:3px}
-    .member-chip{display:inline-flex;align-items:center;gap:6px;background:var(--green-muted);border-radius:99px;padding:5px 12px;font-size:12px;font-weight:700;color:var(--green-dark);margin:3px}
-    .chat-container{display:flex;gap:18px;height:600px}
-    .chat-sidebar{width:240px;flex-shrink:0;background:var(--card);border-radius:18px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
-    .chat-sidebar-header{background:linear-gradient(135deg,var(--green-dark),var(--green));padding:16px;color:#fff}
-    .chat-sidebar-title{font-size:14px;font-weight:800}
-    .chat-room-list{overflow-y:auto;flex:1}
-    .chat-room-item{padding:13px 16px;cursor:pointer;border-bottom:1px solid var(--border);transition:background .15s;display:flex;align-items:center;gap:10px}
-    .chat-room-item:hover{background:#f4faf4}
+    .member-chip{display:inline-flex;align-items:center;background:var(--green-muted);
+      border-radius:99px;padding:4px 10px;font-size:11px;font-weight:700;
+      color:var(--green-dark);margin:2px}
+
+    /* ── KOUREL DETAIL / CHAT ── */
+    #kourels-layout{display:flex;gap:14px;height:calc(100vh - var(--header-h) - var(--nav-h) - 100px)}
+    #kourels-left-col{width:220px;flex-shrink:0;background:var(--card);border-radius:16px;
+      box-shadow:var(--shadow);display:flex;flex-direction:column;overflow:hidden}
+    .chat-main{flex:1;background:var(--card);border-radius:16px;box-shadow:var(--shadow);
+      display:flex;flex-direction:column;overflow:hidden}
+    .chat-locked-overlay{flex:1;display:flex;flex-direction:column;align-items:center;
+      justify-content:center;background:#f4faf4}
+    .chat-locked-overlay .lock-big{font-size:44px;margin-bottom:12px}
+    .chat-locked-overlay h3{font-size:15px;font-weight:800;color:var(--text);margin-bottom:6px}
+    .chat-locked-overlay p{font-size:12px;color:var(--text-light);text-align:center;max-width:240px}
+    .chat-room-item{padding:12px 14px;cursor:pointer;border-bottom:1px solid var(--border);
+      display:flex;align-items:center;gap:8px;transition:background .15s}
+    .chat-room-item:active{background:#f4faf4}
     .chat-room-item.active{background:var(--green-muted)}
-    .room-icon{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--green-dark),var(--green));display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
-    .room-name{font-size:13px;font-weight:700}
-    .room-desc{font-size:11px;color:var(--text-light);margin-top:1px}
-    .chat-main{flex:1;background:var(--card);border-radius:18px;box-shadow:var(--shadow);display:flex;flex-direction:column;overflow:hidden}
-    .chat-main-header{background:linear-gradient(135deg,var(--green-dark),var(--green));padding:16px 20px;color:#fff;display:flex;align-items:center;gap:12px}
-    .chat-main-icon{width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:18px}
-    .chat-main-title{font-size:15px;font-weight:800}
-    .chat-messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;background:#fafcfa}
-    .chat-empty{text-align:center;padding:40px;color:var(--text-light)}
-    .chat-empty .ce-icon{font-size:40px;margin-bottom:10px}
-    .chat-empty p{font-size:13px;font-weight:600}
-    .msg-bubble{max-width:75%;padding:10px 14px;border-radius:14px;font-size:13px;line-height:1.5}
-    .msg-mine{background:linear-gradient(135deg,var(--green-dark),var(--green));color:#fff;border-bottom-right-radius:4px;align-self:flex-end}
-    .msg-other{background:#fff;color:var(--text);border:1px solid var(--border);border-bottom-left-radius:4px;align-self:flex-start}
-    .msg-sender{font-size:10px;font-weight:800;opacity:.7;margin-bottom:4px}
-    .msg-time{font-size:10px;opacity:.6;margin-top:3px;text-align:right}
-    .chat-input-bar{padding:14px 16px;border-top:1px solid var(--border);display:flex;gap:10px;align-items:flex-end}
-    .chat-input-bar textarea{flex:1;resize:none;max-height:100px;padding:10px 14px;border-radius:12px;border:1.5px solid var(--border);font-size:13px;font-family:'Plus Jakarta Sans',sans-serif;outline:none;transition:border-color .2s}
-    .chat-input-bar textarea:focus{border-color:var(--green)}
-    .chat-send-btn{width:40px;height:40px;border-radius:12px;border:none;cursor:pointer;background:linear-gradient(135deg,var(--green-dark),var(--green));color:#fff;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s}
-    .chat-send-btn:hover{transform:scale(1.08)}
-    .chat-locked-overlay{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#f4faf4}
-    .chat-locked-overlay .lock-big{font-size:48px;margin-bottom:14px}
-    .chat-locked-overlay h3{font-size:16px;font-weight:800;color:var(--text);margin-bottom:8px}
-    .chat-locked-overlay p{font-size:13px;color:var(--text-light);text-align:center;max-width:280px;line-height:1.5}
-    .rapport-bar-wrap{background:#e0f0e0;border-radius:99px;height:10px;flex:1}
-    .rapport-bar{height:10px;border-radius:99px;transition:width .6s ease}
-    .notif{position:fixed;bottom:20px;right:20px;z-index:9999;background:linear-gradient(135deg,var(--green-dark),var(--green));color:#fff;border-radius:14px;padding:14px 20px;font-size:13px;font-weight:700;box-shadow:0 8px 28px rgba(15,76,37,.4);max-width:300px;animation:notifIn .3s cubic-bezier(.22,1,.36,1) both}
-    @keyframes notifIn{from{opacity:0;transform:translateY(20px) scale(.9)}to{opacity:1;transform:translateY(0) scale(1)}}
+    .room-icon{width:34px;height:34px;border-radius:9px;
+      background:linear-gradient(135deg,var(--green-dark),var(--green));
+      display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+    .room-name{font-size:12px;font-weight:700}
+    .room-desc{font-size:10px;color:var(--text-light);margin-top:1px}
+    .kourel-detail{display:flex;flex-direction:column;height:100%}
+    .kourel-detail-header{background:linear-gradient(135deg,var(--green-dark),var(--green));
+      padding:12px 16px;color:#fff;display:flex;align-items:center;gap:10px}
+    .kourel-members-panel{background:#fff;border-bottom:1px solid var(--border);
+      padding:10px 14px;max-height:110px;overflow-y:auto}
+    .chat-messages{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;
+      gap:8px;background:#e5ddd5;-webkit-overflow-scrolling:touch}
+    .chat-empty{text-align:center;padding:30px;color:var(--text-light)}
+    .msg-bubble{max-width:80%;padding:9px 12px;border-radius:14px;font-size:13px;line-height:1.5}
+    .msg-mine{background:#dcf8c6;color:var(--text);border-bottom-right-radius:4px;align-self:flex-end}
+    .msg-other{background:#fff;color:var(--text);border:1px solid var(--border);
+      border-bottom-left-radius:4px;align-self:flex-start}
+    .msg-sender{font-size:10px;font-weight:800;color:var(--green-dark);margin-bottom:3px}
+    .msg-time{font-size:10px;color:#999;margin-top:2px;text-align:right}
+    .chat-input-bar{padding:8px 10px;border-top:1px solid var(--border);display:flex;
+      gap:6px;align-items:flex-end;background:#f0f0f0;
+      padding-bottom:max(8px, env(safe-area-inset-bottom))}
+    .chat-input-bar textarea{flex:1;resize:none;max-height:80px;padding:9px 12px;
+      border-radius:20px;border:none;font-size:14px;
+      font-family:'Plus Jakarta Sans',sans-serif;outline:none;background:#fff;
+      box-shadow:0 1px 3px rgba(0,0,0,.1)}
+    .chat-send-btn{width:40px;height:40px;border-radius:50%;border:none;cursor:pointer;
+      background:linear-gradient(135deg,var(--green-dark),var(--green));color:#fff;
+      font-size:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .chat-send-btn:active{transform:scale(.93)}
+    .chat-plus-btn{width:38px;height:38px;border-radius:50%;border:none;background:#fff;
+      color:var(--green-dark);font-size:20px;cursor:pointer;flex-shrink:0;
+      display:flex;align-items:center;justify-content:center;
+      box-shadow:0 1px 3px rgba(0,0,0,.1)}
+    .msg-menu-btn{background:none;border:none;cursor:pointer;font-size:15px;
+      color:#999;padding:0 2px;line-height:1}
+    .msg-menu-dropdown{display:none;position:absolute;right:0;top:20px;background:#fff;
+      border-radius:10px;box-shadow:0 4px 20px rgba(0,0,0,.18);z-index:99;
+      min-width:130px;overflow:hidden}
+    .menu-item-delete{padding:10px 14px;font-size:13px;font-weight:700;color:#991b1b;
+      cursor:pointer;display:flex;align-items:center;gap:6px}
+    .menu-item-delete:active{background:#fee2e2}
+
+    /* ── RAPPORT ── */
+    .rapport-bar-wrap{background:#e0f0e0;border-radius:99px;height:8px;flex:1}
+    .rapport-bar{height:8px;border-radius:99px;transition:width .6s ease}
+    .two-col{display:grid;grid-template-columns:1fr;gap:14px}
+
+    /* ── NOTIF ── */
+    .notif{position:fixed;bottom:calc(var(--nav-h) + 10px);left:50%;transform:translateX(-50%);
+      z-index:9999;background:linear-gradient(135deg,var(--green-dark),var(--green));
+      color:#fff;border-radius:12px;padding:12px 18px;font-size:13px;font-weight:700;
+      box-shadow:0 6px 22px rgba(15,76,37,.4);max-width:calc(100vw - 28px);
+      text-align:center;animation:notifIn .3s cubic-bezier(.22,1,.36,1) both;
+      white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    @keyframes notifIn{from{opacity:0;transform:translateX(-50%) translateY(16px)}
+      to{opacity:1;transform:translateX(-50%) translateY(0)}}
     .notif-err{background:linear-gradient(135deg,#991b1b,#dc2626)}
-    .page{display:none}
-    .page.active{display:block}
-    .info-box{background:linear-gradient(135deg,#fef9ee,#fef3c7);border:1.5px solid #fde68a;border-radius:12px;padding:14px 18px;font-size:13px;color:#92400e;font-weight:600;margin-bottom:18px;display:flex;align-items:flex-start;gap:10px}
-    @media(max-width:700px){
-      .stats-grid{grid-template-columns:1fr 1fr}.two-col{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.content{padding:16px 12px}.header-top{padding:0 14px}.chat-container{flex-direction:column;height:auto}.chat-sidebar{width:100%;height:200px}.chat-main{height:400px}
+
+    /* ── MOBILE KOUREL PANEL (fullscreen) ── */
+    @media(max-width:640px){
+      #kourels-layout{flex-direction:column;height:auto;gap:0}
+      #kourels-left-col{width:100%;border-radius:14px;max-height:260px}
+      .chat-main{border-radius:14px;height:460px}
+      .prog-info-grid{grid-template-columns:1fr}
+      .stats-grid{grid-template-columns:repeat(2,1fr)}
+      .form-grid{grid-template-columns:1fr}
+      .header-center{display:none}
     }
-    @media(max-width:480px){.stats-grid{grid-template-columns:1fr}.welcome-card{padding:32px 20px}}
+    @media(min-width:641px){
+      .stats-grid{grid-template-columns:repeat(4,1fr)}
+      .two-col{grid-template-columns:1fr 1fr}
+      .form-grid{grid-template-columns:1fr 1fr}
+    }
   </style>
 </head>
 <body>
@@ -200,7 +328,6 @@
 <!-- WELCOME -->
 <div id="welcome-screen">
   <div class="bg-pattern"></div>
-  <div class="geo-lines"></div>
   <div class="floating-orb orb1"></div>
   <div class="floating-orb orb2"></div>
   <div class="floating-orb orb3"></div>
@@ -211,76 +338,39 @@
       <p class="tagline">Système de gestion des Kourels · Sénégal</p>
     </div>
     <div class="divider"></div>
-
-   <!-- SEARCH PHASE -->
-<div id="search-phase" class="search-phase">
-  <h2>Connexion à DAARA CONNECT</h2>
-  
-  <!-- Onglets Admin / Membre -->
-  <div style="display:flex;gap:8px;margin-bottom:20px">
-    <button id="btn-tab-admin" onclick="switchTab('admin')"
-      style="flex:1;padding:10px;border-radius:10px;border:2px solid var(--green);background:var(--green);color:#fff;font-weight:800;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">
-      🔑 Admin
-    </button>
-    <button id="btn-tab-membre" onclick="switchTab('membre')"
-      style="flex:1;padding:10px;border-radius:10px;border:2px solid var(--border);background:#fff;color:var(--text-light);font-weight:800;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">
-      👤 Membre
-    </button>
-  </div>
-
-  <!-- Formulaire Admin -->
-  <div id="form-admin">
-    <div class="fl">
-      <label>Identifiant</label>
-      <input type="text" id="login-id" placeholder="Ex: admin2" />
+    <div id="search-phase">
+      <h2 style="font-size:16px;font-weight:800;color:var(--green-dark);margin-bottom:14px">Connexion à DAARA CONNECT</h2>
+      <div style="display:flex;gap:8px;margin-bottom:16px">
+        <button id="btn-tab-admin" onclick="switchTab('admin')" style="flex:1;padding:10px;border-radius:10px;border:2px solid var(--green);background:var(--green);color:#fff;font-weight:800;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px">🔑 Admin</button>
+        <button id="btn-tab-membre" onclick="switchTab('membre')" style="flex:1;padding:10px;border-radius:10px;border:2px solid var(--border);background:#fff;color:var(--text-light);font-weight:800;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px">👤 Membre</button>
+      </div>
+      <div id="form-admin">
+        <div class="fl"><label>Identifiant</label><input type="text" id="login-id" placeholder="Ex: admin2" autocomplete="username"/></div>
+        <div class="fl">
+          <label>Mot de passe</label>
+          <input type="password" id="login-pwd" placeholder="Votre mot de passe" autocomplete="current-password" onkeydown="if(event.key==='Enter')loginUser()" />
+          <div class="err" id="err-login">Identifiant ou mot de passe incorrect</div>
+        </div>
+        <button class="cta-btn" id="btn-login" onclick="loginUser()">Se connecter →</button>
+      </div>
+      <div id="form-membre-login" style="display:none">
+        <div class="fl">
+          <label>Votre numéro de téléphone</label>
+          <input type="tel" id="login-tel" placeholder="Ex: 771234567" />
+          <div class="err" id="err-login-membre">Numéro introuvable</div>
+        </div>
+        <button class="cta-btn" id="btn-login-membre" onclick="loginMembre()">Accéder →</button>
+      </div>
+      <div class="or-divider" style="margin-top:16px">— OU —</div>
+      <button class="new-daara-btn" onclick="showCreatePhase()">+ Créer un nouveau Daara</button>
     </div>
-    <div class="fl">
-      <label>Mot de passe</label>
-      <input type="password" id="login-pwd" placeholder="Votre mot de passe"
-        onkeydown="if(event.key==='Enter')loginUser()" />
-      <div class="err" id="err-login">Identifiant ou mot de passe incorrect</div>
-    </div>
-    <button class="cta-btn" id="btn-login" onclick="loginUser()">Se connecter →</button>
-  </div>
-
-  <!-- Formulaire Membre -->
-  <div id="form-membre-login" style="display:none">
-    <div class="fl">
-      <label>Votre numéro de téléphone</label>
-      <input type="tel" id="login-tel" placeholder="Ex: 771234567" />
-      <div class="err" id="err-login-membre">Numéro introuvable</div>
-    </div>
-    <button class="cta-btn" id="btn-login-membre" onclick="loginMembre()">Accéder →</button>
-  </div>
-
-  <div class="or-divider" style="margin-top:20px">— OU —</div>
-  <button class="new-daara-btn" onclick="showCreatePhase()">+ Créer un nouveau Daara</button>
-</div>
-
-    <!-- CREATE -->
     <div id="create-phase" class="create-phase">
       <button class="back-btn" onclick="showSearchPhase()">← Retour</button>
-      <h2 style="font-size:17px;font-weight:800;color:var(--green-dark);margin-bottom:20px">Créer un nouveau Daara</h2>
-      <div class="fl">
-        <label>Nom du Daara</label>
-        <input type="text" id="new-daara-nom" placeholder="Ex: Daara Touba Mbacké" />
-        <div class="err" id="err-new-nom">Champ obligatoire</div>
-      </div>
-      <div class="fl">
-        <label>Siège</label>
-        <input type="text" id="new-daara-siege" placeholder="Ex: Touba, Sénégal" />
-        <div class="err" id="err-new-siege">Champ obligatoire</div>
-      </div>
-      <div class="fl">
-        <label>Identifiant administrateur</label>
-        <input type="text" id="new-admin-id" placeholder="Ex: serigne_daara" />
-        <div class="err" id="err-new-id">Champ obligatoire</div>
-      </div>
-      <div class="fl">
-        <label>Mot de passe</label>
-        <input type="password" id="new-admin-pwd" placeholder="Choisir un mot de passe" />
-        <div class="err" id="err-new-pwd">Champ obligatoire</div>
-      </div>
+      <h2 style="font-size:16px;font-weight:800;color:var(--green-dark);margin-bottom:16px">Créer un nouveau Daara</h2>
+      <div class="fl"><label>Nom du Daara</label><input type="text" id="new-daara-nom" placeholder="Ex: Daara Touba Mbacké"/><div class="err" id="err-new-nom">Champ obligatoire</div></div>
+      <div class="fl"><label>Siège</label><input type="text" id="new-daara-siege" placeholder="Ex: Touba, Sénégal"/><div class="err" id="err-new-siege">Champ obligatoire</div></div>
+      <div class="fl"><label>Identifiant admin</label><input type="text" id="new-admin-id" placeholder="Ex: serigne_daara"/><div class="err" id="err-new-id">Champ obligatoire</div></div>
+      <div class="fl"><label>Mot de passe</label><input type="password" id="new-admin-pwd" placeholder="Choisir un mot de passe"/><div class="err" id="err-new-pwd">Champ obligatoire</div></div>
       <button class="cta-btn" id="btn-create" onclick="createDaara()">Créer le Daara →</button>
     </div>
   </div>
@@ -294,942 +384,873 @@
         <div class="logo-icon">🕌</div>
         <span class="logo-text">DAARA CONNECT</span>
       </div>
-      <div class="header-center">
-        <div class="hdr-daara" id="hdr-daara">—</div>
-        <div class="hdr-meta" id="hdr-meta">—</div>
+      <div class="header-center" id="header-center">
+        <div style="font-size:13px;font-weight:800" id="hdr-daara">—</div>
+        <div style="font-size:10px;opacity:.8" id="hdr-meta">—</div>
       </div>
-      <div class="header-right">
-        <div class="hdr-user">
+      <div style="display:flex;align-items:center;gap:8px">
+        <div class="hdr-user-pill">
           <div class="user-avatar" id="hdr-avatar">?</div>
-          <span id="hdr-username">—</span>
+          <span id="hdr-username" style="max-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">—</span>
           <span class="role-badge" id="hdr-role">—</span>
         </div>
-        <button class="hdr-switch" onclick="logout()">Déconnexion</button>
+        <button class="hdr-switch" onclick="logout()">↩</button>
       </div>
     </div>
-    <nav>
-      <button class="nav-btn active" onclick="showPage('accueil',this)">🏠 Accueil</button>
-      <button class="nav-btn" onclick="showPage('kourels',this)">👥 Kourels</button>
-      <button class="nav-btn" onclick="showPage('membres',this)">👤 Membres</button>
-      <button class="nav-btn" onclick="showPage('conservatoire',this)">🎵 Conservatoire</button>
-      <button class="nav-btn" onclick="showPage('programmes',this)">📅 Programmes</button>
-      <button class="nav-btn" onclick="showPage('presences',this)">✅ Présences</button>
-      <button class="nav-btn" onclick="showPage('messagerie',this)">💬 Messagerie</button>
-      <button class="nav-btn" onclick="showPage('cotisations',this)">💰 Adiyeu</button>
-      <button class="nav-btn" onclick="showPage('rapports',this)">📊 Rapports</button>
-    </nav>
   </div>
 
-  <div class="content">
+  <div class="content-wrap">
+    <div class="content">
 
-    <!-- ACCUEIL -->
-    <div id="page-accueil" class="page active">
-      <h2 class="page-title">Tableau de Bord</h2>
-      <div class="stats-grid">
-        <div class="stat-card" style="background:var(--green-dark)"><div class="stat-icon">👥</div><div class="stat-value" id="stat-kourels">0</div><div class="stat-label">Kourels</div></div>
-        <div class="stat-card" style="background:var(--green-dark)"><div class="stat-icon">👨🏽‍💼</div><div class="stat-value" id="stat-membres">0</div><div class="stat-label">Membres</div></div>
-        <div class="stat-card" style="background:var(--green-dark)"><div class="stat-icon">✅</div><div class="stat-value" id="stat-presence">0</div><div class="stat-label">Sessions</div></div>
-        <div class="stat-card" style="background:var(--green-dark)"><div class="stat-icon">🎵</div><div class="stat-value" id="stat-conserv">0</div><div class="stat-label">Groupes Conserv.</div></div>
-      </div>
-      <div class="two-col">
-        <div class="card"><h3>Kourels</h3><div id="accueil-kourels"></div></div>
-        <div class="card"><h3>Membres récents</h3><div id="accueil-membres"></div></div>
-      </div>
-    </div>
-
-    <!-- KOURELS -->
-    <div id="page-kourels" class="page">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:22px">
-        <h2 class="page-title" style="margin:0">Gestion des Kourels</h2>
-        <button class="add-btn" onclick="toggleForm('form-kourel')">+ Nouveau Kourel</button>
-      </div>
-      <div id="form-kourel" class="form-box" style="display:none">
-        <h3 style="margin-bottom:16px;font-size:14px">Ajouter un Kourel</h3>
-        <div class="form-grid">
-          <input type="text" id="k-nom" placeholder="Nom du Kourel" />
-          <input type="text" id="k-desc" placeholder="Description du Kourel" />
-          <select id="k-statut"><option>Actif</option><option>Inactif</option></select>
+      <!-- ACCUEIL -->
+      <div id="page-accueil" class="page active">
+        <h2 class="page-title">Tableau de Bord</h2>
+        <div class="stats-grid">
+          <div class="stat-card" style="background:var(--green-dark)"><div class="stat-icon">👥</div><div class="stat-value" id="stat-kourels">0</div><div class="stat-label">Kourels</div></div>
+          <div class="stat-card" style="background:var(--green-dark)"><div class="stat-icon">👤</div><div class="stat-value" id="stat-membres">0</div><div class="stat-label">Membres</div></div>
+          <div class="stat-card" style="background:var(--green-dark)"><div class="stat-icon">✅</div><div class="stat-value" id="stat-presence">0</div><div class="stat-label">Sessions</div></div>
+          <div class="stat-card" style="background:var(--green-dark)"><div class="stat-icon">🎵</div><div class="stat-value" id="stat-conserv">0</div><div class="stat-label">Programmes</div></div>
         </div>
-        <div class="btn-row">
-          <button class="btn btn-primary" onclick="addKourel()">Enregistrer</button>
-          <button class="btn btn-secondary" onclick="toggleForm('form-kourel')">Annuler</button>
+        <div class="two-col">
+          <div class="card"><h3>Kourels</h3><div id="accueil-kourels"></div></div>
+          <div class="card"><h3>Membres récents</h3><div id="accueil-membres"></div></div>
         </div>
       </div>
-      <div id="kourels-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px"></div>
-    </div>
 
-    <!-- MEMBRES -->
-    <div id="page-membres" class="page">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:22px">
-        <h2 class="page-title" style="margin:0">Gestion des Membres</h2>
-        <button class="add-btn" onclick="toggleForm('form-membre')">+ Nouveau Membre</button>
+      <!-- KOURELS -->
+      <div id="page-kourels" class="page">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+          <h2 class="page-title" style="margin:0">👥 Kourels</h2>
+          <button class="add-btn" onclick="toggleForm('form-kourel')">+ Nouveau</button>
+        </div>
+        <div id="form-kourel" class="form-box" style="display:none">
+          <h3 style="margin-bottom:12px;font-size:13px">Ajouter un Kourel</h3>
+          <div class="form-grid">
+            <input type="text" id="k-nom" placeholder="Nom du Kourel"/>
+            <input type="text" id="k-desc" placeholder="Description"/>
+            <select id="k-statut"><option>Actif</option><option>Inactif</option></select>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-primary" onclick="addKourel()">Enregistrer</button>
+            <button class="btn btn-secondary" onclick="toggleForm('form-kourel')">Annuler</button>
+          </div>
+        </div>
+        <div id="kourels-layout">
+          <div id="kourels-left-col">
+            <div style="background:linear-gradient(135deg,var(--green-dark),var(--green));padding:12px 14px;color:#fff;font-size:13px;font-weight:800">👥 Mes Kourels</div>
+            <div id="kourels-list-sidebar" style="overflow-y:auto;flex:1"></div>
+          </div>
+          <div class="chat-main" id="kourel-detail-panel">
+            <div class="chat-locked-overlay">
+              <div class="lock-big">👥</div>
+              <h3>Sélectionnez un Kourel</h3>
+              <p>Cliquez sur un Kourel pour voir ses membres et discuter</p>
+            </div>
+          </div>
+        </div>
       </div>
-      <input class="search-box" type="text" id="search-membre" placeholder="🔍 Rechercher un membre…" oninput="filtrerMembres()" />
-      <div id="form-membre" class="form-box" style="display:none">
-        <h3 style="margin-bottom:16px;font-size:14px">Ajouter un Membre</h3>
-        <div class="form-grid">
-          <input type="text" id="m-prenom" placeholder="Prénom" />
-          <input type="text" id="m-nom" placeholder="Nom" />
-          <input type="tel" id="m-tel" placeholder="Téléphone" />
-          <div>
-            <label style="font-size:11px;font-weight:700;color:var(--text-light);display:block;margin-bottom:6px">Kourel</label>
+
+      <!-- MEMBRES -->
+      <div id="page-membres" class="page">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+          <h2 class="page-title" style="margin:0">Membres</h2>
+          <button class="add-btn" onclick="toggleForm('form-membre')">+ Nouveau</button>
+        </div>
+        <input class="search-box" type="text" id="search-membre" placeholder="🔍 Rechercher…" oninput="filtrerMembres()"/>
+        <div id="form-membre" class="form-box" style="display:none">
+          <div class="form-grid">
+            <input type="text" id="m-prenom" placeholder="Prénom"/>
+            <input type="text" id="m-nom" placeholder="Nom"/>
+            <input type="tel" id="m-tel" placeholder="Téléphone"/>
             <select id="m-kourel"></select>
           </div>
-        </div>
-        <div class="btn-row">
-          <button class="btn btn-primary" onclick="addMembre()">Enregistrer</button>
-          <button class="btn btn-secondary" onclick="toggleForm('form-membre')">Annuler</button>
-        </div>
-      </div>
-      <div class="card" style="padding:0;overflow:hidden">
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>Nom</th><th>Kourel</th><th>Téléphone</th><th>Rôle</th><th>Statut</th><th>Actions</th></tr></thead>
-            <tbody id="membres-body"></tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <!-- CONSERVATOIRE -->
-    <div id="page-conservatoire" class="page">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:22px">
-        <h2 class="page-title" style="margin:0">Groupes Conservatoires</h2>
-        <button class="add-btn" onclick="toggleForm('form-conservatoire')">+ Nouveau Groupe</button>
-      </div>
-      <div id="form-conservatoire" class="form-box" style="display:none">
-        <h3 style="margin-bottom:16px;font-size:14px">Créer un Groupe Conservatoire</h3>
-        <div class="form-grid">
-          <div>
-            <label style="font-size:11px;font-weight:700;color:var(--text-light);display:block;margin-bottom:6px">Kourel</label>
-            <select id="cv-kourel" onchange="updateConservMembres()"></select>
+          <div class="btn-row">
+            <button class="btn btn-primary" onclick="addMembre()">Enregistrer</button>
+            <button class="btn btn-secondary" onclick="toggleForm('form-membre')">Annuler</button>
           </div>
-          <input type="text" id="cv-nom" placeholder="Nom du groupe" />
         </div>
-        <div style="margin-top:14px">
-          <label style="font-size:11px;font-weight:700;color:var(--text-light);display:block;margin-bottom:8px">Membres</label>
-          <div id="cv-membres-select" style="border:1.5px solid var(--border);border-radius:12px;overflow:hidden;max-height:220px;overflow-y:auto;background:#fff"></div>
-        </div>
-        <div class="btn-row">
-          <button class="btn btn-primary" onclick="addConservatoire()">Créer</button>
-          <button class="btn btn-secondary" onclick="toggleForm('form-conservatoire')">Annuler</button>
-        </div>
-      </div>
-      <div id="conservatoires-list"></div>
-    </div>
-
-    <!-- PROGRAMMES -->
-    <div id="page-programmes" class="page">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:22px">
-        <h2 class="page-title" style="margin:0">Programmes</h2>
-        <button class="add-btn" onclick="toggleForm('form-programme')">+ Nouveau Programme</button>
-      </div>
-      <div id="form-programme" class="form-box" style="display:none">
-        <div class="form-grid">
-          <select id="pr-kourel"></select>
-          <input type="text" id="pr-xassida" placeholder="Xassida" />
-          <input type="text" id="pr-lieu" placeholder="Lieu" />
-          <input type="text" id="pr-responsable" placeholder="Responsable" />
-          <select id="pr-jour"><option>Lundi</option><option>Mardi</option><option>Mercredi</option><option>Jeudi</option><option>Vendredi</option><option>Samedi</option><option>Dimanche</option></select>
-          <input type="time" id="pr-heure" />
-        </div>
-        <div style="margin-top:12px">
-          <label style="font-size:11px;font-weight:700;color:var(--text-light);display:block;margin-bottom:8px">Tolérance</label>
-          <div style="display:flex;gap:8px;flex-wrap:wrap" id="tol-buttons">
-            <button class="tol-btn selected" onclick="selectTolerance(this,'0')">Aucune</button>
-            <button class="tol-btn" onclick="selectTolerance(this,'5')">5 min</button>
-            <button class="tol-btn" onclick="selectTolerance(this,'10')">10 min</button>
-            <button class="tol-btn" onclick="selectTolerance(this,'15')">15 min</button>
-            <button class="tol-btn" onclick="selectTolerance(this,'20')">20 min</button>
-            <button class="tol-btn" onclick="selectTolerance(this,'30')">30 min</button>
-          </div>
-          <input type="hidden" id="pr-tolerance" value="0" />
-        </div>
-        <textarea id="pr-notes" rows="2" placeholder="Notes…" style="margin-top:12px"></textarea>
-        <div class="btn-row">
-          <button class="btn btn-primary" onclick="addProgramme()">Enregistrer</button>
-          <button class="btn btn-secondary" onclick="toggleForm('form-programme')">Annuler</button>
-        </div>
-      </div>
-      <div id="programmes-list"></div>
-    </div>
-
-    <!-- PRESENCES -->
-    <div id="page-presences" class="page">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:22px">
-        <h2 class="page-title" style="margin:0">Présences</h2>
-        <button class="add-btn" onclick="toggleForm('form-presence')">+ Nouvelle Session</button>
-      </div>
-      <div id="form-presence" class="form-box" style="display:none">
-        <div class="form-grid">
-          <input type="date" id="p-date" />
-          <select id="p-kourel" onchange="loadMembresForPresence()"></select>
-          <select id="p-type"><option>Répétition</option><option>Xam Xam</option><option>Programme</option><option>Réunion</option></select>
-          <input type="text" id="p-lieu" placeholder="Lieu" />
-        </div>
-        <div id="p-membres-list" style="margin-top:18px"></div>
-        <div class="btn-row">
-          <button class="btn btn-primary" onclick="savePresenceSession()">Enregistrer</button>
-          <button class="btn btn-secondary" onclick="toggleForm('form-presence')">Annuler</button>
-        </div>
-      </div>
-      <div id="presences-list"></div>
-    </div>
-
-    <!-- COTISATIONS -->
-    <div id="page-cotisations" class="page">
-      <h2 class="page-title">Adiyeu</h2>
-      <div class="stats-grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:22px">
-        <div class="stat-card" style="background:var(--green-dark)"><div class="stat-icon">💵</div><div class="stat-value" id="cot-total">—</div><div class="stat-label">Total collecté</div></div>
-        <div class="stat-card" style="background:var(--green-dark)"><div class="stat-icon">✅</div><div class="stat-value" id="cot-payees">—</div><div class="stat-label">Payées</div></div>
-        <div class="stat-card" style="background:var(--green-dark)"><div class="stat-icon">⏳</div><div class="stat-value" id="cot-attente">—</div><div class="stat-label">En attente</div></div>
-      </div>
-      <div class="card" style="padding:0;overflow:hidden">
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>Membre</th><th>Kourel</th><th>Montant</th><th>Date</th><th>Statut</th><th>Action</th></tr></thead>
-            <tbody id="cotisations-body"></tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <!-- MESSAGERIE -->
-    <div id="page-messagerie" class="page">
-      <h2 class="page-title">Messagerie</h2>
-      <div class="chat-container">
-        <div class="chat-sidebar">
-          <div class="chat-sidebar-header">
-            <div class="chat-sidebar-title">💬 Groupes</div>
-          </div>
-          <div class="chat-room-list" id="chat-room-list"></div>
-        </div>
-        <div class="chat-main" id="chat-main">
-          <div class="chat-locked-overlay">
-            <div class="lock-big">💬</div>
-            <h3>Sélectionnez un groupe</h3>
-            <p>Choisissez un groupe dans la liste pour commencer</p>
+        <div class="card" style="padding:0;overflow:hidden">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Nom</th><th>Kourel</th><th>Tél</th><th>Statut</th><th></th></tr></thead>
+              <tbody id="membres-body"></tbody>
+            </table>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- RAPPORTS -->
-    <div id="page-rapports" class="page">
-      <h2 class="page-title">Rapports</h2>
-      <div class="stats-grid" id="rapport-stats" style="margin-bottom:22px"></div>
-      <div class="two-col">
-        <div class="card"><h3>Membres par Kourel</h3><div id="rapport-kourels"></div></div>
-        <div class="card"><h3>Sessions par type</h3><div id="rapport-types"></div></div>
+      <!-- PROGRAMMES -->
+      <div id="page-programmes" class="page">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+          <h2 class="page-title" style="margin:0">Programmes</h2>
+          <button class="add-btn" onclick="toggleForm('form-programme')">+ Nouveau</button>
+        </div>
+        <div id="form-programme" class="form-box" style="display:none">
+          <div class="form-grid">
+            <select id="pr-kourel"></select>
+            <select id="pr-jour"><option>Lundi</option><option>Mardi</option><option>Mercredi</option><option>Jeudi</option><option>Vendredi</option><option>Samedi</option><option>Dimanche</option></select>
+            <input type="text" id="pr-lieu" placeholder="Lieu"/>
+            <input type="text" id="pr-xassida" placeholder="Xassida"/>
+            <input type="text" id="pr-responsable" placeholder="Responsable"/>
+            <input type="time" id="pr-heure"/>
+          </div>
+          <div class="form-section-title">Son de référence</div>
+          <div class="audio-upload-zone" onclick="document.getElementById('pr-audio-file').click()">
+            <input type="file" id="pr-audio-file" accept="audio/*" onchange="handleAudioUpload(event)"/>
+            <div class="upload-icon">🎵</div>
+            <p><strong>Choisir un son</strong></p><p>MP3, WAV, OGG…</p>
+          </div>
+          <div id="pr-audio-preview" style="display:none;margin-top:8px"></div>
+          <div style="margin-top:10px">
+            <label style="font-size:11px;font-weight:700;color:var(--text-light);display:block;margin-bottom:6px">Tolérance</label>
+            <div style="display:flex;gap:6px;flex-wrap:wrap" id="tol-buttons">
+              <button class="tol-btn selected" onclick="selectTolerance(this,'0')">Aucune</button>
+              <button class="tol-btn" onclick="selectTolerance(this,'5')">5 min</button>
+              <button class="tol-btn" onclick="selectTolerance(this,'10')">10 min</button>
+              <button class="tol-btn" onclick="selectTolerance(this,'15')">15 min</button>
+              <button class="tol-btn" onclick="selectTolerance(this,'20')">20 min</button>
+              <button class="tol-btn" onclick="selectTolerance(this,'30')">30 min</button>
+            </div>
+            <input type="hidden" id="pr-tolerance" value="0"/>
+          </div>
+          <textarea id="pr-notes" rows="2" placeholder="Notes…" style="margin-top:10px"></textarea>
+          <div class="btn-row">
+            <button class="btn btn-primary" onclick="addProgramme()">Enregistrer</button>
+            <button class="btn btn-secondary" onclick="toggleForm('form-programme')">Annuler</button>
+          </div>
+        </div>
+        <div id="programmes-list"></div>
       </div>
-    </div>
 
+      <!-- PRESENCES -->
+      <div id="page-presences" class="page">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+          <h2 class="page-title" style="margin:0">Présences</h2>
+          <button class="add-btn" onclick="toggleForm('form-presence')">+ Session</button>
+        </div>
+        <div id="form-presence" class="form-box" style="display:none">
+          <div class="form-grid">
+            <input type="date" id="p-date"/>
+            <select id="p-kourel" onchange="loadMembresForPresence()"></select>
+            <select id="p-type"><option>Répétition</option><option>Xam Xam</option><option>Programme</option><option>Réunion</option></select>
+            <input type="text" id="p-lieu" placeholder="Lieu"/>
+          </div>
+          <div id="p-membres-list" style="margin-top:14px"></div>
+          <div class="btn-row">
+            <button class="btn btn-primary" onclick="savePresenceSession()">Enregistrer</button>
+            <button class="btn btn-secondary" onclick="toggleForm('form-presence')">Annuler</button>
+          </div>
+        </div>
+        <div id="presences-list"></div>
+      </div>
+
+      <!-- COTISATIONS -->
+      <div id="page-cotisations" class="page">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+          <h2 class="page-title" style="margin:0">Adiyeu</h2>
+          <button class="add-btn" onclick="openFormAdiyeu()">+ Cotisation</button>
+        </div>
+        <div id="form-adiyeu" class="form-box" style="display:none">
+          <h3 style="margin-bottom:12px;font-size:13px">Nouvelle cotisation</h3>
+          <div class="form-grid">
+            <select id="a-membre"></select>
+            <select id="a-kourel"></select>
+            <input type="number" id="a-montant" placeholder="Montant (FCFA)"/>
+            <input type="text" id="a-programme" placeholder="Programme (ex: Gamou 2026)"/>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-primary" onclick="addAdiyeu()">Enregistrer</button>
+            <button class="btn btn-secondary" onclick="toggleForm('form-adiyeu')">Annuler</button>
+          </div>
+        </div>
+        <div class="stats-grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:16px">
+          <div class="stat-card" style="background:var(--green-dark)"><div class="stat-icon">💵</div><div class="stat-value" id="cot-total">—</div><div class="stat-label">Total</div></div>
+          <div class="stat-card" style="background:var(--green-dark)"><div class="stat-icon">✅</div><div class="stat-value" id="cot-payees">—</div><div class="stat-label">Payées</div></div>
+          <div class="stat-card" style="background:var(--green-dark)"><div class="stat-icon">⏳</div><div class="stat-value" id="cot-attente">—</div><div class="stat-label">Attente</div></div>
+        </div>
+        <div class="card" style="padding:0;overflow:hidden">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Membre</th><th>Montant</th><th>Statut</th><th></th></tr></thead>
+              <tbody id="cotisations-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- RAPPORTS -->
+      <div id="page-rapports" class="page">
+        <h2 class="page-title">Rapports</h2>
+        <div class="stats-grid" id="rapport-stats" style="margin-bottom:16px"></div>
+        <div class="two-col">
+          <div class="card"><h3>Membres par Kourel</h3><div id="rapport-kourels"></div></div>
+          <div class="card"><h3>Statistiques</h3><div id="rapport-types"></div></div>
+        </div>
+      </div>
+
+    </div>
   </div>
+
+  <!-- BOTTOM NAV -->
+  <nav class="bottom-nav">
+    <button class="bottom-nav-btn active" onclick="showPage('accueil',this)"><span class="nav-icon">🏠</span>Accueil</button>
+    <button class="bottom-nav-btn" onclick="showPage('kourels',this)"><span class="nav-icon">👥</span>Kourels</button>
+    <button class="bottom-nav-btn" onclick="showPage('membres',this)"><span class="nav-icon">👤</span>Membres</button>
+    <button class="bottom-nav-btn" onclick="showPage('programmes',this)"><span class="nav-icon">📅</span>Programmes</button>
+    <button class="bottom-nav-btn" onclick="showPage('presences',this)"><span class="nav-icon">✅</span>Présences</button>
+    <button class="bottom-nav-btn" onclick="showPage('cotisations',this)"><span class="nav-icon">💰</span>Adiyeu</button>
+    <button class="bottom-nav-btn" onclick="showPage('rapports',this)"><span class="nav-icon">📊</span>Rapports</button>
+  </nav>
 </div>
 
 <script>
-  // Switcher entre Admin et Membre
-function switchTab(tab) {
-  if (tab === 'admin') {
-    document.getElementById('form-admin').style.display = 'block';
-    document.getElementById('form-membre-login').style.display = 'none';
-    document.getElementById('btn-tab-admin').style.background = 'var(--green)';
-    document.getElementById('btn-tab-admin').style.color = '#fff';
-    document.getElementById('btn-tab-membre').style.background = '#fff';
-    document.getElementById('btn-tab-membre').style.color = 'var(--text-light)';
-  } else {
-    document.getElementById('form-admin').style.display = 'none';
-    document.getElementById('form-membre-login').style.display = 'block';
-    document.getElementById('btn-tab-admin').style.background = '#fff';
-    document.getElementById('btn-tab-admin').style.color = 'var(--text-light)';
-    document.getElementById('btn-tab-membre').style.background = 'var(--green)';
-    document.getElementById('btn-tab-membre').style.color = '#fff';
-  }
-}
+const API='https://daara-connect-backend.onrender.com/api';
+let token=localStorage.getItem('dc_token')||'';
+let currentUser=JSON.parse(localStorage.getItem('dc_user')||'null');
+let currentDaara=JSON.parse(localStorage.getItem('dc_daara')||'null');
+let cacheKourels=[];
+let cacheMembres=[];
+let presenceStatuts={};
+let activeChatRoom=null;
+let mediaRecorder=null;
+let audioChunks=[];
+let isRecording=false;
+let currentAudioDataUrl=null;
 
-// Connexion membre par téléphone
-async function loginMembre() {
-  const telephone = document.getElementById('login-tel').value.trim();
-  const errEl = document.getElementById('err-login-membre');
-  const btn   = document.getElementById('btn-login-membre');
-  if (!telephone) { errEl.style.display = 'block'; errEl.textContent = 'Entrez votre numéro'; return; }
-  btn.disabled = true; btn.textContent = 'Connexion…';
-  try {
-    const data = await api('POST', '/auth/login-membre', { telephone });
-    token = data.token;
-    currentUser  = { id: data.membre.id, nom: data.membre.prenom + ' ' + data.membre.nom, role: 'membre' };
-    currentDaara = { id: data.membre.daara, nom: 'Daara Connect' };
-    localStorage.setItem('dc_token', token);
-    localStorage.setItem('dc_user', JSON.stringify(currentUser));
-    localStorage.setItem('dc_daara', JSON.stringify(currentDaara));
-    errEl.style.display = 'none';
-    launchApp();
-  } catch(e) {
-    errEl.style.display = 'block';
-    errEl.textContent = e.message;
-  } finally {
-    btn.disabled = false; btn.textContent = 'Accéder →';
-  }
-}
-// ══════════════════════════════════════════════════════════════
-// ✅ CONFIG — pointe vers ton backend Node.js port 5000
-// ══════════════════════════════════════════════════════════════
-const API = 'https://daara-connect-backend.onrender.com/api';
-
-// Récupérer le token et les infos depuis localStorage (persistance)
-let token       = localStorage.getItem('dc_token') || '';
-let currentUser = JSON.parse(localStorage.getItem('dc_user')  || 'null');
-let currentDaara= JSON.parse(localStorage.getItem('dc_daara') || 'null');
-
-// Cache local (données chargées depuis le backend)
-let cacheKourels = [];
-let cacheMembres = [];
-let presenceStatuts = {};
-let activeChatRoom  = null;
-
-// ══════════════════════════════════════════════════════════════
-// HELPERS
-// ══════════════════════════════════════════════════════════════
-function escHtml(s) {
-  return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-
-function badge(s) {
-  const map = {'Actif':'actif','Inactif':'inactif','Payé':'payé','En attente':'attente','Admin':'admin','Membre':'membre'};
+// ── HELPERS ──────────────────────────────────────────────
+function escHtml(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function badge(s){
+  const map={'Actif':'actif','Inactif':'inactif','Payé':'payé','En attente':'attente','Admin':'admin','Membre':'membre'};
   return `<span class="badge ${map[s]||''}">${escHtml(s)}</span>`;
 }
-
-function showNotif(msg, isErr) {
-  const n = document.createElement('div');
-  n.className = 'notif' + (isErr ? ' notif-err' : '');
-  n.textContent = msg;
+function showNotif(msg,isErr){
+  document.querySelectorAll('.notif').forEach(n=>n.remove());
+  const n=document.createElement('div');
+  n.className='notif'+(isErr?' notif-err':'');
+  n.textContent=msg;
   document.body.appendChild(n);
-  setTimeout(() => n.remove(), 3500);
+  setTimeout(()=>n.remove(),3500);
 }
-
-function getHeaders() {
-  return { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token };
-}
-
-// ✅ Fonction centrale d'appel API — gère les erreurs proprement
-async function api(method, path, body) {
-  const opts = { method, headers: getHeaders() };
-  if (body) opts.body = JSON.stringify(body);
-  const res  = await fetch(API + path, opts);
-  const data = await res.json();
-  if (!res.ok) throw new Error(data.message || 'Erreur serveur');
+function getHeaders(){return{'Content-Type':'application/json','Authorization':'Bearer '+token};}
+async function api(method,path,body){
+  const opts={method,headers:getHeaders()};
+  if(body)opts.body=JSON.stringify(body);
+  const res=await fetch(API+path,opts);
+  const data=await res.json();
+  if(!res.ok)throw new Error(data.message||'Erreur serveur');
   return data;
 }
-
-function isAdmin() { return currentUser?.role === 'admin'; }
-
-function selectTolerance(btn, val) {
-  document.querySelectorAll('#tol-buttons .tol-btn').forEach(b => b.classList.remove('selected'));
+function isAdmin(){return currentUser?.role==='admin';}
+function selectTolerance(btn,val){
+  document.querySelectorAll('#tol-buttons .tol-btn').forEach(b=>b.classList.remove('selected'));
   btn.classList.add('selected');
-  document.getElementById('pr-tolerance').value = val;
+  document.getElementById('pr-tolerance').value=val;
 }
 
-// ══════════════════════════════════════════════════════════════
-// AUTH
-// ══════════════════════════════════════════════════════════════
-async function loginUser() {
-  const identifiant = document.getElementById('login-id').value.trim();
-  const motDePasse  = document.getElementById('login-pwd').value;
-  const errEl = document.getElementById('err-login');
-  const btn   = document.getElementById('btn-login');
-  if (!identifiant || !motDePasse) {
-    errEl.textContent = 'Veuillez remplir tous les champs';
-    errEl.style.display = 'block';
-    return;
-  }
-  btn.disabled = true;
-  btn.textContent = 'Connexion…';
-  try {
-    const data = await api('POST', '/auth/login', { identifiant, motDePasse });
-    token        = data.token;
-    currentUser  = { id: data.utilisateur?._id || data.utilisateur?.id, nom: data.utilisateur?.nom || data.daara?.nom, role: data.utilisateur?.role || 'admin' };
-    currentDaara = data.daara;
-    localStorage.setItem('dc_token',  token);
-    localStorage.setItem('dc_user',   JSON.stringify(currentUser));
-    localStorage.setItem('dc_daara',  JSON.stringify(currentDaara));
-    errEl.style.display = 'none';
+// ── AUTH ─────────────────────────────────────────────────
+function switchTab(tab){
+  const a=tab==='admin';
+  document.getElementById('form-admin').style.display=a?'block':'none';
+  document.getElementById('form-membre-login').style.display=a?'none':'block';
+  document.getElementById('btn-tab-admin').style.cssText=`flex:1;padding:10px;border-radius:10px;font-size:13px;border:2px solid ${a?'var(--green)':'var(--border)'};background:${a?'var(--green)':'#fff'};color:${a?'#fff':'var(--text-light)'};font-weight:800;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif`;
+  document.getElementById('btn-tab-membre').style.cssText=`flex:1;padding:10px;border-radius:10px;font-size:13px;border:2px solid ${!a?'var(--green)':'var(--border)'};background:${!a?'var(--green)':'#fff'};color:${!a?'#fff':'var(--text-light)'};font-weight:800;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif`;
+}
+
+async function loginUser(){
+  const identifiant=document.getElementById('login-id').value.trim();
+  const motDePasse=document.getElementById('login-pwd').value;
+  const errEl=document.getElementById('err-login');
+  const btn=document.getElementById('btn-login');
+  if(!identifiant||!motDePasse){errEl.textContent='Veuillez remplir tous les champs';errEl.style.display='block';return;}
+  btn.disabled=true;btn.textContent='Connexion…';
+  try{
+    const data=await api('POST','/auth/login',{identifiant,motDePasse});
+    token=data.token;
+    currentUser={id:data.utilisateur?._id||data.utilisateur?.id||data.daara?._id,nom:data.utilisateur?.nom||data.daara?.nom,role:data.utilisateur?.role||'admin'};
+    currentDaara=data.daara;
+    localStorage.setItem('dc_token',token);
+    localStorage.setItem('dc_user',JSON.stringify(currentUser));
+    localStorage.setItem('dc_daara',JSON.stringify(currentDaara));
+    errEl.style.display='none';
     launchApp();
-  } catch(e) {
-    errEl.textContent = e.message;
-    errEl.style.display = 'block';
-  } finally {
-    btn.disabled = false;
-    btn.textContent = 'Se connecter →';
-  }
+  }catch(e){errEl.textContent=e.message;errEl.style.display='block';}
+  finally{btn.disabled=false;btn.textContent='Se connecter →';}
 }
 
-async function createDaara() {
-  const nom         = document.getElementById('new-daara-nom').value.trim();
-  const siege       = document.getElementById('new-daara-siege').value.trim();
-  const identifiant = document.getElementById('new-admin-id').value.trim();
-  const motDePasse  = document.getElementById('new-admin-pwd').value.trim();
-  let ok = true;
+async function loginMembre(){
+  const telephone=document.getElementById('login-tel').value.trim();
+  const errEl=document.getElementById('err-login-membre');
+  const btn=document.getElementById('btn-login-membre');
+  if(!telephone){errEl.style.display='block';errEl.textContent='Entrez votre numéro';return;}
+  btn.disabled=true;btn.textContent='Connexion…';
+  try{
+    const data=await api('POST','/auth/login-membre',{telephone});
+    token=data.token;
+    currentUser={id:data.membre.id,nom:data.membre.prenom+' '+data.membre.nom,role:'membre'};
+    currentDaara={id:data.membre.daara,nom:'Daara Connect'};
+    localStorage.setItem('dc_token',token);
+    localStorage.setItem('dc_user',JSON.stringify(currentUser));
+    localStorage.setItem('dc_daara',JSON.stringify(currentDaara));
+    errEl.style.display='none';
+    launchApp();
+  }catch(e){errEl.style.display='block';errEl.textContent=e.message;}
+  finally{btn.disabled=false;btn.textContent='Accéder →';}
+}
+
+async function createDaara(){
+  const nom=document.getElementById('new-daara-nom').value.trim();
+  const siege=document.getElementById('new-daara-siege').value.trim();
+  const identifiant=document.getElementById('new-admin-id').value.trim();
+  const motDePasse=document.getElementById('new-admin-pwd').value.trim();
+  let ok=true;
   [['err-new-nom',nom],['err-new-siege',siege],['err-new-id',identifiant],['err-new-pwd',motDePasse]]
-    .forEach(([id,v]) => { document.getElementById(id).style.display = v ? 'none' : 'block'; if (!v) ok = false; });
-  if (!ok) return;
-  const btn = document.getElementById('btn-create');
-  btn.disabled = true;
-  btn.textContent = 'Création…';
-  try {
-    await api('POST', '/auth/register', { nom, siege, identifiant, motDePasse });
+    .forEach(([id,v])=>{document.getElementById(id).style.display=v?'none':'block';if(!v)ok=false;});
+  if(!ok)return;
+  const btn=document.getElementById('btn-create');
+  btn.disabled=true;btn.textContent='Création…';
+  try{
+    await api('POST','/auth/register',{nom,siege,identifiant,motDePasse});
     showNotif('Daara créé ! Connectez-vous.');
     showSearchPhase();
-    document.getElementById('login-id').value = identifiant;
-  } catch(e) {
-    showNotif(e.message, true);
-  } finally {
-    btn.disabled = false;
-    btn.textContent = 'Créer le Daara →';
-  }
+    document.getElementById('login-id').value=identifiant;
+  }catch(e){showNotif(e.message,true);}
+  finally{btn.disabled=false;btn.textContent='Créer le Daara →';}
 }
 
-function logout() {
-  localStorage.removeItem('dc_token');
-  localStorage.removeItem('dc_user');
-  localStorage.removeItem('dc_daara');
-  token = ''; currentUser = null; currentDaara = null;
-  cacheKourels = []; cacheMembres = [];
-  document.getElementById('app').style.display = 'none';
-  document.getElementById('welcome-screen').style.display = 'flex';
-  document.getElementById('login-id').value = '';
-  document.getElementById('login-pwd').value = '';
-  document.getElementById('err-login').style.display = 'none';
+function logout(){
+  localStorage.removeItem('dc_token');localStorage.removeItem('dc_user');localStorage.removeItem('dc_daara');
+  token='';currentUser=null;currentDaara=null;cacheKourels=[];cacheMembres=[];activeChatRoom=null;
+  document.getElementById('app').style.display='none';
+  document.getElementById('welcome-screen').style.display='flex';
+  document.getElementById('login-id').value='';
+  document.getElementById('login-pwd').value='';
+  document.getElementById('err-login').style.display='none';
 }
+function showCreatePhase(){document.getElementById('search-phase').style.display='none';document.getElementById('create-phase').style.display='block';}
+function showSearchPhase(){document.getElementById('create-phase').style.display='none';document.getElementById('search-phase').style.display='block';}
 
-function showCreatePhase() {
-  document.getElementById('search-phase').style.display = 'none';
-  document.getElementById('create-phase').style.display = 'block';
-}
-function showSearchPhase() {
-  document.getElementById('create-phase').style.display = 'none';
-  document.getElementById('search-phase').style.display = 'block';
-}
-
-// ══════════════════════════════════════════════════════════════
-// APP LAUNCH
-// ══════════════════════════════════════════════════════════════
-function launchApp() {
-  document.getElementById('welcome-screen').style.display = 'none';
-  document.getElementById('app').style.display = 'block';
-  document.getElementById('hdr-daara').textContent   = currentDaara?.nom   || '—';
-  document.getElementById('hdr-meta').textContent    = currentDaara?.siege  || '—';
-  document.getElementById('hdr-username').textContent = currentUser?.nom    || '—';
-  document.getElementById('hdr-avatar').textContent  = (currentUser?.nom || currentDaara?.nom || '?')[0].toUpperCase();
-  document.getElementById('hdr-role').textContent    = isAdmin() ? 'Admin' : 'Membre';
+// ── APP LAUNCH ───────────────────────────────────────────
+function launchApp(){
+  document.getElementById('welcome-screen').style.display='none';
+  document.getElementById('app').style.display='flex';
+  document.getElementById('hdr-daara').textContent=currentDaara?.nom||'—';
+  document.getElementById('hdr-meta').textContent=currentDaara?.siege||'—';
+  document.getElementById('hdr-username').textContent=currentUser?.nom||'—';
+  document.getElementById('hdr-avatar').textContent=(currentUser?.nom||currentDaara?.nom||'?')[0].toUpperCase();
+  document.getElementById('hdr-role').textContent=isAdmin()?'Admin':'Membre';
   renderAll();
 }
 
-function showPage(id, btn) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('page-' + id).classList.add('active');
-  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-  if (btn) btn.classList.add('active');
-  if (id === 'messagerie') renderChatSidebar();
+function showPage(id,btn){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  document.querySelectorAll('.bottom-nav-btn').forEach(b=>b.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+  // scroll to top
+  document.querySelector('.content-wrap').scrollTop=0;
 }
 
-function toggleForm(id) {
-  const el = document.getElementById(id);
-  const visible = el.style.display !== 'none';
-  el.style.display = visible ? 'none' : 'block';
-  if (!visible) {
-    if (id === 'form-membre')        remplirSelectKourels('m-kourel');
-    if (id === 'form-programme')     remplirSelectKourels('pr-kourel');
-    if (id === 'form-presence')      { remplirSelectKourels('p-kourel'); loadMembresForPresence(); }
-    if (id === 'form-conservatoire') { remplirSelectKourels('cv-kourel'); updateConservMembres(); }
+function toggleForm(id){
+  const el=document.getElementById(id);
+  const visible=el.style.display!=='none';
+  el.style.display=visible?'none':'block';
+  if(!visible){
+    if(id==='form-membre')remplirSelectKourels('m-kourel');
+    if(id==='form-programme')remplirSelectKourels('pr-kourel');
+    if(id==='form-presence'){remplirSelectKourels('p-kourel');loadMembresForPresence();}
   }
 }
 
-function remplirSelectKourels(selId) {
-  const el = document.getElementById(selId);
-  if (!el) return;
-  el.innerHTML = cacheKourels.length
-    ? cacheKourels.map(k => `<option value="${k._id}">${escHtml(k.nom)}</option>`).join('')
-    : '<option value="">Aucun Kourel</option>';
-}
-
-// ══════════════════════════════════════════════════════════════
-// RENDER ALL
-// ══════════════════════════════════════════════════════════════
-async function renderAll() {
-  try {
-    await Promise.all([renderKourels(), renderMembres()]);
-    await Promise.all([renderProgrammes(), renderPresences(), renderConservatoires(), renderCotisations()]);
-    renderAccueil();
-    renderChatSidebar();
-    renderRapports();
-  } catch(e) {
-    console.error('renderAll error:', e);
+function openFormAdiyeu(){
+  const el=document.getElementById('form-adiyeu');
+  const visible=el.style.display!=='none';
+  el.style.display=visible?'none':'block';
+  if(!visible){
+    remplirSelectKourels('a-kourel');
+    remplirSelectMembres('a-membre');
   }
 }
 
-// ══════════════════════════════════════════════════════════════
-// ACCUEIL
-// ══════════════════════════════════════════════════════════════
-function renderAccueil() {
-  document.getElementById('stat-kourels').textContent = cacheKourels.length;
-  document.getElementById('stat-membres').textContent = cacheMembres.length;
-  document.getElementById('accueil-kourels').innerHTML = cacheKourels.map(k => `
-    <div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border)">
+function remplirSelectKourels(selId){
+  const el=document.getElementById(selId);if(!el)return;
+  el.innerHTML=cacheKourels.length
+    ?cacheKourels.map(k=>`<option value="${k._id}">${escHtml(k.nom)}</option>`).join('')
+    :'<option value="">Aucun Kourel</option>';
+}
+function remplirSelectMembres(selId){
+  const el=document.getElementById(selId);if(!el)return;
+  el.innerHTML=cacheMembres.length
+    ?cacheMembres.map(m=>`<option value="${m._id}">${escHtml(m.prenom+' '+m.nom)}</option>`).join('')
+    :'<option value="">Aucun membre</option>';
+}
+
+// ── RENDER ALL ───────────────────────────────────────────
+async function renderAll(){
+  try{
+    await Promise.all([renderKourels(),renderMembres()]);
+    await Promise.all([renderProgrammes(),renderPresences(),renderCotisations()]);
+    renderAccueil();renderRapports();
+  }catch(e){console.error('renderAll:',e);}
+}
+
+// ── ACCUEIL ──────────────────────────────────────────────
+function renderAccueil(){
+  document.getElementById('stat-kourels').textContent=cacheKourels.length;
+  document.getElementById('stat-membres').textContent=cacheMembres.length;
+  document.getElementById('accueil-kourels').innerHTML=cacheKourels.map(k=>`
+    <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);cursor:pointer"
+      onclick="showPage('kourels',document.querySelector('.bottom-nav-btn:nth-child(2)'));openKourelDetail('${k._id}','${escHtml(k.nom)}')">
       <div style="font-weight:700;font-size:13px">${escHtml(k.nom)}</div>
-      <div style="font-size:12px;color:var(--text-light)">${cacheMembres.filter(m=>(m.kourel?._id||m.kourel)===k._id).length} membres</div>
-    </div>`).join('') || '<p style="color:var(--text-light);font-size:13px">Aucun Kourel</p>';
-  document.getElementById('accueil-membres').innerHTML = cacheMembres.slice(0,5).map(m => `
-    <div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border)">
-      <div style="font-weight:700;font-size:13px">${escHtml(m.prenom + ' ' + m.nom)}</div>
-      <div style="font-size:12px;color:var(--text-light)">${escHtml(m.telephone || '—')}</div>
-    </div>`).join('') || '<p style="color:var(--text-light);font-size:13px">Aucun membre</p>';
+      <div style="font-size:11px;color:var(--text-light)">${cacheMembres.filter(m=>(m.kourel?._id||m.kourel)===k._id).length} membres →</div>
+    </div>`).join('')||'<p style="color:var(--text-light);font-size:12px">Aucun Kourel</p>';
+  document.getElementById('accueil-membres').innerHTML=cacheMembres.slice(0,5).map(m=>`
+    <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)">
+      <div style="font-weight:700;font-size:13px">${escHtml(m.prenom+' '+m.nom)}</div>
+      <div style="font-size:11px;color:var(--text-light)">${escHtml(m.telephone||'—')}</div>
+    </div>`).join('')||'<p style="color:var(--text-light);font-size:12px">Aucun membre</p>';
 }
 
-// ══════════════════════════════════════════════════════════════
-// KOURELS
-// ══════════════════════════════════════════════════════════════
-async function renderKourels() {
-  try {
-    cacheKourels = await api('GET', '/kourels');
-    document.getElementById('kourels-grid').innerHTML = cacheKourels.length
-      ? cacheKourels.map(k => `
-          <div class="kourel-card">
-            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
-              <h3 style="font-size:15px;font-weight:900">${escHtml(k.nom)}</h3>
-              ${badge(k.statut || 'Actif')}
+// ── KOURELS ──────────────────────────────────────────────
+async function renderKourels(){
+  try{
+    cacheKourels=await api('GET','/kourels');
+    const sidebar=document.getElementById('kourels-list-sidebar');
+    if(sidebar){
+      sidebar.innerHTML=cacheKourels.length
+        ?cacheKourels.map(k=>`
+          <div class="chat-room-item${activeChatRoom===k._id?' active':''}"
+            onclick="openKourelDetail('${k._id}','${escHtml(k.nom)}')">
+            <div class="room-icon">👥</div>
+            <div style="flex:1;min-width:0">
+              <div class="room-name">${escHtml(k.nom)}</div>
+              <div class="room-desc">${cacheMembres.filter(m=>(m.kourel?._id||m.kourel)===k._id).length} mbr · ${badge(k.statut||'Actif')}</div>
             </div>
-            <div style="font-size:13px;color:var(--text-light);margin-bottom:10px">${escHtml(k.description || '')}</div>
-            <div style="display:flex;gap:16px;margin-bottom:14px">
-              <div style="text-align:center">
-                <div style="font-size:17px;font-weight:800;color:var(--green)">${escHtml(k.type || '—')}</div>
-                <div style="font-size:11px;color:var(--text-light)">Type</div>
-              </div>
-            </div>
-            <button class="btn btn-danger" onclick="deleteKourel('${k._id}')">🗑 Supprimer</button>
           </div>`).join('')
-      : '<p style="color:var(--text-light)">Aucun Kourel.</p>';
-  } catch(e) { showNotif('Erreur chargement Kourels', true); }
+        :'<div style="padding:14px;font-size:12px;color:var(--text-light)">Aucun Kourel</div>';
+    }
+  }catch(e){showNotif('Erreur chargement Kourels',true);}
 }
 
-async function addKourel() {
-  const nom = document.getElementById('k-nom').value.trim();
-  if (!nom) { showNotif('Nom obligatoire', true); return; }
-  try {
-    await api('POST', '/kourels', {
-      nom,
-      type:   document.getElementById('k-desc').value.trim(),
-    });
-    document.getElementById('k-nom').value = '';
+async function openKourelDetail(kourelId,nom){
+  activeChatRoom=kourelId;
+  document.querySelectorAll('#kourels-list-sidebar .chat-room-item').forEach(el=>{
+    el.classList.toggle('active',el.getAttribute('onclick')?.includes(kourelId));
+  });
+  const panel=document.getElementById('kourel-detail-panel');
+  const membres=cacheMembres.filter(m=>(m.kourel?._id||m.kourel)===kourelId);
+  let msgs=[];
+  try{msgs=await api('GET','/messages/'+kourelId);}catch(e){}
+
+  panel.innerHTML=`
+    <div class="kourel-detail">
+      <div class="kourel-detail-header">
+        <div class="room-icon">👥</div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:14px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${escHtml(nom)}</div>
+          <div style="font-size:10px;opacity:.8">${membres.length} membres</div>
+        </div>
+        ${isAdmin()?`<button onclick="deleteKourel('${kourelId}')" style="background:rgba(255,0,0,.2);border:none;color:#fff;border-radius:7px;padding:5px 9px;font-size:12px;cursor:pointer">🗑</button>`:''}
+      </div>
+      <div class="kourel-members-panel">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+          <span style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--text-light)">Membres</span>
+          ${isAdmin()?`<button onclick="showAddMembre('${kourelId}')" style="background:var(--green);color:#fff;border:none;border-radius:7px;padding:4px 9px;font-size:11px;font-weight:800;cursor:pointer">+ Ajouter</button>`:''}
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:3px">
+          ${membres.length?membres.map(m=>`<span class="member-chip">${escHtml(m.prenom+' '+m.nom)}</span>`).join(''):'<span style="font-size:11px;color:var(--text-light)">Aucun membre</span>'}
+        </div>
+      </div>
+      <div style="background:#f0f0f0;padding:6px 14px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--text-light);border-bottom:1px solid var(--border)">💬 Discussion</div>
+      <div class="chat-messages" id="chat-msgs-area">
+        ${msgs.length?msgs.map(m=>{
+          const isMine=m.auteur?._id===currentUser?.id||m.auteur===currentUser?.id;
+          return `<div style="display:flex;flex-direction:column;align-items:${isMine?'flex-end':'flex-start'}">
+            <div class="msg-bubble ${isMine?'msg-mine':'msg-other'}" style="position:relative">
+              ${!isMine?`<div class="msg-sender">${escHtml(m.auteur?.prenom||m.auteur?.nom||'')}</div>`:''}
+              <div style="display:flex;align-items:center;gap:4px">
+                ${m.type==='audio'
+                  ?`<audio controls src="${m.texte}" style="max-width:180px;height:30px"></audio>`
+                  :`<span style="word-break:break-word">${escHtml(m.texte)}</span>`}
+                ${isMine?`<div style="position:relative;flex-shrink:0">
+                  <button class="msg-menu-btn" onclick="toggleMsgMenu('menu-${m._id}')">⋮</button>
+                  <div class="msg-menu-dropdown" id="menu-${m._id}">
+                    <div class="menu-item-delete" onclick="deleteMsg('${m._id}','${kourelId}','${escHtml(nom)}')">🗑 Supprimer</div>
+                  </div></div>`:''}
+              </div>
+              <div class="msg-time">${new Date(m.createdAt).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}</div>
+            </div></div>`;
+        }).join(''):'<div class="chat-empty"><div style="font-size:36px;margin-bottom:8px">💬</div><p style="font-size:12px;font-weight:600;color:var(--text-light)">Aucun message — soyez le premier !</p></div>'}
+      </div>
+      <div class="chat-input-bar">
+        <button class="chat-plus-btn" onclick="document.getElementById('chat-file-${kourelId}').click()" title="Fichier">+</button>
+        <input type="file" id="chat-file-${kourelId}" accept="audio/*,image/*" style="display:none" onchange="sendFileMsg(event,'${kourelId}','${escHtml(nom)}')"/>
+        <textarea id="chat-input-field" placeholder="Écrire un message…" rows="1"
+          onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMsg('${kourelId}','${escHtml(nom)}')}"></textarea>
+        <button class="chat-send-btn" id="btn-vocal" onclick="startVocal('${kourelId}','${escHtml(nom)}')"
+          style="background:linear-gradient(135deg,#dc2626,#991b1b)" title="Vocal">🎤</button>
+        <button class="chat-send-btn" onclick="sendMsg('${kourelId}','${escHtml(nom)}')">➤</button>
+      </div>
+    </div>`;
+  setTimeout(()=>{const el=document.getElementById('chat-msgs-area');if(el)el.scrollTop=el.scrollHeight;},50);
+}
+
+function showAddMembre(kourelId){
+  showPage('membres',document.querySelector('.bottom-nav-btn:nth-child(3)'));
+  setTimeout(()=>{
+    toggleForm('form-membre');
+    remplirSelectKourels('m-kourel');
+    document.getElementById('m-kourel').value=kourelId;
+  },100);
+}
+
+async function addKourel(){
+  const nom=document.getElementById('k-nom').value.trim();
+  if(!nom){showNotif('Nom obligatoire',true);return;}
+  try{
+    await api('POST','/kourels',{nom,description:document.getElementById('k-desc').value.trim(),statut:document.getElementById('k-statut').value});
+    document.getElementById('k-nom').value='';document.getElementById('k-desc').value='';
     toggleForm('form-kourel');
-    await renderKourels();
-    renderAccueil();
+    await renderKourels();renderAccueil();
     showNotif('Kourel créé !');
-  } catch(e) { showNotif(e.message, true); }
+  }catch(e){showNotif(e.message,true);}
 }
 
-async function deleteKourel(id) {
-  if (!confirm('Supprimer ce Kourel ?')) return;
-  try {
-    await api('DELETE', '/kourels/' + id);
-    await renderKourels();
-    renderAccueil();
+async function deleteKourel(id){
+  if(!confirm('Supprimer ce Kourel ?'))return;
+  try{
+    await api('DELETE','/kourels/'+id);
+    activeChatRoom=null;
+    document.getElementById('kourel-detail-panel').innerHTML=`
+      <div class="chat-locked-overlay"><div class="lock-big">👥</div><h3>Sélectionnez un Kourel</h3></div>`;
+    await renderKourels();renderAccueil();
     showNotif('Kourel supprimé ✅');
-  } catch(e) { showNotif(e.message, true); }
+  }catch(e){showNotif(e.message,true);}
 }
 
-// ══════════════════════════════════════════════════════════════
-// MEMBRES
-// ══════════════════════════════════════════════════════════════
-async function renderMembres() {
-  try {
-    cacheMembres = await api('GET', '/membres');
-    filtrerMembres();
-  } catch(e) { showNotif('Erreur chargement membres', true); }
+// ── MEMBRES ──────────────────────────────────────────────
+async function renderMembres(){
+  try{cacheMembres=await api('GET','/membres');filtrerMembres();}
+  catch(e){showNotif('Erreur chargement membres',true);}
 }
-
-function filtrerMembres() {
-  const q = (document.getElementById('search-membre')?.value || '').toLowerCase();
-  const membres = q
-    ? cacheMembres.filter(m => (m.prenom + ' ' + m.nom + ' ' + (m.telephone || '')).toLowerCase().includes(q))
-    : cacheMembres;
-  document.getElementById('membres-body').innerHTML = membres.length
-    ? membres.map(m => `
+function filtrerMembres(){
+  const q=(document.getElementById('search-membre')?.value||'').toLowerCase();
+  const membres=q?cacheMembres.filter(m=>(m.prenom+' '+m.nom+' '+(m.telephone||'')).toLowerCase().includes(q)):cacheMembres;
+  document.getElementById('membres-body').innerHTML=membres.length
+    ?membres.map(m=>`
         <tr>
-          <td><strong>${escHtml(m.prenom + ' ' + m.nom)}</strong></td>
-          <td style="color:var(--text-light)">${escHtml(m.kourel?.nom || '—')}</td>
-          <td>${escHtml(m.telephone || '—')}</td>
-          <td>${badge(m.role || 'Membre')}</td>
-          <td>${badge(m.statut || 'Actif')}</td>
+          <td><strong>${escHtml(m.prenom+' '+m.nom)}</strong><br><span style="font-size:10px;color:var(--text-light)">${escHtml(m.kourel?.nom||'—')}</span></td>
+          <td>${escHtml(m.telephone||'—')}</td>
+          <td>${badge(m.statut||'Actif')}</td>
           <td><button class="btn btn-danger" onclick="deleteMembre('${m._id}')">🗑</button></td>
         </tr>`).join('')
-    : '<tr><td colspan="6" style="text-align:center;color:var(--text-light);padding:24px">Aucun membre</td></tr>';
+    :'<tr><td colspan="4" style="text-align:center;color:var(--text-light);padding:20px">Aucun membre</td></tr>';
 }
-
-async function addMembre() {
-  const prenom = document.getElementById('m-prenom').value.trim();
-  const nom    = document.getElementById('m-nom').value.trim();
-  const kourel = document.getElementById('m-kourel').value;
-  if (!prenom || !nom) { showNotif('Prénom et Nom obligatoires', true); return; }
-  try {
-    await api('POST', '/membres', {
-      prenom, nom,
-      telephone: document.getElementById('m-tel').value.trim(),
-      kourel:    kourel || undefined,
-      role:      'Membre'
-    });
-    ['m-prenom','m-nom','m-tel'].forEach(id => document.getElementById(id).value = '');
+async function addMembre(){
+  const prenom=document.getElementById('m-prenom').value.trim();
+  const nom=document.getElementById('m-nom').value.trim();
+  const kourel=document.getElementById('m-kourel').value;
+  if(!prenom||!nom){showNotif('Prénom et Nom obligatoires',true);return;}
+  try{
+    await api('POST','/membres',{prenom,nom,telephone:document.getElementById('m-tel').value.trim(),kourel:kourel||undefined,role:'Membre'});
+    ['m-prenom','m-nom','m-tel'].forEach(id=>document.getElementById(id).value='');
     toggleForm('form-membre');
-    await renderMembres();
-    renderAccueil();
+    await renderMembres();renderAccueil();
     showNotif('Membre ajouté !');
-  } catch(e) { showNotif(e.message, true); }
+  }catch(e){showNotif(e.message,true);}
+}
+async function deleteMembre(id){
+  if(!confirm('Supprimer ce membre ?'))return;
+  try{await api('DELETE','/membres/'+id);await renderMembres();renderAccueil();showNotif('Membre supprimé ✅');}
+  catch(e){showNotif(e.message,true);}
 }
 
-async function deleteMembre(id) {
-  if (!confirm('Supprimer ce membre ?')) return;
-  try {
-    await api('DELETE', '/membres/' + id);
-    await renderMembres();
-    renderAccueil();
-    showNotif('Membre supprimé ✅');
-  } catch(e) { showNotif(e.message, true); }
-}
-
-// ══════════════════════════════════════════════════════════════
-// CONSERVATOIRE
-// ══════════════════════════════════════════════════════════════
-async function renderConservatoires() {
-  try {
-    const groupes = await api('GET', '/conservatoire');
-    document.getElementById('stat-conserv').textContent = groupes.length;
-    document.getElementById('conservatoires-list').innerHTML = groupes.length
-      ? groupes.map(cv => {
-          const membres = cv.membres || [];
-          return `
-          <div class="conserv-card">
-            <div class="conserv-header">
-              <div>
-                <div class="conserv-title">🎵 ${escHtml(cv.nom)}</div>
-                <div class="conserv-meta">Kourel : ${escHtml(cv.kourel?.nom || '—')}</div>
-              </div>
-              <button class="btn btn-danger" onclick="deleteConservatoire('${cv._id}')">🗑</button>
-            </div>
-            <div>${membres.map(m => `<span class="member-chip">${escHtml((m.prenom||'') + ' ' + (m.nom||''))}</span>`).join('') || '<span style="font-size:12px;color:var(--text-light)">Aucun membre</span>'}</div>
-          </div>`;
-        }).join('')
-      : '<p style="color:var(--text-light)">Aucun groupe conservatoire.</p>';
-  } catch(e) { showNotif('Erreur chargement conservatoire', true); }
-}
-
-function updateConservMembres() {
-  const kourelId = document.getElementById('cv-kourel')?.value;
-  const membres  = kourelId ? cacheMembres.filter(m => (m.kourel?._id || m.kourel) === kourelId) : [];
-  document.getElementById('cv-membres-select').innerHTML = membres.length
-    ? membres.map(m => `
-        <label style="display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;border-bottom:1px solid var(--border)">
-          <input type="checkbox" value="${m._id}" style="width:16px;height:16px;accent-color:var(--green)" />
-          <span style="font-size:13px;font-weight:700">${escHtml(m.prenom + ' ' + m.nom)}</span>
-        </label>`).join('')
-    : '<div style="padding:14px;color:var(--text-light);font-size:13px">Aucun membre dans ce Kourel</div>';
-}
-
-async function addConservatoire() {
-  const kourel = document.getElementById('cv-kourel').value;
-  const nom    = document.getElementById('cv-nom').value.trim();
-  if (!kourel || !nom) { showNotif('Kourel et nom obligatoires', true); return; }
-  const membres = [...document.querySelectorAll('#cv-membres-select input:checked')].map(i => i.value);
-  try {
-    await api('POST', '/conservatoire', { nom, kourel, membres });
-    document.getElementById('cv-nom').value = '';
-    toggleForm('form-conservatoire');
-    await renderConservatoires();
-    showNotif('Groupe créé !');
-  } catch(e) { showNotif(e.message, true); }
-}
-
-async function deleteConservatoire(id) {
-  if (!confirm('Supprimer ce groupe ?')) return;
-  try {
-    await api('DELETE', '/conservatoire/' + id);
-    await renderConservatoires();
-    showNotif('Groupe supprimé ✅');
-  } catch(e) { showNotif(e.message, true); }
-}
-
-// ══════════════════════════════════════════════════════════════
-// PROGRAMMES
-// ══════════════════════════════════════════════════════════════
-async function renderProgrammes() {
-  try {
-    const progs = await api('GET', '/programmes');
-    document.getElementById('programmes-list').innerHTML = progs.length
-      ? progs.map(p => `
+// ── PROGRAMMES ───────────────────────────────────────────
+async function renderProgrammes(){
+  try{
+    const progs=await api('GET','/programmes');
+    document.getElementById('stat-conserv').textContent=progs.length;
+    document.getElementById('programmes-list').innerHTML=progs.length
+      ?progs.map(p=>`
           <div class="programme-card">
             <div style="display:flex;justify-content:space-between;align-items:flex-start">
               <div>
-                <span class="jour-badge">${escHtml(p.jour || '—')}</span>
-                <h3 style="font-size:16px;font-weight:900;margin-top:8px">${escHtml(p.xassida)}</h3>
-                <div style="font-size:12px;color:var(--text-light)">${escHtml(p.kourel?.nom || '—')}</div>
+                <span class="jour-badge">${escHtml(p.jour||'—')}</span>
+                <h3 style="font-size:15px;font-weight:900;margin-top:6px">${escHtml(p.xassida)}</h3>
+                <div style="font-size:11px;color:var(--text-light)">${escHtml(p.kourel?.nom||'—')}</div>
               </div>
               <button class="btn btn-danger" onclick="deleteProgramme('${p._id}')">🗑</button>
             </div>
             <div class="prog-info-grid">
-              ${p.lieu ? `<div class="prog-info-item"><div class="prog-info-label">Lieu</div><div class="prog-info-value">${escHtml(p.lieu)}</div></div>` : ''}
-              ${p.heure ? `<div class="prog-info-item"><div class="prog-info-label">Heure</div><div class="prog-info-value">${escHtml(p.heure)}</div></div>` : ''}
-              ${p.responsable ? `<div class="prog-info-item"><div class="prog-info-label">Responsable</div><div class="prog-info-value">${escHtml(p.responsable)}</div></div>` : ''}
-              <div class="prog-info-item"><div class="prog-info-label">Tolérance</div><div class="prog-info-value">${p.tolerance || 0} min</div></div>
+              ${p.lieu?`<div class="prog-info-item"><div class="prog-info-label">Lieu</div><div class="prog-info-value">${escHtml(p.lieu)}</div></div>`:''}
+              ${p.heure?`<div class="prog-info-item"><div class="prog-info-label">Heure</div><div class="prog-info-value">${escHtml(p.heure)}</div></div>`:''}
+              ${p.responsable?`<div class="prog-info-item"><div class="prog-info-label">Responsable</div><div class="prog-info-value">${escHtml(p.responsable)}</div></div>`:''}
+              <div class="prog-info-item"><div class="prog-info-label">Tolérance</div><div class="prog-info-value">${p.tolerance||0} min</div></div>
             </div>
-            ${p.notes ? `<div style="margin-top:10px;font-size:12px;color:var(--text-light)">${escHtml(p.notes)}</div>` : ''}
+            ${p.audio?`<div style="margin-top:10px"><div class="audio-player"><span class="audio-label">🎵 Son réf.</span><audio controls src="${p.audio}" style="flex:1;height:30px"></audio></div></div>`:''}
+            ${p.notes?`<div style="margin-top:8px;font-size:11px;color:var(--text-light)">${escHtml(p.notes)}</div>`:''}
           </div>`).join('')
-      : '<p style="color:var(--text-light)">Aucun programme.</p>';
-  } catch(e) { showNotif('Erreur chargement programmes', true); }
+      :'<p style="color:var(--text-light);font-size:13px">Aucun programme.</p>';
+  }catch(e){showNotif('Erreur chargement programmes',true);}
 }
-
-async function addProgramme() {
-  const kourel  = document.getElementById('pr-kourel').value;
-  const xassida = document.getElementById('pr-xassida').value.trim();
-  if (!kourel || !xassida) { showNotif('Kourel et Xassida obligatoires', true); return; }
-  try {
-    await api('POST', '/programmes', {
-      kourel, xassida,
-      lieu:        document.getElementById('pr-lieu').value.trim(),
-      responsable: document.getElementById('pr-responsable').value.trim(),
-      jour:        document.getElementById('pr-jour').value,
-      heure:       document.getElementById('pr-heure').value,
-      tolerance:   parseInt(document.getElementById('pr-tolerance').value) || 0,
-      notes:       document.getElementById('pr-notes').value.trim()
+function handleAudioUpload(event){
+  const file=event.target.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    currentAudioDataUrl=e.target.result;
+    const preview=document.getElementById('pr-audio-preview');
+    preview.style.display='block';
+    preview.innerHTML=`<div class="audio-player"><span class="audio-label">🎵 ${escHtml(file.name)}</span><audio controls src="${e.target.result}" style="flex:1;height:30px"></audio></div>`;
+  };
+  reader.readAsDataURL(file);
+}
+async function addProgramme(){
+  const kourel=document.getElementById('pr-kourel').value;
+  const xassida=document.getElementById('pr-xassida').value.trim();
+  if(!kourel||!xassida){showNotif('Kourel et Xassida obligatoires',true);return;}
+  try{
+    await api('POST','/programmes',{
+      kourel,xassida,
+      lieu:document.getElementById('pr-lieu').value.trim(),
+      responsable:document.getElementById('pr-responsable').value.trim(),
+      jour:document.getElementById('pr-jour').value,
+      heure:document.getElementById('pr-heure').value,
+      tolerance:parseInt(document.getElementById('pr-tolerance').value)||0,
+      notes:document.getElementById('pr-notes').value.trim(),
+      audio:currentAudioDataUrl||undefined
     });
-    ['pr-xassida','pr-lieu','pr-responsable','pr-notes','pr-heure'].forEach(id => document.getElementById(id).value = '');
+    currentAudioDataUrl=null;
+    document.getElementById('pr-audio-preview').style.display='none';
     toggleForm('form-programme');
     await renderProgrammes();
-    showNotif('Programme enregistré !');
-  } catch(e) { showNotif(e.message, true); }
+    showNotif('Programme ajouté !');
+  }catch(e){showNotif(e.message,true);}
+}
+async function deleteProgramme(id){
+  if(!confirm('Supprimer ce programme ?'))return;
+  try{await api('DELETE','/programmes/'+id);await renderProgrammes();showNotif('Programme supprimé ✅');}
+  catch(e){showNotif(e.message,true);}
 }
 
-async function deleteProgramme(id) {
-  if (!confirm('Supprimer ce programme ?')) return;
-  try {
-    await api('DELETE', '/programmes/' + id);
-    await renderProgrammes();
-    showNotif('Programme supprimé ✅');
-  } catch(e) { showNotif(e.message, true); }
-}
-
-// ══════════════════════════════════════════════════════════════
-// PRESENCES
-// ══════════════════════════════════════════════════════════════
-function loadMembresForPresence() {
-  const kourelId = document.getElementById('p-kourel').value;
-  const membres  = cacheMembres.filter(m => (m.kourel?._id || m.kourel) === kourelId);
-  presenceStatuts = {};
-  document.getElementById('p-membres-list').innerHTML = membres.length
-    ? `<div style="background:#fff;border-radius:12px;border:1.5px solid var(--border);overflow:hidden">
-        ${membres.map(m => `
+// ── PRESENCES ────────────────────────────────────────────
+function loadMembresForPresence(){
+  const kourelId=document.getElementById('p-kourel').value;
+  const membres=cacheMembres.filter(m=>(m.kourel?._id||m.kourel)===kourelId);
+  presenceStatuts={};
+  document.getElementById('p-membres-list').innerHTML=membres.length
+    ?`<div style="background:#fff;border-radius:10px;border:1.5px solid var(--border);overflow:hidden">
+        ${membres.map(m=>`
           <div class="membre-presence-row" id="row-${m._id}">
-            <div class="membre-presence-name">${escHtml(m.prenom + ' ' + m.nom)}</div>
+            <div class="membre-presence-name">${escHtml(m.prenom+' '+m.nom)}</div>
             <div class="status-group">
-              <button class="status-btn present" onclick="setPresStatus('${m._id}','Présent',this)">✓ Présent</button>
-              <button class="status-btn retard"  onclick="setPresStatus('${m._id}','Retard',this)">⏱ Retard</button>
-              <button class="status-btn absent"  onclick="setPresStatus('${m._id}','Absent',this)">✗ Absent</button>
+              <button class="status-btn present" onclick="setPresStatus('${m._id}','Présent',this)">✓</button>
+              <button class="status-btn retard" onclick="setPresStatus('${m._id}','Retard',this)">⏱</button>
+              <button class="status-btn absent" onclick="setPresStatus('${m._id}','Absent',this)">✗</button>
             </div>
           </div>`).join('')}
       </div>`
-    : '<p style="color:var(--text-light);font-size:13px">Aucun membre dans ce Kourel</p>';
+    :'<p style="color:var(--text-light);font-size:12px">Aucun membre dans ce Kourel</p>';
 }
-
-function setPresStatus(membreId, statut, btn) {
-  const row = document.getElementById('row-' + membreId);
-  row.querySelectorAll('.status-btn').forEach(b => b.classList.remove('selected'));
+function setPresStatus(membreId,statut,btn){
+  document.getElementById('row-'+membreId).querySelectorAll('.status-btn').forEach(b=>b.classList.remove('selected'));
   btn.classList.add('selected');
-  presenceStatuts[membreId] = statut;
+  presenceStatuts[membreId]=statut;
 }
-
-async function savePresenceSession() {
-  const date   = document.getElementById('p-date').value;
-  const kourel = document.getElementById('p-kourel').value;
-  if (!date || !kourel) { showNotif('Date et Kourel obligatoires', true); return; }
-  const membres = cacheMembres
-    .filter(m => (m.kourel?._id || m.kourel) === kourel)
-    .map(m => ({ membre: m._id, statut: presenceStatuts[m._id] || 'Absent' }));
-  try {
-    await api('POST', '/presences', {
-      kourel, date,
-      type: document.getElementById('p-type').value,
-      lieu: document.getElementById('p-lieu').value.trim(),
-      membres
-    });
-    presenceStatuts = {};
-    ['p-date','p-lieu'].forEach(id => document.getElementById(id).value = '');
-    document.getElementById('p-membres-list').innerHTML = '';
+async function savePresenceSession(){
+  const date=document.getElementById('p-date').value;
+  const kourel=document.getElementById('p-kourel').value;
+  if(!date||!kourel){showNotif('Date et Kourel obligatoires',true);return;}
+  const membres=cacheMembres.filter(m=>(m.kourel?._id||m.kourel)===kourel).map(m=>({membre:m._id,statut:presenceStatuts[m._id]||'Absent'}));
+  try{
+    await api('POST','/presences',{kourel,date,type:document.getElementById('p-type').value,lieu:document.getElementById('p-lieu').value.trim(),membres});
+    presenceStatuts={};
+    ['p-date','p-lieu'].forEach(id=>document.getElementById(id).value='');
+    document.getElementById('p-membres-list').innerHTML='';
     toggleForm('form-presence');
     await renderPresences();
     showNotif('Session enregistrée !');
-  } catch(e) { showNotif(e.message, true); }
+  }catch(e){showNotif(e.message,true);}
 }
-
-async function renderPresences() {
-  try {
-    const sessions = await api('GET', '/presences');
-    document.getElementById('stat-presence').textContent = sessions.length;
-    document.getElementById('presences-list').innerHTML = sessions.length
-      ? sessions.map(p => {
-          const presents = p.membres.filter(m => m.statut === 'Présent').length;
-          const retards  = p.membres.filter(m => m.statut === 'Retard').length;
-          const absents  = p.membres.filter(m => m.statut === 'Absent').length;
-          const total    = p.membres.length;
-          const pct      = total ? Math.round((presents + retards) / total * 100) : 0;
-          return `
-          <div class="presence-session-card">
+async function renderPresences(){
+  try{
+    const sessions=await api('GET','/presences');
+    document.getElementById('stat-presence').textContent=sessions.length;
+    document.getElementById('presences-list').innerHTML=sessions.length
+      ?sessions.map(p=>{
+          const presents=p.membres.filter(m=>m.statut==='Présent').length;
+          const retards=p.membres.filter(m=>m.statut==='Retard').length;
+          const absents=p.membres.filter(m=>m.statut==='Absent').length;
+          const total=p.membres.length;
+          const pct=total?Math.round((presents+retards)/total*100):0;
+          return `<div class="presence-session-card">
             <div class="presence-session-header">
               <div>
-                <div class="presence-session-title">${escHtml(p.type)} — ${escHtml(p.kourel?.nom || '—')}</div>
-                <div class="presence-session-meta">${escHtml(new Date(p.date).toLocaleDateString('fr-FR'))}${p.lieu ? ' · ' + escHtml(p.lieu) : ''}</div>
+                <div class="presence-session-title">${escHtml(p.type)} — ${escHtml(p.kourel?.nom||'—')}</div>
+                <div class="presence-session-meta">${escHtml(new Date(p.date).toLocaleDateString('fr-FR'))}${p.lieu?' · '+escHtml(p.lieu):''}</div>
               </div>
-              <div style="font-size:24px;font-weight:900">${pct}%</div>
+              <div style="display:flex;align-items:center;gap:10px">
+                <div style="font-size:22px;font-weight:900">${pct}%</div>
+                <button class="btn btn-danger" onclick="supprimerSession('${p._id}')">🗑</button>
+              </div>
             </div>
             <div class="presence-stats-row">
               <div class="pstat"><div class="pstat-dot pstat-present"></div>${presents} Présents</div>
               <div class="pstat"><div class="pstat-dot pstat-retard"></div>${retards} Retards</div>
-              <div class="pstat"><div class="pstat-dot pstat-absent"></div>${absents} Absents</div>
+              <div class="pstat"><div class="pstat-dot pstat-absent"></div${absents} Absents</div>
             </div>
+            <div>${p.membres.map(m=>{
+              let ss='',si='';
+              if(m.statut==='Présent'){ss='color:#166534;background:#dcfce7';si='✓';}
+              else if(m.statut==='Retard'){ss='color:#92400e;background:#fef3c7';si='⏱';}
+              else{ss='color:#991b1b;background:#fee2e2';si='✗';}
+              return `<div class="membre-presence-row"><div class="membre-presence-name">${escHtml((m.membre?.prenom||'')+(m.membre?.nom?' '+m.membre.nom:''))}</div><span style="padding:3px 10px;border-radius:99px;font-size:11px;font-weight:800;${ss}">${si} ${escHtml(m.statut)}</span></div>`;
+            }).join('')}</div>
           </div>`;
         }).join('')
-      : '<p style="color:var(--text-light)">Aucune session.</p>';
-  } catch(e) { showNotif('Erreur chargement présences', true); }
+      :'<p style="color:var(--text-light);font-size:13px">Aucune session.</p>';
+  }catch(e){showNotif('Erreur chargement présences',true);}
+}
+async function supprimerSession(id){
+  if(!confirm('Supprimer cette session ?'))return;
+  try{await api('DELETE','/presences/'+id);await renderPresences();showNotif('Session supprimée ✅');}
+  catch(e){showNotif(e.message,true);}
 }
 
-// ══════════════════════════════════════════════════════════════
-// COTISATIONS
-// ══════════════════════════════════════════════════════════════
-async function renderCotisations() {
-  try {
-    const cots    = await api('GET', '/adiyeu');
-    const payees  = cots.filter(c => c.statut === 'Payé');
-    const attente = cots.filter(c => c.statut !== 'Payé');
-    const total   = payees.reduce((s, c) => s + (c.montant || 0), 0);
-    document.getElementById('cot-total').textContent   = total.toLocaleString() + ' F';
-    document.getElementById('cot-payees').textContent  = payees.length;
-    document.getElementById('cot-attente').textContent = attente.length;
-    document.getElementById('cotisations-body').innerHTML = cots.length
-      ? cots.map(c => `
-          <tr>
-            <td><strong>${escHtml((c.membre?.prenom || '') + ' ' + (c.membre?.nom || ''))}</strong></td>
-            <td>${escHtml(c.kourel?.nom || '—')}</td>
-            <td>${(c.montant || 0).toLocaleString()} F</td>
-            <td>${escHtml(c.date ? new Date(c.date).toLocaleDateString('fr-FR') : '—')}</td>
-            <td>${badge(c.statut)}</td>
-            <td>${c.statut !== 'Payé' ? `<button class="btn btn-success" onclick="payerCotisation('${c._id}')">✓ Payer</button>` : ''}</td>
-          </tr>`).join('')
-      : '<tr><td colspan="6" style="text-align:center;color:var(--text-light);padding:24px">Aucune cotisation</td></tr>';
-  } catch(e) { /* silencieux si pas de route */ }
-}
-
-async function payerCotisation(id) {
-  try {
-    await api('PUT', '/adiyeu/' + id, { statut: 'Payé', date: new Date().toISOString().split('T')[0] });
+// ── COTISATIONS ──────────────────────────────────────────
+async function addAdiyeu(){
+  const membre=document.getElementById('a-membre').value;
+  const kourel=document.getElementById('a-kourel').value;
+  const montant=parseFloat(document.getElementById('a-montant').value);
+  const programme=document.getElementById('a-programme').value.trim();
+  if(!membre||!kourel||!montant){showNotif('Membre, Kourel et Montant obligatoires',true);return;}
+  try{
+    await api('POST','/adiyeu',{membre,kourel,montant,programme,statut:'En attente'});
+    ['a-montant','a-programme'].forEach(id=>document.getElementById(id).value='');
+    toggleForm('form-adiyeu');
     await renderCotisations();
-    showNotif('Cotisation payée ✅');
-  } catch(e) { showNotif(e.message, true); }
+    showNotif('Cotisation créée !');
+  }catch(e){showNotif(e.message,true);}
+}
+async function renderCotisations(){
+  try{
+    const cots=await api('GET','/adiyeu');
+    const payees=cots.filter(c=>c.statut==='Payé');
+    const attente=cots.filter(c=>c.statut!=='Payé');
+    const total=payees.reduce((s,c)=>s+(c.montant||0),0);
+    document.getElementById('cot-total').textContent=total.toLocaleString()+' F';
+    document.getElementById('cot-payees').textContent=payees.length;
+    document.getElementById('cot-attente').textContent=attente.length;
+    document.getElementById('cotisations-body').innerHTML=cots.length
+      ?cots.map(c=>`
+          <tr>
+            <td><strong>${escHtml((c.membre?.prenom||'')+' '+(c.membre?.nom||''))}</strong></td>
+            <td>${(c.montant||0).toLocaleString()} F</td>
+            <td>${badge(c.statut)}</td>
+            <td>${c.statut!=='Payé'?`<button class="btn btn-success" onclick="payerCotisation('${c._id}')">✓</button>`:''}</td>
+          </tr>`).join('')
+      :'<tr><td colspan="4" style="text-align:center;color:var(--text-light);padding:18px">Aucune cotisation</td></tr>';
+  }catch(e){}
+}
+async function payerCotisation(id){
+  try{await api('PUT','/adiyeu/'+id,{statut:'Payé',date:new Date().toISOString().split('T')[0]});await renderCotisations();showNotif('Cotisation payée ✅');}
+  catch(e){showNotif(e.message,true);}
 }
 
-// ══════════════════════════════════════════════════════════════
-// MESSAGERIE
-// ══════════════════════════════════════════════════════════════
-function renderChatSidebar() {
-  const list = document.getElementById('chat-room-list');
-  if (!list) return;
-  list.innerHTML = cacheKourels.map(k => `
-    <div class="chat-room-item${activeChatRoom === k._id ? ' active' : ''}" onclick="openChatRoom('${k._id}','${escHtml(k.nom)}')">
-      <div class="room-icon">👥</div>
-      <div>
-        <div class="room-name">${escHtml(k.nom)}</div>
-        <div class="room-desc">Groupe Kourel</div>
-      </div>
-    </div>`).join('') || '<div style="padding:16px;font-size:12px;color:var(--text-light)">Aucun groupe</div>';
+// ── CHAT ─────────────────────────────────────────────────
+function toggleMsgMenu(id){
+  const menu=document.getElementById(id);
+  document.querySelectorAll('.msg-menu-dropdown').forEach(m=>{if(m.id!==id)m.style.display='none';});
+  menu.style.display=menu.style.display==='none'?'block':'none';
+}
+document.addEventListener('click',function(e){
+  if(!e.target.classList.contains('msg-menu-btn'))
+    document.querySelectorAll('.msg-menu-dropdown').forEach(m=>m.style.display='none');
+});
+async function deleteMsg(msgId,kourelId,nom){
+  if(!confirm('Supprimer ce message ?'))return;
+  try{await api('DELETE','/messages/'+msgId);await openKourelDetail(kourelId,nom);showNotif('Message supprimé ✅');}
+  catch(e){showNotif(e.message,true);}
+}
+function startVocal(kourelId,nom){
+  const btn=document.getElementById('btn-vocal');
+  if(!isRecording){
+    navigator.mediaDevices.getUserMedia({audio:true})
+      .then(stream=>{
+        const options=MediaRecorder.isTypeSupported('audio/webm;codecs=opus')
+          ?{mimeType:'audio/webm;codecs=opus',audioBitsPerSecond:32000}:{audioBitsPerSecond:32000};
+        mediaRecorder=new MediaRecorder(stream,options);
+        audioChunks=[];
+        mediaRecorder.ondataavailable=e=>audioChunks.push(e.data);
+        mediaRecorder.onstop=async()=>{
+          const blob=new Blob(audioChunks,{type:'audio/webm'});
+          const reader=new FileReader();
+          reader.onload=async e=>{
+            try{await api('POST','/messages',{kourel:kourelId,texte:e.target.result,type:'audio'});await openKourelDetail(kourelId,nom);}
+            catch(err){showNotif('Erreur envoi audio',true);}
+          };
+          reader.readAsDataURL(blob);
+          stream.getTracks().forEach(t=>t.stop());
+        };
+        mediaRecorder.start();isRecording=true;
+        if(btn){btn.style.background='linear-gradient(135deg,#16a34a,#15803d)';btn.textContent='⏹';}
+        showNotif('Enregistrement… ⏹ pour arrêter');
+        setTimeout(()=>{if(isRecording&&mediaRecorder){mediaRecorder.stop();isRecording=false;if(btn){btn.style.background='linear-gradient(135deg,#dc2626,#991b1b)';btn.textContent='🎤';}}},30000);
+      })
+      .catch(()=>showNotif('Microphone non disponible',true));
+  }else{
+    mediaRecorder.stop();isRecording=false;
+    if(btn){btn.style.background='linear-gradient(135deg,#dc2626,#991b1b)';btn.textContent='🎤';}
+  }
+}
+async function sendMsg(kourelId,nom){
+  const input=document.getElementById('chat-input-field');
+  const texte=input?.value.trim();if(!texte)return;
+  try{await api('POST','/messages',{kourel:kourelId,texte});input.value='';await openKourelDetail(kourelId,nom);}
+  catch(e){showNotif('Erreur envoi message',true);}
+}
+async function sendFileMsg(event,kourelId,nom){
+  const file=event.target.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=async e=>{
+    const type=file.type.startsWith('audio')?'audio':'image';
+    try{await api('POST','/messages',{kourel:kourelId,texte:e.target.result,type});await openKourelDetail(kourelId,nom);}
+    catch(err){showNotif('Fichier trop grand',true);}
+  };
+  reader.readAsDataURL(file);
+  event.target.value='';
 }
 
-async function openChatRoom(kourelId, nom) {
-  activeChatRoom = kourelId;
-  renderChatSidebar();
-  try {
-    const msgs = await api('GET', '/messages/' + kourelId);
-    const main = document.getElementById('chat-main');
-    main.innerHTML = `
-      <div class="chat-main-header">
-        <div class="chat-main-icon">👥</div>
-        <div><div class="chat-main-title">${escHtml(nom)}</div></div>
-      </div>
-      <div class="chat-messages" id="chat-msgs-area">
-        ${msgs.length ? msgs.map(m => {
-          const isMine = m.auteur?._id === currentUser?.id;
-          return `<div style="display:flex;flex-direction:column;align-items:${isMine ? 'flex-end' : 'flex-start'}">
-            <div class="msg-bubble ${isMine ? 'msg-mine' : 'msg-other'}">
-              ${!isMine ? `<div class="msg-sender">${escHtml(m.auteur?.prenom || m.auteur?.nom || '')}</div>` : ''}
-              ${escHtml(m.texte)}
-              <div class="msg-time">${new Date(m.createdAt).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}</div>
-            </div></div>`;
-        }).join('') : '<div class="chat-empty"><div class="ce-icon">💬</div><p>Aucun message — soyez le premier !</p></div>'}
-      </div>
-      <div class="chat-input-bar">
-        <textarea id="chat-input-field" placeholder="Écrire un message…" rows="1"
-          onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMsg('${kourelId}')}"></textarea>
-        <button class="chat-send-btn" onclick="sendMsg('${kourelId}')">➤</button>
-      </div>`;
-    setTimeout(() => { const el = document.getElementById('chat-msgs-area'); if (el) el.scrollTop = el.scrollHeight; }, 50);
-  } catch(e) { showNotif('Erreur chargement messages', true); }
-}
-
-async function sendMsg(kourelId) {
-  const input = document.getElementById('chat-input-field');
-  const texte = input?.value.trim();
-  if (!texte) return;
-  try {
-    await api('POST', '/messages', { kourel: kourelId, texte });
-    input.value = '';
-    const nom = cacheKourels.find(k => k._id === kourelId)?.nom || '';
-    await openChatRoom(kourelId, nom);
-  } catch(e) { showNotif('Erreur envoi message', true); }
-}
-
-// ══════════════════════════════════════════════════════════════
-// RAPPORTS
-// ══════════════════════════════════════════════════════════════
-function renderRapports() {
-  document.getElementById('rapport-stats').innerHTML = `
+// ── RAPPORTS ─────────────────────────────────────────────
+function renderRapports(){
+  document.getElementById('rapport-stats').innerHTML=`
     <div class="stat-card" style="background:var(--green)"><div class="stat-value">${cacheKourels.length}</div><div class="stat-label">Kourels</div></div>
     <div class="stat-card" style="background:var(--blue)"><div class="stat-value">${cacheMembres.length}</div><div class="stat-label">Membres</div></div>
-    <div class="stat-card" style="background:var(--orange)"><div class="stat-value">${cacheMembres.filter(m => m.statut === 'Actif').length}</div><div class="stat-label">Membres actifs</div></div>
+    <div class="stat-card" style="background:var(--orange)"><div class="stat-value">${cacheMembres.filter(m=>m.statut==='Actif').length}</div><div class="stat-label">Actifs</div></div>
     <div class="stat-card" style="background:var(--purple)"><div class="stat-value">${cacheKourels.length}</div><div class="stat-label">Groupes</div></div>`;
-  document.getElementById('rapport-kourels').innerHTML = cacheKourels.map(k => {
-    const nb  = cacheMembres.filter(m => (m.kourel?._id || m.kourel) === k._id).length;
-    const pct = cacheMembres.length ? Math.round(nb / cacheMembres.length * 100) : 0;
-    return `<div style="margin-bottom:12px">
-      <div style="display:flex;justify-content:space-between;margin-bottom:5px">
+  document.getElementById('rapport-kourels').innerHTML=cacheKourels.map(k=>{
+    const nb=cacheMembres.filter(m=>(m.kourel?._id||m.kourel)===k._id).length;
+    const pct=cacheMembres.length?Math.round(nb/cacheMembres.length*100):0;
+    return `<div style="margin-bottom:10px">
+      <div style="display:flex;justify-content:space-between;margin-bottom:4px">
         <span style="font-size:12px;font-weight:700">${escHtml(k.nom)}</span>
-        <span style="font-size:12px;color:var(--text-light)">${nb} membres</span>
+        <span style="font-size:11px;color:var(--text-light)">${nb} membres</span>
       </div>
       <div class="rapport-bar-wrap"><div class="rapport-bar" style="width:${pct}%;background:var(--green)"></div></div>
     </div>`;
-  }).join('') || '<p style="color:var(--text-light);font-size:12px">Aucun Kourel</p>';
-  document.getElementById('rapport-types').innerHTML = `
-    <div style="padding:9px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between"><span style="font-weight:700">Kourels</span><span>${cacheKourels.length}</span></div>
-    <div style="padding:9px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between"><span style="font-weight:700">Membres</span><span>${cacheMembres.length}</span></div>`;
+  }).join('')||'<p style="color:var(--text-light);font-size:12px">Aucun Kourel</p>';
+  document.getElementById('rapport-types').innerHTML=`
+    <div style="padding:8px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;font-size:13px"><span style="font-weight:700">Total Kourels</span><span>${cacheKourels.length}</span></div>
+    <div style="padding:8px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;font-size:13px"><span style="font-weight:700">Total Membres</span><span>${cacheMembres.length}</span></div>
+    <div style="padding:8px 0;display:flex;justify-content:space-between;font-size:13px"><span style="font-weight:700">Membres actifs</span><span>${cacheMembres.filter(m=>m.statut==='Actif').length}</span></div>`;
 }
 
-// ══════════════════════════════════════════════════════════════
-// INIT — auto-login si token existant en localStorage
-// ══════════════════════════════════════════════════════════════
-window.addEventListener('DOMContentLoaded', () => {
-  if (token && currentDaara) {
-    // Vérifier que le token est encore valide
-    api('GET', '/kourels')
-      .then(() => launchApp())
-      .catch(() => {
-        // Token expiré — on nettoie
-        localStorage.removeItem('dc_token');
-        localStorage.removeItem('dc_user');
-        localStorage.removeItem('dc_daara');
-        token = ''; currentUser = null; currentDaara = null;
+// ── INIT ─────────────────────────────────────────────────
+window.addEventListener('DOMContentLoaded',()=>{
+  if(token&&currentDaara){
+    api('GET','/kourels')
+      .then(()=>launchApp())
+      .catch(()=>{
+        localStorage.removeItem('dc_token');localStorage.removeItem('dc_user');localStorage.removeItem('dc_daara');
+        token='';currentUser=null;currentDaara=null;
       });
   }
 });
