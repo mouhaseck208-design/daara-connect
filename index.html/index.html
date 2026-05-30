@@ -232,42 +232,89 @@
       border-radius:99px;padding:4px 10px;font-size:11px;font-weight:700;
       color:var(--green-dark);margin:2px}
 
-    /* ── KOUREL DETAIL / CHAT ── */
-    #kourels-layout{display:flex;gap:14px;height:calc(100vh - var(--header-h) - var(--nav-h) - 100px)}
-    #kourels-left-col{width:220px;flex-shrink:0;background:var(--card);border-radius:16px;
-      box-shadow:var(--shadow);display:flex;flex-direction:column;overflow:hidden}
-    .chat-main{flex:1;background:var(--card);border-radius:16px;box-shadow:var(--shadow);
-      display:flex;flex-direction:column;overflow:hidden}
-    .chat-locked-overlay{flex:1;display:flex;flex-direction:column;align-items:center;
-      justify-content:center;background:#f4faf4}
-    .chat-locked-overlay .lock-big{font-size:44px;margin-bottom:12px}
-    .chat-locked-overlay h3{font-size:15px;font-weight:800;color:var(--text);margin-bottom:6px}
-    .chat-locked-overlay p{font-size:12px;color:var(--text-light);text-align:center;max-width:240px}
-    .chat-room-item{padding:12px 14px;cursor:pointer;border-bottom:1px solid var(--border);
-      display:flex;align-items:center;gap:8px;transition:background .15s}
-    .chat-room-item:active{background:#f4faf4}
-    .chat-room-item.active{background:var(--green-muted)}
-    .room-icon{width:34px;height:34px;border-radius:9px;
+    /* ── KOUREL LIST ── */
+    #kourels-layout{display:block}
+    .chat-room-item{padding:14px 16px;cursor:pointer;border-bottom:1px solid var(--border);
+      display:flex;align-items:center;gap:12px;transition:background .15s;background:var(--card)}
+    .chat-room-item:active{background:var(--green-muted)}
+    .room-icon{width:42px;height:42px;border-radius:12px;
       background:linear-gradient(135deg,var(--green-dark),var(--green));
-      display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
-    .room-name{font-size:12px;font-weight:700}
-    .room-desc{font-size:10px;color:var(--text-light);margin-top:1px}
-    .kourel-detail{display:flex;flex-direction:column;height:100%}
-    .kourel-detail-header{background:linear-gradient(135deg,var(--green-dark),var(--green));
-      padding:12px 16px;color:#fff;display:flex;align-items:center;gap:10px}
-    .kourel-members-panel{background:#fff;border-bottom:1px solid var(--border);
-      padding:10px 14px;max-height:110px;overflow-y:auto}
+      display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+    .room-name{font-size:14px;font-weight:800}
+    .room-desc{font-size:11px;color:var(--text-light);margin-top:2px}
+    .room-arrow{font-size:16px;color:var(--text-light);flex-shrink:0}
+
+    /* ── CHAT FULLSCREEN ── */
+    #chat-fullscreen{
+      position:fixed;inset:0;z-index:150;
+      display:none;flex-direction:column;
+      background:var(--bg);
+    }
+    #chat-fullscreen.open{display:flex}
+
+    /* Header du chat fullscreen */
+    .chat-fs-header{
+      background:linear-gradient(135deg,var(--green-dark),var(--green));
+      color:#fff;padding:0 14px;
+      height:var(--header-h);
+      display:flex;align-items:center;gap:10px;
+      flex-shrink:0;position:relative;
+    }
+    .chat-fs-back{background:rgba(255,255,255,.18);border:none;color:#fff;
+      width:36px;height:36px;border-radius:10px;font-size:18px;
+      cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .chat-fs-title{flex:1;min-width:0}
+    .chat-fs-title-name{font-size:15px;font-weight:800;
+      white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .chat-fs-title-sub{font-size:11px;opacity:.8}
+    .chat-fs-menu-btn{background:rgba(255,255,255,.18);border:none;color:#fff;
+      width:36px;height:36px;border-radius:10px;font-size:20px;font-weight:900;
+      cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+
+    /* Dropdown du ⋮ dans le header chat */
+    .chat-header-dropdown{
+      display:none;position:absolute;right:14px;top:calc(var(--header-h) - 2px);
+      background:#fff;border-radius:12px;
+      box-shadow:0 8px 28px rgba(0,0,0,.22);z-index:200;min-width:200px;overflow:hidden;
+    }
+    .chat-header-dropdown.open{display:block}
+    .chd-item{padding:14px 18px;font-size:14px;font-weight:700;color:var(--text);
+      cursor:pointer;display:flex;align-items:center;gap:12px;
+      border-bottom:1px solid var(--border)}
+    .chd-item:last-child{border-bottom:none}
+    .chd-item:active{background:var(--green-muted)}
+    .chd-item-danger{color:#991b1b}
+    .chd-item-danger:active{background:#fee2e2}
+
+    /* Panel Membres/Présences inline dans le chat */
+    .chat-side-panel{
+      background:#fff;border-bottom:2px solid var(--border);
+      max-height:0;overflow:hidden;
+      transition:max-height .3s ease;
+    }
+    .chat-side-panel.open{max-height:400px;overflow-y:auto}
+    .chat-side-panel-header{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:10px 16px;background:var(--green-muted);
+      border-bottom:1px solid var(--border);
+    }
+    .chat-side-panel-title{font-size:12px;font-weight:800;
+      text-transform:uppercase;letter-spacing:.8px;color:var(--green-dark)}
+    .chat-side-panel-close{background:none;border:none;font-size:18px;
+      cursor:pointer;color:var(--text-light);padding:0}
+
+    /* Messages */
     .chat-messages{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;
       gap:8px;background:#e5ddd5;-webkit-overflow-scrolling:touch}
     .chat-empty{text-align:center;padding:30px;color:var(--text-light)}
-    .msg-bubble{max-width:80%;padding:9px 12px;border-radius:14px;font-size:13px;line-height:1.5}
+    .msg-bubble{max-width:82%;padding:9px 12px;border-radius:14px;font-size:13px;line-height:1.5}
     .msg-mine{background:#dcf8c6;color:var(--text);border-bottom-right-radius:4px;align-self:flex-end}
     .msg-other{background:#fff;color:var(--text);border:1px solid var(--border);
       border-bottom-left-radius:4px;align-self:flex-start}
     .msg-sender{font-size:10px;font-weight:800;color:var(--green-dark);margin-bottom:3px}
     .msg-time{font-size:10px;color:#999;margin-top:2px;text-align:right}
     .chat-input-bar{padding:8px 10px;border-top:1px solid var(--border);display:flex;
-      gap:6px;align-items:flex-end;background:#f0f0f0;
+      gap:6px;align-items:flex-end;background:#f0f0f0;flex-shrink:0;
       padding-bottom:max(8px, env(safe-area-inset-bottom))}
     .chat-input-bar textarea{flex:1;resize:none;max-height:80px;padding:9px 12px;
       border-radius:20px;border:none;font-size:14px;
@@ -281,6 +328,7 @@
       color:var(--green-dark);font-size:20px;cursor:pointer;flex-shrink:0;
       display:flex;align-items:center;justify-content:center;
       box-shadow:0 1px 3px rgba(0,0,0,.1)}
+    /* Menu message ⋮ */
     .msg-menu-btn{background:none;border:none;cursor:pointer;font-size:15px;
       color:#999;padding:0 2px;line-height:1}
     .msg-menu-dropdown{display:none;position:absolute;right:0;top:20px;background:#fff;
@@ -289,6 +337,13 @@
     .menu-item-delete{padding:10px 14px;font-size:13px;font-weight:700;color:#991b1b;
       cursor:pointer;display:flex;align-items:center;gap:6px}
     .menu-item-delete:active{background:#fee2e2}
+    /* Presence inline */
+    .presence-inline-row{display:flex;align-items:center;padding:10px 16px;
+      border-bottom:1px solid var(--border);gap:10px;flex-wrap:wrap}
+    .presence-inline-row:last-child{border-bottom:none}
+    .member-chip{display:inline-flex;align-items:center;background:var(--green-muted);
+      border-radius:99px;padding:4px 10px;font-size:11px;font-weight:700;
+      color:var(--green-dark);margin:2px}
 
     /* ── RAPPORT ── */
     .rapport-bar-wrap{background:#e0f0e0;border-radius:99px;height:8px;flex:1}
@@ -306,11 +361,7 @@
       to{opacity:1;transform:translateX(-50%) translateY(0)}}
     .notif-err{background:linear-gradient(135deg,#991b1b,#dc2626)}
 
-    /* ── MOBILE KOUREL PANEL (fullscreen) ── */
     @media(max-width:640px){
-      #kourels-layout{flex-direction:column;height:auto;gap:0}
-      #kourels-left-col{width:100%;border-radius:14px;max-height:260px}
-      .chat-main{border-radius:14px;height:460px}
       .prog-info-grid{grid-template-columns:1fr}
       .stats-grid{grid-template-columns:repeat(2,1fr)}
       .form-grid{grid-template-columns:1fr}
@@ -435,17 +486,11 @@
             <button class="btn btn-secondary" onclick="toggleForm('form-kourel')">Annuler</button>
           </div>
         </div>
+        <!-- Liste simple des Kourels -->
         <div id="kourels-layout">
-          <div id="kourels-left-col">
-            <div style="background:linear-gradient(135deg,var(--green-dark),var(--green));padding:12px 14px;color:#fff;font-size:13px;font-weight:800">👥 Mes Kourels</div>
-            <div id="kourels-list-sidebar" style="overflow-y:auto;flex:1"></div>
-          </div>
-          <div class="chat-main" id="kourel-detail-panel">
-            <div class="chat-locked-overlay">
-              <div class="lock-big">👥</div>
-              <h3>Sélectionnez un Kourel</h3>
-              <p>Cliquez sur un Kourel pour voir ses membres et discuter</p>
-            </div>
+          <div style="background:var(--card);border-radius:16px;box-shadow:var(--shadow);overflow:hidden">
+            <div style="background:linear-gradient(135deg,var(--green-dark),var(--green));padding:12px 16px;color:#fff;font-size:13px;font-weight:800">👥 Mes Kourels</div>
+            <div id="kourels-list-sidebar"></div>
           </div>
         </div>
       </div>
@@ -479,69 +524,84 @@
         </div>
       </div>
 
-      <!-- PROGRAMMES -->
-      <div id="page-programmes" class="page">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
-          <h2 class="page-title" style="margin:0">Programmes</h2>
-          <button class="add-btn" onclick="toggleForm('form-programme')">+ Nouveau</button>
-        </div>
-        <div id="form-programme" class="form-box" style="display:none">
-          <div class="form-grid">
-            <select id="pr-kourel"></select>
-            <select id="pr-jour"><option>Lundi</option><option>Mardi</option><option>Mercredi</option><option>Jeudi</option><option>Vendredi</option><option>Samedi</option><option>Dimanche</option></select>
-            <input type="text" id="pr-lieu" placeholder="Lieu"/>
-            <input type="text" id="pr-xassida" placeholder="Xassida"/>
-            <input type="text" id="pr-responsable" placeholder="Responsable"/>
-            <input type="time" id="pr-heure"/>
-          </div>
-          <div class="form-section-title">Son de référence</div>
-          <div class="audio-upload-zone" onclick="document.getElementById('pr-audio-file').click()">
-            <input type="file" id="pr-audio-file" accept="audio/*" onchange="handleAudioUpload(event)"/>
-            <div class="upload-icon">🎵</div>
-            <p><strong>Choisir un son</strong></p><p>MP3, WAV, OGG…</p>
-          </div>
-          <div id="pr-audio-preview" style="display:none;margin-top:8px"></div>
-          <div style="margin-top:10px">
-            <label style="font-size:11px;font-weight:700;color:var(--text-light);display:block;margin-bottom:6px">Tolérance</label>
-            <div style="display:flex;gap:6px;flex-wrap:wrap" id="tol-buttons">
-              <button class="tol-btn selected" onclick="selectTolerance(this,'0')">Aucune</button>
-              <button class="tol-btn" onclick="selectTolerance(this,'5')">5 min</button>
-              <button class="tol-btn" onclick="selectTolerance(this,'10')">10 min</button>
-              <button class="tol-btn" onclick="selectTolerance(this,'15')">15 min</button>
-              <button class="tol-btn" onclick="selectTolerance(this,'20')">20 min</button>
-              <button class="tol-btn" onclick="selectTolerance(this,'30')">30 min</button>
-            </div>
-            <input type="hidden" id="pr-tolerance" value="0"/>
-          </div>
-          <textarea id="pr-notes" rows="2" placeholder="Notes…" style="margin-top:10px"></textarea>
-          <div class="btn-row">
-            <button class="btn btn-primary" onclick="addProgramme()">Enregistrer</button>
-            <button class="btn btn-secondary" onclick="toggleForm('form-programme')">Annuler</button>
-          </div>
-        </div>
-        <div id="programmes-list"></div>
-      </div>
+      <!-- ACTIVITÉS (Programmes + Présences fusionnés) -->
+      <div id="page-activites" class="page">
+        <h2 class="page-title">Activités</h2>
 
-      <!-- PRESENCES -->
-      <div id="page-presences" class="page">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
-          <h2 class="page-title" style="margin:0">Présences</h2>
-          <button class="add-btn" onclick="toggleForm('form-presence')">+ Session</button>
+        <!-- Onglets -->
+        <div style="display:flex;gap:0;background:var(--card);border-radius:12px;padding:4px;box-shadow:var(--shadow);margin-bottom:16px">
+          <button id="tab-btn-programmes" onclick="switchActiviteTab('programmes')"
+            style="flex:1;padding:10px;border-radius:9px;border:none;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:800;cursor:pointer;background:var(--green);color:#fff;transition:all .2s">
+            📅 Programmes
+          </button>
+          <button id="tab-btn-presences" onclick="switchActiviteTab('presences')"
+            style="flex:1;padding:10px;border-radius:9px;border:none;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:800;cursor:pointer;background:transparent;color:var(--text-light);transition:all .2s">
+            ✅ Présences
+          </button>
         </div>
-        <div id="form-presence" class="form-box" style="display:none">
-          <div class="form-grid">
-            <input type="date" id="p-date"/>
-            <select id="p-kourel" onchange="loadMembresForPresence()"></select>
-            <select id="p-type"><option>Répétition</option><option>Xam Xam</option><option>Programme</option><option>Réunion</option></select>
-            <input type="text" id="p-lieu" placeholder="Lieu"/>
+
+        <!-- TAB : Programmes -->
+        <div id="tab-programmes">
+          <div style="display:flex;justify-content:flex-end;margin-bottom:12px">
+            <button class="add-btn" onclick="toggleForm('form-programme')">+ Nouveau</button>
           </div>
-          <div id="p-membres-list" style="margin-top:14px"></div>
-          <div class="btn-row">
-            <button class="btn btn-primary" onclick="savePresenceSession()">Enregistrer</button>
-            <button class="btn btn-secondary" onclick="toggleForm('form-presence')">Annuler</button>
+          <div id="form-programme" class="form-box" style="display:none">
+            <div class="form-grid">
+              <select id="pr-kourel"></select>
+              <select id="pr-jour"><option>Lundi</option><option>Mardi</option><option>Mercredi</option><option>Jeudi</option><option>Vendredi</option><option>Samedi</option><option>Dimanche</option></select>
+              <input type="text" id="pr-lieu" placeholder="Lieu"/>
+              <input type="text" id="pr-xassida" placeholder="Xassida"/>
+              <input type="text" id="pr-responsable" placeholder="Responsable"/>
+              <input type="time" id="pr-heure"/>
+            </div>
+            <div class="form-section-title">Son de référence</div>
+            <div class="audio-upload-zone" onclick="document.getElementById('pr-audio-file').click()">
+              <input type="file" id="pr-audio-file" accept="audio/*" onchange="handleAudioUpload(event)"/>
+              <div class="upload-icon">🎵</div>
+              <p><strong>Choisir un son</strong></p><p>MP3, WAV, OGG…</p>
+            </div>
+            <div id="pr-audio-preview" style="display:none;margin-top:8px"></div>
+            <div style="margin-top:10px">
+              <label style="font-size:11px;font-weight:700;color:var(--text-light);display:block;margin-bottom:6px">Tolérance</label>
+              <div style="display:flex;gap:6px;flex-wrap:wrap" id="tol-buttons">
+                <button class="tol-btn selected" onclick="selectTolerance(this,'0')">Aucune</button>
+                <button class="tol-btn" onclick="selectTolerance(this,'5')">5 min</button>
+                <button class="tol-btn" onclick="selectTolerance(this,'10')">10 min</button>
+                <button class="tol-btn" onclick="selectTolerance(this,'15')">15 min</button>
+                <button class="tol-btn" onclick="selectTolerance(this,'20')">20 min</button>
+                <button class="tol-btn" onclick="selectTolerance(this,'30')">30 min</button>
+              </div>
+              <input type="hidden" id="pr-tolerance" value="0"/>
+            </div>
+            <textarea id="pr-notes" rows="2" placeholder="Notes…" style="margin-top:10px"></textarea>
+            <div class="btn-row">
+              <button class="btn btn-primary" onclick="addProgramme()">Enregistrer</button>
+              <button class="btn btn-secondary" onclick="toggleForm('form-programme')">Annuler</button>
+            </div>
           </div>
+          <div id="programmes-list"></div>
         </div>
-        <div id="presences-list"></div>
+
+        <!-- TAB : Présences -->
+        <div id="tab-presences" style="display:none">
+          <div style="display:flex;justify-content:flex-end;margin-bottom:12px">
+            <button class="add-btn" onclick="toggleForm('form-presence')">+ Session</button>
+          </div>
+          <div id="form-presence" class="form-box" style="display:none">
+            <div class="form-grid">
+              <input type="date" id="p-date"/>
+              <select id="p-kourel" onchange="loadMembresForPresence()"></select>
+              <select id="p-type"><option>Répétition</option><option>Xam Xam</option><option>Programme</option><option>Réunion</option></select>
+              <input type="text" id="p-lieu" placeholder="Lieu"/>
+            </div>
+            <div id="p-membres-list" style="margin-top:14px"></div>
+            <div class="btn-row">
+              <button class="btn btn-primary" onclick="savePresenceSession()">Enregistrer</button>
+              <button class="btn btn-secondary" onclick="toggleForm('form-presence')">Annuler</button>
+            </div>
+          </div>
+          <div id="presences-list"></div>
+        </div>
       </div>
 
       <!-- COTISATIONS -->
@@ -591,13 +651,54 @@
     </div>
   </div>
 
+<!-- CHAT FULLSCREEN OVERLAY -->
+<div id="chat-fullscreen">
+  <!-- Header -->
+  <div class="chat-fs-header" id="chat-fs-header">
+    <button class="chat-fs-back" onclick="closeChatFullscreen()">←</button>
+    <div class="chat-fs-title">
+      <div class="chat-fs-title-name" id="chat-fs-name">—</div>
+      <div class="chat-fs-title-sub" id="chat-fs-sub">—</div>
+    </div>
+    <button class="chat-fs-menu-btn" id="chat-fs-dots" onclick="toggleChatHeaderMenu()">⋮</button>
+    <!-- Dropdown menu -->
+    <div class="chat-header-dropdown" id="chat-header-dropdown">
+      <div class="chd-item" onclick="showChatPanel('membres')">👤 Membres</div>
+      <div class="chd-item" onclick="showChatPanel('presences')">✅ Présences</div>
+      <div class="chd-item chd-item-danger" id="chd-delete-btn" onclick="deleteChatKourel()">🗑 Supprimer le Kourel</div>
+    </div>
+  </div>
+
+  <!-- Panel glissant : Membres ou Présences -->
+  <div class="chat-side-panel" id="chat-side-panel">
+    <div class="chat-side-panel-header">
+      <span class="chat-side-panel-title" id="chat-side-panel-title">Membres</span>
+      <button class="chat-side-panel-close" onclick="closeChatPanel()">✕</button>
+    </div>
+    <div id="chat-side-panel-content"></div>
+  </div>
+
+  <!-- Messages -->
+  <div class="chat-messages" id="chat-msgs-area"></div>
+
+  <!-- Barre d'envoi -->
+  <div class="chat-input-bar" id="chat-input-bar">
+    <button class="chat-plus-btn" onclick="document.getElementById('chat-file-input').click()" title="Fichier">+</button>
+    <input type="file" id="chat-file-input" accept="audio/*,image/*" style="display:none" onchange="sendFileMsgFS(event)"/>
+    <textarea id="chat-input-field" placeholder="Écrire un message…" rows="1"
+      onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMsgFS()}"></textarea>
+    <button class="chat-send-btn" id="btn-vocal"
+      style="background:linear-gradient(135deg,#dc2626,#991b1b)" title="Vocal"
+      onclick="startVocalFS()">🎤</button>
+    <button class="chat-send-btn" onclick="sendMsgFS()">➤</button>
+  </div>
+</div>
+
   <!-- BOTTOM NAV -->
   <nav class="bottom-nav">
     <button class="bottom-nav-btn active" onclick="showPage('accueil',this)"><span class="nav-icon">🏠</span>Accueil</button>
     <button class="bottom-nav-btn" onclick="showPage('kourels',this)"><span class="nav-icon">👥</span>Kourels</button>
-    <button class="bottom-nav-btn" onclick="showPage('membres',this)"><span class="nav-icon">👤</span>Membres</button>
-    <button class="bottom-nav-btn" onclick="showPage('programmes',this)"><span class="nav-icon">📅</span>Programmes</button>
-    <button class="bottom-nav-btn" onclick="showPage('presences',this)"><span class="nav-icon">✅</span>Présences</button>
+    <button class="bottom-nav-btn" onclick="showPage('activites',this)"><span class="nav-icon">📅</span>Activités</button>
     <button class="bottom-nav-btn" onclick="showPage('cotisations',this)"><span class="nav-icon">💰</span>Adiyeu</button>
     <button class="bottom-nav-btn" onclick="showPage('rapports',this)"><span class="nav-icon">📊</span>Rapports</button>
   </nav>
@@ -743,15 +844,34 @@ function launchApp(){
 
 function showPage(id,btn){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById('page-'+id).classList.add('active');
+  const el=document.getElementById('page-'+id);
+  if(el) el.classList.add('active');
   document.querySelectorAll('.bottom-nav-btn').forEach(b=>b.classList.remove('active'));
   if(btn)btn.classList.add('active');
-  // scroll to top
   document.querySelector('.content-wrap').scrollTop=0;
+}
+
+function switchActiviteTab(tab){
+  // Onglets visuels
+  const btnProg=document.getElementById('tab-btn-programmes');
+  const btnPres=document.getElementById('tab-btn-presences');
+  const tabProg=document.getElementById('tab-programmes');
+  const tabPres=document.getElementById('tab-presences');
+  if(!btnProg) return;
+  if(tab==='programmes'){
+    btnProg.style.background='var(--green)'; btnProg.style.color='#fff';
+    btnPres.style.background='transparent'; btnPres.style.color='var(--text-light)';
+    tabProg.style.display='block'; tabPres.style.display='none';
+  } else {
+    btnPres.style.background='var(--green)'; btnPres.style.color='#fff';
+    btnProg.style.background='transparent'; btnProg.style.color='var(--text-light)';
+    tabPres.style.display='block'; tabProg.style.display='none';
+  }
 }
 
 function toggleForm(id){
   const el=document.getElementById(id);
+  if(!el)return;
   const visible=el.style.display!=='none';
   el.style.display=visible?'none':'block';
   if(!visible){
@@ -818,101 +938,227 @@ async function renderKourels(){
     if(sidebar){
       sidebar.innerHTML=cacheKourels.length
         ?cacheKourels.map(k=>`
-          <div class="chat-room-item${activeChatRoom===k._id?' active':''}"
-            onclick="openKourelDetail('${k._id}','${escHtml(k.nom)}')">
+          <div class="chat-room-item" onclick="openChatFullscreen('${k._id}','${escHtml(k.nom)}')">
             <div class="room-icon">👥</div>
             <div style="flex:1;min-width:0">
               <div class="room-name">${escHtml(k.nom)}</div>
-              <div class="room-desc">${cacheMembres.filter(m=>(m.kourel?._id||m.kourel)===k._id).length} mbr · ${badge(k.statut||'Actif')}</div>
+              <div class="room-desc">${cacheMembres.filter(m=>(m.kourel?._id||m.kourel)===k._id).length} membres · ${badge(k.statut||'Actif')}</div>
             </div>
+            <div class="room-arrow">›</div>
           </div>`).join('')
-        :'<div style="padding:14px;font-size:12px;color:var(--text-light)">Aucun Kourel</div>';
+        :'<div style="padding:18px;font-size:13px;color:var(--text-light);text-align:center">Aucun Kourel — créez-en un !</div>';
     }
   }catch(e){showNotif('Erreur chargement Kourels',true);}
 }
 
-async function openKourelDetail(kourelId,nom){
-  activeChatRoom=kourelId;
-  document.querySelectorAll('#kourels-list-sidebar .chat-room-item').forEach(el=>{
-    el.classList.toggle('active',el.getAttribute('onclick')?.includes(kourelId));
-  });
-  const panel=document.getElementById('kourel-detail-panel');
-  const membres=cacheMembres.filter(m=>(m.kourel?._id||m.kourel)===kourelId);
-  let msgs=[];
-  try{msgs=await api('GET','/messages/'+kourelId);}catch(e){}
+// ── CHAT FULLSCREEN ──────────────────────────────────────
+let chatFsKourelId=null;
+let chatFsNom=null;
 
-  panel.innerHTML=`
-    <div class="kourel-detail">
-      <div class="kourel-detail-header">
-        <div class="room-icon">👥</div>
-        <div style="flex:1;min-width:0">
-          <div style="font-size:14px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${escHtml(nom)}</div>
-          <div style="font-size:10px;opacity:.8">${membres.length} membres</div>
-        </div>
-        ${isAdmin()?`<button onclick="deleteKourel('${kourelId}')" style="background:rgba(255,0,0,.2);border:none;color:#fff;border-radius:7px;padding:5px 9px;font-size:12px;cursor:pointer">🗑</button>`:''}
-      </div>
-      <div class="kourel-members-panel">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
-          <span style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--text-light)">Membres</span>
-          ${isAdmin()?`<button onclick="showAddMembre('${kourelId}')" style="background:var(--green);color:#fff;border:none;border-radius:7px;padding:4px 9px;font-size:11px;font-weight:800;cursor:pointer">+ Ajouter</button>`:''}
-        </div>
-        <div style="display:flex;flex-wrap:wrap;gap:3px">
-          ${membres.length?membres.map(m=>`<span class="member-chip">${escHtml(m.prenom+' '+m.nom)}</span>`).join(''):'<span style="font-size:11px;color:var(--text-light)">Aucun membre</span>'}
-        </div>
-      </div>
-      <div style="background:#f0f0f0;padding:6px 14px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--text-light);border-bottom:1px solid var(--border)">💬 Discussion</div>
-      <div class="chat-messages" id="chat-msgs-area">
-        ${msgs.length?msgs.map(m=>{
-          const isMine=m.auteur?._id===currentUser?.id||m.auteur===currentUser?.id;
-          return `<div style="display:flex;flex-direction:column;align-items:${isMine?'flex-end':'flex-start'}">
-            <div class="msg-bubble ${isMine?'msg-mine':'msg-other'}" style="position:relative">
-              ${!isMine?`<div class="msg-sender">${escHtml(m.auteur?.prenom||m.auteur?.nom||'')}</div>`:''}
-              <div style="display:flex;align-items:center;gap:4px">
-                ${m.type==='audio'
-                  ?`<audio controls src="${m.texte}" style="max-width:180px;height:30px"></audio>`
-                  :`<span style="word-break:break-word">${escHtml(m.texte)}</span>`}
-                ${isMine?`<div style="position:relative;flex-shrink:0">
-                  <button class="msg-menu-btn" onclick="toggleMsgMenu('menu-${m._id}')">⋮</button>
-                  <div class="msg-menu-dropdown" id="menu-${m._id}">
-                    <div class="menu-item-delete" onclick="deleteMsg('${m._id}','${kourelId}','${escHtml(nom)}')">🗑 Supprimer</div>
-                  </div></div>`:''}
-              </div>
-              <div class="msg-time">${new Date(m.createdAt).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}</div>
-            </div></div>`;
-        }).join(''):'<div class="chat-empty"><div style="font-size:36px;margin-bottom:8px">💬</div><p style="font-size:12px;font-weight:600;color:var(--text-light)">Aucun message — soyez le premier !</p></div>'}
-      </div>
-      <div class="chat-input-bar">
-        <button class="chat-plus-btn" onclick="document.getElementById('chat-file-${kourelId}').click()" title="Fichier">+</button>
-        <input type="file" id="chat-file-${kourelId}" accept="audio/*,image/*" style="display:none" onchange="sendFileMsg(event,'${kourelId}','${escHtml(nom)}')"/>
-        <textarea id="chat-input-field" placeholder="Écrire un message…" rows="1"
-          onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMsg('${kourelId}','${escHtml(nom)}')}"></textarea>
-        <button class="chat-send-btn" id="btn-vocal" onclick="startVocal('${kourelId}','${escHtml(nom)}')"
-          style="background:linear-gradient(135deg,#dc2626,#991b1b)" title="Vocal">🎤</button>
-        <button class="chat-send-btn" onclick="sendMsg('${kourelId}','${escHtml(nom)}')">➤</button>
-      </div>
-    </div>`;
-  setTimeout(()=>{const el=document.getElementById('chat-msgs-area');if(el)el.scrollTop=el.scrollHeight;},50);
+async function openChatFullscreen(kourelId,nom){
+  chatFsKourelId=kourelId;
+  chatFsNom=nom;
+  activeChatRoom=kourelId;
+
+  // Remplir header
+  document.getElementById('chat-fs-name').textContent=nom;
+  const membres=cacheMembres.filter(m=>(m.kourel?._id||m.kourel)===kourelId);
+  document.getElementById('chat-fs-sub').textContent=membres.length+' membres';
+  // Afficher supprimer seulement admin
+  document.getElementById('chd-delete-btn').style.display=isAdmin()?'flex':'none';
+
+  // Ouvrir l'overlay
+  document.getElementById('chat-fullscreen').classList.add('open');
+  document.getElementById('chat-header-dropdown').classList.remove('open');
+  document.getElementById('chat-side-panel').classList.remove('open');
+
+  // Charger les messages
+  await loadChatMessages();
 }
 
+function closeChatFullscreen(){
+  document.getElementById('chat-fullscreen').classList.remove('open');
+  document.getElementById('chat-header-dropdown').classList.remove('open');
+  document.getElementById('chat-side-panel').classList.remove('open');
+  chatFsKourelId=null; chatFsNom=null;
+}
+
+function toggleChatHeaderMenu(){
+  document.getElementById('chat-header-dropdown').classList.toggle('open');
+}
+
+function showChatPanel(type){
+  document.getElementById('chat-header-dropdown').classList.remove('open');
+  const panel=document.getElementById('chat-side-panel');
+  const content=document.getElementById('chat-side-panel-content');
+  const title=document.getElementById('chat-side-panel-title');
+
+  if(type==='membres'){
+    title.textContent='👤 Membres';
+    const membres=cacheMembres.filter(m=>(m.kourel?._id||m.kourel)===chatFsKourelId);
+    content.innerHTML=`<div style="padding:12px 16px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <span style="font-size:12px;color:var(--text-light)">${membres.length} membres dans ce Kourel</span>
+        ${isAdmin()?`<button onclick="showAddMembreFS()" style="background:var(--green);color:#fff;border:none;border-radius:8px;padding:6px 12px;font-size:12px;font-weight:800;cursor:pointer">+ Ajouter</button>`:''}
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px">
+        ${membres.length
+          ?membres.map(m=>`<span class="member-chip" style="font-size:12px;padding:5px 12px">${escHtml(m.prenom+' '+m.nom)}</span>`).join('')
+          :'<span style="font-size:12px;color:var(--text-light)">Aucun membre</span>'}
+      </div>
+    </div>`;
+  } else {
+    title.textContent='✅ Présences';
+    content.innerHTML=`<div style="padding:16px;text-align:center">
+      <div style="font-size:28px;margin-bottom:8px">✅</div>
+      <p style="font-size:13px;color:var(--text-light)">Créer une session de présences</p>
+      <button onclick="goToPresencesFS()" style="background:var(--green);color:#fff;border:none;border-radius:10px;padding:10px 20px;font-size:13px;font-weight:800;cursor:pointer;margin-top:10px">→ Aller aux présences</button>
+    </div>`;
+  }
+  panel.classList.add('open');
+}
+
+function closeChatPanel(){
+  document.getElementById('chat-side-panel').classList.remove('open');
+}
+function goToPresencesFS(){
+  closeChatPanel();
+  closeChatFullscreen();
+  showPage('activites',document.querySelector('.bottom-nav-btn:nth-child(3)'));
+  switchActiviteTab('presences');
+  setTimeout(()=>{
+    toggleForm('form-presence');
+    remplirSelectKourels('p-kourel');
+    document.getElementById('p-kourel').value=chatFsKourelId||'';
+    loadMembresForPresence();
+  },150);
+}
+
+function showAddMembreFS(){
+  closeChatPanel();
+  closeChatFullscreen();
+  // page-membres est toujours dans le DOM même si absente de la nav
+  showPage('membres',null);
+  setTimeout(()=>{
+    toggleForm('form-membre');
+    remplirSelectKourels('m-kourel');
+    document.getElementById('m-kourel').value=chatFsKourelId;
+  },150);
+}
+
+async function deleteChatKourel(){
+  if(!confirm('Supprimer ce Kourel ?'))return;
+  document.getElementById('chat-header-dropdown').classList.remove('open');
+  try{
+    await api('DELETE','/kourels/'+chatFsKourelId);
+    closeChatFullscreen();
+    await renderKourels();renderAccueil();
+    showNotif('Kourel supprimé ✅');
+  }catch(e){showNotif(e.message,true);}
+}
+
+async function loadChatMessages(){
+  const area=document.getElementById('chat-msgs-area');
+  area.innerHTML='<div style="text-align:center;padding:20px;color:var(--text-light);font-size:13px">Chargement…</div>';
+  let msgs=[];
+  try{msgs=await api('GET','/messages/'+chatFsKourelId);}catch(e){}
+  area.innerHTML=msgs.length?msgs.map(m=>{
+    const isMine=m.auteur?._id===currentUser?.id||m.auteur===currentUser?.id;
+    return `<div style="display:flex;flex-direction:column;align-items:${isMine?'flex-end':'flex-start'}">
+      <div class="msg-bubble ${isMine?'msg-mine':'msg-other'}" style="position:relative">
+        ${!isMine?`<div class="msg-sender">${escHtml(m.auteur?.prenom||m.auteur?.nom||'')}</div>`:''}
+        <div style="display:flex;align-items:center;gap:4px">
+          ${m.type==='audio'
+            ?`<audio controls src="${m.texte}" style="max-width:200px;height:30px"></audio>`
+            :`<span style="word-break:break-word">${escHtml(m.texte)}</span>`}
+          ${isMine?`<div style="position:relative;flex-shrink:0">
+            <button class="msg-menu-btn" onclick="toggleMsgMenu('menu-${m._id}')">⋮</button>
+            <div class="msg-menu-dropdown" id="menu-${m._id}">
+              <div class="menu-item-delete" onclick="deleteMsgFS('${m._id}')">🗑 Supprimer</div>
+            </div></div>`:''}
+        </div>
+        <div class="msg-time">${new Date(m.createdAt).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}</div>
+      </div></div>`;
+  }).join(''):`<div class="chat-empty"><div style="font-size:36px;margin-bottom:8px">💬</div><p style="font-size:12px;font-weight:600;color:var(--text-light)">Aucun message — soyez le premier !</p></div>`;
+  setTimeout(()=>{if(area)area.scrollTop=area.scrollHeight;},50);
+}
+
+async function deleteMsgFS(msgId){
+  if(!confirm('Supprimer ce message ?'))return;
+  try{await api('DELETE','/messages/'+msgId);await loadChatMessages();showNotif('Message supprimé ✅');}
+  catch(e){showNotif(e.message,true);}
+}
+
+async function sendMsgFS(){
+  const input=document.getElementById('chat-input-field');
+  const texte=input?.value.trim();if(!texte||!chatFsKourelId)return;
+  try{await api('POST','/messages',{kourel:chatFsKourelId,texte});input.value='';await loadChatMessages();}
+  catch(e){showNotif('Erreur envoi message',true);}
+}
+
+async function sendFileMsgFS(event){
+  const file=event.target.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=async e=>{
+    const type=file.type.startsWith('audio')?'audio':'image';
+    try{await api('POST','/messages',{kourel:chatFsKourelId,texte:e.target.result,type});await loadChatMessages();}
+    catch(err){showNotif('Fichier trop grand',true);}
+  };
+  reader.readAsDataURL(file);
+  event.target.value='';
+}
+
+function startVocalFS(){
+  const btn=document.getElementById('btn-vocal');
+  if(!isRecording){
+    navigator.mediaDevices.getUserMedia({audio:true})
+      .then(stream=>{
+        const options=MediaRecorder.isTypeSupported('audio/webm;codecs=opus')
+          ?{mimeType:'audio/webm;codecs=opus',audioBitsPerSecond:32000}:{audioBitsPerSecond:32000};
+        mediaRecorder=new MediaRecorder(stream,options);
+        audioChunks=[];
+        mediaRecorder.ondataavailable=e=>audioChunks.push(e.data);
+        mediaRecorder.onstop=async()=>{
+          const blob=new Blob(audioChunks,{type:'audio/webm'});
+          const reader=new FileReader();
+          reader.onload=async e=>{
+            try{await api('POST','/messages',{kourel:chatFsKourelId,texte:e.target.result,type:'audio'});await loadChatMessages();}
+            catch(err){showNotif('Erreur envoi audio',true);}
+          };
+          reader.readAsDataURL(blob);
+          stream.getTracks().forEach(t=>t.stop());
+        };
+        mediaRecorder.start();isRecording=true;
+        if(btn){btn.style.background='linear-gradient(135deg,#16a34a,#15803d)';btn.textContent='⏹';}
+        showNotif('Enregistrement… ⏹ pour arrêter');
+        setTimeout(()=>{if(isRecording&&mediaRecorder){mediaRecorder.stop();isRecording=false;if(btn){btn.style.background='linear-gradient(135deg,#dc2626,#991b1b)';btn.textContent='🎤';}}},30000);
+      })
+      .catch(()=>showNotif('Microphone non disponible',true));
+  }else{
+    mediaRecorder.stop();isRecording=false;
+    if(btn){btn.style.background='linear-gradient(135deg,#dc2626,#991b1b)';btn.textContent='🎤';}
+  }
+}
+
+// Fermer dropdown quand on clique ailleurs
+document.addEventListener('click',function(e){
+  if(!e.target.classList.contains('chat-fs-menu-btn')&&!e.target.closest('.chat-header-dropdown'))
+    document.getElementById('chat-header-dropdown')?.classList.remove('open');
+  if(!e.target.classList.contains('msg-menu-btn'))
+    document.querySelectorAll('.msg-menu-dropdown').forEach(m=>m.style.display='none');
+});
+
+// Garder compatibilité accueil click
+function openKourelDetail(kourelId,nom){ openChatFullscreen(kourelId,nom); }
+
 function showAddMembre(kourelId){
-  showPage('membres',document.querySelector('.bottom-nav-btn:nth-child(3)'));
+  chatFsKourelId=kourelId;
+  showPage('membres',null);
   setTimeout(()=>{
     toggleForm('form-membre');
     remplirSelectKourels('m-kourel');
     document.getElementById('m-kourel').value=kourelId;
-  },100);
-}
-
-async function addKourel(){
-  const nom=document.getElementById('k-nom').value.trim();
-  if(!nom){showNotif('Nom obligatoire',true);return;}
-  try{
-    await api('POST','/kourels',{nom,description:document.getElementById('k-desc').value.trim(),statut:document.getElementById('k-statut').value});
-    document.getElementById('k-nom').value='';document.getElementById('k-desc').value='';
-    toggleForm('form-kourel');
-    await renderKourels();renderAccueil();
-    showNotif('Kourel créé !');
-  }catch(e){showNotif(e.message,true);}
+  },150);
 }
 
 async function deleteKourel(id){
@@ -920,8 +1166,6 @@ async function deleteKourel(id){
   try{
     await api('DELETE','/kourels/'+id);
     activeChatRoom=null;
-    document.getElementById('kourel-detail-panel').innerHTML=`
-      <div class="chat-locked-overlay"><div class="lock-big">👥</div><h3>Sélectionnez un Kourel</h3></div>`;
     await renderKourels();renderAccueil();
     showNotif('Kourel supprimé ✅');
   }catch(e){showNotif(e.message,true);}
@@ -1161,63 +1405,8 @@ function toggleMsgMenu(id){
   document.querySelectorAll('.msg-menu-dropdown').forEach(m=>{if(m.id!==id)m.style.display='none';});
   menu.style.display=menu.style.display==='none'?'block':'none';
 }
-document.addEventListener('click',function(e){
-  if(!e.target.classList.contains('msg-menu-btn'))
-    document.querySelectorAll('.msg-menu-dropdown').forEach(m=>m.style.display='none');
-});
-async function deleteMsg(msgId,kourelId,nom){
-  if(!confirm('Supprimer ce message ?'))return;
-  try{await api('DELETE','/messages/'+msgId);await openKourelDetail(kourelId,nom);showNotif('Message supprimé ✅');}
-  catch(e){showNotif(e.message,true);}
-}
-function startVocal(kourelId,nom){
-  const btn=document.getElementById('btn-vocal');
-  if(!isRecording){
-    navigator.mediaDevices.getUserMedia({audio:true})
-      .then(stream=>{
-        const options=MediaRecorder.isTypeSupported('audio/webm;codecs=opus')
-          ?{mimeType:'audio/webm;codecs=opus',audioBitsPerSecond:32000}:{audioBitsPerSecond:32000};
-        mediaRecorder=new MediaRecorder(stream,options);
-        audioChunks=[];
-        mediaRecorder.ondataavailable=e=>audioChunks.push(e.data);
-        mediaRecorder.onstop=async()=>{
-          const blob=new Blob(audioChunks,{type:'audio/webm'});
-          const reader=new FileReader();
-          reader.onload=async e=>{
-            try{await api('POST','/messages',{kourel:kourelId,texte:e.target.result,type:'audio'});await openKourelDetail(kourelId,nom);}
-            catch(err){showNotif('Erreur envoi audio',true);}
-          };
-          reader.readAsDataURL(blob);
-          stream.getTracks().forEach(t=>t.stop());
-        };
-        mediaRecorder.start();isRecording=true;
-        if(btn){btn.style.background='linear-gradient(135deg,#16a34a,#15803d)';btn.textContent='⏹';}
-        showNotif('Enregistrement… ⏹ pour arrêter');
-        setTimeout(()=>{if(isRecording&&mediaRecorder){mediaRecorder.stop();isRecording=false;if(btn){btn.style.background='linear-gradient(135deg,#dc2626,#991b1b)';btn.textContent='🎤';}}},30000);
-      })
-      .catch(()=>showNotif('Microphone non disponible',true));
-  }else{
-    mediaRecorder.stop();isRecording=false;
-    if(btn){btn.style.background='linear-gradient(135deg,#dc2626,#991b1b)';btn.textContent='🎤';}
-  }
-}
-async function sendMsg(kourelId,nom){
-  const input=document.getElementById('chat-input-field');
-  const texte=input?.value.trim();if(!texte)return;
-  try{await api('POST','/messages',{kourel:kourelId,texte});input.value='';await openKourelDetail(kourelId,nom);}
-  catch(e){showNotif('Erreur envoi message',true);}
-}
-async function sendFileMsg(event,kourelId,nom){
-  const file=event.target.files[0];if(!file)return;
-  const reader=new FileReader();
-  reader.onload=async e=>{
-    const type=file.type.startsWith('audio')?'audio':'image';
-    try{await api('POST','/messages',{kourel:kourelId,texte:e.target.result,type});await openKourelDetail(kourelId,nom);}
-    catch(err){showNotif('Fichier trop grand',true);}
-  };
-  reader.readAsDataURL(file);
-  event.target.value='';
-}
+
+// (chat functions moved to FS versions above)
 
 // ── RAPPORTS ─────────────────────────────────────────────
 function renderRapports(){
