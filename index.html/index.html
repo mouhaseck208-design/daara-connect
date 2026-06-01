@@ -4,7 +4,7 @@
   <link rel="icon" href="data:,">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>DAARA CONNECT</title>
+  <title>DAARA CONNECT - Chat WhatsApp Style</title>
   <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
     :root {
@@ -16,7 +16,6 @@
       --shadow: 0 2px 20px rgba(15,76,37,.08);
       --shadow-lg: 0 8px 40px rgba(15,76,37,.15);
       --header-h: 56px; --nav-h: 44px;
-      /* FIX 1 : variables manquantes pour les nouveaux composants */
       --green-border: #b2dfbb;
       --green-pale: #e8f5eb;
       --gray-light: #f4f6f4;
@@ -26,10 +25,8 @@
     }
     *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
     html,body{height:100%;overflow:hidden}
-    body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);
-      display:flex;flex-direction:column}
+    body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);display:flex;flex-direction:column}
 
-    /* ── WELCOME ── */
     #welcome-screen{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
       background:linear-gradient(160deg,#062617 0%,#0f4c25 40%,#1a7a3c 100%);
       z-index:200;overflow-y:auto;padding:16px}
@@ -56,13 +53,11 @@
     .brand .tagline{font-size:12px;color:var(--text-light);margin-top:4px;font-weight:500}
     .divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:0 auto 24px}
     .fl{margin-bottom:14px}
-    .fl label{display:block;font-size:11px;font-weight:800;letter-spacing:1px;
-      text-transform:uppercase;color:var(--green-dark);margin-bottom:6px}
+    .fl label{display:block;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--green-dark);margin-bottom:6px}
     .fl input,.fl select{width:100%;padding:13px 16px;border-radius:12px;border:2px solid var(--border);
       font-size:14px;font-family:'Plus Jakarta Sans',sans-serif;color:var(--text);
       outline:none;background:#f8fbf8;transition:all .2s}
-    .fl input:focus,.fl select:focus{border-color:var(--green);background:#fff;
-      box-shadow:0 0 0 4px rgba(26,122,60,.1)}
+    .fl input:focus,.fl select:focus{border-color:var(--green);background:#fff;box-shadow:0 0 0 4px rgba(26,122,60,.1)}
     .fl input::placeholder{color:#aac5aa}
     .err{color:#dc2626;font-size:11px;margin-top:4px;font-weight:600;display:none}
     .or-divider{text-align:center;font-size:12px;color:var(--text-light);margin:14px 0;font-weight:600;letter-spacing:1px}
@@ -81,13 +76,10 @@
       cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;margin-bottom:16px;
       display:flex;align-items:center;gap:6px}
 
-    /* ── APP SHELL ── */
     #app{display:none;flex-direction:column;height:100%;overflow:hidden}
     .header{background:linear-gradient(135deg,var(--green-dark) 0%,var(--green) 100%);
-      color:#fff;flex-shrink:0;position:sticky;top:0;z-index:100;
-      box-shadow:0 4px 20px rgba(15,76,37,.3)}
-    .header-top{display:flex;align-items:center;justify-content:space-between;
-      padding:0 16px;height:var(--header-h)}
+      color:#fff;flex-shrink:0;position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(15,76,37,.3)}
+    .header-top{display:flex;align-items:center;justify-content:space-between;padding:0 16px;height:var(--header-h)}
     .header-logo{display:flex;align-items:center;gap:8px}
     .logo-icon{width:34px;height:34px;background:rgba(255,255,255,.15);border-radius:9px;
       display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
@@ -97,12 +89,9 @@
     .user-avatar{width:26px;height:26px;background:rgba(255,255,255,.2);border-radius:50%;
       display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0}
     .hdr-switch{background:rgba(255,255,255,.12);border:none;border-radius:7px;
-      padding:5px 10px;color:#fff;font-size:11px;font-weight:700;cursor:pointer;
-      font-family:'Plus Jakarta Sans',sans-serif}
-    .role-badge{padding:3px 8px;border-radius:99px;font-size:10px;font-weight:800;
-      background:rgba(255,255,255,.18);color:#fff}
+      padding:5px 10px;color:#fff;font-size:11px;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif}
+    .role-badge{padding:3px 8px;border-radius:99px;font-size:10px;font-weight:800;background:rgba(255,255,255,.18);color:#fff}
 
-    /* ── BOTTOM NAV ── */
     .bottom-nav{display:flex;background:linear-gradient(135deg,var(--green-dark),var(--green));
       border-top:1px solid rgba(255,255,255,.1);flex-shrink:0}
     .bottom-nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
@@ -113,35 +102,28 @@
     .bottom-nav-btn.active{color:#fff;border-top-color:#fff;background:rgba(255,255,255,.1)}
     .bottom-nav-btn:active{background:rgba(255,255,255,.15)}
 
-    /* ── CONTENT AREA ── */
     .content-wrap{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
     .content{max-width:900px;margin:0 auto;padding:16px 14px}
     .page{display:none}
     .page.active{display:block}
     .page-title{font-size:20px;font-weight:900;color:var(--text);margin-bottom:16px}
 
-    /* ── CARDS & STATS ── */
     .card{background:var(--card);border-radius:16px;padding:18px;box-shadow:var(--shadow)}
     .card h3{font-size:14px;font-weight:800;margin-bottom:14px}
     .stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:20px}
-    .stat-card{border-radius:14px;padding:16px 14px;color:#fff;
-      box-shadow:0 4px 16px rgba(0,0,0,.15);position:relative;overflow:hidden}
-    .stat-card::after{content:'';position:absolute;bottom:-12px;right:-12px;
-      width:55px;height:55px;border-radius:50%;background:rgba(255,255,255,.12)}
+    .stat-card{border-radius:14px;padding:16px 14px;color:#fff;box-shadow:0 4px 16px rgba(0,0,0,.15);position:relative;overflow:hidden}
+    .stat-card::after{content:'';position:absolute;bottom:-12px;right:-12px;width:55px;height:55px;border-radius:50%;background:rgba(255,255,255,.12)}
     .stat-icon{font-size:22px;margin-bottom:6px}
     .stat-value{font-size:26px;font-weight:900}
     .stat-label{font-size:10px;opacity:.88;margin-top:2px;font-weight:500}
 
-    /* ── BADGES ── */
     .badge{padding:3px 10px;border-radius:99px;font-size:11px;font-weight:700}
     .badge.actif,.badge.payé{background:#dcfce7;color:#166534}
     .badge.inactif,.badge.attente{background:#fee2e2;color:#991b1b}
     .badge.admin{background:#fef3c7;color:#92400e}
     .badge.membre{background:var(--green-muted);color:var(--green-dark)}
 
-    /* ── FORMS ── */
-    .form-box{background:#f4faf4;border-radius:14px;padding:18px;margin-bottom:16px;
-      border:1.5px solid var(--border);animation:fadeIn .3s ease}
+    .form-box{background:#f4faf4;border-radius:14px;padding:18px;margin-bottom:16px;border:1.5px solid var(--border);animation:fadeIn .3s ease}
     @keyframes fadeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
     .form-grid{display:grid;grid-template-columns:1fr;gap:10px}
     input[type=text],input[type=number],input[type=date],input[type=time],
@@ -149,10 +131,8 @@
       width:100%;padding:12px 14px;border-radius:10px;border:1.5px solid var(--border);
       font-size:15px;font-family:'Plus Jakarta Sans',sans-serif;color:var(--text);
       outline:none;transition:all .2s;background:#fff;-webkit-appearance:none}
-    input:focus,select:focus,textarea:focus{border-color:var(--green);
-      box-shadow:0 0 0 3px rgba(26,122,60,.1)}
-    .btn{padding:10px 18px;border-radius:10px;border:none;cursor:pointer;font-weight:700;
-      font-size:13px;font-family:'Plus Jakarta Sans',sans-serif;transition:all .15s}
+    input:focus,select:focus,textarea:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(26,122,60,.1)}
+    .btn{padding:10px 18px;border-radius:10px;border:none;cursor:pointer;font-weight:700;font-size:13px;font-family:'Plus Jakarta Sans',sans-serif;transition:all .15s}
     .btn:active{transform:scale(.97)}
     .btn-primary{background:var(--green);color:#fff;box-shadow:0 4px 14px rgba(26,122,60,.25)}
     .btn-secondary{background:var(--green-muted);color:var(--green-dark)}
@@ -169,61 +149,47 @@
       margin-bottom:14px;background:#fff;-webkit-appearance:none}
     .search-box:focus{border-color:var(--green)}
     .form-section-title{font-size:11px;font-weight:800;text-transform:uppercase;
-      letter-spacing:1px;color:var(--green-dark);margin:14px 0 8px;
-      padding-bottom:5px;border-bottom:2px solid var(--border)}
+      letter-spacing:1px;color:var(--green-dark);margin:14px 0 8px;padding-bottom:5px;border-bottom:2px solid var(--border)}
 
-    /* ── TABLE ── */
     .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
     table{width:100%;border-collapse:collapse;min-width:480px}
-    th{background:var(--green);color:#fff;padding:11px 14px;text-align:left;
-      font-size:12px;font-weight:700}
+    th{background:var(--green);color:#fff;padding:11px 14px;text-align:left;font-size:12px;font-weight:700}
     th:first-child{border-radius:8px 0 0 0}
     th:last-child{border-radius:0 8px 0 0}
     td{padding:10px 14px;font-size:12px;border-bottom:1px solid var(--border)}
     tr:nth-child(even) td{background:#f7fbf7}
     tr:active td{background:#edf7ed}
 
-    /* ── SONS MULTIPLES ── */
-    .section-label{font-size:11px;font-weight:800;letter-spacing:.08em;
-      color:var(--green-dark);text-transform:uppercase;margin:14px 0 6px}
+    .section-label{font-size:11px;font-weight:800;letter-spacing:.08em;color:var(--green-dark);text-transform:uppercase;margin:14px 0 6px}
     .sons-container{background:#fff;border:1.5px solid var(--green-border);border-radius:14px;overflow:hidden}
     .sons-drop-zone{border:2px dashed var(--green-border);border-radius:10px;margin:12px;
-      padding:18px 12px;text-align:center;cursor:pointer;
-      transition:background .2s,border-color .2s;background:var(--green-pale)}
+      padding:18px 12px;text-align:center;cursor:pointer;transition:background .2s,border-color .2s;background:var(--green-pale)}
     .sons-drop-zone:hover{background:#d4edda;border-color:var(--green-mid)}
     .sons-drop-zone .dz-icon{font-size:28px;margin-bottom:6px}
     .sons-drop-zone .dz-title{font-size:13px;font-weight:700;color:var(--green-dark)}
     .sons-drop-zone .dz-sub{font-size:11px;color:var(--gray-text);margin-top:2px}
     .sons-list{padding:0 12px 12px;display:flex;flex-direction:column;gap:8px}
-    .son-item{background:var(--gray-light);border:1px solid var(--green-border);
-      border-radius:10px;padding:9px 10px;display:flex;align-items:center;gap:8px;
-      animation:slideIn .2s ease}
+    .son-item{background:var(--gray-light);border:1px solid var(--green-border);border-radius:10px;padding:9px 10px;display:flex;align-items:center;gap:8px;animation:slideIn .2s ease}
     @keyframes slideIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
     .son-icon{font-size:18px;color:var(--green-mid);flex-shrink:0}
     .son-info{flex:1;min-width:0}
     .son-name{font-size:12px;font-weight:700;color:#333;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
     .son-meta{font-size:10px;color:var(--gray-text);margin-top:1px}
     .son-controls{display:flex;align-items:center;gap:6px}
-    .play-btn{background:var(--green-mid);border:none;border-radius:50%;width:28px;height:28px;
-      color:#fff;cursor:pointer;font-size:11px;display:flex;align-items:center;justify-content:center;
-      transition:background .15s}
+    .play-btn{background:var(--green-mid);border:none;border-radius:50%;width:28px;height:28px;color:#fff;cursor:pointer;font-size:11px;display:flex;align-items:center;justify-content:center;transition:background .15s}
     .play-btn:hover{background:var(--green-dark)}
-    .del-btn{background:#fdecea;border:1px solid #f5c6c6;border-radius:50%;
-      width:26px;height:26px;color:var(--red);cursor:pointer;font-size:13px;
-      display:flex;align-items:center;justify-content:center;transition:background .15s}
+    .del-btn{background:#fdecea;border:1px solid #f5c6c6;border-radius:50%;width:26px;height:26px;color:var(--red);cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;transition:background .15s}
     .del-btn:hover{background:#fbc7c7}
     .son-progress-bar{height:3px;background:#ddd;border-radius:2px;margin-top:4px}
     .son-progress-fill{height:100%;background:var(--green-mid);border-radius:2px;width:0%;transition:width .3s}
     .sons-count{padding:0 12px 10px;font-size:11px;color:var(--gray-text);text-align:right}
     .sons-count span{font-weight:700;color:var(--green-mid)}
 
-    /* ── PDF / PHOTOS XASSIDA ── */
     .docs-container{background:#fff;border:1.5px solid var(--green-border);border-radius:14px;overflow:hidden}
     .docs-tabs{display:flex;border-bottom:1.5px solid var(--green-border);background:var(--green-pale)}
     .doc-tab{flex:1;padding:9px 0;font-size:11px;font-weight:700;text-align:center;cursor:pointer;
       color:var(--gray-text);border:none;background:none;transition:background .15s,color .15s;
-      display:flex;align-items:center;justify-content:center;gap:5px;
-      font-family:'Plus Jakarta Sans',sans-serif}
+      display:flex;align-items:center;justify-content:center;gap:5px;font-family:'Plus Jakarta Sans',sans-serif}
     .doc-tab.active{background:var(--green-dark);color:#fff}
     .doc-panel{display:none;padding:12px}
     .doc-panel.active{display:block}
@@ -234,144 +200,111 @@
     .doc-drop-zone .dz-title{font-size:12px;font-weight:700;color:var(--green-dark)}
     .doc-drop-zone .dz-sub{font-size:10px;color:var(--gray-text);margin-top:2px}
     .docs-list{margin-top:10px;display:flex;flex-direction:column;gap:7px}
-    .doc-item{display:flex;align-items:center;gap:8px;background:var(--gray-light);
-      border:1px solid var(--green-border);border-radius:9px;padding:8px 10px;animation:slideIn .2s ease}
+    .doc-item{display:flex;align-items:center;gap:8px;background:var(--gray-light);border:1px solid var(--green-border);border-radius:9px;padding:8px 10px;animation:slideIn .2s ease}
     .doc-item-icon{font-size:20px;flex-shrink:0}
     .doc-item-info{flex:1;min-width:0}
     .doc-item-name{font-size:12px;font-weight:700;color:#333;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
     .doc-item-size{font-size:10px;color:var(--gray-text)}
     .photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px}
-    .photo-thumb{aspect-ratio:1;border-radius:8px;overflow:hidden;position:relative;
-      border:1.5px solid var(--green-border);animation:slideIn .2s ease}
+    .photo-thumb{aspect-ratio:1;border-radius:8px;overflow:hidden;position:relative;border:1.5px solid var(--green-border);animation:slideIn .2s ease}
     .photo-thumb img{width:100%;height:100%;object-fit:cover}
-    .photo-del{position:absolute;top:3px;right:3px;background:rgba(0,0,0,.55);border:none;
-      border-radius:50%;width:20px;height:20px;color:#fff;font-size:10px;cursor:pointer;
-      display:flex;align-items:center;justify-content:center}
+    .photo-del{position:absolute;top:3px;right:3px;background:rgba(0,0,0,.55);border:none;border-radius:50%;width:20px;height:20px;color:#fff;font-size:10px;cursor:pointer;display:flex;align-items:center;justify-content:center}
 
-    /* ── PRESENCE ── */
-    .presence-session-card{background:var(--card);border-radius:16px;margin-bottom:14px;
-      box-shadow:var(--shadow);overflow:hidden}
-    .presence-session-header{background:linear-gradient(135deg,var(--green-dark),var(--green));
-      color:#fff;padding:14px 18px;display:flex;justify-content:space-between;
-      align-items:center;flex-wrap:wrap;gap:8px}
+    .presence-session-card{background:var(--card);border-radius:16px;margin-bottom:14px;box-shadow:var(--shadow);overflow:hidden}
+    .presence-session-header{background:linear-gradient(135deg,var(--green-dark),var(--green));color:#fff;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
     .presence-session-title{font-size:14px;font-weight:800}
     .presence-session-meta{font-size:11px;opacity:.88}
-    .presence-stats-row{display:flex;gap:12px;padding:10px 18px;background:#f4faf4;
-      border-bottom:1px solid var(--border);flex-wrap:wrap;align-items:center}
+    .presence-stats-row{display:flex;gap:12px;padding:10px 18px;background:#f4faf4;border-bottom:1px solid var(--border);flex-wrap:wrap;align-items:center}
     .pstat{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:700}
     .pstat-dot{width:8px;height:8px;border-radius:50%}
     .pstat-present{background:#16a34a}.pstat-retard{background:#d97706}.pstat-absent{background:#dc2626}
-    .membre-presence-row{display:flex;align-items:center;padding:10px 18px;
-      border-bottom:1px solid var(--border);gap:10px;flex-wrap:wrap}
+    .membre-presence-row{display:flex;align-items:center;padding:10px 18px;border-bottom:1px solid var(--border);gap:10px;flex-wrap:wrap}
     .membre-presence-row:last-child{border-bottom:none}
     .membre-presence-name{flex:1;font-weight:700;font-size:13px;min-width:120px}
     .status-group{display:flex;gap:4px;flex-wrap:wrap}
-    .status-btn{padding:6px 10px;border-radius:99px;border:2px solid transparent;
-      cursor:pointer;font-size:11px;font-weight:800;font-family:'Plus Jakarta Sans',sans-serif;
-      background:#f0f0f0;color:#666}
+    .status-btn{padding:6px 10px;border-radius:99px;border:2px solid transparent;cursor:pointer;font-size:11px;font-weight:800;font-family:'Plus Jakarta Sans',sans-serif;background:#f0f0f0;color:#666}
     .status-btn.present.selected{background:#dcfce7;border-color:#16a34a;color:#166534}
     .status-btn.retard.selected{background:#fef3c7;border-color:#d97706;color:#92400e}
     .status-btn.absent.selected{background:#fee2e2;border-color:#dc2626;color:#991b1b}
-    .tol-btn{padding:7px 12px;border-radius:99px;border:2px solid var(--border);
-      cursor:pointer;font-size:11px;font-weight:700;font-family:'Plus Jakarta Sans',sans-serif;
-      background:#fff;color:var(--text-light)}
+    .tol-btn{padding:7px 12px;border-radius:99px;border:2px solid var(--border);cursor:pointer;font-size:11px;font-weight:700;font-family:'Plus Jakarta Sans',sans-serif;background:#fff;color:var(--text-light)}
     .tol-btn.selected{background:var(--green);border-color:var(--green);color:#fff}
-    .member-chip{display:inline-flex;align-items:center;background:var(--green-muted);
-      border-radius:99px;padding:4px 10px;font-size:11px;font-weight:700;
-      color:var(--green-dark);margin:2px}
+    .member-chip{display:inline-flex;align-items:center;background:var(--green-muted);border-radius:99px;padding:4px 10px;font-size:11px;font-weight:700;color:var(--green-dark);margin:2px}
 
-    /* ── KOUREL LIST ── */
-    .chat-room-item{padding:14px 16px;cursor:pointer;border-bottom:1px solid var(--border);
-      display:flex;align-items:center;gap:12px;transition:background .15s;background:var(--card)}
+    .chat-room-item{padding:14px 16px;cursor:pointer;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;transition:background .15s;background:var(--card)}
     .chat-room-item:active{background:var(--green-muted)}
-    .room-icon{width:42px;height:42px;border-radius:12px;
-      background:linear-gradient(135deg,var(--green-dark),var(--green));
-      display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+    .room-icon{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--green-dark),var(--green));display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
     .room-name{font-size:14px;font-weight:800}
     .room-desc{font-size:11px;color:var(--text-light);margin-top:2px}
     .room-arrow{font-size:16px;color:var(--text-light);flex-shrink:0}
 
-    /* ── CHAT FULLSCREEN ── */
     #chat-fullscreen{position:fixed;inset:0;z-index:150;display:none;flex-direction:column;background:var(--bg)}
     #chat-fullscreen.open{display:flex}
-    .chat-fs-header{background:linear-gradient(135deg,var(--green-dark),var(--green));
-      color:#fff;padding:0 14px;height:var(--header-h);
-      display:flex;align-items:center;gap:10px;flex-shrink:0;position:relative}
-    .chat-fs-back{background:rgba(255,255,255,.18);border:none;color:#fff;
-      width:36px;height:36px;border-radius:10px;font-size:18px;
-      cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .chat-fs-header{background:linear-gradient(135deg,var(--green-dark),var(--green));color:#fff;padding:0 14px;height:var(--header-h);display:flex;align-items:center;gap:10px;flex-shrink:0;position:relative}
+    .chat-fs-back{background:rgba(255,255,255,.18);border:none;color:#fff;width:36px;height:36px;border-radius:10px;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
     .chat-fs-title{flex:1;min-width:0}
     .chat-fs-title-name{font-size:15px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
     .chat-fs-title-sub{font-size:11px;opacity:.8}
-    .chat-fs-menu-btn{background:rgba(255,255,255,.18);border:none;color:#fff;
-      width:36px;height:36px;border-radius:10px;font-size:20px;font-weight:900;
-      cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-    .chat-header-dropdown{display:none;position:absolute;right:14px;top:calc(var(--header-h) - 2px);
-      background:#fff;border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.22);
-      z-index:200;min-width:200px;overflow:hidden}
+    .chat-fs-menu-btn{background:rgba(255,255,255,.18);border:none;color:#fff;width:36px;height:36px;border-radius:10px;font-size:20px;font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .chat-header-dropdown{display:none;position:absolute;right:14px;top:calc(var(--header-h) - 2px);background:#fff;border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.22);z-index:200;min-width:200px;overflow:hidden}
     .chat-header-dropdown.open{display:block}
-    .chd-item{padding:14px 18px;font-size:14px;font-weight:700;color:var(--text);
-      cursor:pointer;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--border)}
+    .chd-item{padding:14px 18px;font-size:14px;font-weight:700;color:var(--text);cursor:pointer;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--border)}
     .chd-item:last-child{border-bottom:none}
     .chd-item:active{background:var(--green-muted)}
     .chd-item-danger{color:#991b1b}
     .chd-item-danger:active{background:#fee2e2}
-    .chat-side-panel{background:#fff;border-bottom:2px solid var(--border);
-      max-height:0;overflow:hidden;transition:max-height .3s ease}
+    .chat-side-panel{background:#fff;border-bottom:2px solid var(--border);max-height:0;overflow:hidden;transition:max-height .3s ease}
     .chat-side-panel.open{max-height:400px;overflow-y:auto}
-    .chat-side-panel-header{display:flex;align-items:center;justify-content:space-between;
-      padding:10px 16px;background:var(--green-muted);border-bottom:1px solid var(--border)}
-    .chat-side-panel-title{font-size:12px;font-weight:800;text-transform:uppercase;
-      letter-spacing:.8px;color:var(--green-dark)}
+    .chat-side-panel-header{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:var(--green-muted);border-bottom:1px solid var(--border)}
+    .chat-side-panel-title{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--green-dark)}
     .chat-side-panel-close{background:none;border:none;font-size:18px;cursor:pointer;color:var(--text-light);padding:0}
-    .chat-messages{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;
-      gap:8px;background:#e5ddd5;-webkit-overflow-scrolling:touch}
+    .chat-messages{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px;background:#e5ddd5;-webkit-overflow-scrolling:touch}
     .chat-empty{text-align:center;padding:30px;color:var(--text-light)}
-    .msg-bubble{max-width:82%;padding:9px 12px;border-radius:14px;font-size:13px;line-height:1.5}
-    .msg-mine{background:#dcf8c6;color:var(--text);border-bottom-right-radius:4px;align-self:flex-end}
-    .msg-other{background:#fff;color:var(--text);border:1px solid var(--border);
-      border-bottom-left-radius:4px;align-self:flex-start}
-    .msg-sender{font-size:10px;font-weight:800;color:var(--green-dark);margin-bottom:3px}
-    .msg-time{font-size:10px;color:#999;margin-top:2px;text-align:right}
-    .chat-input-bar{padding:8px 10px;border-top:1px solid var(--border);display:flex;
-      gap:6px;align-items:flex-end;background:#f0f0f0;flex-shrink:0;
-      padding-bottom:max(8px,env(safe-area-inset-bottom))}
-    .chat-input-bar textarea{flex:1;resize:none;max-height:80px;padding:9px 12px;
-      border-radius:20px;border:none;font-size:14px;
-      font-family:'Plus Jakarta Sans',sans-serif;outline:none;background:#fff;
-      box-shadow:0 1px 3px rgba(0,0,0,.1)}
-    .chat-send-btn{width:40px;height:40px;border-radius:50%;border:none;cursor:pointer;
-      background:linear-gradient(135deg,var(--green-dark),var(--green));color:#fff;
-      font-size:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .chat-input-bar{padding:8px 10px;border-top:1px solid var(--border);display:flex;gap:6px;align-items:flex-end;background:#f0f0f0;flex-shrink:0;padding-bottom:max(8px,env(safe-area-inset-bottom))}
+    .chat-input-bar textarea{flex:1;resize:none;max-height:80px;padding:9px 12px;border-radius:20px;border:none;font-size:14px;font-family:'Plus Jakarta Sans',sans-serif;outline:none;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.1)}
+    .chat-send-btn{width:40px;height:40px;border-radius:50%;border:none;cursor:pointer;background:linear-gradient(135deg,var(--green-dark),var(--green));color:#fff;font-size:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
     .chat-send-btn:active{transform:scale(.93)}
-    .chat-plus-btn{width:38px;height:38px;border-radius:50%;border:none;background:#fff;
-      color:var(--green-dark);font-size:20px;cursor:pointer;flex-shrink:0;
-      display:flex;align-items:center;justify-content:center;box-shadow:0 1px 3px rgba(0,0,0,.1)}
-    .msg-menu-btn{background:none;border:none;cursor:pointer;font-size:15px;color:#999;padding:0 2px;line-height:1}
-    .msg-menu-dropdown{display:none;position:absolute;right:0;top:20px;background:#fff;
-      border-radius:10px;box-shadow:0 4px 20px rgba(0,0,0,.18);z-index:99;min-width:130px;overflow:hidden}
-    .menu-item-delete{padding:10px 14px;font-size:13px;font-weight:700;color:#991b1b;
-      cursor:pointer;display:flex;align-items:center;gap:6px}
+    .chat-plus-btn{width:38px;height:38px;border-radius:50%;border:none;background:#fff;color:var(--green-dark);font-size:20px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 3px rgba(0,0,0,.1)}
+    .msg-menu-btn{background:none;border:none;cursor:pointer;font-size:15px;color:#999;padding:0 6px;line-height:1}
+    .msg-menu-dropdown{display:none;position:absolute;right:0;top:20px;background:#fff;border-radius:10px;box-shadow:0 4px 20px rgba(0,0,0,.18);z-index:99;min-width:150px;overflow:hidden}
+    .menu-item{padding:10px 14px;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px;border-bottom:1px solid #f0f0f0}
+    .menu-item:last-child{border-bottom:none}
+    .menu-item:active{background:#f5f5f5}
+    .menu-item-delete{color:#991b1b}
     .menu-item-delete:active{background:#fee2e2}
 
-    /* ── RAPPORT ── */
+    .chat-bubble, .chat-messages > div > div:last-child {
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      cursor: pointer;
+    }
+    .chat-bubble:hover, .chat-messages > div > div:last-child:hover {
+      transform: scale(1.01);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+    }
+
     .rapport-bar-wrap{background:#e0f0e0;border-radius:99px;height:8px;flex:1}
     .rapport-bar{height:8px;border-radius:99px;transition:width .6s ease}
     .two-col{display:grid;grid-template-columns:1fr;gap:14px}
 
-    /* ── NOTIF ── */
     .notif{position:fixed;bottom:calc(var(--nav-h) + 10px);left:50%;transform:translateX(-50%);
       z-index:9999;background:linear-gradient(135deg,var(--green-dark),var(--green));
       color:#fff;border-radius:12px;padding:12px 18px;font-size:13px;font-weight:700;
       box-shadow:0 6px 22px rgba(15,76,37,.4);max-width:calc(100vw - 28px);
       text-align:center;animation:notifIn .3s cubic-bezier(.22,1,.36,1) both;
       white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    @keyframes notifIn{from{opacity:0;transform:translateX(-50%) translateY(16px)}
-      to{opacity:1;transform:translateX(-50%) translateY(0)}}
+    @keyframes notifIn{from{opacity:0;transform:translateX(-50%) translateY(16px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
     .notif-err{background:linear-gradient(135deg,#991b1b,#dc2626)}
 
     @media(max-width:640px){.stats-grid{grid-template-columns:repeat(2,1fr)}.form-grid{grid-template-columns:1fr}.header-center{display:none}}
     @media(min-width:641px){.stats-grid{grid-template-columns:repeat(4,1fr)}.two-col{grid-template-columns:1fr 1fr}.form-grid{grid-template-columns:1fr 1fr}}
+    /* Effet survol des bulles */
+.chat-messages > div > div {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  cursor: pointer;
+}
+.chat-messages > div > div:hover {
+  transform: scale(1.01);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+}
   </style>
 </head>
 <body>
@@ -399,7 +332,7 @@
         <div class="fl"><label>Identifiant</label><input type="text" id="login-id" placeholder="Ex: admin2" autocomplete="username"/></div>
         <div class="fl">
           <label>Mot de passe</label>
-          <input type="password" id="login-pwd" placeholder="Votre mot de passe" autocomplete="current-password" onkeydown="if(event.key==='Enter')loginUser()"/>
+          <input type="password" id="login-pwd" placeholder="Votre mot de passe" autocomplete="current-password"/>
           <div class="err" id="err-login">Identifiant ou mot de passe incorrect</div>
         </div>
         <button class="cta-btn" id="btn-login" onclick="loginUser()">Se connecter →</button>
@@ -501,27 +434,17 @@
           <button class="add-btn" onclick="toggleForm('form-membre')">+ Nouveau</button>
         </div>
         <input class="search-box" type="text" id="search-membre" placeholder="🔍 Rechercher…" oninput="filtrerMembres()"/>
-
-        <!-- Formulaire nouveau membre avec anti-doublon -->
         <div id="form-membre" class="form-box" style="display:none">
-          <!-- Sélecteur du Kourel cible en premier -->
           <div style="margin-bottom:12px">
             <label style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--green-dark);display:block;margin-bottom:6px">Kourel cible</label>
             <select id="m-kourel" onchange="refreshMembreExistants()"></select>
           </div>
-
-          <!-- Membres existants à ajouter (clic = rattache au kourel) -->
           <div id="membres-existants-wrap" style="display:none;margin-bottom:14px">
-            <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--green-dark);margin-bottom:8px">
-              ✅ Membres déjà enregistrés — cliquer pour rattacher
-            </div>
+            <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--green-dark);margin-bottom:8px">✅ Membres déjà enregistrés — cliquer pour rattacher</div>
             <div id="membres-existants-list" style="display:flex;flex-wrap:wrap;gap:6px"></div>
             <div style="height:1px;background:var(--border);margin:14px 0"></div>
-            <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--green-dark);margin-bottom:8px">
-              ➕ Ou créer un nouveau membre
-            </div>
+            <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--green-dark);margin-bottom:8px">➕ Ou créer un nouveau membre</div>
           </div>
-
           <div class="form-grid">
             <input type="text" id="m-prenom" placeholder="Prénom"/>
             <input type="text" id="m-nom" placeholder="Nom"/>
@@ -532,7 +455,6 @@
             <button class="btn btn-secondary" onclick="toggleForm('form-membre')">Annuler</button>
           </div>
         </div>
-
         <div class="card" style="padding:0;overflow:hidden">
           <div class="table-wrap">
             <table>
@@ -547,17 +469,9 @@
       <div id="page-activites" class="page">
         <h2 class="page-title">Activités</h2>
         <div style="display:flex;gap:0;background:var(--card);border-radius:12px;padding:4px;box-shadow:var(--shadow);margin-bottom:16px">
-          <button id="tab-btn-programmes" onclick="switchActiviteTab('programmes')"
-            style="flex:1;padding:10px;border-radius:9px;border:none;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:800;cursor:pointer;background:var(--green);color:#fff;transition:all .2s">
-            📅 Programmes
-          </button>
-          <button id="tab-btn-presences" onclick="switchActiviteTab('presences')"
-            style="flex:1;padding:10px;border-radius:9px;border:none;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:800;cursor:pointer;background:transparent;color:var(--text-light);transition:all .2s">
-            ✅ Présences
-          </button>
+          <button id="tab-btn-programmes" onclick="switchActiviteTab('programmes')" style="flex:1;padding:10px;border-radius:9px;border:none;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:800;cursor:pointer;background:var(--green);color:#fff;transition:all .2s">📅 Programmes</button>
+          <button id="tab-btn-presences" onclick="switchActiviteTab('presences')" style="flex:1;padding:10px;border-radius:9px;border:none;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:800;cursor:pointer;background:transparent;color:var(--text-light);transition:all .2s">✅ Présences</button>
         </div>
-
-        <!-- TAB Programmes -->
         <div id="tab-programmes">
           <div style="display:flex;justify-content:flex-end;margin-bottom:12px">
             <button class="add-btn" onclick="toggleForm('form-programme')">+ Nouveau</button>
@@ -571,8 +485,6 @@
               <input type="text" id="pr-responsable" placeholder="Responsable"/>
               <input type="time" id="pr-heure"/>
             </div>
-
-            <!-- FIX 2 : Sons multiples (IDs préfixés pr- pour éviter conflits) -->
             <div class="section-label">🎵 Sons de référence</div>
             <div class="sons-container">
               <div class="sons-drop-zone" onclick="document.getElementById('pr-sons-input').click()">
@@ -584,11 +496,8 @@
               <div class="sons-list" id="pr-sons-list"></div>
               <div class="sons-count" id="pr-sons-count" style="display:none"><span id="pr-sons-n">0</span> son(s) sélectionné(s)</div>
             </div>
-
-            <!-- FIX 2 : PDF / Photos (IDs préfixés pr-) -->
             <div class="section-label">📚 Xassida — PDF &amp; Photos</div>
             <div class="docs-container">
-              <!-- FIX 3 : onglets utilisent data-panel pour ne pas conflicquer avec switchActiviteTab -->
               <div class="docs-tabs">
                 <button class="doc-tab active" onclick="switchDocsTab('pr-pdf','pr',this)">📄 PDF</button>
                 <button class="doc-tab" onclick="switchDocsTab('pr-photo','pr',this)">🖼️ Photos</button>
@@ -612,7 +521,6 @@
                 <div class="photo-grid" id="pr-photo-grid"></div>
               </div>
             </div>
-
             <div class="form-section-title">Tolérance</div>
             <div style="display:flex;gap:6px;flex-wrap:wrap" id="tol-buttons">
               <button class="tol-btn selected" onclick="selectTolerance(this,'0')">Aucune</button>
@@ -631,8 +539,6 @@
           </div>
           <div id="programmes-list"></div>
         </div>
-
-        <!-- TAB Présences -->
         <div id="tab-presences" style="display:none">
           <div style="display:flex;justify-content:flex-end;margin-bottom:12px">
             <button class="add-btn" onclick="toggleForm('form-presence')">+ Session</button>
@@ -703,13 +609,13 @@
 
   <!-- CHAT FULLSCREEN -->
   <div id="chat-fullscreen">
-    <div class="chat-fs-header" id="chat-fs-header">
+    <div class="chat-fs-header">
       <button class="chat-fs-back" onclick="closeChatFullscreen()">←</button>
       <div class="chat-fs-title">
         <div class="chat-fs-title-name" id="chat-fs-name">—</div>
         <div class="chat-fs-title-sub" id="chat-fs-sub">—</div>
       </div>
-      <button class="chat-fs-menu-btn" id="chat-fs-dots" onclick="toggleChatHeaderMenu()">⋮</button>
+      <button class="chat-fs-menu-btn" onclick="toggleChatHeaderMenu()">⋮</button>
       <div class="chat-header-dropdown" id="chat-header-dropdown">
         <div class="chd-item" onclick="showChatPanel('membres')">👤 Membres</div>
         <div class="chd-item" onclick="showChatPanel('presences')">✅ Présences</div>
@@ -724,14 +630,11 @@
       <div id="chat-side-panel-content"></div>
     </div>
     <div class="chat-messages" id="chat-msgs-area"></div>
-    <div class="chat-input-bar" id="chat-input-bar">
-      <button class="chat-plus-btn" onclick="document.getElementById('chat-file-input').click()" title="Fichier">+</button>
+    <div class="chat-input-bar">
+      <button class="chat-plus-btn" onclick="document.getElementById('chat-file-input').click()">+</button>
       <input type="file" id="chat-file-input" accept="audio/*,image/*" style="display:none" onchange="sendFileMsgFS(event)"/>
-      <textarea id="chat-input-field" placeholder="Écrire un message…" rows="1"
-        onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMsgFS()}"></textarea>
-      <button class="chat-send-btn" id="btn-vocal"
-        style="background:linear-gradient(135deg,#dc2626,#991b1b)" title="Vocal"
-        onclick="startVocalFS()">🎤</button>
+      <textarea id="chat-input-field" placeholder="Écrire un message…" rows="1"></textarea>
+      <button class="chat-send-btn" id="btn-vocal" style="background:linear-gradient(135deg,#dc2626,#991b1b)" title="Vocal" onclick="startVocalFS()">🎤</button>
       <button class="chat-send-btn" onclick="sendMsgFS()">➤</button>
     </div>
   </div>
@@ -747,323 +650,405 @@
 </div>
 
 <script>
-const API='https://daara-connect-backend.onrender.com/api';
-let token=localStorage.getItem('dc_token')||'';
-let currentUser=JSON.parse(localStorage.getItem('dc_user')||'null');
-let currentDaara=JSON.parse(localStorage.getItem('dc_daara')||'null');
-let cacheKourels=[];
-let cacheMembres=[];
-let presenceStatuts={};
-let activeChatRoom=null;
-let mediaRecorder=null;
-let audioChunks=[];
-let isRecording=false;
-let currentAudio=null;
-let currentPlayBtn=null;
+// ==================== CONFIGURATION ====================
+const API = 'http://localhost:5000/api';
+let token = localStorage.getItem('dc_token') || '';
+let currentUser = JSON.parse(localStorage.getItem('dc_user') || 'null');
+let currentDaara = JSON.parse(localStorage.getItem('dc_daara') || 'null');
+let cacheKourels = [];
+let cacheMembres = [];
+let presenceStatuts = {};
+let activeChatRoom = null;
+let mediaRecorder = null;
+let audioChunks = [];
+let isRecording = false;
+let currentAudio = null;
+let currentPlayBtn = null;
+let chatFsKourelId = null;
+let chatFsNom = null;
 
-// ── HELPERS ──────────────────────────────────────────────
-function escHtml(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-function badge(s){
-  const map={'Actif':'actif','Inactif':'inactif','Payé':'payé','En attente':'attente','Admin':'admin','Membre':'membre'};
+// ==================== UTILITAIRES ====================
+function escHtml(s) {
+  return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+function badge(s) {
+  const map = {'Actif':'actif','Inactif':'inactif','Payé':'payé','En attente':'attente','Admin':'admin','Membre':'membre'};
   return `<span class="badge ${map[s]||''}">${escHtml(s)}</span>`;
 }
-function showNotif(msg,isErr){
-  document.querySelectorAll('.notif').forEach(n=>n.remove());
-  const n=document.createElement('div');
-  n.className='notif'+(isErr?' notif-err':'');
-  n.textContent=msg;
+
+function showNotif(msg, isErr) {
+  document.querySelectorAll('.notif').forEach(n => n.remove());
+  const n = document.createElement('div');
+  n.className = 'notif' + (isErr ? ' notif-err' : '');
+  n.textContent = msg;
   document.body.appendChild(n);
-  setTimeout(()=>n.remove(),3500);
+  setTimeout(() => n.remove(), 3500);
 }
-function getHeaders(){return{'Content-Type':'application/json','Authorization':'Bearer '+token};}
-async function api(method,path,body){
-  const opts={method,headers:getHeaders()};
-  if(body)opts.body=JSON.stringify(body);
-  const res=await fetch(API+path,opts);
-  const data=await res.json();
-  if(!res.ok)throw new Error(data.message||'Erreur serveur');
+
+function getHeaders() {
+  return {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token};
+}
+
+async function api(method, path, body) {
+  const opts = {method, headers: getHeaders()};
+  if (body) opts.body = JSON.stringify(body);
+  const res = await fetch(API + path, opts);
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.message || 'Erreur serveur');
   return data;
 }
-function isAdmin(){return currentUser?.role==='admin';}
-function selectTolerance(btn,val){
-  document.querySelectorAll('#tol-buttons .tol-btn').forEach(b=>b.classList.remove('selected'));
-  btn.classList.add('selected');
-  document.getElementById('pr-tolerance').value=val;
-}
-function formatSize(bytes){
-  if(bytes<1024)return bytes+' B';
-  if(bytes<1048576)return (bytes/1024).toFixed(1)+' KB';
-  return (bytes/1048576).toFixed(1)+' MB';
+
+function isAdmin() {
+  return currentUser?.role === 'admin';
 }
 
-// ── AUTH ─────────────────────────────────────────────────
-// FIX : renommé switchLoginTab pour ne pas conflicquer avec switchDocsTab
-function switchLoginTab(tab){
-  const a=tab==='admin';
-  document.getElementById('form-admin').style.display=a?'block':'none';
-  document.getElementById('form-membre-login').style.display=a?'none':'block';
-  document.getElementById('btn-tab-admin').style.cssText=`flex:1;padding:10px;border-radius:10px;font-size:13px;border:2px solid ${a?'var(--green)':'var(--border)'};background:${a?'var(--green)':'#fff'};color:${a?'#fff':'var(--text-light)'};font-weight:800;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif`;
-  document.getElementById('btn-tab-membre').style.cssText=`flex:1;padding:10px;border-radius:10px;font-size:13px;border:2px solid ${!a?'var(--green)':'var(--border)'};background:${!a?'var(--green)':'#fff'};color:${!a?'#fff':'var(--text-light)'};font-weight:800;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif`;
+function formatSize(bytes) {
+  if (bytes < 1024) return bytes + ' B';
+  if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+  return (bytes / 1048576).toFixed(1) + ' MB';
 }
 
-async function loginUser(){
-  const identifiant=document.getElementById('login-id').value.trim();
-  const motDePasse=document.getElementById('login-pwd').value;
-  const errEl=document.getElementById('err-login');
-  const btn=document.getElementById('btn-login');
-  if(!identifiant||!motDePasse){errEl.textContent='Veuillez remplir tous les champs';errEl.style.display='block';return;}
-  btn.disabled=true;btn.textContent='Connexion…';
-  try{
-    const data=await api('POST','/auth/login',{identifiant,motDePasse});
-    token=data.token;
-    // Décoder le JWT pour récupérer l'ID exact utilisé par le backend
-    const payload=JSON.parse(atob(token.split('.')[1]));
-    const adminId=payload.id; // même valeur que decoded.id dans auth.middleware
-    currentUser={id:adminId, _id:adminId, nom:data.daara?.nom||identifiant, role:'admin'};
-    currentDaara=data.daara||{};
-    localStorage.setItem('dc_token',token);
-    localStorage.setItem('dc_user',JSON.stringify(currentUser));
-    localStorage.setItem('dc_daara',JSON.stringify(currentDaara));
-    errEl.style.display='none';
+// ==================== AUTHENTIFICATION ====================
+function switchLoginTab(tab) {
+  const a = tab === 'admin';
+  document.getElementById('form-admin').style.display = a ? 'block' : 'none';
+  document.getElementById('form-membre-login').style.display = a ? 'none' : 'block';
+  const btnAdmin = document.getElementById('btn-tab-admin');
+  const btnMembre = document.getElementById('btn-tab-membre');
+  btnAdmin.style.cssText = `flex:1;padding:10px;border-radius:10px;font-size:13px;border:2px solid ${a ? 'var(--green)' : 'var(--border)'};background:${a ? 'var(--green)' : '#fff'};color:${a ? '#fff' : 'var(--text-light)'};font-weight:800;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif`;
+  btnMembre.style.cssText = `flex:1;padding:10px;border-radius:10px;font-size:13px;border:2px solid ${!a ? 'var(--green)' : 'var(--border)'};background:${!a ? 'var(--green)' : '#fff'};color:${!a ? '#fff' : 'var(--text-light)'};font-weight:800;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif`;
+}
+
+async function loginUser() {
+  const identifiant = document.getElementById('login-id').value.trim();
+  const motDePasse = document.getElementById('login-pwd').value;
+  const errEl = document.getElementById('err-login');
+  const btn = document.getElementById('btn-login');
+  if (!identifiant || !motDePasse) {
+    errEl.textContent = 'Veuillez remplir tous les champs';
+    errEl.style.display = 'block';
+    return;
+  }
+  btn.disabled = true;
+  btn.textContent = 'Connexion…';
+  try {
+    const data = await api('POST', '/auth/login', {identifiant, motDePasse});
+    token = data.token;
+    currentUser = {id: data.user?._id || data.user?.id, nom: data.daara?.nom || identifiant, role: 'admin'};
+    currentDaara = data.daara || {};
+    localStorage.setItem('dc_token', token);
+    localStorage.setItem('dc_user', JSON.stringify(currentUser));
+    localStorage.setItem('dc_daara', JSON.stringify(currentDaara));
+    errEl.style.display = 'none';
     launchApp();
-  }catch(e){errEl.textContent=e.message;errEl.style.display='block';}
-  finally{btn.disabled=false;btn.textContent='Se connecter →';}
+  } catch(e) {
+    errEl.textContent = e.message;
+    errEl.style.display = 'block';
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Se connecter →';
+  }
 }
 
-async function loginMembre(){
-  const telephone=document.getElementById('login-tel').value.trim();
-  const errEl=document.getElementById('err-login-membre');
-  const btn=document.getElementById('btn-login-membre');
-  if(!telephone){errEl.style.display='block';errEl.textContent='Entrez votre numéro';return;}
-  btn.disabled=true;btn.textContent='Connexion…';
-  try{
-    const data=await api('POST','/auth/login-membre',{telephone});
-    token=data.token;
-    currentUser={id:data.membre.id,nom:data.membre.prenom+' '+data.membre.nom,role:'membre'};
-    currentDaara={id:data.membre.daara,nom:'Daara Connect'};
-    localStorage.setItem('dc_token',token);
-    localStorage.setItem('dc_user',JSON.stringify(currentUser));
-    localStorage.setItem('dc_daara',JSON.stringify(currentDaara));
-    errEl.style.display='none';
+async function loginMembre() {
+  const telephone = document.getElementById('login-tel').value.trim();
+  const errEl = document.getElementById('err-login-membre');
+  const btn = document.getElementById('btn-login-membre');
+  if (!telephone) {
+    errEl.style.display = 'block';
+    errEl.textContent = 'Entrez votre numéro';
+    return;
+  }
+  btn.disabled = true;
+  btn.textContent = 'Connexion…';
+  try {
+    const data = await api('POST', '/auth/login-membre', {telephone});
+    token = data.token;
+    currentUser = {id: data.membre.id, nom: data.membre.prenom + ' ' + data.membre.nom, role: 'membre', telephone: telephone};
+    currentDaara = {id: data.membre.daara, nom: 'Daara Connect'};
+    localStorage.setItem('dc_token', token);
+    localStorage.setItem('dc_user', JSON.stringify(currentUser));
+    localStorage.setItem('dc_daara', JSON.stringify(currentDaara));
+    errEl.style.display = 'none';
     launchApp();
-  }catch(e){errEl.style.display='block';errEl.textContent=e.message;}
-  finally{btn.disabled=false;btn.textContent='Accéder →';}
+  } catch(e) {
+    errEl.style.display = 'block';
+    errEl.textContent = e.message;
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Accéder →';
+  }
 }
 
-async function createDaara(){
-  const nom=document.getElementById('new-daara-nom').value.trim();
-  const siege=document.getElementById('new-daara-siege').value.trim();
-  const identifiant=document.getElementById('new-admin-id').value.trim();
-  const motDePasse=document.getElementById('new-admin-pwd').value.trim();
-  let ok=true;
-  [['err-new-nom',nom],['err-new-siege',siege],['err-new-id',identifiant],['err-new-pwd',motDePasse]]
-    .forEach(([id,v])=>{document.getElementById(id).style.display=v?'none':'block';if(!v)ok=false;});
-  if(!ok)return;
-  const btn=document.getElementById('btn-create');
-  btn.disabled=true;btn.textContent='Création…';
-  try{
-    await api('POST','/auth/register',{nom,siege,identifiant,motDePasse});
+async function createDaara() {
+  const nom = document.getElementById('new-daara-nom').value.trim();
+  const siege = document.getElementById('new-daara-siege').value.trim();
+  const identifiant = document.getElementById('new-admin-id').value.trim();
+  const motDePasse = document.getElementById('new-admin-pwd').value.trim();
+  let ok = true;
+  [['err-new-nom', nom], ['err-new-siege', siege], ['err-new-id', identifiant], ['err-new-pwd', motDePasse]].forEach(([id, v]) => {
+    document.getElementById(id).style.display = v ? 'none' : 'block';
+    if (!v) ok = false;
+  });
+  if (!ok) return;
+  const btn = document.getElementById('btn-create');
+  btn.disabled = true;
+  btn.textContent = 'Création…';
+  try {
+    await api('POST', '/auth/register', {nom, siege, identifiant, motDePasse});
     showNotif('Daara créé ! Connectez-vous.');
     showSearchPhase();
-    document.getElementById('login-id').value=identifiant;
-  }catch(e){showNotif(e.message,true);}
-  finally{btn.disabled=false;btn.textContent='Créer le Daara →';}
+    document.getElementById('login-id').value = identifiant;
+  } catch(e) {
+    showNotif(e.message, true);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Créer le Daara →';
+  }
 }
 
-function logout(){
-  localStorage.removeItem('dc_token');localStorage.removeItem('dc_user');localStorage.removeItem('dc_daara');
-  token='';currentUser=null;currentDaara=null;cacheKourels=[];cacheMembres=[];activeChatRoom=null;
-  document.getElementById('app').style.display='none';
-  document.getElementById('welcome-screen').style.display='flex';
-  document.getElementById('login-id').value='';
-  document.getElementById('login-pwd').value='';
-  document.getElementById('err-login').style.display='none';
+function logout() {
+  localStorage.removeItem('dc_token');
+  localStorage.removeItem('dc_user');
+  localStorage.removeItem('dc_daara');
+  token = '';
+  currentUser = null;
+  currentDaara = null;
+  cacheKourels = [];
+  cacheMembres = [];
+  activeChatRoom = null;
+  document.getElementById('app').style.display = 'none';
+  document.getElementById('welcome-screen').style.display = 'flex';
 }
-function showCreatePhase(){document.getElementById('search-phase').style.display='none';document.getElementById('create-phase').style.display='block';}
-function showSearchPhase(){document.getElementById('create-phase').style.display='none';document.getElementById('search-phase').style.display='block';}
 
-// ── APP LAUNCH ───────────────────────────────────────────
-function launchApp(){
-  document.getElementById('welcome-screen').style.display='none';
-  document.getElementById('app').style.display='flex';
-  document.getElementById('hdr-daara').textContent=currentDaara?.nom||'—';
-  document.getElementById('hdr-meta').textContent=currentDaara?.siege||'—';
-  document.getElementById('hdr-username').textContent=currentUser?.nom||'—';
-  document.getElementById('hdr-avatar').textContent=(currentUser?.nom||currentDaara?.nom||'?')[0].toUpperCase();
-  document.getElementById('hdr-role').textContent=isAdmin()?'Admin':'Membre';
+function showCreatePhase() {
+  document.getElementById('search-phase').style.display = 'none';
+  document.getElementById('create-phase').style.display = 'block';
+}
+
+function showSearchPhase() {
+  document.getElementById('create-phase').style.display = 'none';
+  document.getElementById('search-phase').style.display = 'block';
+}
+
+function launchApp() {
+  document.getElementById('welcome-screen').style.display = 'none';
+  document.getElementById('app').style.display = 'flex';
+  document.getElementById('hdr-daara').textContent = currentDaara?.nom || '—';
+  document.getElementById('hdr-meta').textContent = currentDaara?.siege || '—';
+  document.getElementById('hdr-username').textContent = currentUser?.nom || '—';
+  document.getElementById('hdr-avatar').textContent = (currentUser?.nom || currentDaara?.nom || '?')[0].toUpperCase();
+  document.getElementById('hdr-role').textContent = isAdmin() ? 'Admin' : 'Membre';
   renderAll();
 }
 
-function showPage(id,btn){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  const el=document.getElementById('page-'+id);
-  if(el)el.classList.add('active');
-  document.querySelectorAll('.bottom-nav-btn').forEach(b=>b.classList.remove('active'));
-  if(btn)btn.classList.add('active');
-  document.querySelector('.content-wrap').scrollTop=0;
+// ==================== NAVIGATION ====================
+function showPage(id, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const el = document.getElementById('page-' + id);
+  if (el) el.classList.add('active');
+  document.querySelectorAll('.bottom-nav-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  document.querySelector('.content-wrap').scrollTop = 0;
 }
 
-function switchActiviteTab(tab){
-  const btnProg=document.getElementById('tab-btn-programmes');
-  const btnPres=document.getElementById('tab-btn-presences');
-  const tabProg=document.getElementById('tab-programmes');
-  const tabPres=document.getElementById('tab-presences');
-  if(!btnProg)return;
-  if(tab==='programmes'){
-    btnProg.style.background='var(--green)';btnProg.style.color='#fff';
-    btnPres.style.background='transparent';btnPres.style.color='var(--text-light)';
-    tabProg.style.display='block';tabPres.style.display='none';
-  }else{
-    btnPres.style.background='var(--green)';btnPres.style.color='#fff';
-    btnProg.style.background='transparent';btnProg.style.color='var(--text-light)';
-    tabPres.style.display='block';tabProg.style.display='none';
+function switchActiviteTab(tab) {
+  const btnProg = document.getElementById('tab-btn-programmes');
+  const btnPres = document.getElementById('tab-btn-presences');
+  const tabProg = document.getElementById('tab-programmes');
+  const tabPres = document.getElementById('tab-presences');
+  if (tab === 'programmes') {
+    btnProg.style.background = 'var(--green)';
+    btnProg.style.color = '#fff';
+    btnPres.style.background = 'transparent';
+    btnPres.style.color = 'var(--text-light)';
+    tabProg.style.display = 'block';
+    tabPres.style.display = 'none';
+  } else {
+    btnPres.style.background = 'var(--green)';
+    btnPres.style.color = '#fff';
+    btnProg.style.background = 'transparent';
+    btnProg.style.color = 'var(--text-light)';
+    tabPres.style.display = 'block';
+    tabProg.style.display = 'none';
   }
 }
 
-// FIX : switchDocsTab — fonction dédiée aux onglets PDF/Photos avec préfixe
-function switchDocsTab(type,prefix,btn){
-  // Chercher dans le container parent
-  const container=btn.closest('.docs-container');
-  container.querySelectorAll('.doc-tab').forEach(t=>t.classList.remove('active'));
-  container.querySelectorAll('.doc-panel').forEach(p=>p.classList.remove('active'));
+function switchDocsTab(type, prefix, btn) {
+  const container = btn.closest('.docs-container');
+  container.querySelectorAll('.doc-tab').forEach(t => t.classList.remove('active'));
+  container.querySelectorAll('.doc-panel').forEach(p => p.classList.remove('active'));
   btn.classList.add('active');
-  const panel=document.getElementById(prefix+'-panel-'+prefix+'-'+type);
-  if(panel)panel.classList.add('active');
+  const panel = document.getElementById(prefix + '-panel-' + prefix + '-' + type);
+  if (panel) panel.classList.add('active');
 }
 
-function toggleForm(id){
-  const el=document.getElementById(id);
-  if(!el)return;
-  const visible=el.style.display!=='none';
-  el.style.display=visible?'none':'block';
-  if(!visible){
-    if(id==='form-membre'){remplirSelectKourels('m-kourel');setTimeout(refreshMembreExistants,50);}
-    if(id==='form-programme')remplirSelectKourels('pr-kourel');
-    if(id==='form-presence'){remplirSelectKourels('p-kourel');loadMembresForPresence();}
+function toggleForm(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const visible = el.style.display !== 'none';
+  el.style.display = visible ? 'none' : 'block';
+  if (!visible) {
+    if (id === 'form-membre') {
+      remplirSelectKourels('m-kourel');
+      setTimeout(refreshMembreExistants, 50);
+    }
+    if (id === 'form-programme') remplirSelectKourels('pr-kourel');
+    if (id === 'form-presence') {
+      remplirSelectKourels('p-kourel');
+      loadMembresForPresence();
+    }
   }
 }
 
-function openFormAdiyeu(){
-  const el=document.getElementById('form-adiyeu');
-  const visible=el.style.display!=='none';
-  el.style.display=visible?'none':'block';
-  if(!visible){remplirSelectKourels('a-kourel');remplirSelectMembres('a-membre');}
+function openFormAdiyeu() {
+  const el = document.getElementById('form-adiyeu');
+  const visible = el.style.display !== 'none';
+  el.style.display = visible ? 'none' : 'block';
+  if (!visible) {
+    remplirSelectKourels('a-kourel');
+    remplirSelectMembres('a-membre');
+  }
 }
 
-function remplirSelectKourels(selId){
-  const el=document.getElementById(selId);if(!el)return;
-  el.innerHTML=cacheKourels.length
-    ?cacheKourels.map(k=>`<option value="${k._id}">${escHtml(k.nom)}</option>`).join('')
-    :'<option value="">Aucun Kourel</option>';
-}
-function remplirSelectMembres(selId){
-  const el=document.getElementById(selId);if(!el)return;
-  el.innerHTML=cacheMembres.length
-    ?cacheMembres.map(m=>`<option value="${m._id}">${escHtml(m.prenom+' '+m.nom)}</option>`).join('')
-    :'<option value="">Aucun membre</option>';
+function remplirSelectKourels(selId) {
+  const el = document.getElementById(selId);
+  if (!el) return;
+  el.innerHTML = cacheKourels.length ? cacheKourels.map(k => `<option value="${k._id}">${escHtml(k.nom)}</option>`).join('') : '<option value="">Aucun Kourel</option>';
 }
 
-// ── RENDER ALL ───────────────────────────────────────────
-async function renderAll(){
-  try{
-    await Promise.all([renderKourels(),renderMembres()]);
-    await Promise.all([renderProgrammes(),renderPresences(),renderCotisations()]);
-    renderAccueil();renderRapports();
-  }catch(e){console.error('renderAll:',e);}
+function remplirSelectMembres(selId) {
+  const el = document.getElementById(selId);
+  if (!el) return;
+  el.innerHTML = cacheMembres.length ? cacheMembres.map(m => `<option value="${m._id}">${escHtml(m.prenom + ' ' + m.nom)}</option>`).join('') : '<option value="">Aucun membre</option>';
 }
 
-// ── ACCUEIL ──────────────────────────────────────────────
-function renderAccueil(){
-  document.getElementById('stat-kourels').textContent=cacheKourels.length;
-  document.getElementById('stat-membres').textContent=cacheMembres.length;
-  document.getElementById('accueil-kourels').innerHTML=cacheKourels.map(k=>`
+function selectTolerance(btn, val) {
+  document.querySelectorAll('#tol-buttons .tol-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  document.getElementById('pr-tolerance').value = val;
+}
+
+// ==================== RENDU PRINCIPAL ====================
+async function renderAll() {
+  try {
+    await Promise.all([renderKourels(), renderMembres()]);
+    await Promise.all([renderProgrammes(), renderPresences(), renderCotisations()]);
+    renderAccueil();
+    renderRapports();
+  } catch(e) {
+    console.error('renderAll:', e);
+  }
+}
+
+function renderAccueil() {
+  document.getElementById('stat-kourels').textContent = cacheKourels.length;
+  document.getElementById('stat-membres').textContent = cacheMembres.length;
+  document.getElementById('accueil-kourels').innerHTML = cacheKourels.map(k => `
     <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);cursor:pointer"
       onclick="showPage('kourels',document.querySelector('.bottom-nav-btn:nth-child(2)'));openKourelDetail('${k._id}','${escHtml(k.nom)}')">
       <div style="font-weight:700;font-size:13px">${escHtml(k.nom)}</div>
-      <div style="font-size:11px;color:var(--text-light)">${cacheMembres.filter(m=>(m.kourel?._id||m.kourel)===k._id).length} membres →</div>
-    </div>`).join('')||'<p style="color:var(--text-light);font-size:12px">Aucun Kourel</p>';
-  document.getElementById('accueil-membres').innerHTML=cacheMembres.slice(0,5).map(m=>`
+      <div style="font-size:11px;color:var(--text-light)">${cacheMembres.filter(m => (m.kourel?._id || m.kourel) === k._id).length} membres →</div>
+    </div>`).join('') || '<p style="color:var(--text-light);font-size:12px">Aucun Kourel</p>';
+  document.getElementById('accueil-membres').innerHTML = cacheMembres.slice(0, 5).map(m => `
     <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)">
-      <div style="font-weight:700;font-size:13px">${escHtml(m.prenom+' '+m.nom)}</div>
-      <div style="font-size:11px;color:var(--text-light)">${escHtml(m.telephone||'—')}</div>
-    </div>`).join('')||'<p style="color:var(--text-light);font-size:12px">Aucun membre</p>';
+      <div style="font-weight:700;font-size:13px">${escHtml(m.prenom + ' ' + m.nom)}</div>
+      <div style="font-size:11px;color:var(--text-light)">${escHtml(m.telephone || '—')}</div>
+    </div>`).join('') || '<p style="color:var(--text-light);font-size:12px">Aucun membre</p>';
 }
 
-// ── KOURELS ──────────────────────────────────────────────
-async function renderKourels(){
-  try{
-    cacheKourels=await api('GET','/kourels');
-    const sidebar=document.getElementById('kourels-list-sidebar');
-    if(sidebar){
-      sidebar.innerHTML=cacheKourels.length
-        ?cacheKourels.map(k=>`
-          <div class="chat-room-item" onclick="openChatFullscreen('${k._id}','${escHtml(k.nom)}')">
-            <div class="room-icon">👥</div>
-            <div style="flex:1;min-width:0">
-              <div class="room-name">${escHtml(k.nom)}</div>
-              <div class="room-desc">${cacheMembres.filter(m=>(m.kourel?._id||m.kourel)===k._id).length} membres · ${badge(k.statut||'Actif')}</div>
-            </div>
-            <div class="room-arrow">›</div>
-          </div>`).join('')
-        :'<div style="padding:18px;font-size:13px;color:var(--text-light);text-align:center">Aucun Kourel — créez-en un !</div>';
+async function renderKourels() {
+  try {
+    cacheKourels = await api('GET', '/kourels');
+    const sidebar = document.getElementById('kourels-list-sidebar');
+    if (sidebar) {
+      sidebar.innerHTML = cacheKourels.length ? cacheKourels.map(k => `
+        <div class="chat-room-item" onclick="openChatFullscreen('${k._id}','${escHtml(k.nom)}')">
+          <div class="room-icon">👥</div>
+          <div style="flex:1;min-width:0">
+            <div class="room-name">${escHtml(k.nom)}</div>
+            <div class="room-desc">${cacheMembres.filter(m => (m.kourel?._id || m.kourel) === k._id).length} membres · ${badge(k.statut || 'Actif')}</div>
+          </div>
+          <div class="room-arrow">›</div>
+        </div>`).join('') : '<div style="padding:18px;font-size:13px;color:var(--text-light);text-align:center">Aucun Kourel — créez-en un !</div>';
     }
-  }catch(e){showNotif('Erreur chargement Kourels',true);}
+  } catch(e) {
+    showNotif('Erreur chargement Kourels', true);
+  }
 }
 
-async function addKourel(){
-  const nom=document.getElementById('k-nom').value.trim();
-  if(!nom){showNotif('Nom obligatoire',true);return;}
-  try{
-    await api('POST','/kourels',{nom,description:document.getElementById('k-desc').value.trim(),statut:document.getElementById('k-statut').value});
-    ['k-nom','k-desc'].forEach(id=>document.getElementById(id).value='');
+async function addKourel() {
+  const nom = document.getElementById('k-nom').value.trim();
+  if (!nom) {
+    showNotif('Nom obligatoire', true);
+    return;
+  }
+  try {
+    await api('POST', '/kourels', {nom, description: document.getElementById('k-desc').value.trim(), statut: document.getElementById('k-statut').value});
+    document.getElementById('k-nom').value = '';
+    document.getElementById('k-desc').value = '';
     toggleForm('form-kourel');
-    await renderKourels();renderAccueil();
+    await renderKourels();
+    renderAccueil();
     showNotif('Kourel ajouté !');
-  }catch(e){showNotif(e.message,true);}
+  } catch(e) {
+    showNotif(e.message, true);
+  }
 }
 
-// ── CHAT FULLSCREEN ──────────────────────────────────────
-let chatFsKourelId=null;
-let chatFsNom=null;
-
-async function openChatFullscreen(kourelId,nom){
-  chatFsKourelId=kourelId;chatFsNom=nom;activeChatRoom=kourelId;
-  document.getElementById('chat-fs-name').textContent=nom;
-  const membres=cacheMembres.filter(m=>(m.kourel?._id||m.kourel)===kourelId);
-  document.getElementById('chat-fs-sub').textContent=membres.length+' membres';
-  document.getElementById('chd-delete-btn').style.display=isAdmin()?'flex':'none';
+// ==================== CHAT - STYLE WHATSAPP ====================
+async function openChatFullscreen(kourelId, nom) {
+  chatFsKourelId = kourelId;
+  chatFsNom = nom;
+  activeChatRoom = kourelId;
+  document.getElementById('chat-fs-name').textContent = nom;
+  const membres = cacheMembres.filter(m => (m.kourel?._id || m.kourel) === kourelId);
+  document.getElementById('chat-fs-sub').textContent = membres.length + ' membres';
+  document.getElementById('chd-delete-btn').style.display = isAdmin() ? 'flex' : 'none';
   document.getElementById('chat-fullscreen').classList.add('open');
   document.getElementById('chat-header-dropdown').classList.remove('open');
   document.getElementById('chat-side-panel').classList.remove('open');
   await loadChatMessages();
 }
-function closeChatFullscreen(){
+
+function closeChatFullscreen() {
   document.getElementById('chat-fullscreen').classList.remove('open');
   document.getElementById('chat-header-dropdown').classList.remove('open');
   document.getElementById('chat-side-panel').classList.remove('open');
-  chatFsKourelId=null;chatFsNom=null;
+  chatFsKourelId = null;
+  chatFsNom = null;
 }
-function toggleChatHeaderMenu(){document.getElementById('chat-header-dropdown').classList.toggle('open');}
 
-function showChatPanel(type){
+function toggleChatHeaderMenu() {
+  document.getElementById('chat-header-dropdown').classList.toggle('open');
+}
+
+function showChatPanel(type) {
   document.getElementById('chat-header-dropdown').classList.remove('open');
-  const panel=document.getElementById('chat-side-panel');
-  const content=document.getElementById('chat-side-panel-content');
-  const title=document.getElementById('chat-side-panel-title');
-  if(type==='membres'){
-    title.textContent='👤 Membres';
-    const membres=cacheMembres.filter(m=>(m.kourel?._id||m.kourel)===chatFsKourelId);
-    content.innerHTML=`<div style="padding:12px 16px">
+  const panel = document.getElementById('chat-side-panel');
+  const content = document.getElementById('chat-side-panel-content');
+  const title = document.getElementById('chat-side-panel-title');
+  if (type === 'membres') {
+    title.textContent = '👤 Membres';
+    const membres = cacheMembres.filter(m => (m.kourel?._id || m.kourel) === chatFsKourelId);
+    content.innerHTML = `<div style="padding:12px 16px">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
         <span style="font-size:12px;color:var(--text-light)">${membres.length} membres dans ce Kourel</span>
-        ${isAdmin()?`<button onclick="showAddMembreFS()" style="background:var(--green);color:#fff;border:none;border-radius:8px;padding:6px 12px;font-size:12px;font-weight:800;cursor:pointer">+ Ajouter</button>`:''}
+        ${isAdmin() ? `<button onclick="showAddMembreFS()" style="background:var(--green);color:#fff;border:none;border-radius:8px;padding:6px 12px;font-size:12px;font-weight:800;cursor:pointer">+ Ajouter</button>` : ''}
       </div>
       <div style="display:flex;flex-wrap:wrap;gap:6px">
-        ${membres.length?membres.map(m=>`<span class="member-chip">${escHtml(m.prenom+' '+m.nom)}</span>`).join(''):'<span style="font-size:12px;color:var(--text-light)">Aucun membre</span>'}
-      </div></div>`;
-  }else{
-    title.textContent='✅ Présences';
-    content.innerHTML=`<div style="padding:16px;text-align:center">
+        // APRÈS
+${membres.length ? membres.map(m => `
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)">
+    <span style="font-size:13px;font-weight:700">${escHtml(m.prenom + ' ' + m.nom)}</span>
+    ${isAdmin() && m.telephone ? `<button onclick="inviterMembre('${m._id}')"
+      style="background:var(--green);color:#fff;border:none;border-radius:8px;padding:5px 10px;font-size:11px;font-weight:800;cursor:pointer">📨 Inviter</button>` : ''}
+  </div>`).join('') : '<span style="font-size:12px;color:var(--text-light)">Aucun membre</span>'}
+  </div></div>`;
+  } else {
+    title.textContent = '✅ Présences';
+    content.innerHTML = `<div style="padding:16px;text-align:center">
       <div style="font-size:28px;margin-bottom:8px">✅</div>
       <p style="font-size:13px;color:var(--text-light)">Créer une session de présences</p>
       <button onclick="goToPresencesFS()" style="background:var(--green);color:#fff;border:none;border-radius:10px;padding:10px 20px;font-size:13px;font-weight:800;cursor:pointer;margin-top:10px">→ Aller aux présences</button>
@@ -1071,146 +1056,666 @@ function showChatPanel(type){
   }
   panel.classList.add('open');
 }
-function closeChatPanel(){document.getElementById('chat-side-panel').classList.remove('open');}
-function goToPresencesFS(){
-  closeChatPanel();closeChatFullscreen();
-  showPage('activites',document.querySelector('.bottom-nav-btn:nth-child(3)'));
+
+function closeChatPanel() {
+  document.getElementById('chat-side-panel').classList.remove('open');
+}
+
+function goToPresencesFS() {
+  closeChatPanel();
+  closeChatFullscreen();
+  showPage('activites', document.querySelector('.bottom-nav-btn:nth-child(3)'));
   switchActiviteTab('presences');
-  setTimeout(()=>{toggleForm('form-presence');remplirSelectKourels('p-kourel');document.getElementById('p-kourel').value=chatFsKourelId||'';loadMembresForPresence();},150);
+  setTimeout(() => {
+    toggleForm('form-presence');
+    remplirSelectKourels('p-kourel');
+    document.getElementById('p-kourel').value = chatFsKourelId || '';
+    loadMembresForPresence();
+  }, 150);
 }
-function showAddMembreFS(){
-  closeChatPanel();closeChatFullscreen();
-  showPage('membres',null);
-  setTimeout(()=>{toggleForm('form-membre');remplirSelectKourels('m-kourel');document.getElementById('m-kourel').value=chatFsKourelId;},150);
+
+function showAddMembreFS() {
+  closeChatPanel();
+  closeChatFullscreen();
+  showPage('membres', null);
+  setTimeout(() => {
+    toggleForm('form-membre');
+    remplirSelectKourels('m-kourel');
+    document.getElementById('m-kourel').value = chatFsKourelId;
+  }, 150);
 }
-async function deleteChatKourel(){
-  if(!confirm('Supprimer ce Kourel ?'))return;
+
+async function deleteChatKourel() {
+  if (!confirm('Supprimer ce Kourel ?')) return;
   document.getElementById('chat-header-dropdown').classList.remove('open');
-  try{await api('DELETE','/kourels/'+chatFsKourelId);closeChatFullscreen();await renderKourels();renderAccueil();showNotif('Kourel supprimé ✅');}
-  catch(e){showNotif(e.message,true);}
+  try {
+    await api('DELETE', '/kourels/' + chatFsKourelId);
+    closeChatFullscreen();
+    await renderKourels();
+    renderAccueil();
+    showNotif('Kourel supprimé ✅');
+  } catch(e) {
+    showNotif(e.message, true);
+  }
 }
-async function loadChatMessages(){
-  const area=document.getElementById('chat-msgs-area');
-  area.innerHTML='<div style="text-align:center;padding:20px;color:var(--text-light);font-size:13px">Chargement…</div>';
-  let msgs=[];
-  try{msgs=await api('GET','/messages/'+chatFsKourelId);}catch(e){}
 
-  // Palette de couleurs pour identifier chaque auteur
-  const COLORS=['#2563eb','#7c3aed','#db2777','#059669','#d97706','#dc2626','#0891b2','#65a30d'];
-  const authorColors={};
-  let colorIdx=0;
-  function getAuthorColor(authorId){
-    if(!authorId)return '#888';
-    if(!authorColors[authorId]){authorColors[authorId]=COLORS[colorIdx%COLORS.length];colorIdx++;}
-    return authorColors[authorId];
+// ⭐⭐⭐ FONCTION PRINCIPALE DU CHAT - STYLE WHATSAPP ⭐⭐⭐
+// ⭐⭐⭐ FONCTION CHAT CORRIGÉE - STYLE WHATSAPP ⭐⭐⭐
+async function loadChatMessages() {
+  const area = document.getElementById('chat-msgs-area');
+  if (!area) return;
+  
+  area.innerHTML = '<div style="text-align:center;padding:20px;">⏳ Chargement...</div>';
+  
+  let messages = [];
+  try {
+    messages = await api('GET', '/messages/' + chatFsKourelId);
+    console.log('📩 Messages reçus:', messages);
+  } catch(e) {
+    console.error('Erreur:', e);
+    area.innerHTML = '<div class="chat-empty">⚠️ Erreur de chargement</div>';
+    return;
   }
 
-  area.innerHTML=msgs.length?msgs.map(m=>{
-    // Comparaison robuste : convertir en string pour éviter les mismatches ObjectId vs string
-    const authorId=String(m.auteur?._id||m.auteur||'');
-    const myId=String(currentUser?.id||currentUser?._id||'');
-    const isMine= myId && authorId && authorId===myId;
+  if (!messages || messages.length === 0) {
+    area.innerHTML = '<div class="chat-empty">💬 Aucun message</div>';
+    return;
+  }
 
-    // Nom de l'auteur : essayer prenom+nom, puis nom, puis identifiant, sinon "Membre"
-    const authorName= m.auteur?.prenom
-      ? (m.auteur.prenom + (m.auteur.nom ? ' '+m.auteur.nom : ''))
-      : (m.auteur?.nom || m.auteur?.identifiant || m.auteur?.username || (authorId?'Membre #'+authorId.slice(-4):'Membre'));
+  // 🔑 Récupérer l'utilisateur connecté
+  const myId = String(currentUser?.id || currentUser?._id || '');
+  const myName = (currentUser?.nom || '').toLowerCase();
+  
+  console.log('🟢 Mon ID:', myId);
+  console.log('🟢 Mon nom:', myName);
 
-    const color=isMine?'#1a7a3c':getAuthorColor(authorId);
+  // Palette de couleurs pour les autres membres
+  const COLORS = ['#2563eb', '#7c3aed', '#db2777', '#059669', '#d97706', '#dc2626', '#0891b2', '#65a30d'];
+  const authorColors = {};
+  let colorIdx = 0;
+  
+  function getAuthorColor(id, name) {
+    const key = id || name;
+    if (!key) return '#888';
+    if (!authorColors[key]) {
+      authorColors[key] = COLORS[colorIdx % COLORS.length];
+      colorIdx++;
+    }
+    return authorColors[key];
+  }
 
-    return `<div style="display:flex;flex-direction:column;align-items:${isMine?'flex-end':'flex-start'};margin-bottom:6px;padding:0 8px">
-      ${!isMine?`<div style="font-size:10px;font-weight:800;color:${color};margin:0 4px 3px 4px">${escHtml(authorName)}</div>`:''}
-      <div style="max-width:78%;padding:9px 13px;border-radius:${isMine?'16px 4px 16px 16px':'4px 16px 16px 16px'};
-          background:${isMine?'#dcf8c6':'#ffffff'};
-          border:1px solid ${isMine?'#b5e8a0':'#e0e0e0'};
-          ${!isMine?'border-left:3px solid '+color:''}
-          position:relative;">
-        <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
-          ${m.type==='audio'
-            ?`<audio controls src="${m.texte}" style="max-width:220px;height:34px;border-radius:8px"></audio>`
-            :m.type==='image'
-              ?`<img src="${m.texte}" style="max-width:200px;border-radius:8px;display:block"/>`
-              :`<span style="font-size:13px;line-height:1.5;word-break:break-word;color:#111">${escHtml(m.texte)}</span>`}
-          ${isMine?`<div style="position:relative;flex-shrink:0;align-self:flex-start">
-            <button class="msg-menu-btn" onclick="toggleMsgMenu('menu-${m._id}')">⋮</button>
-            <div class="msg-menu-dropdown" id="menu-${m._id}">
-              <div class="menu-item-delete" onclick="deleteMsgFS('${m._id}')">🗑 Supprimer</div>
-            </div></div>`:''}
+  // Trier par date
+  messages.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+
+  let html = '';
+  
+  for (const m of messages) {
+    // Récupérer les infos de l'auteur
+    const authorId = String(m.auteurId || m.auteur?._id || m.auteur || '');
+    const authorName = m.auteurNom || m.auteur?.nom || m.auteur?.prenom || 'Membre';
+    const authorNameLower = authorName.toLowerCase();
+    
+    // 🔑 DÉTECTION SI LE MESSAGE EST DE MOI
+    let isMine = false;
+    
+    // Méthode 1: par ID
+    if (myId && authorId && authorId === myId) {
+      isMine = true;
+    }
+    // Méthode 2: par nom
+    if (!isMine && myName && authorNameLower === myName) {
+      isMine = true;
+    }
+    // Méthode 3: si le backend a déjà calculé isMine
+    if (m.isMine === true) {
+      isMine = true;
+    }
+    
+    const authorColor = getAuthorColor(authorId, authorName);
+    const timeStr = new Date(m.createdAt).toLocaleTimeString('fr-FR', {hour:'2-digit', minute:'2-digit'});
+    
+    // Contenu du message
+    let msgContent = '';
+    if (m.type === 'audio') {
+      msgContent = `
+        <div style="display:flex;align-items:center;gap:8px;">
+          <button onclick="toggleAudioMsg(this,'audio-${m._id}')" 
+            style="background:${isMine ? '#0f4c25' : '#1a7a3c'};border:none;border-radius:50%;width:32px;height:32px;color:#fff;cursor:pointer;">▶</button>
+          <audio id="audio-${m._id}" src="${m.texte}" style="display:none"></audio>
+          <span style="font-size:12px;">🎤 Message vocal</span>
+        </div>`;
+    } else if (m.type === 'image') {
+      msgContent = `<img src="${m.texte}" style="max-width:180px;border-radius:12px;display:block;">`;
+    } else {
+      msgContent = `<div style="font-size:13px;line-height:1.4;color:#111;">${escHtml(m.texte)}</div>`;
+    }
+    
+    // Style selon que c'est moi ou pas
+    if (isMine) {
+      // ✅ MES MESSAGES : à DROITE, fond VERT
+      html += `
+        <div style="display:flex;justify-content:flex-end;margin-bottom:12px;padding:0 8px;">
+          <div style="max-width:75%;background:#dcf8c6;border-radius:18px 4px 18px 18px;padding:10px 12px;box-shadow:0 1px 0.5px rgba(0,0,0,0.05);">
+            ${msgContent}
+            <div style="font-size:9px;color:#999;margin-top:4px;text-align:right;">✓ ${timeStr}</div>
+          </div>
         </div>
-        <div style="font-size:10px;color:#999;margin-top:4px;text-align:right">
-          ${isMine?'&check; ':''} ${new Date(m.createdAt).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}
+      `;
+    } else {
+      // ✅ MESSAGES DES AUTRES : à GAUCHE, fond BLANC avec bordure colorée
+      html += `
+        <div style="display:flex;flex-direction:column;align-items:flex-start;margin-bottom:12px;padding:0 8px;">
+          <div style="font-size:10px;font-weight:700;color:${authorColor};margin-bottom:2px;margin-left:8px;">${escHtml(authorName)}</div>
+          <div style="max-width:75%;background:#ffffff;border-left:3px solid ${authorColor};border-radius:4px 18px 18px 18px;padding:10px 12px;box-shadow:0 1px 0.5px rgba(0,0,0,0.05);">
+            ${msgContent}
+            <div style="font-size:9px;color:#999;margin-top:4px;text-align:right;">${timeStr}</div>
+          </div>
         </div>
-      </div>
-    </div>`;
-  }).join(''):`<div class="chat-empty"><div style="font-size:36px;margin-bottom:8px">💬</div><p style="font-size:12px;font-weight:600">Aucun message — soyez le premier !</p></div>`;
-  setTimeout(()=>{if(area)area.scrollTop=area.scrollHeight;},50);
+      `;
+    }
+  }
+  
+  area.innerHTML = html;
+  
+  // Scroll en bas
+  setTimeout(() => { area.scrollTop = area.scrollHeight; }, 50);
 }
-async function deleteMsgFS(msgId){
-  if(!confirm('Supprimer ce message ?'))return;
-  try{await api('DELETE','/messages/'+msgId);await loadChatMessages();showNotif('Message supprimé ✅');}
-  catch(e){showNotif(e.message,true);}
+function escHtml(s) {
+  return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
-async function sendMsgFS(){
-  const input=document.getElementById('chat-input-field');
-  const texte=input?.value.trim();if(!texte||!chatFsKourelId)return;
-  try{await api('POST','/messages',{kourel:chatFsKourelId,texte});input.value='';await loadChatMessages();}
-  catch(e){showNotif('Erreur envoi message',true);}
+// Lecteur audio pour les messages vocaux
+function toggleAudioMsg(btn, audioId) {
+  const audio = document.getElementById(audioId);
+  if (!audio) return;
+  document.querySelectorAll('[data-playing="1"]').forEach(a => {
+    if (a.id !== audioId) { a.pause(); a.removeAttribute('data-playing'); }
+  });
+  document.querySelectorAll('[data-audio-for]').forEach(b => {
+    if (b.dataset.audioFor !== audioId) b.textContent = '▶';
+  });
+  btn.setAttribute('data-audio-for', audioId);
+  if (audio.paused) {
+    audio.play();
+    audio.setAttribute('data-playing', '1');
+    btn.textContent = '⏸';
+    const id = audioId.replace('audio-', '');
+    audio.ontimeupdate = () => {
+      const prog = document.getElementById('prog-audio-' + id);
+      if (audio.duration && prog) prog.style.width = (audio.currentTime / audio.duration * 100) + '%';
+    };
+    audio.onended = () => { btn.textContent = '▶'; audio.removeAttribute('data-playing'); };
+  } else {
+    audio.pause();
+    audio.removeAttribute('data-playing');
+    btn.textContent = '▶';
+  }
 }
-async function sendFileMsgFS(event){
-  const file=event.target.files[0];if(!file)return;
-  const reader=new FileReader();
-  reader.onload=async e=>{
-    const type=file.type.startsWith('audio')?'audio':'image';
-    try{await api('POST','/messages',{kourel:chatFsKourelId,texte:e.target.result,type});await loadChatMessages();}
-    catch(err){showNotif('Fichier trop grand',true);}
+
+async function deleteMsgFS(msgId) {
+  if (!confirm('Supprimer ce message ?')) return;
+  try {
+    await api('DELETE', '/messages/' + msgId);
+    await loadChatMessages();
+    showNotif('Message supprimé ✅');
+  } catch(e) { 
+    showNotif(e.message || 'Erreur lors de la suppression', true); 
+  }
+}
+
+async function sendMsgFS() {
+  const input = document.getElementById('chat-input-field');
+  const texte = input?.value.trim();
+  if (!texte || !chatFsKourelId) return;
+  try {
+    await api('POST', '/messages', { kourel: chatFsKourelId, texte });
+    input.value = '';
+    await loadChatMessages();
+  } catch(e) { 
+    showNotif('Erreur envoi message', true); 
+  }
+}
+
+async function sendFileMsgFS(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = async e => {
+    const type = file.type.startsWith('audio') ? 'audio' : 'image';
+    try {
+      await api('POST', '/messages', { kourel: chatFsKourelId, texte: e.target.result, type });
+      await loadChatMessages();
+    } catch(err) { 
+      showNotif('Fichier trop grand', true); 
+    }
   };
-  reader.readAsDataURL(file);event.target.value='';
+  reader.readAsDataURL(file);
+  event.target.value = '';
 }
-function startVocalFS(){
-  const btn=document.getElementById('btn-vocal');
-  if(!isRecording){
-    navigator.mediaDevices.getUserMedia({audio:true}).then(stream=>{
-      const options=MediaRecorder.isTypeSupported('audio/webm;codecs=opus')?{mimeType:'audio/webm;codecs=opus',audioBitsPerSecond:32000}:{audioBitsPerSecond:32000};
-      mediaRecorder=new MediaRecorder(stream,options);audioChunks=[];
-      mediaRecorder.ondataavailable=e=>audioChunks.push(e.data);
-      mediaRecorder.onstop=async()=>{
-        const blob=new Blob(audioChunks,{type:'audio/webm'});
-        const reader=new FileReader();
-        reader.onload=async e=>{
-          try{await api('POST','/messages',{kourel:chatFsKourelId,texte:e.target.result,type:'audio'});await loadChatMessages();}
-          catch(err){showNotif('Erreur envoi audio',true);}
+
+function startVocalFS() {
+  const btn = document.getElementById('btn-vocal');
+  if (!isRecording) {
+    navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
+      const options = MediaRecorder.isTypeSupported('audio/webm;codecs=opus') ? { mimeType: 'audio/webm;codecs=opus', audioBitsPerSecond: 32000 } : { audioBitsPerSecond: 32000 };
+      mediaRecorder = new MediaRecorder(stream, options);
+      audioChunks = [];
+      mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
+      mediaRecorder.onstop = async () => {
+        const blob = new Blob(audioChunks, { type: 'audio/webm' });
+        const reader = new FileReader();
+        reader.onload = async e => {
+          try {
+            await api('POST', '/messages', { kourel: chatFsKourelId, texte: e.target.result, type: 'audio' });
+            await loadChatMessages();
+          } catch(err) { 
+            showNotif('Erreur envoi audio', true); 
+          }
         };
-        reader.readAsDataURL(blob);stream.getTracks().forEach(t=>t.stop());
+        reader.readAsDataURL(blob);
+        stream.getTracks().forEach(t => t.stop());
       };
-      mediaRecorder.start();isRecording=true;
-      if(btn){btn.style.background='linear-gradient(135deg,#16a34a,#15803d)';btn.textContent='⏹';}
+      mediaRecorder.start();
+      isRecording = true;
+      if (btn) {
+        btn.style.background = 'linear-gradient(135deg,#16a34a,#15803d)';
+        btn.textContent = '⏹';
+      }
       showNotif('Enregistrement… ⏹ pour arrêter');
-      setTimeout(()=>{if(isRecording&&mediaRecorder){mediaRecorder.stop();isRecording=false;if(btn){btn.style.background='linear-gradient(135deg,#dc2626,#991b1b)';btn.textContent='🎤';}}},30000);
-    }).catch(()=>showNotif('Microphone non disponible',true));
-  }else{
-    mediaRecorder.stop();isRecording=false;
-    if(btn){btn.style.background='linear-gradient(135deg,#dc2626,#991b1b)';btn.textContent='🎤';}
+      setTimeout(() => { 
+        if (isRecording && mediaRecorder) { 
+          mediaRecorder.stop(); 
+          isRecording = false; 
+          if (btn) { 
+            btn.style.background = 'linear-gradient(135deg,#dc2626,#991b1b)'; 
+            btn.textContent = '🎤'; 
+          } 
+        } 
+      }, 30000);
+    }).catch(() => showNotif('Microphone non disponible', true));
+  } else {
+    mediaRecorder.stop();
+    isRecording = false;
+    if (btn) { 
+      btn.style.background = 'linear-gradient(135deg,#dc2626,#991b1b)'; 
+      btn.textContent = '🎤'; 
+    }
   }
 }
-document.addEventListener('click',function(e){
-  if(!e.target.classList.contains('chat-fs-menu-btn')&&!e.target.closest('.chat-header-dropdown'))
-    document.getElementById('chat-header-dropdown')?.classList.remove('open');
-  if(!e.target.classList.contains('msg-menu-btn'))
-    document.querySelectorAll('.msg-menu-dropdown').forEach(m=>m.style.display='none');
-});
-function openKourelDetail(kourelId,nom){openChatFullscreen(kourelId,nom);}
 
-// ── SONS MULTIPLES ──────────────────────────────────────
-function handleSons(input,listId,countId,nId){
-  const list=document.getElementById(listId);
-  const countEl=document.getElementById(countId);
-  const nEl=document.getElementById(nId);
-  Array.from(input.files).forEach(file=>{
-    const url=URL.createObjectURL(file);
-    const id='son-'+Date.now()+Math.random().toString(36).slice(2);
-    const item=document.createElement('div');
-    item.className='son-item';item.id=id;
-    item.innerHTML=`
+function toggleMsgMenu(id) {
+  const menu = document.getElementById(id);
+  if (!menu) return;
+  document.querySelectorAll('.msg-menu-dropdown').forEach(m => { if (m.id !== id) m.style.display = 'none'; });
+  menu.style.display = menu.style.display === 'none' || menu.style.display === '' ? 'block' : 'none';
+}
+
+function openKourelDetail(kourelId, nom) {
+  openChatFullscreen(kourelId, nom);
+}
+
+// Gestion des clics pour fermer les menus
+document.addEventListener('click', function(e) {
+  if (!e.target.classList.contains('chat-fs-menu-btn') && !e.target.closest('.chat-header-dropdown'))
+    document.getElementById('chat-header-dropdown')?.classList.remove('open');
+  if (!e.target.classList.contains('msg-menu-btn') && !e.target.closest('.msg-menu-dropdown'))
+    document.querySelectorAll('.msg-menu-dropdown').forEach(m => m.style.display = 'none');
+});
+
+// Gestion de l'envoi avec Entrée
+document.getElementById('chat-input-field')?.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    sendMsgFS();
+  }
+});
+
+// ==================== MEMBRES ====================
+async function renderMembres() {
+  try {
+    cacheMembres = await api('GET', '/membres');
+    filtrerMembres();
+  } catch(e) {
+    showNotif('Erreur chargement membres', true);
+  }
+}
+
+function filtrerMembres() {
+  const q = (document.getElementById('search-membre')?.value || '').toLowerCase();
+  const membres = q ? cacheMembres.filter(m => (m.prenom + ' ' + m.nom + ' ' + (m.telephone || '')).toLowerCase().includes(q)) : cacheMembres;
+  document.getElementById('membres-body').innerHTML = membres.length ? membres.map(m => `
+    <tr>
+      <td><strong>${escHtml(m.prenom + ' ' + m.nom)}</strong><br><span style="font-size:10px;color:var(--text-light)">${escHtml(m.kourel?.nom || '—')}</span></td>
+      <td>${escHtml(m.telephone || '—')}</td>
+      <td>${badge(m.statut || 'Actif')}</td>
+      <td><button class="btn btn-danger" onclick="deleteMembre('${m._id}')">🗑</button></td>
+    </tr>`).join('') : '<tr><td colspan="4" style="text-align:center;color:var(--text-light);padding:20px">Aucun membre</td></tr>';
+}
+
+async function addMembre() {
+  const prenom = document.getElementById('m-prenom').value.trim();
+  const nom = document.getElementById('m-nom').value.trim();
+  const kourel = document.getElementById('m-kourel').value;
+  if (!prenom || !nom) {
+    showNotif('Prénom et Nom obligatoires', true);
+    return;
+  }
+  try {
+    await api('POST', '/membres', {prenom, nom, telephone: document.getElementById('m-tel').value.trim(), kourel: kourel || undefined, role: 'Membre'});
+    document.getElementById('m-prenom').value = '';
+    document.getElementById('m-nom').value = '';
+    document.getElementById('m-tel').value = '';
+    toggleForm('form-membre');
+    await renderMembres();
+    renderAccueil();
+    showNotif('Membre ajouté !');
+  } catch(e) {
+    showNotif(e.message, true);
+  }
+}
+
+async function deleteMembre(id) {
+  if (!confirm('Supprimer ce membre ?')) return;
+  try {
+    await api('DELETE', '/membres/' + id);
+    await renderMembres();
+    renderAccueil();
+    showNotif('Membre supprimé ✅');
+  } catch(e) {
+    showNotif(e.message, true);
+  }
+}
+
+function refreshMembreExistants() {
+  const kourelId = document.getElementById('m-kourel').value;
+  const wrap = document.getElementById('membres-existants-wrap');
+  const list = document.getElementById('membres-existants-list');
+  if (!kourelId) {
+    wrap.style.display = 'none';
+    return;
+  }
+  const dehors = cacheMembres.filter(m => (m.kourel?._id || m.kourel) !== kourelId);
+  if (dehors.length === 0) {
+    wrap.style.display = 'none';
+    return;
+  }
+  wrap.style.display = 'block';
+  list.innerHTML = dehors.map(m => `
+    <span onclick="rattacherMembre('${m._id}','${kourelId}')"
+      style="display:inline-flex;align-items:center;gap:5px;background:var(--green-muted);
+        border:1.5px solid var(--green-border);border-radius:99px;padding:5px 12px;
+        font-size:12px;font-weight:700;color:var(--green-dark);cursor:pointer;transition:background .15s">
+      👤 ${escHtml(m.prenom + ' ' + m.nom)}
+      <span style="font-size:10px;color:var(--text-light)">${escHtml(m.kourel?.nom || 'sans kourel')}</span>
+    </span>`).join('');
+}
+
+async function rattacherMembre(membreId, kourelId) {
+  try {
+    await api('PUT', '/membres/' + membreId, {kourel: kourelId});
+    await renderMembres();
+    refreshMembreExistants();
+    showNotif('Membre rattaché au Kourel ✅');
+  } catch(e) {
+    showNotif(e.message, true);
+  }
+}
+
+// ==================== PROGRAMMES ====================
+async function addProgramme() {
+  const kourel = document.getElementById('pr-kourel').value;
+  const xassida = document.getElementById('pr-xassida').value.trim();
+  if (!kourel || !xassida) {
+    showNotif('Kourel et Xassida obligatoires', true);
+    return;
+  }
+  try {
+    await api('POST', '/programmes', {
+      kourel,
+      jour: document.getElementById('pr-jour').value,
+      lieu: document.getElementById('pr-lieu').value.trim(),
+      xassida,
+      responsable: document.getElementById('pr-responsable').value.trim(),
+      heure: document.getElementById('pr-heure').value,
+      tolerance: parseInt(document.getElementById('pr-tolerance').value) || 0,
+      notes: document.getElementById('pr-notes').value.trim()
+    });
+    document.getElementById('pr-lieu').value = '';
+    document.getElementById('pr-xassida').value = '';
+    document.getElementById('pr-responsable').value = '';
+    document.getElementById('pr-notes').value = '';
+    toggleForm('form-programme');
+    await renderProgrammes();
+    showNotif('Programme enregistré !');
+  } catch(e) {
+    showNotif(e.message, true);
+  }
+}
+
+async function renderProgrammes() {
+  try {
+    const progs = await api('GET', '/programmes');
+    document.getElementById('stat-conserv').textContent = progs.length;
+    document.getElementById('programmes-list').innerHTML = progs.length ? progs.map(p => `
+      <div style="background:#fff;border-radius:16px;box-shadow:0 2px 14px rgba(15,76,37,.10);margin-bottom:12px;overflow:hidden;border:1.5px solid var(--border)">
+        <div style="background:linear-gradient(135deg,var(--green-dark),var(--green));padding:12px 16px;display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <div style="color:#fff;font-size:15px;font-weight:900;letter-spacing:.5px">${escHtml(p.kourel?.nom || '—')}</div>
+            <div style="color:rgba(255,255,255,.75);font-size:11px;margin-top:2px">${escHtml(p.xassida || '')}</div>
+          </div>
+          <button class="btn btn-danger" style="background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3)" onclick="deleteProgramme('${p._id}')">🗑</button>
+        </div>
+        <div style="padding:14px 16px;display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;align-items:center;gap:10px"><span style="font-size:18px">📅</span><span style="font-size:14px;font-weight:800;color:var(--text)">${escHtml(p.jour || '—')} à ${p.heure || '—'}</span></div>
+          <div style="display:flex;align-items:center;gap:10px"><span style="font-size:18px">📍</span><span style="font-size:13px;color:var(--text-light);font-weight:600">${escHtml(p.lieu || '—')}</span></div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px">
+            <div style="background:var(--green-muted);border-radius:99px;padding:5px 12px;display:flex;align-items:center;gap:6px"><span style="font-size:14px">🎵</span><span style="font-size:12px;font-weight:700;color:var(--green-dark)">Sons à répéter</span></div>
+            <div style="background:#fef3e8;border-radius:99px;padding:5px 12px;display:flex;align-items:center;gap:6px"><span style="font-size:14px">📕</span><span style="font-size:12px;font-weight:700;color:#92400e">PDF Xassida</span></div>
+          </div>
+          ${p.responsable ? `<div style="font-size:11px;color:var(--text-light);margin-top:2px">👤 Responsable : <strong>${escHtml(p.responsable)}</strong></div>` : ''}
+          ${p.notes ? `<div style="font-size:11px;color:var(--text-light);font-style:italic;background:#f4faf4;border-radius:8px;padding:6px 10px">${escHtml(p.notes)}</div>` : ''}
+        </div>
+      </div>`).join('') : '<p style="color:var(--text-light);font-size:13px">Aucun programme.</p>';
+  } catch(e) {
+    showNotif('Erreur chargement programmes', true);
+  }
+}
+
+async function deleteProgramme(id) {
+  if (!confirm('Supprimer ce programme ?')) return;
+  try {
+    await api('DELETE', '/programmes/' + id);
+    await renderProgrammes();
+    showNotif('Programme supprimé ✅');
+  } catch(e) {
+    showNotif(e.message, true);
+  }
+}
+
+// ==================== PRÉSENCES ====================
+function loadMembresForPresence() {
+  const kourelId = document.getElementById('p-kourel').value;
+  const membres = cacheMembres.filter(m => (m.kourel?._id || m.kourel) === kourelId);
+  presenceStatuts = {};
+  document.getElementById('p-membres-list').innerHTML = membres.length ? `
+    <div style="background:#fff;border-radius:10px;border:1.5px solid var(--border);overflow:hidden">
+      ${membres.map(m => `
+        <div class="membre-presence-row" id="row-${m._id}">
+          <div class="membre-presence-name">${escHtml(m.prenom + ' ' + m.nom)}</div>
+          <div class="status-group">
+            <button class="status-btn present" onclick="setPresStatus('${m._id}','Présent',this)">✓</button>
+            <button class="status-btn retard" onclick="setPresStatus('${m._id}','Retard',this)">⏱</button>
+            <button class="status-btn absent" onclick="setPresStatus('${m._id}','Absent',this)">✗</button>
+          </div>
+        </div>`).join('')}
+    </div>` : '<p style="color:var(--text-light);font-size:12px">Aucun membre dans ce Kourel</p>';
+}
+
+function setPresStatus(membreId, statut, btn) {
+  document.getElementById('row-' + membreId).querySelectorAll('.status-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  presenceStatuts[membreId] = statut;
+}
+
+async function savePresenceSession() {
+  const date = document.getElementById('p-date').value;
+  const kourel = document.getElementById('p-kourel').value;
+  if (!date || !kourel) {
+    showNotif('Date et Kourel obligatoires', true);
+    return;
+  }
+  const membres = cacheMembres.filter(m => (m.kourel?._id || m.kourel) === kourel).map(m => ({membre: m._id, statut: presenceStatuts[m._id] || 'Absent'}));
+  try {
+    await api('POST', '/presences', {kourel, date, type: document.getElementById('p-type').value, lieu: document.getElementById('p-lieu').value.trim(), membres});
+    presenceStatuts = {};
+    document.getElementById('p-date').value = '';
+    document.getElementById('p-lieu').value = '';
+    document.getElementById('p-membres-list').innerHTML = '';
+    toggleForm('form-presence');
+    await renderPresences();
+    showNotif('Session enregistrée !');
+  } catch(e) {
+    showNotif(e.message, true);
+  }
+}
+
+async function renderPresences() {
+  try {
+    const sessions = await api('GET', '/presences');
+    document.getElementById('stat-presence').textContent = sessions.length;
+    document.getElementById('presences-list').innerHTML = sessions.length ? sessions.map(p => {
+      const presents = p.membres.filter(m => m.statut === 'Présent').length;
+      const retards = p.membres.filter(m => m.statut === 'Retard').length;
+      const absents = p.membres.filter(m => m.statut === 'Absent').length;
+      const total = p.membres.length;
+      const pct = total ? Math.round((presents + retards) / total * 100) : 0;
+      return `<div class="presence-session-card">
+        <div class="presence-session-header">
+          <div>
+            <div class="presence-session-title">${escHtml(p.type)} — ${escHtml(p.kourel?.nom || '—')}</div>
+            <div class="presence-session-meta">${new Date(p.date).toLocaleDateString('fr-FR')}${p.lieu ? ' · ' + escHtml(p.lieu) : ''}</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <div style="font-size:22px;font-weight:900">${pct}%</div>
+            <button class="btn btn-danger" onclick="supprimerSession('${p._id}')">🗑</button>
+          </div>
+        </div>
+        <div class="presence-stats-row">
+          <div class="pstat"><div class="pstat-dot pstat-present"></div>${presents} Présents</div>
+          <div class="pstat"><div class="pstat-dot pstat-retard"></div>${retards} Retards</div>
+          <div class="pstat"><div class="pstat-dot pstat-absent"></div>${absents} Absents</div>
+        </div>
+        <div>${p.membres.map(m => {
+          let ss = '', si = '';
+          if (m.statut === 'Présent') { ss = 'color:#166534;background:#dcfce7'; si = '✓'; }
+          else if (m.statut === 'Retard') { ss = 'color:#92400e;background:#fef3c7'; si = '⏱'; }
+          else { ss = 'color:#991b1b;background:#fee2e2'; si = '✗'; }
+          return `<div class="membre-presence-row"><div class="membre-presence-name">${escHtml((m.membre?.prenom || '') + (m.membre?.nom ? ' ' + m.membre.nom : ''))}</div><span style="padding:3px 10px;border-radius:99px;font-size:11px;font-weight:800;${ss}">${si} ${escHtml(m.statut)}</span></div>`;
+        }).join('')}</div>
+      </div>`;
+    }).join('') : '<p style="color:var(--text-light);font-size:13px">Aucune session.</p>';
+  } catch(e) {
+    showNotif('Erreur chargement présences', true);
+  }
+}
+
+async function supprimerSession(id) {
+  if (!confirm('Supprimer cette session ?')) return;
+  try {
+    await api('DELETE', '/presences/' + id);
+    await renderPresences();
+    showNotif('Session supprimée ✅');
+  } catch(e) {
+    showNotif(e.message, true);
+  }
+}
+
+// ==================== COTISATIONS ====================
+async function addAdiyeu() {
+  const membre = document.getElementById('a-membre').value;
+  const kourel = document.getElementById('a-kourel').value;
+  const montant = parseFloat(document.getElementById('a-montant').value);
+  const programme = document.getElementById('a-programme').value.trim();
+  if (!membre || !kourel || !montant) {
+    showNotif('Membre, Kourel et Montant obligatoires', true);
+    return;
+  }
+  try {
+    await api('POST', '/adiyeu', {membre, kourel, montant, programme, statut: 'En attente'});
+    document.getElementById('a-montant').value = '';
+    document.getElementById('a-programme').value = '';
+    toggleForm('form-adiyeu');
+    await renderCotisations();
+    showNotif('Cotisation créée !');
+  } catch(e) {
+    showNotif(e.message, true);
+  }
+}
+
+async function renderCotisations() {
+  try {
+    const cots = await api('GET', '/adiyeu');
+    const payees = cots.filter(c => c.statut === 'Payé');
+    const attente = cots.filter(c => c.statut !== 'Payé');
+    const total = payees.reduce((s, c) => s + (c.montant || 0), 0);
+    document.getElementById('cot-total').textContent = total.toLocaleString() + ' F';
+    document.getElementById('cot-payees').textContent = payees.length;
+    document.getElementById('cot-attente').textContent = attente.length;
+    document.getElementById('cotisations-body').innerHTML = cots.length ? cots.map(c => `
+      <tr>
+        <td><strong>${escHtml((c.membre?.prenom || '') + ' ' + (c.membre?.nom || ''))}</strong></td>
+        <td>${(c.montant || 0).toLocaleString()} F</td>
+        <td>${badge(c.statut)}</td>
+        <td>${c.statut !== 'Payé' ? `<button class="btn btn-success" onclick="payerCotisation('${c._id}')">✓</button>` : ''}</td>
+      </tr>`).join('') : '<tr><td colspan="4" style="text-align:center;color:var(--text-light);padding:18px">Aucune cotisation</td></tr>';
+  } catch(e) {}
+}
+
+async function payerCotisation(id) {
+  try {
+    await api('PUT', '/adiyeu/' + id, {statut: 'Payé', date: new Date().toISOString().split('T')[0]});
+    await renderCotisations();
+    showNotif('Cotisation payée ✅');
+  } catch(e) {
+    showNotif(e.message, true);
+  }
+}
+
+// ==================== RAPPORTS ====================
+function renderRapports() {
+  document.getElementById('rapport-stats').innerHTML = `
+    <div class="stat-card" style="background:var(--green)"><div class="stat-value">${cacheKourels.length}</div><div class="stat-label">Kourels</div></div>
+    <div class="stat-card" style="background:var(--blue)"><div class="stat-value">${cacheMembres.length}</div><div class="stat-label">Membres</div></div>
+    <div class="stat-card" style="background:var(--orange)"><div class="stat-value">${cacheMembres.filter(m => m.statut === 'Actif').length}</div><div class="stat-label">Actifs</div></div>
+    <div class="stat-card" style="background:var(--purple)"><div class="stat-value">${cacheKourels.length}</div><div class="stat-label">Groupes</div></div>`;
+  document.getElementById('rapport-kourels').innerHTML = cacheKourels.map(k => {
+    const nb = cacheMembres.filter(m => (m.kourel?._id || m.kourel) === k._id).length;
+    const pct = cacheMembres.length ? Math.round(nb / cacheMembres.length * 100) : 0;
+    return `<div style="margin-bottom:10px">
+      <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+        <span style="font-size:12px;font-weight:700">${escHtml(k.nom)}</span>
+        <span style="font-size:11px;color:var(--text-light)">${nb} membres</span>
+      </div>
+      <div class="rapport-bar-wrap"><div class="rapport-bar" style="width:${pct}%;background:var(--green)"></div></div>
+    </div>`;
+  }).join('') || '<p style="color:var(--text-light);font-size:12px">Aucun Kourel</p>';
+  document.getElementById('rapport-types').innerHTML = `
+    <div style="padding:8px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;font-size:13px"><span style="font-weight:700">Total Kourels</span><span>${cacheKourels.length}</span></div>
+    <div style="padding:8px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;font-size:13px"><span style="font-weight:700">Total Membres</span><span>${cacheMembres.length}</span></div>
+    <div style="padding:8px 0;display:flex;justify-content:space-between;font-size:13px"><span style="font-weight:700">Membres actifs</span><span>${cacheMembres.filter(m => m.statut === 'Actif').length}</span></div>`;
+}
+
+// ==================== GESTION FICHIERS (SONS, PDF, PHOTOS) ====================
+function handleSons(input, listId, countId, nId) {
+  const list = document.getElementById(listId);
+  const countEl = document.getElementById(countId);
+  const nEl = document.getElementById(nId);
+  Array.from(input.files).forEach(file => {
+    const url = URL.createObjectURL(file);
+    const id = 'son-' + Date.now() + Math.random().toString(36).slice(2);
+    const item = document.createElement('div');
+    item.className = 'son-item';
+    item.id = id;
+    item.innerHTML = `
       <span class="son-icon">🎵</span>
       <div class="son-info">
         <div class="son-name">${escHtml(file.name)}</div>
@@ -1218,43 +1723,56 @@ function handleSons(input,listId,countId,nId){
         <div class="son-progress-bar"><div class="son-progress-fill" id="prog-${id}"></div></div>
       </div>
       <div class="son-controls">
-        <button class="play-btn" id="play-${id}" onclick="togglePlay('${id}','${url}','${listId}','${countId}','${nId}')">▶</button>
+        <button class="play-btn" onclick="togglePlay('${id}','${url}')">▶️</button>
         <button class="del-btn" onclick="removeSon('${id}','${listId}','${countId}','${nId}')">✕</button>
       </div>`;
     list.appendChild(item);
   });
-  const count=list.children.length;
-  nEl.textContent=count;countEl.style.display=count>0?'block':'none';
-  input.value='';
-}
-function togglePlay(id,url){
-  const btn=document.getElementById('play-'+id);
-  const prog=document.getElementById('prog-'+id);
-  if(currentAudio&&currentPlayBtn){
-    currentAudio.pause();currentPlayBtn.textContent='▶';
-    if(currentPlayBtn===btn){currentAudio=null;currentPlayBtn=null;prog.style.width='0%';return;}
-  }
-  const audio=new Audio(url);currentAudio=audio;currentPlayBtn=btn;btn.textContent='⏸';
-  audio.ontimeupdate=()=>{if(audio.duration)prog.style.width=(audio.currentTime/audio.duration*100)+'%';};
-  audio.onended=()=>{btn.textContent='▶';prog.style.width='0%';currentAudio=null;currentPlayBtn=null;};
-  audio.play();
-}
-function removeSon(id,listId,countId,nId){
-  const el=document.getElementById(id);if(el)el.remove();
-  const list=document.getElementById(listId);
-  const count=list.children.length;
-  document.getElementById(nId).textContent=count;
-  document.getElementById(countId).style.display=count>0?'block':'none';
+  const count = list.children.length;
+  nEl.textContent = count;
+  countEl.style.display = count > 0 ? 'block' : 'none';
+  input.value = '';
 }
 
-// ── PDF ──────────────────────────────────────────────────
-function handlePDF(input,listId){
-  const list=document.getElementById(listId);
-  Array.from(input.files).forEach(file=>{
-    const eid='pdf-'+Date.now()+Math.random().toString(36).slice(2);
-    const item=document.createElement('div');
-    item.className='doc-item';item.id=eid;
-    item.innerHTML=`
+function togglePlay(id, url) {
+  const btn = document.getElementById('play-' + id);
+  const prog = document.getElementById('prog-' + id);
+  if (currentAudio && currentPlayBtn) {
+    currentAudio.pause();
+    currentPlayBtn.textContent = '▶️';
+    if (currentPlayBtn === btn) {
+      currentAudio = null;
+      currentPlayBtn = null;
+      if (prog) prog.style.width = '0%';
+      return;
+    }
+  }
+  const audio = new Audio(url);
+  currentAudio = audio;
+  currentPlayBtn = btn;
+  btn.textContent = '⏸';
+  audio.ontimeupdate = () => { if (audio.duration && prog) prog.style.width = (audio.currentTime / audio.duration * 100) + '%'; };
+  audio.onended = () => { btn.textContent = '▶️'; if (prog) prog.style.width = '0%'; currentAudio = null; currentPlayBtn = null; };
+  audio.play();
+}
+
+function removeSon(id, listId, countId, nId) {
+  const el = document.getElementById(id);
+  if (el) el.remove();
+  const list = document.getElementById(listId);
+  const count = list.children.length;
+  document.getElementById(nId).textContent = count;
+  document.getElementById(countId).style.display = count > 0 ? 'block' : 'none';
+}
+
+function handlePDF(input, listId) {
+  const list = document.getElementById(listId);
+  Array.from(input.files).forEach(file => {
+    const eid = 'pdf-' + Date.now() + Math.random().toString(36).slice(2);
+    const item = document.createElement('div');
+    item.className = 'doc-item';
+    item.id = eid;
+    item.innerHTML = `
       <span class="doc-item-icon">📄</span>
       <div class="doc-item-info">
         <div class="doc-item-name">${escHtml(file.name)}</div>
@@ -1263,313 +1781,32 @@ function handlePDF(input,listId){
       <button class="del-btn" onclick="document.getElementById('${eid}').remove()">✕</button>`;
     list.appendChild(item);
   });
-  input.value='';
+  input.value = '';
 }
 
-// ── PHOTOS ──────────────────────────────────────────────
-function handlePhotos(input,gridId){
-  const grid=document.getElementById(gridId);
-  Array.from(input.files).forEach(file=>{
-    const url=URL.createObjectURL(file);
-    const eid='ph-'+Date.now()+Math.random().toString(36).slice(2);
-    const thumb=document.createElement('div');
-    thumb.className='photo-thumb';thumb.id=eid;
-    thumb.innerHTML=`<img src="${url}" alt="${escHtml(file.name)}"><button class="photo-del" onclick="document.getElementById('${eid}').remove()">✕</button>`;
-    grid.appendChild(thumb);
-  });
-  input.value='';
+// ==================== INVITATION SMS ====================
+async function inviterMembre(membreId) {
+  try {
+    showNotif('Envoi en cours…');
+    await api('POST', '/membres/' + membreId + '/inviter', {});
+    showNotif('Invitation envoyée ✅');
+  } catch(e) {
+    showNotif(e.message || 'Erreur envoi SMS', true);
+  }
 }
 
-// ── MEMBRES ──────────────────────────────────────────────
-// Affiche les membres déjà enregistrés mais pas encore dans ce Kourel
-function refreshMembreExistants(){
-  const kourelId=document.getElementById('m-kourel').value;
-  const wrap=document.getElementById('membres-existants-wrap');
-  const list=document.getElementById('membres-existants-list');
-  if(!kourelId){wrap.style.display='none';return;}
-  // Membres PAS dans ce kourel (pour éviter doublon)
-  const dehors=cacheMembres.filter(m=>(m.kourel?._id||m.kourel)!==kourelId);
-  if(dehors.length===0){wrap.style.display='none';return;}
-  wrap.style.display='block';
-  list.innerHTML=dehors.map(m=>`
-    <span onclick="rattacherMembre('${m._id}','${kourelId}')"
-      style="display:inline-flex;align-items:center;gap:5px;background:var(--green-muted);
-        border:1.5px solid var(--green-border);border-radius:99px;padding:5px 12px;
-        font-size:12px;font-weight:700;color:var(--green-dark);cursor:pointer;transition:background .15s"
-      onmouseover="this.style.background='#c8ecd0'" onmouseout="this.style.background='var(--green-muted)'">
-      👤 ${escHtml(m.prenom+' '+m.nom)}
-      <span style="font-size:10px;color:var(--text-light)">${escHtml(m.kourel?.nom||'sans kourel')}</span>
-    </span>`).join('');
-}
-
-// Rattache un membre existant à un nouveau kourel (PUT)
-async function rattacherMembre(membreId,kourelId){
-  try{
-    await api('PUT','/membres/'+membreId,{kourel:kourelId});
-    await renderMembres();
-    refreshMembreExistants();
-    showNotif('Membre rattaché au Kourel ✅');
-  }catch(e){showNotif(e.message,true);}
-}
-
-async function renderMembres(){
-  try{cacheMembres=await api('GET','/membres');filtrerMembres();}
-  catch(e){showNotif('Erreur chargement membres',true);}
-}
-function filtrerMembres(){
-  const q=(document.getElementById('search-membre')?.value||'').toLowerCase();
-  const membres=q?cacheMembres.filter(m=>(m.prenom+' '+m.nom+' '+(m.telephone||'')).toLowerCase().includes(q)):cacheMembres;
-  document.getElementById('membres-body').innerHTML=membres.length
-    ?membres.map(m=>`
-        <tr>
-          <td><strong>${escHtml(m.prenom+' '+m.nom)}</strong><br><span style="font-size:10px;color:var(--text-light)">${escHtml(m.kourel?.nom||'—')}</span></td>
-          <td>${escHtml(m.telephone||'—')}</td>
-          <td>${badge(m.statut||'Actif')}</td>
-          <td><button class="btn btn-danger" onclick="deleteMembre('${m._id}')">🗑</button></td>
-        </tr>`).join('')
-    :'<tr><td colspan="4" style="text-align:center;color:var(--text-light);padding:20px">Aucun membre</td></tr>';
-}
-async function addMembre(){
-  const prenom=document.getElementById('m-prenom').value.trim();
-  const nom=document.getElementById('m-nom').value.trim();
-  const kourel=document.getElementById('m-kourel').value;
-  if(!prenom||!nom){showNotif('Prénom et Nom obligatoires',true);return;}
-  try{
-    await api('POST','/membres',{prenom,nom,telephone:document.getElementById('m-tel').value.trim(),kourel:kourel||undefined,role:'Membre'});
-    ['m-prenom','m-nom','m-tel'].forEach(id=>document.getElementById(id).value='');
-    toggleForm('form-membre');await renderMembres();renderAccueil();showNotif('Membre ajouté !');
-  }catch(e){showNotif(e.message,true);}
-}
-async function deleteMembre(id){
-  if(!confirm('Supprimer ce membre ?'))return;
-  try{await api('DELETE','/membres/'+id);await renderMembres();renderAccueil();showNotif('Membre supprimé ✅');}
-  catch(e){showNotif(e.message,true);}
-}
-
-// ── PROGRAMMES ───────────────────────────────────────────
-async function addProgramme(){
-  const kourel=document.getElementById('pr-kourel').value;
-  const xassida=document.getElementById('pr-xassida').value.trim();
-  if(!kourel||!xassida){showNotif('Kourel et Xassida obligatoires',true);return;}
-  try{
-    await api('POST','/programmes',{
-      kourel,jour:document.getElementById('pr-jour').value,
-      lieu:document.getElementById('pr-lieu').value.trim(),
-      xassida,responsable:document.getElementById('pr-responsable').value.trim(),
-      heure:document.getElementById('pr-heure').value,
-      tolerance:parseInt(document.getElementById('pr-tolerance').value)||0,
-      notes:document.getElementById('pr-notes').value.trim()
-    });
-    ['pr-lieu','pr-xassida','pr-responsable','pr-notes'].forEach(id=>document.getElementById(id).value='');
-    toggleForm('form-programme');await renderProgrammes();showNotif('Programme enregistré !');
-  }catch(e){showNotif(e.message,true);}
-}
-async function renderProgrammes(){
-  try{
-    const progs=await api('GET','/programmes');
-    document.getElementById('stat-conserv').textContent=progs.length;
-    document.getElementById('programmes-list').innerHTML=progs.length
-      ?progs.map(p=>`
-        <div style="background:#fff;border-radius:16px;box-shadow:0 2px 14px rgba(15,76,37,.10);margin-bottom:12px;overflow:hidden;border:1.5px solid var(--border)">
-          <!-- Bandeau titre Kourel -->
-          <div style="background:linear-gradient(135deg,var(--green-dark),var(--green));padding:12px 16px;display:flex;justify-content:space-between;align-items:center">
-            <div>
-              <div style="color:#fff;font-size:15px;font-weight:900;letter-spacing:.5px">${escHtml(p.kourel?.nom||'—')}</div>
-              <div style="color:rgba(255,255,255,.75);font-size:11px;margin-top:2px">${escHtml(p.xassida||'')}</div>
-            </div>
-            <button class="btn btn-danger" style="background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3)" onclick="deleteProgramme('${p._id}')">🗑</button>
-          </div>
-          <!-- Infos principales style croquis -->
-          <div style="padding:14px 16px;display:flex;flex-direction:column;gap:8px">
-            <div style="display:flex;align-items:center;gap:10px">
-              <span style="font-size:18px">📅</span>
-              <span style="font-size:14px;font-weight:800;color:var(--text)">${escHtml(p.jour||'—')} à ${p.heure||'—'}</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:10px">
-              <span style="font-size:18px">📍</span>
-              <span style="font-size:13px;color:var(--text-light);font-weight:600">${escHtml(p.lieu||'—')}</span>
-            </div>
-            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px">
-              <div style="background:var(--green-muted);border-radius:99px;padding:5px 12px;display:flex;align-items:center;gap:6px">
-                <span style="font-size:14px">🎵</span>
-                <span style="font-size:12px;font-weight:700;color:var(--green-dark)">Sons à répéter</span>
-              </div>
-              <div style="background:#fef3e8;border-radius:99px;padding:5px 12px;display:flex;align-items:center;gap:6px">
-                <span style="font-size:14px">📕</span>
-                <span style="font-size:12px;font-weight:700;color:#92400e">PDF Xassida</span>
-              </div>
-            </div>
-            ${p.responsable?`<div style="font-size:11px;color:var(--text-light);margin-top:2px">👤 Responsable : <strong>${escHtml(p.responsable)}</strong></div>`:''}
-            ${p.notes?`<div style="font-size:11px;color:var(--text-light);font-style:italic;background:#f4faf4;border-radius:8px;padding:6px 10px">${escHtml(p.notes)}</div>`:''}
-          </div>
-        </div>`).join('')
-      :'<p style="color:var(--text-light);font-size:13px">Aucun programme.</p>';
-  }catch(e){showNotif('Erreur chargement programmes',true);}
-}
-async function deleteProgramme(id){
-  if(!confirm('Supprimer ce programme ?'))return;
-  try{await api('DELETE','/programmes/'+id);await renderProgrammes();showNotif('Programme supprimé ✅');}
-  catch(e){showNotif(e.message,true);}
-}
-
-// ── PRESENCES ────────────────────────────────────────────
-function loadMembresForPresence(){
-  const kourelId=document.getElementById('p-kourel').value;
-  const membres=cacheMembres.filter(m=>(m.kourel?._id||m.kourel)===kourelId);
-  presenceStatuts={};
-  document.getElementById('p-membres-list').innerHTML=membres.length
-    ?`<div style="background:#fff;border-radius:10px;border:1.5px solid var(--border);overflow:hidden">
-        ${membres.map(m=>`
-          <div class="membre-presence-row" id="row-${m._id}">
-            <div class="membre-presence-name">${escHtml(m.prenom+' '+m.nom)}</div>
-            <div class="status-group">
-              <button class="status-btn present" onclick="setPresStatus('${m._id}','Présent',this)">✓</button>
-              <button class="status-btn retard" onclick="setPresStatus('${m._id}','Retard',this)">⏱</button>
-              <button class="status-btn absent" onclick="setPresStatus('${m._id}','Absent',this)">✗</button>
-            </div>
-          </div>`).join('')}
-      </div>`
-    :'<p style="color:var(--text-light);font-size:12px">Aucun membre dans ce Kourel</p>';
-}
-function setPresStatus(membreId,statut,btn){
-  document.getElementById('row-'+membreId).querySelectorAll('.status-btn').forEach(b=>b.classList.remove('selected'));
-  btn.classList.add('selected');presenceStatuts[membreId]=statut;
-}
-async function savePresenceSession(){
-  const date=document.getElementById('p-date').value;
-  const kourel=document.getElementById('p-kourel').value;
-  if(!date||!kourel){showNotif('Date et Kourel obligatoires',true);return;}
-  const membres=cacheMembres.filter(m=>(m.kourel?._id||m.kourel)===kourel).map(m=>({membre:m._id,statut:presenceStatuts[m._id]||'Absent'}));
-  try{
-    await api('POST','/presences',{kourel,date,type:document.getElementById('p-type').value,lieu:document.getElementById('p-lieu').value.trim(),membres});
-    presenceStatuts={};
-    ['p-date','p-lieu'].forEach(id=>document.getElementById(id).value='');
-    document.getElementById('p-membres-list').innerHTML='';
-    toggleForm('form-presence');await renderPresences();showNotif('Session enregistrée !');
-  }catch(e){showNotif(e.message,true);}
-}
-async function renderPresences(){
-  try{
-    const sessions=await api('GET','/presences');
-    document.getElementById('stat-presence').textContent=sessions.length;
-    document.getElementById('presences-list').innerHTML=sessions.length
-      ?sessions.map(p=>{
-          const presents=p.membres.filter(m=>m.statut==='Présent').length;
-          const retards=p.membres.filter(m=>m.statut==='Retard').length;
-          const absents=p.membres.filter(m=>m.statut==='Absent').length; // FIX 4 : typo > corrigée
-          const total=p.membres.length;
-          const pct=total?Math.round((presents+retards)/total*100):0;
-          return `<div class="presence-session-card">
-            <div class="presence-session-header">
-              <div>
-                <div class="presence-session-title">${escHtml(p.type)} — ${escHtml(p.kourel?.nom||'—')}</div>
-                <div class="presence-session-meta">${new Date(p.date).toLocaleDateString('fr-FR')}${p.lieu?' · '+escHtml(p.lieu):''}</div>
-              </div>
-              <div style="display:flex;align-items:center;gap:10px">
-                <div style="font-size:22px;font-weight:900">${pct}%</div>
-                <button class="btn btn-danger" onclick="supprimerSession('${p._id}')">🗑</button>
-              </div>
-            </div>
-            <div class="presence-stats-row">
-              <div class="pstat"><div class="pstat-dot pstat-present"></div>${presents} Présents</div>
-              <div class="pstat"><div class="pstat-dot pstat-retard"></div>${retards} Retards</div>
-              <div class="pstat"><div class="pstat-dot pstat-absent"></div>${absents} Absents</div>
-            </div>
-            <div>${p.membres.map(m=>{
-              let ss='',si='';
-              if(m.statut==='Présent'){ss='color:#166534;background:#dcfce7';si='✓';}
-              else if(m.statut==='Retard'){ss='color:#92400e;background:#fef3c7';si='⏱';}
-              else{ss='color:#991b1b;background:#fee2e2';si='✗';}
-              return `<div class="membre-presence-row"><div class="membre-presence-name">${escHtml((m.membre?.prenom||'')+(m.membre?.nom?' '+m.membre.nom:''))}</div><span style="padding:3px 10px;border-radius:99px;font-size:11px;font-weight:800;${ss}">${si} ${escHtml(m.statut)}</span></div>`;
-            }).join('')}</div>
-          </div>`;
-        }).join('')
-      :'<p style="color:var(--text-light);font-size:13px">Aucune session.</p>';
-  }catch(e){showNotif('Erreur chargement présences',true);}
-}
-async function supprimerSession(id){
-  if(!confirm('Supprimer cette session ?'))return;
-  try{await api('DELETE','/presences/'+id);await renderPresences();showNotif('Session supprimée ✅');}
-  catch(e){showNotif(e.message,true);}
-}
-
-// ── COTISATIONS ──────────────────────────────────────────
-async function addAdiyeu(){
-  const membre=document.getElementById('a-membre').value;
-  const kourel=document.getElementById('a-kourel').value;
-  const montant=parseFloat(document.getElementById('a-montant').value);
-  const programme=document.getElementById('a-programme').value.trim();
-  if(!membre||!kourel||!montant){showNotif('Membre, Kourel et Montant obligatoires',true);return;}
-  try{
-    await api('POST','/adiyeu',{membre,kourel,montant,programme,statut:'En attente'});
-    ['a-montant','a-programme'].forEach(id=>document.getElementById(id).value='');
-    toggleForm('form-adiyeu');await renderCotisations();showNotif('Cotisation créée !');
-  }catch(e){showNotif(e.message,true);}
-}
-async function renderCotisations(){
-  try{
-    const cots=await api('GET','/adiyeu');
-    const payees=cots.filter(c=>c.statut==='Payé');
-    const attente=cots.filter(c=>c.statut!=='Payé');
-    const total=payees.reduce((s,c)=>s+(c.montant||0),0);
-    document.getElementById('cot-total').textContent=total.toLocaleString()+' F';
-    document.getElementById('cot-payees').textContent=payees.length;
-    document.getElementById('cot-attente').textContent=attente.length;
-    document.getElementById('cotisations-body').innerHTML=cots.length
-      ?cots.map(c=>`
-          <tr>
-            <td><strong>${escHtml((c.membre?.prenom||'')+' '+(c.membre?.nom||''))}</strong></td>
-            <td>${(c.montant||0).toLocaleString()} F</td>
-            <td>${badge(c.statut)}</td>
-            <td>${c.statut!=='Payé'?`<button class="btn btn-success" onclick="payerCotisation('${c._id}')">✓</button>`:''}</td>
-          </tr>`).join('')
-      :'<tr><td colspan="4" style="text-align:center;color:var(--text-light);padding:18px">Aucune cotisation</td></tr>';
-  }catch(e){}
-}
-async function payerCotisation(id){
-  try{await api('PUT','/adiyeu/'+id,{statut:'Payé',date:new Date().toISOString().split('T')[0]});await renderCotisations();showNotif('Cotisation payée ✅');}
-  catch(e){showNotif(e.message,true);}
-}
-
-// ── CHAT helpers ─────────────────────────────────────────
-function toggleMsgMenu(id){
-  const menu=document.getElementById(id);
-  document.querySelectorAll('.msg-menu-dropdown').forEach(m=>{if(m.id!==id)m.style.display='none';});
-  menu.style.display=menu.style.display==='none'?'block':'none';
-}
-
-// ── RAPPORTS ─────────────────────────────────────────────
-function renderRapports(){
-  document.getElementById('rapport-stats').innerHTML=`
-    <div class="stat-card" style="background:var(--green)"><div class="stat-value">${cacheKourels.length}</div><div class="stat-label">Kourels</div></div>
-    <div class="stat-card" style="background:var(--blue)"><div class="stat-value">${cacheMembres.length}</div><div class="stat-label">Membres</div></div>
-    <div class="stat-card" style="background:var(--orange)"><div class="stat-value">${cacheMembres.filter(m=>m.statut==='Actif').length}</div><div class="stat-label">Actifs</div></div>
-    <div class="stat-card" style="background:var(--purple)"><div class="stat-value">${cacheKourels.length}</div><div class="stat-label">Groupes</div></div>`;
-  document.getElementById('rapport-kourels').innerHTML=cacheKourels.map(k=>{
-    const nb=cacheMembres.filter(m=>(m.kourel?._id||m.kourel)===k._id).length;
-    const pct=cacheMembres.length?Math.round(nb/cacheMembres.length*100):0;
-    return `<div style="margin-bottom:10px">
-      <div style="display:flex;justify-content:space-between;margin-bottom:4px">
-        <span style="font-size:12px;font-weight:700">${escHtml(k.nom)}</span>
-        <span style="font-size:11px;color:var(--text-light)">${nb} membres</span>
-      </div>
-      <div class="rapport-bar-wrap"><div class="rapport-bar" style="width:${pct}%;background:var(--green)"></div></div>
-    </div>`;
-  }).join('')||'<p style="color:var(--text-light);font-size:12px">Aucun Kourel</p>';
-  document.getElementById('rapport-types').innerHTML=`
-    <div style="padding:8px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;font-size:13px"><span style="font-weight:700">Total Kourels</span><span>${cacheKourels.length}</span></div>
-    <div style="padding:8px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;font-size:13px"><span style="font-weight:700">Total Membres</span><span>${cacheMembres.length}</span></div>
-    <div style="padding:8px 0;display:flex;justify-content:space-between;font-size:13px"><span style="font-weight:700">Membres actifs</span><span>${cacheMembres.filter(m=>m.statut==='Actif').length}</span></div>`;
-}
-
-// ── INIT ─────────────────────────────────────────────────
-window.addEventListener('DOMContentLoaded',()=>{
-  if(token&&currentDaara){
-    api('GET','/kourels')
-      .then(()=>launchApp())
-      .catch(()=>{
-        localStorage.removeItem('dc_token');localStorage.removeItem('dc_user');localStorage.removeItem('dc_daara');
-        token='';currentUser=null;currentDaara=null;
+// ==================== INITIALISATION ====================
+window.addEventListener('DOMContentLoaded', () => {
+  if (token && currentDaara) {
+    api('GET', '/kourels')
+      .then(() => launchApp())
+      .catch(() => {
+        localStorage.removeItem('dc_token');
+        localStorage.removeItem('dc_user');
+        localStorage.removeItem('dc_daara');
+        token = '';
+        currentUser = null;
+        currentDaara = null;
       });
   }
 });
