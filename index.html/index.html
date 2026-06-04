@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -75,6 +76,17 @@
     .back-btn{background:none;border:none;color:var(--text-light);font-size:13px;font-weight:700;
       cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;margin-bottom:16px;
       display:flex;align-items:center;gap:6px}
+    .tab-buttons{display:flex;gap:8px;margin-bottom:16px}
+    .tab-btn{flex:1;padding:10px;border-radius:10px;font-size:13px;font-weight:800;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:all .2s}
+    .tab-btn.active{background:var(--green);color:#fff;border:2px solid var(--green)}
+    .tab-btn.inactive{background:#fff;color:var(--text-light);border:2px solid var(--border)}
+    .daara-select-item{background:var(--green-muted);border-radius:12px;padding:14px;margin-bottom:10px;cursor:pointer;border:1.5px solid var(--green-border);transition:all .2s}
+    .daara-select-item:hover{transform:translateX(4px);border-color:var(--green);background:var(--green-pale)}
+    .daara-select-item .daara-name{font-weight:800;font-size:15px;color:var(--green-dark)}
+    .daara-select-item .daara-role{font-size:11px;color:var(--text-light);margin-top:4px}
+    .badge-admin{background:#fef3c7;color:#d97706}
+    .badge-membre{background:var(--green-muted);color:var(--green-dark)}
+    .badge{display:inline-block;padding:2px 8px;border-radius:99px;font-size:10px;font-weight:700}
 
     #app{display:none;flex-direction:column;height:100%;overflow:hidden}
     .header{background:linear-gradient(135deg,var(--green-dark) 0%,var(--green) 100%);
@@ -91,7 +103,6 @@
     .hdr-switch{background:rgba(255,255,255,.12);border:none;border-radius:7px;
       padding:5px 10px;color:#fff;font-size:11px;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif}
     .role-badge{padding:3px 8px;border-radius:99px;font-size:10px;font-weight:800;background:rgba(255,255,255,.18);color:#fff}
-
     .bottom-nav{display:flex;background:linear-gradient(135deg,var(--green-dark),var(--green));
       border-top:1px solid rgba(255,255,255,.1);flex-shrink:0}
     .bottom-nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
@@ -101,13 +112,11 @@
     .bottom-nav-btn .nav-icon{font-size:18px;line-height:1}
     .bottom-nav-btn.active{color:#fff;border-top-color:#fff;background:rgba(255,255,255,.1)}
     .bottom-nav-btn:active{background:rgba(255,255,255,.15)}
-
     .content-wrap{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
     .content{max-width:900px;margin:0 auto;padding:16px 14px}
     .page{display:none}
     .page.active{display:block}
     .page-title{font-size:20px;font-weight:900;color:var(--text);margin-bottom:16px}
-
     .card{background:var(--card);border-radius:16px;padding:18px;box-shadow:var(--shadow)}
     .card h3{font-size:14px;font-weight:800;margin-bottom:14px}
     .stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:20px}
@@ -116,13 +125,11 @@
     .stat-icon{font-size:22px;margin-bottom:6px}
     .stat-value{font-size:26px;font-weight:900}
     .stat-label{font-size:10px;opacity:.88;margin-top:2px;font-weight:500}
-
     .badge{padding:3px 10px;border-radius:99px;font-size:11px;font-weight:700}
     .badge.actif,.badge.payé{background:#dcfce7;color:#166534}
     .badge.inactif,.badge.attente{background:#fee2e2;color:#991b1b}
     .badge.admin{background:#fef3c7;color:#92400e}
     .badge.membre{background:var(--green-muted);color:var(--green-dark)}
-
     .form-box{background:#f4faf4;border-radius:14px;padding:18px;margin-bottom:16px;border:1.5px solid var(--border);animation:fadeIn .3s ease}
     @keyframes fadeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
     .form-grid{display:grid;grid-template-columns:1fr;gap:10px}
@@ -150,7 +157,6 @@
     .search-box:focus{border-color:var(--green)}
     .form-section-title{font-size:11px;font-weight:800;text-transform:uppercase;
       letter-spacing:1px;color:var(--green-dark);margin:14px 0 8px;padding-bottom:5px;border-bottom:2px solid var(--border)}
-
     .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
     table{width:100%;border-collapse:collapse;min-width:480px}
     th{background:var(--green);color:#fff;padding:11px 14px;text-align:left;font-size:12px;font-weight:700}
@@ -159,7 +165,6 @@
     td{padding:10px 14px;font-size:12px;border-bottom:1px solid var(--border)}
     tr:nth-child(even) td{background:#f7fbf7}
     tr:active td{background:#edf7ed}
-
     .section-label{font-size:11px;font-weight:800;letter-spacing:.08em;color:var(--green-dark);text-transform:uppercase;margin:14px 0 6px}
     .sons-container{background:#fff;border:1.5px solid var(--green-border);border-radius:14px;overflow:hidden}
     .sons-drop-zone{border:2px dashed var(--green-border);border-radius:10px;margin:12px;
@@ -184,7 +189,6 @@
     .son-progress-fill{height:100%;background:var(--green-mid);border-radius:2px;width:0%;transition:width .3s}
     .sons-count{padding:0 12px 10px;font-size:11px;color:var(--gray-text);text-align:right}
     .sons-count span{font-weight:700;color:var(--green-mid)}
-
     .docs-container{background:#fff;border:1.5px solid var(--green-border);border-radius:14px;overflow:hidden}
     .docs-tabs{display:flex;border-bottom:1.5px solid var(--green-border);background:var(--green-pale)}
     .doc-tab{flex:1;padding:9px 0;font-size:11px;font-weight:700;text-align:center;cursor:pointer;
@@ -209,7 +213,6 @@
     .photo-thumb{aspect-ratio:1;border-radius:8px;overflow:hidden;position:relative;border:1.5px solid var(--green-border);animation:slideIn .2s ease}
     .photo-thumb img{width:100%;height:100%;object-fit:cover}
     .photo-del{position:absolute;top:3px;right:3px;background:rgba(0,0,0,.55);border:none;border-radius:50%;width:20px;height:20px;color:#fff;font-size:10px;cursor:pointer;display:flex;align-items:center;justify-content:center}
-
     .presence-session-card{background:var(--card);border-radius:16px;margin-bottom:14px;box-shadow:var(--shadow);overflow:hidden}
     .presence-session-header{background:linear-gradient(135deg,var(--green-dark),var(--green));color:#fff;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
     .presence-session-title{font-size:14px;font-weight:800}
@@ -226,17 +229,12 @@
     .status-btn.present.selected{background:#dcfce7;border-color:#16a34a;color:#166534}
     .status-btn.retard.selected{background:#fef3c7;border-color:#d97706;color:#92400e}
     .status-btn.absent.selected{background:#fee2e2;border-color:#dc2626;color:#991b1b}
-    .tol-btn{padding:7px 12px;border-radius:99px;border:2px solid var(--border);cursor:pointer;font-size:11px;font-weight:700;font-family:'Plus Jakarta Sans',sans-serif;background:#fff;color:var(--text-light)}
-    .tol-btn.selected{background:var(--green);border-color:var(--green);color:#fff}
-    .member-chip{display:inline-flex;align-items:center;background:var(--green-muted);border-radius:99px;padding:4px 10px;font-size:11px;font-weight:700;color:var(--green-dark);margin:2px}
-
     .chat-room-item{padding:14px 16px;cursor:pointer;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;transition:background .15s;background:var(--card)}
     .chat-room-item:active{background:var(--green-muted)}
     .room-icon{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--green-dark),var(--green));display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
     .room-name{font-size:14px;font-weight:800}
     .room-desc{font-size:11px;color:var(--text-light);margin-top:2px}
     .room-arrow{font-size:16px;color:var(--text-light);flex-shrink:0}
-
     #chat-fullscreen{position:fixed;inset:0;z-index:150;display:none;flex-direction:column;background:var(--bg)}
     #chat-fullscreen.open{display:flex}
     .chat-fs-header{background:linear-gradient(135deg,var(--green-dark),var(--green));color:#fff;padding:0 14px;height:var(--header-h);display:flex;align-items:center;gap:10px;flex-shrink:0;position:relative}
@@ -251,7 +249,6 @@
     .chd-item:last-child{border-bottom:none}
     .chd-item:active{background:var(--green-muted)}
     .chd-item-danger{color:#991b1b}
-    .chd-item-danger:active{background:#fee2e2}
     .chat-side-panel{background:#fff;border-bottom:2px solid var(--border);max-height:0;overflow:hidden;transition:max-height .3s ease}
     .chat-side-panel.open{max-height:400px;overflow-y:auto}
     .chat-side-panel-header{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:var(--green-muted);border-bottom:1px solid var(--border)}
@@ -264,27 +261,7 @@
     .chat-send-btn{width:40px;height:40px;border-radius:50%;border:none;cursor:pointer;background:linear-gradient(135deg,var(--green-dark),var(--green));color:#fff;font-size:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
     .chat-send-btn:active{transform:scale(.93)}
     .chat-plus-btn{width:38px;height:38px;border-radius:50%;border:none;background:#fff;color:var(--green-dark);font-size:20px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 3px rgba(0,0,0,.1)}
-    .msg-menu-btn{background:none;border:none;cursor:pointer;font-size:15px;color:#999;padding:0 6px;line-height:1}
-    .msg-menu-dropdown{display:none;position:absolute;right:0;top:20px;background:#fff;border-radius:10px;box-shadow:0 4px 20px rgba(0,0,0,.18);z-index:99;min-width:150px;overflow:hidden}
-    .menu-item{padding:10px 14px;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px;border-bottom:1px solid #f0f0f0}
-    .menu-item:last-child{border-bottom:none}
-    .menu-item:active{background:#f5f5f5}
-    .menu-item-delete{color:#991b1b}
-    .menu-item-delete:active{background:#fee2e2}
-
-    .chat-bubble, .chat-messages > div > div:last-child {
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
-      cursor: pointer;
-    }
-    .chat-bubble:hover, .chat-messages > div > div:last-child:hover {
-      transform: scale(1.01);
-      box-shadow: 0 2px 10px rgba(0,0,0,0.12);
-    }
-
-    .rapport-bar-wrap{background:#e0f0e0;border-radius:99px;height:8px;flex:1}
-    .rapport-bar{height:8px;border-radius:99px;transition:width .6s ease}
     .two-col{display:grid;grid-template-columns:1fr;gap:14px}
-
     .notif{position:fixed;bottom:calc(var(--nav-h) + 10px);left:50%;transform:translateX(-50%);
       z-index:9999;background:linear-gradient(135deg,var(--green-dark),var(--green));
       color:#fff;border-radius:12px;padding:12px 18px;font-size:13px;font-weight:700;
@@ -293,23 +270,24 @@
       white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
     @keyframes notifIn{from{opacity:0;transform:translateX(-50%) translateY(16px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
     .notif-err{background:linear-gradient(135deg,#991b1b,#dc2626)}
-
     @media(max-width:640px){.stats-grid{grid-template-columns:repeat(2,1fr)}.form-grid{grid-template-columns:1fr}.header-center{display:none}}
     @media(min-width:641px){.stats-grid{grid-template-columns:repeat(4,1fr)}.two-col{grid-template-columns:1fr 1fr}.form-grid{grid-template-columns:1fr 1fr}}
-    /* Effet survol des bulles */
-.chat-messages > div > div {
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-  cursor: pointer;
+    .param-item{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 18px;border-bottom:1px solid var(--border);
+  cursor:pointer;font-size:14px;font-weight:600;
+  transition:background .15s;gap:12px
 }
-.chat-messages > div > div:hover {
-  transform: scale(1.01);
-  box-shadow: 0 2px 10px rgba(0,0,0,0.12);
-}
+.param-item:last-child{border-bottom:none}
+.param-item:active{background:var(--green-muted)}
+.param-item span:first-child{font-size:20px;flex-shrink:0}
+.param-item span:nth-child(2){flex:1}
+.param-item span:last-child{color:var(--text-light);font-size:18px}
   </style>
 </head>
 <body>
 
-<!-- WELCOME -->
+<!-- WELCOME SCREEN -->
 <div id="welcome-screen">
   <div class="bg-pattern"></div>
   <div class="floating-orb orb1"></div>
@@ -319,48 +297,64 @@
     <div class="brand">
       <div class="mosque-icon">🕌</div>
       <h1>DAARA CONNECT</h1>
-      <p class="tagline">Système de gestion des Kourels · Sénégal</p>
+      <p class="tagline">Système de gestion des Kourels</p>
     </div>
     <div class="divider"></div>
+    
+    <!-- Phase 1: Connexion -->
     <div id="search-phase">
-      <h2 style="font-size:16px;font-weight:800;color:var(--green-dark);margin-bottom:14px">Connexion à DAARA CONNECT</h2>
-      <div style="display:flex;gap:8px;margin-bottom:16px">
-        <button id="btn-tab-admin" onclick="switchLoginTab('admin')" style="flex:1;padding:10px;border-radius:10px;border:2px solid var(--green);background:var(--green);color:#fff;font-weight:800;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px">🔑 Admin</button>
-        <button id="btn-tab-membre" onclick="switchLoginTab('membre')" style="flex:1;padding:10px;border-radius:10px;border:2px solid var(--border);background:#fff;color:var(--text-light);font-weight:800;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px">👤 Membre</button>
+      <h2 style="font-size:16px;font-weight:800;color:var(--green-dark);margin-bottom:14px">Connexion</h2>
+      
+      <!-- Onglets -->
+      <div class="tab-buttons">
+        <button id="tab-code" class="tab-btn active" onclick="switchLoginTab('code')">👤Daalal ak Jamm Mouride</button>
       </div>
-      <div id="form-admin">
-        <div class="fl"><label>Identifiant</label><input type="text" id="login-id" placeholder="Ex: admin2" autocomplete="username"/></div>
+      
+      <!-- Formulaire connexion par CODE -->
+      <div id="form-code-login">
         <div class="fl">
-          <label>Mot de passe</label>
-          <input type="password" id="login-pwd" placeholder="Votre mot de passe" autocomplete="current-password"/>
-          <div class="err" id="err-login">Identifiant ou mot de passe incorrect</div>
+          <label>IDENTIFIANT</label>
+          <input type="text" id="login-id-code" placeholder="Votre identifiant" autocomplete="username"/>
         </div>
-        <button class="cta-btn" id="btn-login" onclick="loginUser()">Se connecter →</button>
-      </div>
-      <div id="form-membre-login" style="display:none">
         <div class="fl">
-          <label>Votre numéro de téléphone</label>
-          <input type="tel" id="login-tel" placeholder="Ex: 771234567"/>
-          <div class="err" id="err-login-membre">Numéro introuvable</div>
+          <label>CODE REÇU PAR L'ADMIN</label>
+          <input type="text" id="login-code" placeholder="Ex: ABCD123"/>
+          <div class="err" id="err-login-code"></div>
+          <div id="create-daara-prompt" style="display:none;margin-top:8px">
+            <p style="font-size:12px;color:var(--orange)">⚠️ Aucun daara trouvé avec ce code.</p>
+            <button class="new-daara-btn" style="margin-top:8px" onclick="showCreatePhase()">+ Créer un nouveau Daara</button>
+          </div>
         </div>
-        <button class="cta-btn" id="btn-login-membre" onclick="loginMembre()">Accéder →</button>
+        <button class="cta-btn" id="btn-login-code" onclick="loginWithCode()">Se connecter →</button>
       </div>
+      
+      
       <div class="or-divider" style="margin-top:16px">— OU —</div>
       <button class="new-daara-btn" onclick="showCreatePhase()">+ Créer un nouveau Daara</button>
     </div>
+    
+    <!-- Phase 2: Création de Daara -->
     <div id="create-phase" class="create-phase">
       <button class="back-btn" onclick="showSearchPhase()">← Retour</button>
       <h2 style="font-size:16px;font-weight:800;color:var(--green-dark);margin-bottom:16px">Créer un nouveau Daara</h2>
-      <div class="fl"><label>Nom du Daara</label><input type="text" id="new-daara-nom" placeholder="Ex: Daara Touba Mbacké"/><div class="err" id="err-new-nom">Champ obligatoire</div></div>
-      <div class="fl"><label>Siège</label><input type="text" id="new-daara-siege" placeholder="Ex: Touba, Sénégal"/><div class="err" id="err-new-siege">Champ obligatoire</div></div>
-      <div class="fl"><label>Identifiant admin</label><input type="text" id="new-admin-id" placeholder="Ex: serigne_daara"/><div class="err" id="err-new-id">Champ obligatoire</div></div>
-      <div class="fl"><label>Mot de passe</label><input type="password" id="new-admin-pwd" placeholder="Choisir un mot de passe"/><div class="err" id="err-new-pwd">Champ obligatoire</div></div>
+      <div class="fl"><label>Nom du Daara</label><input type="text" id="new-daara-nom" placeholder="Ex: Daara Touba Mbacké"/><div class="err" id="err-new-nom"></div></div>
+      <div class="fl"><label>Siège</label><input type="text" id="new-daara-siege" placeholder="Ex: Touba, Sénégal"/><div class="err" id="err-new-siege"></div></div>
+      <div class="fl"><label>Identifiant admin</label><input type="text" id="new-admin-id" placeholder="Ex: serigne_daara"/><div class="err" id="err-new-id"></div></div>
+      <div class="fl"><label>Mot de passe</label><input type="password" id="new-admin-pwd" placeholder="Choisir un mot de passe"/><div class="err" id="err-new-pwd"></div></div>
       <button class="cta-btn" id="btn-create" onclick="createDaara()">Créer le Daara →</button>
     </div>
+    
+    <!-- Phase 3: Sélection des daaras (plusieurs) -->
+    <div id="daara-selection-phase" class="create-phase">
+      <button class="back-btn" onclick="resetToLogin()">← Retour</button>
+      <h2 style="font-size:16px;font-weight:800;color:var(--green-dark);margin-bottom:16px" id="daara-select-title">Choisissez votre Daara</h2>
+      <div id="daara-select-list"></div>
+    </div>
+    
   </div>
 </div>
 
-<!-- APP -->
+<!-- APP PRINCIPALE -->
 <div id="app">
   <div class="header">
     <div class="header-top">
@@ -378,14 +372,15 @@
           <span id="hdr-username" style="max-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">—</span>
           <span class="role-badge" id="hdr-role">—</span>
         </div>
-        <button class="hdr-switch" onclick="logout()">↩</button>
+        <button class="bottom-nav-btn" onclick="showPage('parametres',this)">
+  <span class="nav-icon">⚙️</span>Paramètres
+</button>
       </div>
     </div>
   </div>
 
   <div class="content-wrap">
     <div class="content">
-
       <!-- ACCUEIL -->
       <div id="page-accueil" class="page active">
         <h2 class="page-title">Tableau de Bord</h2>
@@ -407,24 +402,16 @@
           <h2 class="page-title" style="margin:0">👥 Kourels</h2>
           <button class="add-btn" onclick="toggleForm('form-kourel')">+ Nouveau</button>
         </div>
-        <div id="form-kourel" class="form-box" style="display:none">
-          <h3 style="margin-bottom:12px;font-size:13px">Ajouter un Kourel</h3>
-          <div class="form-grid">
-            <input type="text" id="k-nom" placeholder="Nom du Kourel"/>
-            <input type="text" id="k-desc" placeholder="Description"/>
-            <select id="k-statut"><option>Actif</option><option>Inactif</option></select>
-          </div>
+        <div id="form-kourel" class="form-box">
+          <input type="text" id="k-nom" placeholder="Nom du Kourel"/>
+          <input type="text" id="k-desc" placeholder="Description"/>
+          <select id="k-statut"><option>Actif</option><option>Inactif</option></select>
           <div class="btn-row">
             <button class="btn btn-primary" onclick="addKourel()">Enregistrer</button>
             <button class="btn btn-secondary" onclick="toggleForm('form-kourel')">Annuler</button>
           </div>
         </div>
-        <div id="kourels-layout">
-          <div style="background:var(--card);border-radius:16px;box-shadow:var(--shadow);overflow:hidden">
-            <div style="background:linear-gradient(135deg,var(--green-dark),var(--green));padding:12px 16px;color:#fff;font-size:13px;font-weight:800">👥 Mes Kourels</div>
-            <div id="kourels-list-sidebar"></div>
-          </div>
-        </div>
+        <div id="kourels-list-sidebar"></div>
       </div>
 
       <!-- MEMBRES -->
@@ -433,32 +420,28 @@
           <h2 class="page-title" style="margin:0">Membres</h2>
           <button class="add-btn" onclick="toggleForm('form-membre')">+ Nouveau</button>
         </div>
-        <input class="search-box" type="text" id="search-membre" placeholder="🔍 Rechercher…" oninput="filtrerMembres()"/>
-        <div id="form-membre" class="form-box" style="display:none">
-          <div style="margin-bottom:12px">
-            <label style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--green-dark);display:block;margin-bottom:6px">Kourel cible</label>
-            <select id="m-kourel" onchange="refreshMembreExistants()"></select>
-          </div>
-          <div id="membres-existants-wrap" style="display:none;margin-bottom:14px">
-            <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--green-dark);margin-bottom:8px">✅ Membres déjà enregistrés — cliquer pour rattacher</div>
-            <div id="membres-existants-list" style="display:flex;flex-wrap:wrap;gap:6px"></div>
-            <div style="height:1px;background:var(--border);margin:14px 0"></div>
-            <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--green-dark);margin-bottom:8px">➕ Ou créer un nouveau membre</div>
-          </div>
-          <div class="form-grid">
-            <input type="text" id="m-prenom" placeholder="Prénom"/>
-            <input type="text" id="m-nom" placeholder="Nom"/>
-            <input type="tel" id="m-tel" placeholder="Téléphone"/>
-          </div>
-          <div class="btn-row">
-            <button class="btn btn-primary" onclick="addMembre()">Enregistrer nouveau</button>
-            <button class="btn btn-secondary" onclick="toggleForm('form-membre')">Annuler</button>
-          </div>
-        </div>
+        <input class="search-box" type="text" id="search-membre" placeholder="🔍 Rechercher…" oninput="filtrerMembres()" style="width:100%;padding:12px;border-radius:12px;border:2px solid var(--border);margin-bottom:14px"/>
+       <div id="form-membre" class="form-box" style="display:none">
+  <select id="m-kourel" onchange="refreshMembreExistants()"></select>
+  <div id="membres-existants-wrap" style="display:none;margin:10px 0">
+    <div id="membres-existants-list" style="display:flex;flex-wrap:wrap;gap:6px"></div>
+  </div>
+  <input type="text" id="m-prenom" placeholder="Prénom"/>
+  <input type="text" id="m-nom" placeholder="Nom"/>
+  <input type="tel" id="m-tel" placeholder="Téléphone"/>
+  <div class="btn-row">
+    <button class="btn" onclick="addMembreEtWhatsApp()"
+      style="background:#25D366;color:#fff;display:flex;align-items:center;
+        gap:8px;font-size:14px;padding:12px 20px">
+      📱 Enregistrer et inviter sur WhatsApp
+    </button>
+    <button class="btn btn-secondary" onclick="toggleForm('form-membre')">Annuler</button>
+  </div>
+</div>
         <div class="card" style="padding:0;overflow:hidden">
           <div class="table-wrap">
-            <table>
-              <thead><tr><th>Nom</th><th>Kourel</th><th>Tél</th><th>Statut</th><th></th></tr></thead>
+            <table style="width:100%">
+              <thead><tr><th>Nom</th><th>Kourel</th><th>Tél</th><th></th></tr></thead>
               <tbody id="membres-body"></tbody>
             </table>
           </div>
@@ -468,15 +451,15 @@
       <!-- ACTIVITÉS -->
       <div id="page-activites" class="page">
         <h2 class="page-title">Activités</h2>
-        <div style="display:flex;gap:0;background:var(--card);border-radius:12px;padding:4px;box-shadow:var(--shadow);margin-bottom:16px">
-          <button id="tab-btn-programmes" onclick="switchActiviteTab('programmes')" style="flex:1;padding:10px;border-radius:9px;border:none;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:800;cursor:pointer;background:var(--green);color:#fff;transition:all .2s">📅 Programmes</button>
-          <button id="tab-btn-presences" onclick="switchActiviteTab('presences')" style="flex:1;padding:10px;border-radius:9px;border:none;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:800;cursor:pointer;background:transparent;color:var(--text-light);transition:all .2s">✅ Présences</button>
+        <div style="display:flex;gap:0;margin-bottom:16px">
+          <button id="tab-btn-programmes" onclick="switchActiviteTab('programmes')" style="flex:1;padding:10px;border-radius:9px;border:none;font-weight:800;cursor:pointer;background:var(--green);color:#fff">📅 Programmes</button>
+          <button id="tab-btn-presences" onclick="switchActiviteTab('presences')" style="flex:1;padding:10px;border-radius:9px;border:none;font-weight:800;cursor:pointer;background:transparent;color:var(--text-light)">✅ Présences</button>
         </div>
         <div id="tab-programmes">
           <div style="display:flex;justify-content:flex-end;margin-bottom:12px">
             <button class="add-btn" onclick="toggleForm('form-programme')">+ Nouveau</button>
           </div>
-          <div id="form-programme" class="form-box" style="display:none">
+          <div id="form-programme" class="form-box">
             <div class="form-grid">
               <select id="pr-kourel"></select>
               <select id="pr-jour"><option>Lundi</option><option>Mardi</option><option>Mercredi</option><option>Jeudi</option><option>Vendredi</option><option>Samedi</option><option>Dimanche</option></select>
@@ -488,50 +471,13 @@
             <div class="section-label">🎵 Sons de référence</div>
             <div class="sons-container">
               <div class="sons-drop-zone" onclick="document.getElementById('pr-sons-input').click()">
-                <div class="dz-icon">🎶</div>
-                <div class="dz-title">Choisir un ou plusieurs sons</div>
-                <div class="dz-sub">MP3, WAV, OGG — sélection multiple possible</div>
+                <div>🎶</div>
+                <div>Choisir des sons</div>
               </div>
               <input type="file" id="pr-sons-input" accept="audio/*" multiple style="display:none" onchange="handleSons(this,'pr-sons-list','pr-sons-count','pr-sons-n')">
               <div class="sons-list" id="pr-sons-list"></div>
-              <div class="sons-count" id="pr-sons-count" style="display:none"><span id="pr-sons-n">0</span> son(s) sélectionné(s)</div>
             </div>
-            <div class="section-label">📚 Xassida — PDF &amp; Photos</div>
-            <div class="docs-container">
-              <div class="docs-tabs">
-                <button class="doc-tab active" onclick="switchDocsTab('pr-pdf','pr',this)">📄 PDF</button>
-                <button class="doc-tab" onclick="switchDocsTab('pr-photo','pr',this)">🖼️ Photos</button>
-              </div>
-              <div class="doc-panel active" id="pr-panel-pr-pdf">
-                <div class="doc-drop-zone" onclick="document.getElementById('pr-pdf-input').click()">
-                  <div class="dz-icon">📕</div>
-                  <div class="dz-title">Ajouter des fichiers PDF</div>
-                  <div class="dz-sub">Xassida, livres, documents — PDF uniquement</div>
-                </div>
-                <input type="file" id="pr-pdf-input" accept=".pdf,application/pdf" multiple style="display:none" onchange="handlePDF(this,'pr-pdf-list')">
-                <div class="docs-list" id="pr-pdf-list"></div>
-              </div>
-              <div class="doc-panel" id="pr-panel-pr-photo">
-                <div class="doc-drop-zone" onclick="document.getElementById('pr-photo-input').click()">
-                  <div class="dz-icon">📸</div>
-                  <div class="dz-title">Ajouter des photos de Xassida</div>
-                  <div class="dz-sub">JPG, PNG, WEBP — plusieurs photos possibles</div>
-                </div>
-                <input type="file" id="pr-photo-input" accept="image/*" multiple style="display:none" onchange="handlePhotos(this,'pr-photo-grid')">
-                <div class="photo-grid" id="pr-photo-grid"></div>
-              </div>
-            </div>
-            <div class="form-section-title">Tolérance</div>
-            <div style="display:flex;gap:6px;flex-wrap:wrap" id="tol-buttons">
-              <button class="tol-btn selected" onclick="selectTolerance(this,'0')">Aucune</button>
-              <button class="tol-btn" onclick="selectTolerance(this,'5')">5 min</button>
-              <button class="tol-btn" onclick="selectTolerance(this,'10')">10 min</button>
-              <button class="tol-btn" onclick="selectTolerance(this,'15')">15 min</button>
-              <button class="tol-btn" onclick="selectTolerance(this,'20')">20 min</button>
-              <button class="tol-btn" onclick="selectTolerance(this,'30')">30 min</button>
-            </div>
-            <input type="hidden" id="pr-tolerance" value="0"/>
-            <textarea id="pr-notes" rows="2" placeholder="Notes…" style="margin-top:10px"></textarea>
+            <textarea id="pr-notes" rows="2" placeholder="Notes…"></textarea>
             <div class="btn-row">
               <button class="btn btn-primary" onclick="addProgramme()">Enregistrer</button>
               <button class="btn btn-secondary" onclick="toggleForm('form-programme')">Annuler</button>
@@ -543,14 +489,12 @@
           <div style="display:flex;justify-content:flex-end;margin-bottom:12px">
             <button class="add-btn" onclick="toggleForm('form-presence')">+ Session</button>
           </div>
-          <div id="form-presence" class="form-box" style="display:none">
-            <div class="form-grid">
-              <input type="date" id="p-date"/>
-              <select id="p-kourel" onchange="loadMembresForPresence()"></select>
-              <select id="p-type"><option>Répétition</option><option>Xam Xam</option><option>Programme</option><option>Réunion</option></select>
-              <input type="text" id="p-lieu" placeholder="Lieu"/>
-            </div>
-            <div id="p-membres-list" style="margin-top:14px"></div>
+          <div id="form-presence" class="form-box">
+            <input type="date" id="p-date"/>
+            <select id="p-kourel" onchange="loadMembresForPresence()"></select>
+            <select id="p-type"><option>Répétition</option><option>Xam Xam</option><option>Programme</option><option>Réunion</option></select>
+            <input type="text" id="p-lieu" placeholder="Lieu"/>
+            <div id="p-membres-list"></div>
             <div class="btn-row">
               <button class="btn btn-primary" onclick="savePresenceSession()">Enregistrer</button>
               <button class="btn btn-secondary" onclick="toggleForm('form-presence')">Annuler</button>
@@ -566,13 +510,12 @@
           <h2 class="page-title" style="margin:0">Adiyeu</h2>
           <button class="add-btn" onclick="openFormAdiyeu()">+ Cotisation</button>
         </div>
-        <div id="form-adiyeu" class="form-box" style="display:none">
-          <h3 style="margin-bottom:12px;font-size:13px">Nouvelle cotisation</h3>
+        <div id="form-adiyeu" class="form-box">
           <div class="form-grid">
             <select id="a-membre"></select>
             <select id="a-kourel"></select>
             <input type="number" id="a-montant" placeholder="Montant (FCFA)"/>
-            <input type="text" id="a-programme" placeholder="Programme (ex: Gamou 2026)"/>
+            <input type="text" id="a-programme" placeholder="Programme"/>
           </div>
           <div class="btn-row">
             <button class="btn btn-primary" onclick="addAdiyeu()">Enregistrer</button>
@@ -580,13 +523,13 @@
           </div>
         </div>
         <div class="stats-grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:16px">
-          <div class="stat-card" style="background:var(--green-dark)"><div class="stat-icon">💵</div><div class="stat-value" id="cot-total">—</div><div class="stat-label">Total</div></div>
-          <div class="stat-card" style="background:var(--green-dark)"><div class="stat-icon">✅</div><div class="stat-value" id="cot-payees">—</div><div class="stat-label">Payées</div></div>
-          <div class="stat-card" style="background:var(--green-dark)"><div class="stat-icon">⏳</div><div class="stat-value" id="cot-attente">—</div><div class="stat-label">Attente</div></div>
+          <div class="stat-card" style="background:var(--green-dark)"><div class="stat-value" id="cot-total">—</div><div class="stat-label">Total</div></div>
+          <div class="stat-card" style="background:var(--green-dark)"><div class="stat-value" id="cot-payees">—</div><div class="stat-label">Payées</div></div>
+          <div class="stat-card" style="background:var(--green-dark)"><div class="stat-value" id="cot-attente">—</div><div class="stat-label">Attente</div></div>
         </div>
         <div class="card" style="padding:0;overflow:hidden">
           <div class="table-wrap">
-            <table>
+            <table style="width:100%">
               <thead><tr><th>Membre</th><th>Montant</th><th>Statut</th><th></th></tr></thead>
               <tbody id="cotisations-body"></tbody>
             </table>
@@ -603,25 +546,71 @@
           <div class="card"><h3>Statistiques</h3><div id="rapport-types"></div></div>
         </div>
       </div>
+    <!-- PARAMÈTRES -->
+<div id="page-parametres" class="page">
+  <h2 class="page-title">Paramètres</h2>
 
+  <!-- Général -->
+  <div style="margin-bottom:20px">
+    <div style="font-size:12px;font-weight:800;color:var(--text-light);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">Général</div>
+    <div class="card" style="padding:0;overflow:hidden">
+      <div class="param-item" onclick="showNotif('Notifications bientôt disponibles')">
+        <span>🔔</span><span>Notifications</span><span>›</span>
+      </div>
+      <div class="param-item" onclick="showNotif('Langue: Français')">
+        <span>🌐</span><span>Langue</span><span>›</span>
+      </div>
+      <div class="param-item" onclick="showNotif('Stockage local utilisé')">
+        <span>💾</span><span>Stockage</span><span>›</span>
+      </div>
+      <div class="param-item" onclick="partagerApp()">
+        <span>↗️</span><span>Partager l'application</span><span>›</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Infos -->
+  <div style="margin-bottom:20px">
+    <div style="font-size:12px;font-weight:800;color:var(--text-light);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">Infos</div>
+    <div class="card" style="padding:0;overflow:hidden">
+      <div class="param-item" onclick="ouvrirLien('https://mouhaseck208-design.github.io/daara-connect/')">
+        <span>📄</span><span>Politique de confidentialité</span><span>›</span>
+      </div>
+      <div class="param-item" onclick="showNotif('DAARA CONNECT v1.0 — Innovation Mouride')">
+        <span>ℹ️</span><span>À proposdu daara-connect</span><span>›</span>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- Déconnexion -->
+  <button onclick="logout()" style="width:100%;padding:14px;background:#fee2e2;color:#991b1b;border:none;border-radius:12px;font-size:14px;font-weight:800;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">
+    ↩ Se déconnecter
+  </button>
+</div>
     </div>
   </div>
 
   <!-- CHAT FULLSCREEN -->
   <div id="chat-fullscreen">
     <div class="chat-fs-header">
-      <button class="chat-fs-back" onclick="closeChatFullscreen()">←</button>
-      <div class="chat-fs-title">
-        <div class="chat-fs-title-name" id="chat-fs-name">—</div>
-        <div class="chat-fs-title-sub" id="chat-fs-sub">—</div>
-      </div>
-      <button class="chat-fs-menu-btn" onclick="toggleChatHeaderMenu()">⋮</button>
-      <div class="chat-header-dropdown" id="chat-header-dropdown">
-        <div class="chd-item" onclick="showChatPanel('membres')">👤 Membres</div>
-        <div class="chd-item" onclick="showChatPanel('presences')">✅ Présences</div>
-        <div class="chd-item chd-item-danger" id="chd-delete-btn" onclick="deleteChatKourel()">🗑 Supprimer le Kourel</div>
-      </div>
-    </div>
+  <button class="chat-fs-back" onclick="closeChatFullscreen()">←</button>
+  <div class="chat-fs-title">
+    <div class="chat-fs-title-name" id="chat-fs-name">—</div>
+    <div class="chat-fs-title-sub" id="chat-fs-sub">—</div>
+  </div>
+  <!-- ✅ Remplacer les 3 points par + Ajouter (visible seulement pour admin) -->
+  <button id="btn-ajouter-membre-fs" onclick="showAddMembreFS()"
+    style="background:rgba(255,255,255,.18);border:none;color:#fff;
+      border-radius:10px;padding:8px 14px;font-size:13px;font-weight:800;
+      cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;
+      display:none;align-items:center;gap:6px">
+    ➕ Ajouter
+  </button>
+  <div class="chat-header-dropdown" id="chat-header-dropdown">
+    <div class="chd-item chd-item-danger" id="chd-delete-btn" onclick="deleteChatKourel()">🗑 Supprimer le Kourel</div>
+  </div>
+</div>
     <div class="chat-side-panel" id="chat-side-panel">
       <div class="chat-side-panel-header">
         <span class="chat-side-panel-title" id="chat-side-panel-title">Membres</span>
@@ -634,7 +623,7 @@
       <button class="chat-plus-btn" onclick="document.getElementById('chat-file-input').click()">+</button>
       <input type="file" id="chat-file-input" accept="audio/*,image/*" style="display:none" onchange="sendFileMsgFS(event)"/>
       <textarea id="chat-input-field" placeholder="Écrire un message…" rows="1"></textarea>
-      <button class="chat-send-btn" id="btn-vocal" style="background:linear-gradient(135deg,#dc2626,#991b1b)" title="Vocal" onclick="startVocalFS()">🎤</button>
+      <button class="chat-send-btn" id="btn-vocal" style="background:linear-gradient(135deg,#dc2626,#991b1b)" onclick="startVocalFS()">🎤</button>
       <button class="chat-send-btn" onclick="sendMsgFS()">➤</button>
     </div>
   </div>
@@ -650,6 +639,83 @@
 </div>
 
 <script>
+  function ouvrirLien(url) {
+  window.open(url, '_blank');
+}
+
+function partagerApp() {
+  if (navigator.share) {
+    navigator.share({
+      title: 'DAARA CONNECT',
+      text: 'Gérez votre Kourel avec DAARA CONNECT !',
+      url: window.location.href
+    });
+  } else {
+    showNotif('Lien copié !');
+    navigator.clipboard?.writeText(window.location.href);
+  }
+}
+// Enregistrer membre ET ouvrir WhatsApp directement
+async function addMembreEtWhatsApp() {
+  const prenom = document.getElementById('m-prenom').value.trim();
+  const nom = document.getElementById('m-nom').value.trim();
+  const kourel = document.getElementById('m-kourel').value;
+  const tel = document.getElementById('m-tel').value.trim();
+  if (!prenom || !nom) { showNotif('Prénom et Nom obligatoires', true); return; }
+
+  try {
+    const data = await api('POST', '/membres', {
+      prenom, nom, telephone: tel,
+      kourel: kourel || undefined,
+      daara: currentDaara?._id
+    });
+
+    document.getElementById('m-prenom').value = '';
+    document.getElementById('m-nom').value = '';
+    document.getElementById('m-tel').value = '';
+    toggleForm('form-membre');
+    await renderMembres();
+    renderAccueil();
+
+    // Ouvrir WhatsApp directement
+    if (tel && data.codeGenere) {
+      envoyerInvitationWA(prenom, nom, tel, data.identifiant, data.codeGenere);
+    } else {
+      showNotif('Membre ajouté ! ✅');
+    }
+
+  } catch(e) {
+    showNotif(e.message, true);
+  }
+}
+
+// Envoyer invitation WhatsApp
+function envoyerInvitationWA(prenom, nom, telephone, identifiant, code) {
+  const kourelNom = chatFsNom || cacheKourels[0]?.nom || 'votre Kourel';
+  const daaraNom = currentDaara?.nom || 'DAARA CONNECT';
+  const lien = window.location.href;
+
+  const message =
+`🕌 *${daaraNom}*
+
+Assalamu Alaykoum ${prenom} ${nom} !
+
+Vous êtes invité(e) à rejoindre le Kourel *${kourelNom}* sur DAARA CONNECT.
+
+📱 *Vos informations de connexion :*
+👤 Identifiant : *${identifiant}*
+🔑 Code : *${code}*
+
+🔗 Accédez ici : ${lien}
+
+Barakallahu fikoum 🤲`;
+
+  let tel = telephone.replace(/[^0-9]/g, '');
+  if (tel.startsWith('0')) tel = tel.substring(1);
+  if (!tel.startsWith('221')) tel = '221' + tel;
+
+  window.open(`https://wa.me/${tel}?text=${encodeURIComponent(message)}`, '_blank');
+}
 // ==================== CONFIGURATION ====================
 const API = 'http://localhost:5000/api';
 let token = localStorage.getItem('dc_token') || '';
@@ -666,6 +732,7 @@ let currentAudio = null;
 let currentPlayBtn = null;
 let chatFsKourelId = null;
 let chatFsNom = null;
+let pendingUserData = null;
 
 // ==================== UTILITAIRES ====================
 function escHtml(s) {
@@ -673,7 +740,7 @@ function escHtml(s) {
 }
 
 function badge(s) {
-  const map = {'Actif':'actif','Inactif':'inactif','Payé':'payé','En attente':'attente','Admin':'admin','Membre':'membre'};
+  const map = {'Actif':'actif','Inactif':'inactif','Payé':'payé','En attente':'attente'};
   return `<span class="badge ${map[s]||''}">${escHtml(s)}</span>`;
 }
 
@@ -709,103 +776,163 @@ function formatSize(bytes) {
   return (bytes / 1048576).toFixed(1) + ' MB';
 }
 
-// ==================== AUTHENTIFICATION ====================
-function switchLoginTab(tab) {
-  const a = tab === 'admin';
-  document.getElementById('form-admin').style.display = a ? 'block' : 'none';
-  document.getElementById('form-membre-login').style.display = a ? 'none' : 'block';
-  const btnAdmin = document.getElementById('btn-tab-admin');
-  const btnMembre = document.getElementById('btn-tab-membre');
-  btnAdmin.style.cssText = `flex:1;padding:10px;border-radius:10px;font-size:13px;border:2px solid ${a ? 'var(--green)' : 'var(--border)'};background:${a ? 'var(--green)' : '#fff'};color:${a ? '#fff' : 'var(--text-light)'};font-weight:800;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif`;
-  btnMembre.style.cssText = `flex:1;padding:10px;border-radius:10px;font-size:13px;border:2px solid ${!a ? 'var(--green)' : 'var(--border)'};background:${!a ? 'var(--green)' : '#fff'};color:${!a ? '#fff' : 'var(--text-light)'};font-weight:800;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif`;
-}
+// ==================== AUTHENTIFICATION SIMPLIFIÉE ====================
 
-async function loginUser() {
-  const identifiant = document.getElementById('login-id').value.trim();
-  const motDePasse = document.getElementById('login-pwd').value;
-  const errEl = document.getElementById('err-login');
-  const btn = document.getElementById('btn-login');
-  if (!identifiant || !motDePasse) {
-    errEl.textContent = 'Veuillez remplir tous les champs';
+async function loginWithCode() {
+  const identifiant = document.getElementById('login-id-code').value.trim();
+  const code = document.getElementById('login-code').value.trim();
+  const errEl = document.getElementById('err-login-code');
+  const btn = document.getElementById('btn-login-code');
+  const promptDiv = document.getElementById('create-daara-prompt');
+  
+  if (!identifiant || !code) {
+    errEl.textContent = 'Veuillez entrer votre identifiant et le code reçu';
     errEl.style.display = 'block';
     return;
   }
+  
+  errEl.style.display = 'none';
+  if (promptDiv) promptDiv.style.display = 'none';
+  
   btn.disabled = true;
-  btn.textContent = 'Connexion…';
+  btn.innerHTML = '<span class="loading-spinner"></span>Connexion…';
+  
   try {
-    const data = await api('POST', '/auth/login', {identifiant, motDePasse});
+    const data = await api('POST', '/auth/login-by-code', {identifiant, code});
+    
+    if (!data.daaras || data.daaras.length === 0) {
+      errEl.textContent = 'Aucun daara trouvé avec ce code.';
+      errEl.style.display = 'block';
+      if (promptDiv) promptDiv.style.display = 'block';
+      pendingUserData = data.user || null;
+      btn.disabled = false;
+      btn.innerHTML = 'Se connecter →';
+      return;
+    }
+    
     token = data.token;
-    currentUser = {id: data.user?._id || data.user?.id, nom: data.daara?.nom || identifiant, role: 'admin'};
-    currentDaara = data.daara || {};
-    localStorage.setItem('dc_token', token);
-    localStorage.setItem('dc_user', JSON.stringify(currentUser));
-    localStorage.setItem('dc_daara', JSON.stringify(currentDaara));
-    errEl.style.display = 'none';
-    launchApp();
+    currentUser = data.user;
+    
+    if (data.daaras.length === 1) {
+      currentDaara = data.daaras[0];
+      localStorage.setItem('dc_token', token);
+      localStorage.setItem('dc_user', JSON.stringify(currentUser));
+      localStorage.setItem('dc_daara', JSON.stringify(currentDaara));
+      launchApp();
+    } else {
+      showDaaraSelection(data.daaras, data.user);
+    }
+    
   } catch(e) {
     errEl.textContent = e.message;
     errEl.style.display = 'block';
-  } finally {
     btn.disabled = false;
-    btn.textContent = 'Se connecter →';
+    btn.innerHTML = 'Se connecter →';
   }
 }
 
-async function loginMembre() {
-  const telephone = document.getElementById('login-tel').value.trim();
-  const errEl = document.getElementById('err-login-membre');
-  const btn = document.getElementById('btn-login-membre');
-  if (!telephone) {
-    errEl.style.display = 'block';
-    errEl.textContent = 'Entrez votre numéro';
+function showDaaraSelection(daaras, user) {
+  const searchPhase = document.getElementById('search-phase');
+  const createPhase = document.getElementById('create-phase');
+  const daaraSelectPhase = document.getElementById('daara-selection-phase');
+  const selectList = document.getElementById('daara-select-list');
+  const selectTitle = document.getElementById('daara-select-title');
+  
+  searchPhase.style.display = 'none';
+  createPhase.style.display = 'none';
+  daaraSelectPhase.style.display = 'block';
+  
+  selectTitle.textContent = `Bienvenue ${escHtml(user?.prenom || user?.nom || user?.identifiant || '')}, choisissez votre Daara :`;
+  
+  selectList.innerHTML = daaras.map(d => `
+    <div class="daara-select-item" onclick="selectDaaraAndLogin('${d._id}')">
+      <div class="daara-name">${escHtml(d.nom)}</div>
+      <div class="daara-role">
+        <span class="${d.role === 'admin' ? 'badge-admin' : 'badge-membre'}">
+          ${d.role === 'admin' ? '👑 Administrateur' : '👤 Membre'}
+        </span>
+        ${d.siege ? `<span style="margin-left:8px">📍 ${escHtml(d.siege)}</span>` : ''}
+      </div>
+    </div>
+  `).join('');
+  
+  pendingUserData = user;
+}
+
+function selectDaaraAndLogin(daaraId) {
+  if (!pendingUserData) {
+    showNotif('Erreur: utilisateur non trouvé', true);
+    resetToLogin();
     return;
   }
-  btn.disabled = true;
-  btn.textContent = 'Connexion…';
-  try {
-    const data = await api('POST', '/auth/login-membre', {telephone});
-    token = data.token;
-    currentUser = {id: data.membre.id, nom: data.membre.prenom + ' ' + data.membre.nom, role: 'membre', telephone: telephone};
-    currentDaara = {id: data.membre.daara, nom: 'Daara Connect'};
-    localStorage.setItem('dc_token', token);
-    localStorage.setItem('dc_user', JSON.stringify(currentUser));
-    localStorage.setItem('dc_daara', JSON.stringify(currentDaara));
-    errEl.style.display = 'none';
-    launchApp();
-  } catch(e) {
-    errEl.style.display = 'block';
-    errEl.textContent = e.message;
-  } finally {
-    btn.disabled = false;
-    btn.textContent = 'Accéder →';
-  }
+  
+  currentDaara = {_id: daaraId};
+  currentUser = pendingUserData;
+  localStorage.setItem('dc_token', token);
+  localStorage.setItem('dc_user', JSON.stringify(currentUser));
+  localStorage.setItem('dc_daara', JSON.stringify(currentDaara));
+  launchApp();
+}
+
+function resetToLogin() {
+  document.getElementById('search-phase').style.display = 'block';
+  document.getElementById('create-phase').style.display = 'none';
+  document.getElementById('daara-selection-phase').style.display = 'none';
+  document.getElementById('login-id-code').value = '';
+  document.getElementById('login-code').value = '';
+  document.getElementById('err-login-code').style.display = 'none';
+  const promptDiv = document.getElementById('create-daara-prompt');
+  if (promptDiv) promptDiv.style.display = 'none';
+  pendingUserData = null;
 }
 
 async function createDaara() {
   const nom = document.getElementById('new-daara-nom').value.trim();
   const siege = document.getElementById('new-daara-siege').value.trim();
   const identifiant = document.getElementById('new-admin-id').value.trim();
-  const motDePasse = document.getElementById('new-admin-pwd').value.trim();
+  const motDePasse = document.getElementById('new-admin-pwd').value;
+  
   let ok = true;
   [['err-new-nom', nom], ['err-new-siege', siege], ['err-new-id', identifiant], ['err-new-pwd', motDePasse]].forEach(([id, v]) => {
-    document.getElementById(id).style.display = v ? 'none' : 'block';
+    const el = document.getElementById(id);
+    if (el) el.style.display = v ? 'none' : 'block';
     if (!v) ok = false;
   });
   if (!ok) return;
+  
   const btn = document.getElementById('btn-create');
   btn.disabled = true;
   btn.textContent = 'Création…';
+  
   try {
-    await api('POST', '/auth/register', {nom, siege, identifiant, motDePasse});
-    showNotif('Daara créé ! Connectez-vous.');
-    showSearchPhase();
-    document.getElementById('login-id').value = identifiant;
+    const data = await api('POST', '/auth/register', {nom, siege, identifiant, motDePasse});
+    
+    token = data.token;
+    currentUser = data.user;
+    currentDaara = data.daara;
+    
+    localStorage.setItem('dc_token', token);
+    localStorage.setItem('dc_user', JSON.stringify(currentUser));
+    localStorage.setItem('dc_daara', JSON.stringify(currentDaara));
+    
+    launchApp();
   } catch(e) {
     showNotif(e.message, true);
-  } finally {
     btn.disabled = false;
-    btn.textContent = 'Créer le Daara →';
+    btn.textContent = 'Créer et ouvrir →';
   }
+}
+
+function showCreatePhase() {
+  document.getElementById('search-phase').style.display = 'none';
+  document.getElementById('create-phase').style.display = 'block';
+  document.getElementById('daara-selection-phase').style.display = 'none';
+}
+
+function showSearchPhase() {
+  document.getElementById('create-phase').style.display = 'none';
+  document.getElementById('search-phase').style.display = 'block';
+  document.getElementById('daara-selection-phase').style.display = 'none';
 }
 
 function logout() {
@@ -820,23 +947,12 @@ function logout() {
   activeChatRoom = null;
   document.getElementById('app').style.display = 'none';
   document.getElementById('welcome-screen').style.display = 'flex';
-}
-
-function showCreatePhase() {
-  document.getElementById('search-phase').style.display = 'none';
-  document.getElementById('create-phase').style.display = 'block';
-}
-
-function showSearchPhase() {
-  document.getElementById('create-phase').style.display = 'none';
-  document.getElementById('search-phase').style.display = 'block';
+  resetToLogin();
 }
 
 function launchApp() {
   document.getElementById('welcome-screen').style.display = 'none';
   document.getElementById('app').style.display = 'flex';
-  document.getElementById('hdr-daara').textContent = currentDaara?.nom || '—';
-  document.getElementById('hdr-meta').textContent = currentDaara?.siege || '—';
   document.getElementById('hdr-username').textContent = currentUser?.nom || '—';
   document.getElementById('hdr-avatar').textContent = (currentUser?.nom || currentDaara?.nom || '?')[0].toUpperCase();
   document.getElementById('hdr-role').textContent = isAdmin() ? 'Admin' : 'Membre';
@@ -873,15 +989,6 @@ function switchActiviteTab(tab) {
     tabPres.style.display = 'block';
     tabProg.style.display = 'none';
   }
-}
-
-function switchDocsTab(type, prefix, btn) {
-  const container = btn.closest('.docs-container');
-  container.querySelectorAll('.doc-tab').forEach(t => t.classList.remove('active'));
-  container.querySelectorAll('.doc-panel').forEach(p => p.classList.remove('active'));
-  btn.classList.add('active');
-  const panel = document.getElementById(prefix + '-panel-' + prefix + '-' + type);
-  if (panel) panel.classList.add('active');
 }
 
 function toggleForm(id) {
@@ -924,12 +1031,6 @@ function remplirSelectMembres(selId) {
   el.innerHTML = cacheMembres.length ? cacheMembres.map(m => `<option value="${m._id}">${escHtml(m.prenom + ' ' + m.nom)}</option>`).join('') : '<option value="">Aucun membre</option>';
 }
 
-function selectTolerance(btn, val) {
-  document.querySelectorAll('#tol-buttons .tol-btn').forEach(b => b.classList.remove('selected'));
-  btn.classList.add('selected');
-  document.getElementById('pr-tolerance').value = val;
-}
-
 // ==================== RENDU PRINCIPAL ====================
 async function renderAll() {
   try {
@@ -947,7 +1048,7 @@ function renderAccueil() {
   document.getElementById('stat-membres').textContent = cacheMembres.length;
   document.getElementById('accueil-kourels').innerHTML = cacheKourels.map(k => `
     <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);cursor:pointer"
-      onclick="showPage('kourels',document.querySelector('.bottom-nav-btn:nth-child(2)'));openKourelDetail('${k._id}','${escHtml(k.nom)}')">
+      onclick="showPage('kourels',document.querySelector('.bottom-nav-btn:nth-child(2)'));openChatFullscreen('${k._id}','${escHtml(k.nom)}')">
       <div style="font-weight:700;font-size:13px">${escHtml(k.nom)}</div>
       <div style="font-size:11px;color:var(--text-light)">${cacheMembres.filter(m => (m.kourel?._id || m.kourel) === k._id).length} membres →</div>
     </div>`).join('') || '<p style="color:var(--text-light);font-size:12px">Aucun Kourel</p>';
@@ -980,10 +1081,7 @@ async function renderKourels() {
 
 async function addKourel() {
   const nom = document.getElementById('k-nom').value.trim();
-  if (!nom) {
-    showNotif('Nom obligatoire', true);
-    return;
-  }
+  if (!nom) { showNotif('Nom obligatoire', true); return; }
   try {
     await api('POST', '/kourels', {nom, description: document.getElementById('k-desc').value.trim(), statut: document.getElementById('k-statut').value});
     document.getElementById('k-nom').value = '';
@@ -997,7 +1095,7 @@ async function addKourel() {
   }
 }
 
-// ==================== CHAT - STYLE WHATSAPP ====================
+// ==================== CHAT ====================
 async function openChatFullscreen(kourelId, nom) {
   chatFsKourelId = kourelId;
   chatFsNom = nom;
@@ -1005,13 +1103,19 @@ async function openChatFullscreen(kourelId, nom) {
   document.getElementById('chat-fs-name').textContent = nom;
   const membres = cacheMembres.filter(m => (m.kourel?._id || m.kourel) === kourelId);
   document.getElementById('chat-fs-sub').textContent = membres.length + ' membres';
+
+  // ✅ Afficher + Ajouter seulement pour admin
+  const btnAjouter = document.getElementById('btn-ajouter-membre-fs');
+  if (btnAjouter) {
+    btnAjouter.style.display = isAdmin() ? 'flex' : 'none';
+  }
+
   document.getElementById('chd-delete-btn').style.display = isAdmin() ? 'flex' : 'none';
   document.getElementById('chat-fullscreen').classList.add('open');
   document.getElementById('chat-header-dropdown').classList.remove('open');
   document.getElementById('chat-side-panel').classList.remove('open');
   await loadChatMessages();
 }
-
 function closeChatFullscreen() {
   document.getElementById('chat-fullscreen').classList.remove('open');
   document.getElementById('chat-header-dropdown').classList.remove('open');
@@ -1037,21 +1141,12 @@ function showChatPanel(type) {
         <span style="font-size:12px;color:var(--text-light)">${membres.length} membres dans ce Kourel</span>
         ${isAdmin() ? `<button onclick="showAddMembreFS()" style="background:var(--green);color:#fff;border:none;border-radius:8px;padding:6px 12px;font-size:12px;font-weight:800;cursor:pointer">+ Ajouter</button>` : ''}
       </div>
-      <div style="display:flex;flex-wrap:wrap;gap:6px">
-        // APRÈS
-${membres.length ? membres.map(m => `
-  <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)">
-    <span style="font-size:13px;font-weight:700">${escHtml(m.prenom + ' ' + m.nom)}</span>
-    ${isAdmin() && m.telephone ? `<button onclick="inviterMembre('${m._id}')"
-      style="background:var(--green);color:#fff;border:none;border-radius:8px;padding:5px 10px;font-size:11px;font-weight:800;cursor:pointer">📨 Inviter</button>` : ''}
-  </div>`).join('') : '<span style="font-size:12px;color:var(--text-light)">Aucun membre</span>'}
-  </div></div>`;
-  } else {
-    title.textContent = '✅ Présences';
-    content.innerHTML = `<div style="padding:16px;text-align:center">
-      <div style="font-size:28px;margin-bottom:8px">✅</div>
-      <p style="font-size:13px;color:var(--text-light)">Créer une session de présences</p>
-      <button onclick="goToPresencesFS()" style="background:var(--green);color:#fff;border:none;border-radius:10px;padding:10px 20px;font-size:13px;font-weight:800;cursor:pointer;margin-top:10px">→ Aller aux présences</button>
+      <div>
+        ${membres.length ? membres.map(m => `<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid #eee">
+          <span style="font-size:13px;font-weight:700">${escHtml(m.prenom + ' ' + m.nom)}</span>
+          ${isAdmin() && m.telephone ? `<button onclick="inviterMembreWA(this)" data-nom="${escHtml(m.prenom + ' ' + m.nom)}" data-tel="${m.telephone}" data-kourel="${escHtml(chatFsNom)}" style="background:#25D366;color:#fff;border:none;border-radius:8px;padding:5px 10px;font-size:11px;font-weight:800;cursor:pointer">📱 WhatsApp</button>` : ''}
+        </div>`).join('') : '<span style="font-size:12px;color:var(--text-light)">Aucun membre</span>'}
+      </div>
     </div>`;
   }
   panel.classList.add('open');
@@ -1059,19 +1154,6 @@ ${membres.length ? membres.map(m => `
 
 function closeChatPanel() {
   document.getElementById('chat-side-panel').classList.remove('open');
-}
-
-function goToPresencesFS() {
-  closeChatPanel();
-  closeChatFullscreen();
-  showPage('activites', document.querySelector('.bottom-nav-btn:nth-child(3)'));
-  switchActiviteTab('presences');
-  setTimeout(() => {
-    toggleForm('form-presence');
-    remplirSelectKourels('p-kourel');
-    document.getElementById('p-kourel').value = chatFsKourelId || '';
-    loadMembresForPresence();
-  }, 150);
 }
 
 function showAddMembreFS() {
@@ -1099,131 +1181,84 @@ async function deleteChatKourel() {
   }
 }
 
-// ⭐⭐⭐ FONCTION PRINCIPALE DU CHAT - STYLE WHATSAPP ⭐⭐⭐
-// ⭐⭐⭐ FONCTION CHAT CORRIGÉE - STYLE WHATSAPP ⭐⭐⭐
+// ==================== MESSAGES ====================
 async function loadChatMessages() {
   const area = document.getElementById('chat-msgs-area');
   if (!area) return;
-  
   area.innerHTML = '<div style="text-align:center;padding:20px;">⏳ Chargement...</div>';
-  
   let messages = [];
   try {
     messages = await api('GET', '/messages/' + chatFsKourelId);
-    console.log('📩 Messages reçus:', messages);
   } catch(e) {
-    console.error('Erreur:', e);
     area.innerHTML = '<div class="chat-empty">⚠️ Erreur de chargement</div>';
     return;
   }
-
   if (!messages || messages.length === 0) {
     area.innerHTML = '<div class="chat-empty">💬 Aucun message</div>';
     return;
   }
-
-  // 🔑 Récupérer l'utilisateur connecté
   const myId = String(currentUser?.id || currentUser?._id || '');
   const myName = (currentUser?.nom || '').toLowerCase();
-  
-  console.log('🟢 Mon ID:', myId);
-  console.log('🟢 Mon nom:', myName);
-
-  // Palette de couleurs pour les autres membres
   const COLORS = ['#2563eb', '#7c3aed', '#db2777', '#059669', '#d97706', '#dc2626', '#0891b2', '#65a30d'];
   const authorColors = {};
   let colorIdx = 0;
-  
   function getAuthorColor(id, name) {
     const key = id || name;
     if (!key) return '#888';
-    if (!authorColors[key]) {
-      authorColors[key] = COLORS[colorIdx % COLORS.length];
-      colorIdx++;
-    }
+    if (!authorColors[key]) { authorColors[key] = COLORS[colorIdx % COLORS.length]; colorIdx++; }
     return authorColors[key];
   }
-
-  // Trier par date
   messages.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
-
   let html = '';
+  const isAdminUser = isAdmin();
   
   for (const m of messages) {
-    // Récupérer les infos de l'auteur
     const authorId = String(m.auteurId || m.auteur?._id || m.auteur || '');
     const authorName = m.auteurNom || m.auteur?.nom || m.auteur?.prenom || 'Membre';
     const authorNameLower = authorName.toLowerCase();
-    
-    // 🔑 DÉTECTION SI LE MESSAGE EST DE MOI
     let isMine = false;
-    
-    // Méthode 1: par ID
-    if (myId && authorId && authorId === myId) {
-      isMine = true;
-    }
-    // Méthode 2: par nom
-    if (!isMine && myName && authorNameLower === myName) {
-      isMine = true;
-    }
-    // Méthode 3: si le backend a déjà calculé isMine
-    if (m.isMine === true) {
-      isMine = true;
-    }
-    
+    if (myId && authorId && authorId === myId) isMine = true;
+    if (!isMine && myName && authorNameLower === myName) isMine = true;
+    if (m.isMine === true) isMine = true;
     const authorColor = getAuthorColor(authorId, authorName);
     const timeStr = new Date(m.createdAt).toLocaleTimeString('fr-FR', {hour:'2-digit', minute:'2-digit'});
-    
-    // Contenu du message
     let msgContent = '';
     if (m.type === 'audio') {
-      msgContent = `
-        <div style="display:flex;align-items:center;gap:8px;">
-          <button onclick="toggleAudioMsg(this,'audio-${m._id}')" 
-            style="background:${isMine ? '#0f4c25' : '#1a7a3c'};border:none;border-radius:50%;width:32px;height:32px;color:#fff;cursor:pointer;">▶</button>
-          <audio id="audio-${m._id}" src="${m.texte}" style="display:none"></audio>
-          <span style="font-size:12px;">🎤 Message vocal</span>
-        </div>`;
+      msgContent = `<div style="display:flex;align-items:center;gap:8px;">
+        <button onclick="toggleAudioMsg(this,'audio-${m._id}')" style="background:${isMine ? '#0f4c25' : '#1a7a3c'};border:none;border-radius:50%;width:32px;height:32px;color:#fff;cursor:pointer;">▶️</button>
+        <audio id="audio-${m._id}" src="${m.texte}" style="display:none"></audio>
+        <span style="font-size:12px;">🎤 Message vocal</span>
+      </div>`;
     } else if (m.type === 'image') {
       msgContent = `<img src="${m.texte}" style="max-width:180px;border-radius:12px;display:block;">`;
     } else {
       msgContent = `<div style="font-size:13px;line-height:1.4;color:#111;">${escHtml(m.texte)}</div>`;
     }
     
-    // Style selon que c'est moi ou pas
+    const showDelete = isMine || isAdminUser;
+    const deleteBtn = showDelete ? `<button class="msg-delete-btn" onclick="deleteMsgFS('${m._id}')" title="Supprimer">🗑</button>` : '';
+    
     if (isMine) {
-      // ✅ MES MESSAGES : à DROITE, fond VERT
-      html += `
-        <div style="display:flex;justify-content:flex-end;margin-bottom:12px;padding:0 8px;">
-          <div style="max-width:75%;background:#dcf8c6;border-radius:18px 4px 18px 18px;padding:10px 12px;box-shadow:0 1px 0.5px rgba(0,0,0,0.05);">
-            ${msgContent}
-            <div style="font-size:9px;color:#999;margin-top:4px;text-align:right;">✓ ${timeStr}</div>
-          </div>
+      html += `<div style="display:flex;justify-content:flex-end;margin-bottom:12px;padding:0 8px;">
+        <div style="max-width:75%;background:#dcf8c6;border-radius:18px 4px 18px 18px;padding:10px 12px;box-shadow:0 1px 0.5px rgba(0,0,0,0.05);">
+          ${msgContent}
+          <div style="font-size:9px;color:#999;margin-top:4px;text-align:right;">✓ ${timeStr} ${deleteBtn}</div>
         </div>
-      `;
+      </div>`;
     } else {
-      // ✅ MESSAGES DES AUTRES : à GAUCHE, fond BLANC avec bordure colorée
-      html += `
-        <div style="display:flex;flex-direction:column;align-items:flex-start;margin-bottom:12px;padding:0 8px;">
-          <div style="font-size:10px;font-weight:700;color:${authorColor};margin-bottom:2px;margin-left:8px;">${escHtml(authorName)}</div>
-          <div style="max-width:75%;background:#ffffff;border-left:3px solid ${authorColor};border-radius:4px 18px 18px 18px;padding:10px 12px;box-shadow:0 1px 0.5px rgba(0,0,0,0.05);">
-            ${msgContent}
-            <div style="font-size:9px;color:#999;margin-top:4px;text-align:right;">${timeStr}</div>
-          </div>
+      html += `<div style="display:flex;flex-direction:column;align-items:flex-start;margin-bottom:12px;padding:0 8px;">
+        <div style="font-size:10px;font-weight:700;color:${authorColor};margin-bottom:2px;margin-left:8px;">${escHtml(authorName)}</div>
+        <div style="max-width:75%;background:#ffffff;border-left:3px solid ${authorColor};border-radius:4px 18px 18px 18px;padding:10px 12px;box-shadow:0 1px 0.5px rgba(0,0,0,0.05);">
+          ${msgContent}
+          <div style="font-size:9px;color:#999;margin-top:4px;text-align:right;">${timeStr} ${deleteBtn}</div>
         </div>
-      `;
+      </div>`;
     }
   }
-  
   area.innerHTML = html;
-  
-  // Scroll en bas
   setTimeout(() => { area.scrollTop = area.scrollHeight; }, 50);
 }
-function escHtml(s) {
-  return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-}
-// Lecteur audio pour les messages vocaux
+
 function toggleAudioMsg(btn, audioId) {
   const audio = document.getElementById(audioId);
   if (!audio) return;
@@ -1231,23 +1266,18 @@ function toggleAudioMsg(btn, audioId) {
     if (a.id !== audioId) { a.pause(); a.removeAttribute('data-playing'); }
   });
   document.querySelectorAll('[data-audio-for]').forEach(b => {
-    if (b.dataset.audioFor !== audioId) b.textContent = '▶';
+    if (b.dataset.audioFor !== audioId) b.textContent = '▶️';
   });
   btn.setAttribute('data-audio-for', audioId);
   if (audio.paused) {
     audio.play();
     audio.setAttribute('data-playing', '1');
     btn.textContent = '⏸';
-    const id = audioId.replace('audio-', '');
-    audio.ontimeupdate = () => {
-      const prog = document.getElementById('prog-audio-' + id);
-      if (audio.duration && prog) prog.style.width = (audio.currentTime / audio.duration * 100) + '%';
-    };
-    audio.onended = () => { btn.textContent = '▶'; audio.removeAttribute('data-playing'); };
+    audio.onended = () => { btn.textContent = '▶️'; audio.removeAttribute('data-playing'); };
   } else {
     audio.pause();
     audio.removeAttribute('data-playing');
-    btn.textContent = '▶';
+    btn.textContent = '▶️';
   }
 }
 
@@ -1257,8 +1287,8 @@ async function deleteMsgFS(msgId) {
     await api('DELETE', '/messages/' + msgId);
     await loadChatMessages();
     showNotif('Message supprimé ✅');
-  } catch(e) { 
-    showNotif(e.message || 'Erreur lors de la suppression', true); 
+  } catch(e) {
+    showNotif(e.message || 'Erreur suppression', true);
   }
 }
 
@@ -1267,11 +1297,11 @@ async function sendMsgFS() {
   const texte = input?.value.trim();
   if (!texte || !chatFsKourelId) return;
   try {
-    await api('POST', '/messages', { kourel: chatFsKourelId, texte });
+    await api('POST', '/messages', {kourel: chatFsKourelId, texte});
     input.value = '';
     await loadChatMessages();
-  } catch(e) { 
-    showNotif('Erreur envoi message', true); 
+  } catch(e) {
+    showNotif('Erreur envoi message', true);
   }
 }
 
@@ -1282,10 +1312,10 @@ async function sendFileMsgFS(event) {
   reader.onload = async e => {
     const type = file.type.startsWith('audio') ? 'audio' : 'image';
     try {
-      await api('POST', '/messages', { kourel: chatFsKourelId, texte: e.target.result, type });
+      await api('POST', '/messages', {kourel: chatFsKourelId, texte: e.target.result, type});
       await loadChatMessages();
-    } catch(err) { 
-      showNotif('Fichier trop grand', true); 
+    } catch(err) {
+      showNotif('Fichier trop grand', true);
     }
   };
   reader.readAsDataURL(file);
@@ -1295,20 +1325,20 @@ async function sendFileMsgFS(event) {
 function startVocalFS() {
   const btn = document.getElementById('btn-vocal');
   if (!isRecording) {
-    navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
-      const options = MediaRecorder.isTypeSupported('audio/webm;codecs=opus') ? { mimeType: 'audio/webm;codecs=opus', audioBitsPerSecond: 32000 } : { audioBitsPerSecond: 32000 };
+    navigator.mediaDevices.getUserMedia({audio: true}).then(stream => {
+      const options = MediaRecorder.isTypeSupported('audio/webm;codecs=opus') ? {mimeType: 'audio/webm;codecs=opus', audioBitsPerSecond: 32000} : {audioBitsPerSecond: 32000};
       mediaRecorder = new MediaRecorder(stream, options);
       audioChunks = [];
       mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
       mediaRecorder.onstop = async () => {
-        const blob = new Blob(audioChunks, { type: 'audio/webm' });
+        const blob = new Blob(audioChunks, {type: 'audio/webm'});
         const reader = new FileReader();
         reader.onload = async e => {
           try {
-            await api('POST', '/messages', { kourel: chatFsKourelId, texte: e.target.result, type: 'audio' });
+            await api('POST', '/messages', {kourel: chatFsKourelId, texte: e.target.result, type: 'audio'});
             await loadChatMessages();
-          } catch(err) { 
-            showNotif('Erreur envoi audio', true); 
+          } catch(err) {
+            showNotif('Erreur envoi audio', true);
           }
         };
         reader.readAsDataURL(blob);
@@ -1316,57 +1346,30 @@ function startVocalFS() {
       };
       mediaRecorder.start();
       isRecording = true;
-      if (btn) {
-        btn.style.background = 'linear-gradient(135deg,#16a34a,#15803d)';
-        btn.textContent = '⏹';
-      }
+      if (btn) { btn.style.background = 'linear-gradient(135deg,#16a34a,#15803d)'; btn.textContent = '⏹'; }
       showNotif('Enregistrement… ⏹ pour arrêter');
-      setTimeout(() => { 
-        if (isRecording && mediaRecorder) { 
-          mediaRecorder.stop(); 
-          isRecording = false; 
-          if (btn) { 
-            btn.style.background = 'linear-gradient(135deg,#dc2626,#991b1b)'; 
-            btn.textContent = '🎤'; 
-          } 
-        } 
+      setTimeout(() => {
+        if (isRecording && mediaRecorder) {
+          mediaRecorder.stop();
+          isRecording = false;
+          if (btn) { btn.style.background = 'linear-gradient(135deg,#dc2626,#991b1b)'; btn.textContent = '🎤'; }
+        }
       }, 30000);
     }).catch(() => showNotif('Microphone non disponible', true));
   } else {
     mediaRecorder.stop();
     isRecording = false;
-    if (btn) { 
-      btn.style.background = 'linear-gradient(135deg,#dc2626,#991b1b)'; 
-      btn.textContent = '🎤'; 
-    }
+    if (btn) { btn.style.background = 'linear-gradient(135deg,#dc2626,#991b1b)'; btn.textContent = '🎤'; }
   }
 }
 
-function toggleMsgMenu(id) {
-  const menu = document.getElementById(id);
-  if (!menu) return;
-  document.querySelectorAll('.msg-menu-dropdown').forEach(m => { if (m.id !== id) m.style.display = 'none'; });
-  menu.style.display = menu.style.display === 'none' || menu.style.display === '' ? 'block' : 'none';
-}
-
-function openKourelDetail(kourelId, nom) {
-  openChatFullscreen(kourelId, nom);
-}
-
-// Gestion des clics pour fermer les menus
 document.addEventListener('click', function(e) {
   if (!e.target.classList.contains('chat-fs-menu-btn') && !e.target.closest('.chat-header-dropdown'))
     document.getElementById('chat-header-dropdown')?.classList.remove('open');
-  if (!e.target.classList.contains('msg-menu-btn') && !e.target.closest('.msg-menu-dropdown'))
-    document.querySelectorAll('.msg-menu-dropdown').forEach(m => m.style.display = 'none');
 });
 
-// Gestion de l'envoi avec Entrée
 document.getElementById('chat-input-field')?.addEventListener('keydown', function(e) {
-  if (e.key === 'Enter' && !e.shiftKey) {
-    e.preventDefault();
-    sendMsgFS();
-  }
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMsgFS(); }
 });
 
 // ==================== MEMBRES ====================
@@ -1390,29 +1393,39 @@ function filtrerMembres() {
       <td><button class="btn btn-danger" onclick="deleteMembre('${m._id}')">🗑</button></td>
     </tr>`).join('') : '<tr><td colspan="4" style="text-align:center;color:var(--text-light);padding:20px">Aucun membre</td></tr>';
 }
-
 async function addMembre() {
   const prenom = document.getElementById('m-prenom').value.trim();
   const nom = document.getElementById('m-nom').value.trim();
   const kourel = document.getElementById('m-kourel').value;
-  if (!prenom || !nom) {
-    showNotif('Prénom et Nom obligatoires', true);
-    return;
-  }
+  const tel = document.getElementById('m-tel').value.trim();
+  if (!prenom || !nom) { showNotif('Prénom et Nom obligatoires', true); return; }
+  
   try {
-    await api('POST', '/membres', {prenom, nom, telephone: document.getElementById('m-tel').value.trim(), kourel: kourel || undefined, role: 'Membre'});
+    const data = await api('POST', '/membres', {
+      prenom, nom,
+      telephone: tel,
+      kourel: kourel || undefined,
+      daara: currentDaara?._id
+    });
+
     document.getElementById('m-prenom').value = '';
     document.getElementById('m-nom').value = '';
     document.getElementById('m-tel').value = '';
     toggleForm('form-membre');
     await renderMembres();
     renderAccueil();
-    showNotif('Membre ajouté !');
+
+    // ✅ Générer message d'invitation automatiquement
+    if (data.codeGenere) {
+      afficherInvitation(data, kourel);
+    } else {
+      showNotif('Membre ajouté !');
+    }
+
   } catch(e) {
     showNotif(e.message, true);
   }
 }
-
 async function deleteMembre(id) {
   if (!confirm('Supprimer ce membre ?')) return;
   try {
@@ -1424,26 +1437,71 @@ async function deleteMembre(id) {
     showNotif(e.message, true);
   }
 }
+function showChatPanel(type) {
+  document.getElementById('chat-header-dropdown').classList.remove('open');
+  const panel = document.getElementById('chat-side-panel');
+  const content = document.getElementById('chat-side-panel-content');
+  const title = document.getElementById('chat-side-panel-title');
+  
+  if (type === 'membres') {
+    title.textContent = '👤 Membres';
+    const membres = cacheMembres.filter(m => (m.kourel?._id || m.kourel) === chatFsKourelId);
+    content.innerHTML = `
+      <div style="padding:12px 16px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+          <span style="font-size:12px;color:var(--text-light);font-weight:700">${membres.length} membres dans ce Kourel</span>
+          ${isAdmin() ? `
+            <button onclick="showAddMembreFS()" 
+              style="background:var(--green);color:#fff;border:none;border-radius:10px;
+                padding:8px 16px;font-size:13px;font-weight:800;cursor:pointer;
+                font-family:'Plus Jakarta Sans',sans-serif;display:flex;align-items:center;gap:6px">
+              ➕ Ajouter
+            </button>` : ''}
+        </div>
+        <div>
+          ${membres.length ? membres.map(m => `
+            <div style="display:flex;align-items:center;justify-content:space-between;
+              padding:10px 0;border-bottom:1px solid #eee;gap:10px">
+              <div style="display:flex;align-items:center;gap:10px">
+                <div style="width:36px;height:36px;background:linear-gradient(135deg,#0f4c25,#1a7a3c);
+                  border-radius:50%;display:flex;align-items:center;justify-content:center;
+                  color:#fff;font-size:14px;font-weight:900;flex-shrink:0">
+                  ${(m.prenom || '?')[0].toUpperCase()}
+                </div>
+                <div>
+                  <div style="font-size:13px;font-weight:800">${escHtml(m.prenom + ' ' + m.nom)}</div>
+                  <div style="font-size:11px;color:var(--text-light)">${escHtml(m.telephone || 'Pas de numéro')}</div>
+                </div>
+              </div>
+              ${m.telephone ? `
+                <button onclick="envoyerInvitationWA('${escHtml(m.prenom)}','${escHtml(m.nom)}','${m.telephone}','${escHtml(m.identifiant || '')}','${escHtml(m.code || '')}')"
+                  style="background:#25D366;color:#fff;border:none;border-radius:10px;
+                    padding:8px 12px;font-size:12px;font-weight:800;cursor:pointer;
+                    font-family:'Plus Jakarta Sans',sans-serif;flex-shrink:0;
+                    display:flex;align-items:center;gap:5px">
+                  📱 WhatsApp
+                </button>` : `
+                <span style="font-size:11px;color:#ccc">Pas de numéro</span>`}
+            </div>`).join('') : '<p style="font-size:13px;color:var(--text-light);text-align:center;padding:20px">Aucun membre</p>'}
+        </div>
+      </div>`;
+  }
+  panel.classList.add('open');
+}
 
 function refreshMembreExistants() {
   const kourelId = document.getElementById('m-kourel').value;
   const wrap = document.getElementById('membres-existants-wrap');
   const list = document.getElementById('membres-existants-list');
-  if (!kourelId) {
-    wrap.style.display = 'none';
-    return;
-  }
+  if (!kourelId) { wrap.style.display = 'none'; return; }
   const dehors = cacheMembres.filter(m => (m.kourel?._id || m.kourel) !== kourelId);
-  if (dehors.length === 0) {
-    wrap.style.display = 'none';
-    return;
-  }
+  if (dehors.length === 0) { wrap.style.display = 'none'; return; }
   wrap.style.display = 'block';
   list.innerHTML = dehors.map(m => `
     <span onclick="rattacherMembre('${m._id}','${kourelId}')"
       style="display:inline-flex;align-items:center;gap:5px;background:var(--green-muted);
         border:1.5px solid var(--green-border);border-radius:99px;padding:5px 12px;
-        font-size:12px;font-weight:700;color:var(--green-dark);cursor:pointer;transition:background .15s">
+        font-size:12px;font-weight:700;color:var(--green-dark);cursor:pointer">
       👤 ${escHtml(m.prenom + ' ' + m.nom)}
       <span style="font-size:10px;color:var(--text-light)">${escHtml(m.kourel?.nom || 'sans kourel')}</span>
     </span>`).join('');
@@ -1464,10 +1522,7 @@ async function rattacherMembre(membreId, kourelId) {
 async function addProgramme() {
   const kourel = document.getElementById('pr-kourel').value;
   const xassida = document.getElementById('pr-xassida').value.trim();
-  if (!kourel || !xassida) {
-    showNotif('Kourel et Xassida obligatoires', true);
-    return;
-  }
+  if (!kourel || !xassida) { showNotif('Kourel et Xassida obligatoires', true); return; }
   try {
     await api('POST', '/programmes', {
       kourel,
@@ -1476,13 +1531,10 @@ async function addProgramme() {
       xassida,
       responsable: document.getElementById('pr-responsable').value.trim(),
       heure: document.getElementById('pr-heure').value,
-      tolerance: parseInt(document.getElementById('pr-tolerance').value) || 0,
+      tolerance: 0,
       notes: document.getElementById('pr-notes').value.trim()
     });
-    document.getElementById('pr-lieu').value = '';
-    document.getElementById('pr-xassida').value = '';
-    document.getElementById('pr-responsable').value = '';
-    document.getElementById('pr-notes').value = '';
+    ['pr-lieu','pr-xassida','pr-responsable','pr-notes'].forEach(id => document.getElementById(id).value = '');
     toggleForm('form-programme');
     await renderProgrammes();
     showNotif('Programme enregistré !');
@@ -1499,19 +1551,15 @@ async function renderProgrammes() {
       <div style="background:#fff;border-radius:16px;box-shadow:0 2px 14px rgba(15,76,37,.10);margin-bottom:12px;overflow:hidden;border:1.5px solid var(--border)">
         <div style="background:linear-gradient(135deg,var(--green-dark),var(--green));padding:12px 16px;display:flex;justify-content:space-between;align-items:center">
           <div>
-            <div style="color:#fff;font-size:15px;font-weight:900;letter-spacing:.5px">${escHtml(p.kourel?.nom || '—')}</div>
+            <div style="color:#fff;font-size:15px;font-weight:900">${escHtml(p.kourel?.nom || '—')}</div>
             <div style="color:rgba(255,255,255,.75);font-size:11px;margin-top:2px">${escHtml(p.xassida || '')}</div>
           </div>
           <button class="btn btn-danger" style="background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3)" onclick="deleteProgramme('${p._id}')">🗑</button>
         </div>
         <div style="padding:14px 16px;display:flex;flex-direction:column;gap:8px">
-          <div style="display:flex;align-items:center;gap:10px"><span style="font-size:18px">📅</span><span style="font-size:14px;font-weight:800;color:var(--text)">${escHtml(p.jour || '—')} à ${p.heure || '—'}</span></div>
+          <div style="display:flex;align-items:center;gap:10px"><span style="font-size:18px">📅</span><span style="font-size:14px;font-weight:800">${escHtml(p.jour || '—')} à ${p.heure || '—'}</span></div>
           <div style="display:flex;align-items:center;gap:10px"><span style="font-size:18px">📍</span><span style="font-size:13px;color:var(--text-light);font-weight:600">${escHtml(p.lieu || '—')}</span></div>
-          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px">
-            <div style="background:var(--green-muted);border-radius:99px;padding:5px 12px;display:flex;align-items:center;gap:6px"><span style="font-size:14px">🎵</span><span style="font-size:12px;font-weight:700;color:var(--green-dark)">Sons à répéter</span></div>
-            <div style="background:#fef3e8;border-radius:99px;padding:5px 12px;display:flex;align-items:center;gap:6px"><span style="font-size:14px">📕</span><span style="font-size:12px;font-weight:700;color:#92400e">PDF Xassida</span></div>
-          </div>
-          ${p.responsable ? `<div style="font-size:11px;color:var(--text-light);margin-top:2px">👤 Responsable : <strong>${escHtml(p.responsable)}</strong></div>` : ''}
+          ${p.responsable ? `<div style="font-size:11px;color:var(--text-light)">👤 ${escHtml(p.responsable)}</div>` : ''}
           ${p.notes ? `<div style="font-size:11px;color:var(--text-light);font-style:italic;background:#f4faf4;border-radius:8px;padding:6px 10px">${escHtml(p.notes)}</div>` : ''}
         </div>
       </div>`).join('') : '<p style="color:var(--text-light);font-size:13px">Aucun programme.</p>';
@@ -1530,7 +1578,6 @@ async function deleteProgramme(id) {
     showNotif(e.message, true);
   }
 }
-
 // ==================== PRÉSENCES ====================
 function loadMembresForPresence() {
   const kourelId = document.getElementById('p-kourel').value;
@@ -1559,10 +1606,7 @@ function setPresStatus(membreId, statut, btn) {
 async function savePresenceSession() {
   const date = document.getElementById('p-date').value;
   const kourel = document.getElementById('p-kourel').value;
-  if (!date || !kourel) {
-    showNotif('Date et Kourel obligatoires', true);
-    return;
-  }
+  if (!date || !kourel) { showNotif('Date et Kourel obligatoires', true); return; }
   const membres = cacheMembres.filter(m => (m.kourel?._id || m.kourel) === kourel).map(m => ({membre: m._id, statut: presenceStatuts[m._id] || 'Absent'}));
   try {
     await api('POST', '/presences', {kourel, date, type: document.getElementById('p-type').value, lieu: document.getElementById('p-lieu').value.trim(), membres});
@@ -1635,10 +1679,7 @@ async function addAdiyeu() {
   const kourel = document.getElementById('a-kourel').value;
   const montant = parseFloat(document.getElementById('a-montant').value);
   const programme = document.getElementById('a-programme').value.trim();
-  if (!membre || !kourel || !montant) {
-    showNotif('Membre, Kourel et Montant obligatoires', true);
-    return;
-  }
+  if (!membre || !kourel || !montant) { showNotif('Membre, Kourel et Montant obligatoires', true); return; }
   try {
     await api('POST', '/adiyeu', {membre, kourel, montant, programme, statut: 'En attente'});
     document.getElementById('a-montant').value = '';
@@ -1704,7 +1745,7 @@ function renderRapports() {
     <div style="padding:8px 0;display:flex;justify-content:space-between;font-size:13px"><span style="font-weight:700">Membres actifs</span><span>${cacheMembres.filter(m => m.statut === 'Actif').length}</span></div>`;
 }
 
-// ==================== GESTION FICHIERS (SONS, PDF, PHOTOS) ====================
+// ==================== FICHIERS ====================
 function handleSons(input, listId, countId, nId) {
   const list = document.getElementById(listId);
   const countEl = document.getElementById(countId);
@@ -1729,8 +1770,8 @@ function handleSons(input, listId, countId, nId) {
     list.appendChild(item);
   });
   const count = list.children.length;
-  nEl.textContent = count;
-  countEl.style.display = count > 0 ? 'block' : 'none';
+  if (nEl) nEl.textContent = count;
+  if (countEl) countEl.style.display = count > 0 ? 'block' : 'none';
   input.value = '';
 }
 
@@ -1740,12 +1781,7 @@ function togglePlay(id, url) {
   if (currentAudio && currentPlayBtn) {
     currentAudio.pause();
     currentPlayBtn.textContent = '▶️';
-    if (currentPlayBtn === btn) {
-      currentAudio = null;
-      currentPlayBtn = null;
-      if (prog) prog.style.width = '0%';
-      return;
-    }
+    if (currentPlayBtn === btn) { currentAudio = null; currentPlayBtn = null; if (prog) prog.style.width = '0%'; return; }
   }
   const audio = new Audio(url);
   currentAudio = audio;
@@ -1761,38 +1797,21 @@ function removeSon(id, listId, countId, nId) {
   if (el) el.remove();
   const list = document.getElementById(listId);
   const count = list.children.length;
-  document.getElementById(nId).textContent = count;
-  document.getElementById(countId).style.display = count > 0 ? 'block' : 'none';
+  if (document.getElementById(nId)) document.getElementById(nId).textContent = count;
+  if (document.getElementById(countId)) document.getElementById(countId).style.display = count > 0 ? 'block' : 'none';
 }
 
-function handlePDF(input, listId) {
-  const list = document.getElementById(listId);
-  Array.from(input.files).forEach(file => {
-    const eid = 'pdf-' + Date.now() + Math.random().toString(36).slice(2);
-    const item = document.createElement('div');
-    item.className = 'doc-item';
-    item.id = eid;
-    item.innerHTML = `
-      <span class="doc-item-icon">📄</span>
-      <div class="doc-item-info">
-        <div class="doc-item-name">${escHtml(file.name)}</div>
-        <div class="doc-item-size">${formatSize(file.size)}</div>
-      </div>
-      <button class="del-btn" onclick="document.getElementById('${eid}').remove()">✕</button>`;
-    list.appendChild(item);
-  });
-  input.value = '';
-}
-
-// ==================== INVITATION SMS ====================
-async function inviterMembre(membreId) {
-  try {
-    showNotif('Envoi en cours…');
-    await api('POST', '/membres/' + membreId + '/inviter', {});
-    showNotif('Invitation envoyée ✅');
-  } catch(e) {
-    showNotif(e.message || 'Erreur envoi SMS', true);
-  }
+// ==================== INVITATION WHATSAPP ====================
+function inviterMembreWA(btn) {
+  const nom = btn.getAttribute('data-nom');
+  const tel = btn.getAttribute('data-tel');
+  const kourel = btn.getAttribute('data-kourel');
+  if (!tel || tel === 'undefined') { showNotif('Ce membre n\'a pas de numéro', true); return; }
+  const lien = window.location.origin;
+  const message = `Salam ${nom} ! Vous êtes invité(e) à rejoindre le Kourel "${kourel}" sur A MOURIIDE. Connectez-vous avec votre identifiant sur : ${lien}`;
+  let cleanTel = tel.replace(/[^0-9]/g, '');
+  if (cleanTel.startsWith('0')) cleanTel = cleanTel.substring(1);
+  window.open(`https://wa.me/221${cleanTel}?text=${encodeURIComponent(message)}`, '_blank');
 }
 
 // ==================== INITIALISATION ====================
@@ -1807,6 +1826,7 @@ window.addEventListener('DOMContentLoaded', () => {
         token = '';
         currentUser = null;
         currentDaara = null;
+        resetToLogin();
       });
   }
 });
